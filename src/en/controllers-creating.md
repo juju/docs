@@ -29,6 +29,7 @@ be done at controller-creation time:
  - [Create a controller using configuration values][#create-a-controller-using-configuration-values]
  - [Create a controller using a non-default region][#create-a-controller-using-a-non-default-region]
  - [Create a controller using a different MongoDB profile][#create-a-controller-using-a-different-mongodb-profile]
+ - [Use a custom charm store][#use-a-custom-charm-store]
  - [Change timeout and retry delays][#change-timeout-and-retry-delays]
  - [Create a new controller without changing contexts][#create-a-new-controller-without-changing-contexts]
  - [Configuring/enabling a remote syslog server][#configuring/enabling-a-remote-syslog-server]
@@ -128,6 +129,18 @@ your controller uses when it is created, use:
 
 ```bash
 juju bootstrap --config mongo-memory-profile=low
+```
+
+### Use a custom charm store
+
+Sometimes the charms you're interested in do not yet reside in the default
+production charm store (`https://api.jujucharms.com/charmstore`). In this case
+you can configure Juju to pull charms from an alternate source at controller
+creation time. Below, we create an OCI controller and pass the staging store
+URL:
+
+```bash
+juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore oci
 ```
 
 ### Change timeout and retry delays
@@ -250,6 +263,7 @@ how to do this.
 [#create-a-controller-using-configuration-values]: #create-a-controller-using-configuration-values
 [#create-a-controller-using-a-non-default-region]: #create-a-controller-using-a-non-default-region
 [#create-a-controller-using-a-different-mongodb-profile]: #create-a-controller-using-a-different-mongodb-profile
+[#use-a-custom-charm-store]: #use-a-custom-charm-store
 [#change-timeout-and-retry-delays]: #change-timeout-and-retry-delays
 [#create-a-new-controller-without-changing-contexts]: #create-a-new-controller-without-changing-contexts
 [#configuring/enabling-a-remote-syslog-server]: #configuring/enabling-a-remote-syslog-server

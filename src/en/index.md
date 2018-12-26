@@ -40,8 +40,8 @@ homepage: true
 		        <a href="/devel/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
 		        <a href="/devel/en/client">client</a>&nbsp;&rsaquo;
 		    </li>
-                    <li class="p-list__item"><a href="/devel/en/tutorial-k8s-static-pv.md">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/en/tutorial-microk8s.md">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
@@ -58,8 +58,8 @@ homepage: true
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/fa38eb81-picto-business-midaubergine.svg');
                         height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
-			<a href="/devel/en/experts-sla">Managed solutions</a>
-		    </li>
+                        <a href="/devel/en/experts-sla">Managed solutions</a>
+                    </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/4ef84d88-picto-quote-warmgrey.svg');
                         height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
