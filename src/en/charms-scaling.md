@@ -1,5 +1,6 @@
 Title: Scaling applications
 TODO:  More direction ito how users discover "built-in scaling" (e.g. the store is not clear on wordpress)
+       Write a tutorial on Kubernetes scaling
 
 # Scaling applications
 
@@ -19,7 +20,8 @@ mention some less common situations.
 ## Scaling up
 
 In the context of Juju, scaling up means increasing the number of application
-units and always involves the `add-unit` command.
+units and always involves the `add-unit` command. The exception is for a
+Kubernetes-backed cloud where the `scale-application` command is used.
 
 Closely resembling scaling up is the addition of a machine devoid of a unit.
 This is accomplished via the `add-machine` command:
@@ -65,6 +67,15 @@ To add five more units (with each running in its own machine):
 
 ```bash
 juju add-unit -n 5 mediawiki
+```
+
+### Scaling up within a Kubernetes model
+
+To scale up while in a Kubernetes model the total number of desired units for
+the application is simply stated. Here we want a total of three units:
+
+```bash
+juju scale-application mediawiki 3
 ```
 
 ### Scaling up using a charm with built-in scaling
@@ -152,7 +163,8 @@ constraints.
 ## Scaling down
 
 In the context of Juju, scaling down means decreasing the number of application
-units and always involves the `remove-unit` command.
+units and always involves the `remove-unit` command. The exception is for a
+Kubernetes-backed cloud where the `scale-application` command is used.
 
 Closely resembling scaling down is the direct removal of a machine. This is
 therefore also covered here and is accomplished via the `remove-machine`
@@ -182,6 +194,14 @@ juju remove-machine 6
 For more information on removing applications and machines, see the
 [Removing Juju objects][charms-destroy] page.
 
+### Scaling down within a Kubernetes model
+
+To scale down while in a Kubernetes model the total number of desired units for
+the application is simply stated. Here we want a total of two units:
+
+```bash
+juju scale-application mediawiki 2
+```
 
 <!-- LINKS -->
 

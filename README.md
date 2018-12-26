@@ -1,74 +1,115 @@
 # Documentation for Juju
 
+JUJU DOCUMENTATION WILL SOON BE MOVING TO DISCOURSE:
+
+https://discourse.jujucharms.com
+
+RENDERING THESE INSTRUCTIONS OBSOLETE.
+
+-----
+
 The documentation is written in Markdown, and then generated into HTML.
 
 The latest version of these docs live at:
 
 - [github.com/juju/docs](https://github.com/juju/docs)
-- [jujucharms.com/docs](http://jujucharms.com/docs) - Rendered docs, generated every 15 minutes.
+- [docs.jujucharms.com](http://docs.jujucharms.com) - Rendered docs
 
-For advice on contributing to the docs (please!), see
-the [contributing.html](https://jujucharms.com/docs/contributing.html) page in 
-this project. This has important information on style, the use of Markdown and
-other useful tips.
+For advice on contributing to the docs see the
+[contributing.html](https://docs.jujucharms.com/stable/contributing.html) page
+in this project. This has important information on style, the use of Markdown
+and other useful tips.
 
-## Docs structure
+## Important files and directories
 
-For editing actual documentation, you will find the Markdown format source 
-files in the `src/en` directory. At some point we hope to offer multilingual 
-versions of the docs, whereupon these will live in similarly titled directories 
-(e.g. 'fr', 'de', etc.).
+The following files and directories under `src/en` are of interest:
 
-There are two other files in the `src` directory:
+ - The `metadata.yaml` file is used to build the navigation for the website.
+   You won't need to change this unless you are adding a new page (and even
+   then, please ask about where it should go).
 
-**navigation.tpl** - This is used to build the navigation for the website. You 
-won't need to change this unless you are adding a new page (and even then, 
-please ask about where it should go).
+ - The `build` directory is where local builds of the docs are made, and
+   contains some support files (CSS, JavaScript) and all the graphics used by
+   the docs. If you need to add graphics, add them here: `htmldocs/media`. 
 
-**base.tpl** - this is the HTML template local docs use. This is as far as 
-possible a simulation of how the docs appear online, but changes to this file 
-do not alter the online appearance of the docs.
+   Do not _replace_ graphics unless you know what you are doing. These image
+   files are used by all versions of the docs, so usually you will want to add
+   files rather than change existing ones, unless the changes apply to all
+   versions of Juju (e.g. website images).
 
-The `htmldocs` directory is where local builds of the docs are made, and 
-contains some support files (CSS, JavaScript) and all the graphics used by the 
-docs. If you need to add graphics, add them here (`htmldocs/media`). 
+ - The `versions` file contains a list of Github branches which represent the
+   current supported versions of documentation. Many tools rely on this list,
+   it should not be changed by anyone but the docs team!
 
-**NOTE!** Please don't _replace_ graphics unless you know what you are doing. 
-These image files are used by all versions of the docs, so usually you will want
-to add files rather than change existing ones, unless the changes apply to all 
-versions of Juju (e.g. website images).
+ - The `archive` file contains a list of Github branches which contain
+   unmaintained, older versions of documentation.
 
-The `tools` directory is reserved for build tools and support files.
+## Building the documentation
 
-The `versions` file contains a list of Github branches which represent the 
-current supported versions of documentation. Many tools rely on this list, it 
-should not be changed by anyone but the docs team!
+Every non-trivial contribution must first have its HTML built and verified
+before a pull request (PR) is made from it.
 
-The `archive` file contains a list of Github branches which contain unmaintained,
-older versions of documentation.
+See the [documentation-builder project][github-documentation-builder] for
+details of the actual tool.
 
-The `Makefile` is used to build local versions of the docs, and other useful 
-things. Some of the make targets are:
- 
- - **sysdeps** Run this first! It makes sure you have the required packages to 
-    build the docs.
- - **build** Uses the `tools/mdtool.py` program to build a local version of the 
-    docs in the htmldocs directory
- - **clean** Removes temp files and generated docs
- - **serve** Runs a simple Python HTTP server on port 8000, which points at the
-    htmldocs directory - essential for testing!
- - **todo** Scans the source files for metadata 'TODO' items, and dumps them in a 
-    file called 'TODO.txt'
+### Installation
 
+Install the builder. On Ubuntu 16.04 LTS (or greater):
 
+```bash
+sudo snap install documentation-builder
+```
 
-## Typical Github workflow
+!!! Note:
+    You will first need to install package `squashfuse` if you're doing this in
+    a LXD container.
 
-Github, and git, allow you to use many different styles of workflow, but it is 
-tricky to get your head around initially, so here is an example of how to use it
-easily for our documentation.
+### Build
 
-1. Make sure you have a Github account! [https://github.com/join](https://github.com/join)
+To build the HTML, while in the root of the docs repository:
+
+```bash
+documentation-builder --source-folder src --media-path src/en/media
+```
+
+### Verification
+
+You can point a web browser at individual HTML files but to make your
+verification more conclusive you will need a web server.
+
+See the [Ubuntu Server Guide][ubuntu-serverguide-apache] for instructions on
+setting up Apache. The DocumentRoot should be the `src/build/en` directory. To
+test, point your browser at:
+
+```no-highlight
+http://127.0.0.1/
+```
+
+Alternatively, you can use Python to start a simple HTTP server (port 8000).
+While in the `src/build/en` directory run:
+
+```bash
+python3 -m http.server
+```
+
+To test, point your browser at:
+
+```no-highlight
+http://0.0.0.0:8000/
+```
+
+#### Points to consider
+
+Some things to consider during verification:
+
+ - A linkchecker (either a system-wide tool or a
+   [browser add-on][browser-linkchecker-addon])
+ - Images should show enough context (surrounding real estate) but not so much
+   to make important details illegible.
+
+## Workflow
+
+1. Get a Github account: [https://github.com/join](https://github.com/join)
 2. Fork the [juju/docs](https://github.com/juju/docs) Github repository. This 
  creates your own version of the repository (which you can then find online at
  `https://github.com/{yourusername}/docs`)
@@ -100,14 +141,13 @@ easily for our documentation.
   If you wish to move or rename files you need to use the `git mv` command, and 
   the `git rm` command to delete them 
 
-
 7. To 'save' your changes locally, you should make a commit:
 
         git commit -m 'my commit message which says something useful'
 
-7. Check that the changes you have made make sense! You can build a local
-   version of the docs (` make && make serve`) to check it renders
-   properly.
+7. View your changes to make sure they render properly. See previous section 
+   [Building the docs][#building-the-docs] for how to build a local version of
+   the docs.
 
 8. Push the branch back to **your** fork on Github
 
@@ -121,25 +161,26 @@ easily for our documentation.
     - caching your [password] (https://help.github.com/articles/caching-your-github-password-in-git/)
 
 9. Create a pull request. This is easily done in the web interface of Github:
-   navigate to your branch on the web interface and hit the compare button - 
-   this will allow you to compare across forks to the juju/docs master branch, 
-   which is where your changes will hopefully end up. The comparison will show 
-   you a diff of the changes  - it is useful to look over this to avoid 
-   mistakes. Then click on the button to Create a pull request.
-   Add any useful info about the changes in the comments (e.g. if it fixes an
-   issue you can refer to it by number to automatically link your pull request 
-   to the issue)
+   navigate to your branch on the web interface and hit the compare button -
+   this will allow you to compare across forks to the juju/docs master branch,
+   which is where your changes will hopefully end up. The comparison will show
+   you a diff of the changes  - it is useful to look over this to avoid
+   mistakes. Then click on the button to Create a pull request. Add any useful
+   info about the changes in the comments (e.g. if it fixes an issue you can
+   refer to it by number to automatically link your pull request to the issue)
 
-10. Wait. The documentation team will usually get to your pull request within a 
-   day or two. Be prepared for suggested changes and comments. If there are 
-   changes to be made:
+10. A Documentation team member will review your PR, suggest improvements, and
+    eventually merge it with the appropriate branch (series). Publication to
+    the website is a separate step (performed internally), so it can be a few
+    days before the changes actually show up.
 
-   - make the changes in your local branch
-   - use `git commit -m 'some message' ` to commit the new changes
-   - push the branch to your fork again with `git push origin {branchname}`
-   - there is no need to update the pull request, it will be updated automatically
- 
+    If there are changes to be made:
 
+    - make the changes in your local branch
+    - use `git commit -m 'some message' ` to commit the new changes
+    - push the branch to your fork again with `git push origin {branchname}`
+    - there is no need to update the pull request, it will be done
+      automatically
 
 Once the code has been landed you can remove your feature branch from both the
 remote and your local fork. Github provides a button for this at the bottom of
@@ -148,16 +189,15 @@ the pull request, or you can use `git` to remove the branch.
 Before creating another feature branch, make sure you update your fork's code
 by pulling from the original Juju repository (see below).
 
-
 ## Keeping your fork in sync with Juju docs upstream
 
 You should now have both the upstream branch and your fork listed in git, 
 `git remote -v` should return something like:
 
         upstream   https://github.com/juju/docs.git (fetch)
-        upstream	https://github.com/juju/docs.git (push)
-        origin  	https://github.com/castrojo/docs (fetch)
-        origin  	https://github.com/castrojo/docs (push)
+        upstream   https://github.com/juju/docs.git (push)
+        origin     https://github.com/your-github-id/docs (fetch)
+        origin     https://github.com/your-github-id/docs (push)
 
 To fetch and merge with the upstream branch:
 
@@ -167,39 +207,9 @@ To fetch and merge with the upstream branch:
         git push origin master
 
 
+<!-- LINKS -->
 
-## Additional resources
-
-### Tools
-
-
-[Git Remote Branch](https://github.com/webmat/git_remote_branch>) - A tool to 
-simplify working with remote branches (Detailed installation instructions are
-in their README).
-
-
-### Using git aliases
-
-Git provides a mechanism for creating aliases for complex or multi-step
-commands. These are located in your ``.gitconfig`` file under the
-``[alias]`` section.
-
-If you would like more details on Git aliases, You can find out more
-information here: [How to add Git aliases](https://git.wiki.kernel.org/index.php/Aliases>)
-
-Below are a few helpful aliases that have been suggested:
-
-
-    # Bring down the pull request number from the remote specified.
-    # Note, the remote that the pull request is merging into may not be your
-    # origin (your github fork).
-    fetch-pr = "!f() { git fetch $1 refs/pull/$2/head:refs/remotes/pr/$2; }; f"
-
-    # Make a branch that merges a pull request into the most recent version of the
-    # trunk (the "juju" remote's develop branch). To do this, it also updates your
-    # local develop branch with the newest code from trunk.
-    # In the example below, "juju" is the name of your remote, "6" is the pull
-    # request number, and "qa-sticky-headers" is whatever branch name you want
-    # for the pull request.
-    # git qa-pr juju 6 qa-sticky-headers
-    qa-pr = "!sh -c 'git checkout develop; git pull $0 develop; git checkout -b $2; git fetch-pr $0 $1; git merge pr/$1'"
+[#building-the-docs]: #building-the-docs
+[github-documentation-builder]: https://github.com/CanonicalLtd/documentation-builder
+[ubuntu-serverguide-apache]: https://help.ubuntu.com/lts/serverguide/httpd.html
+[browser-linkchecker-addon]: https://chrome.google.com/webstore/detail/check-my-links/ojkcdipcgfaekbeaelaapakgnjflfglf
