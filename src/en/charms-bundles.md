@@ -111,7 +111,7 @@ as you would a charm. There, you can see icons representing each separate
 application alongside the bundle's name. This gives you a quick overview of a
 bundle's complexity and potential resource requirements.
 
-![Bundle resources in the Charm Store](media/juju2_gui_bundles_store.png)
+![Bundle resources in the Charm Store](https://assets.ubuntu.com/v1/053466a1-juju2_gui_bundles_store.png)
 
 To get a bundle's name, select a bundle on the store and find the 'command
 prompt' icon at the top of the pane. A field will contain the Charm Store URL
