@@ -13,10 +13,14 @@ Kubernetes ("k8s") provides a flexible architecture for managing containerised
 applications at scale. See the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information.
 
-Juju has the ability to add a Kubernetes cluster to its known list of clouds,
-thereby treating the cluster like it does any other cloud. There are some
-differences to working with such a cloud and they are covered in the next
-section.
+The objective of this page is to show how Juju can make use of an existing
+Kubernetes cluster. It is not about showing how to install Kubernetes *with*
+Juju, although we do give pointers on how to do so.
+
+Essentially, Juju is able to treat the added cluster as it does any other of
+its known clouds (i.e. create models and deploy charms). There are some
+differences to working with such a cloud and they are called out in the
+following section.
 
 This document refers to page
 [Persistent storage and Kubernetes][charms-storage-k8s] in a few places. You
@@ -91,7 +95,7 @@ suggestions:
        [Spell Walkthrough][upstream-conjure-up-guide]
  - Use [MicroK8s][upstream-microk8s]. This gives you get a local, fully
    compliant Kubernetes deployment with dynamic persistent volume support. See
-   tutorial [Using Juju with microk8s][tutorial-microk8s].
+   tutorial [Using Juju with MicroK8s][tutorial-microk8s].
  - Use a bundle made for the major cloud vendors. There are special
    "integrator" charms that assist with such deployments.
    [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.

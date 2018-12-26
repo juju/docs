@@ -26,15 +26,22 @@ homepage: true
                 <h2>What's new</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a href="/devel/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-k8s">Using Kubernetes with Juju&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/devel/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/multiuser">Working with multiple users&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item">Understanding&nbsp;
+		        <a href="/devel/en/controllers">controllers</a>,&nbsp;
+		        <a href="/devel/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
+		        <a href="/devel/en/client">client</a>&nbsp;&rsaquo;
+		    </li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-k8s-static-pv.md">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-microk8s.md">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
@@ -52,7 +59,7 @@ homepage: true
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/fa38eb81-picto-business-midaubergine.svg');
                         height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
 			<a href="/devel/en/experts-sla">Managed solutions</a>
-                    </li>
+		    </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/4ef84d88-picto-quote-warmgrey.svg');
                         height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
