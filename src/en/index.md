@@ -14,7 +14,7 @@ homepage: true
         <div class="u-equal-height">
             <div class="col-6">
                 <h2>Getting started</h2>
-                <p><a href="/devel/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
+                <p><a href="/devel/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
             </div>
             <div class="col-6 u-align--right">
                 <img style="border: 0" src="https://assets.ubuntu.com/v1/843c77b6-juju-at-a-glace.svg">
@@ -25,23 +25,23 @@ homepage: true
             <div class="col-6">
                 <h2>What's new</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/devel/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/clouds-k8s">Using Kubernetes with Juju&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-k8s">Using Kubernetes with Juju&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/devel/multiuser">Working with multiple users&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/multiuser">Working with multiple users&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item">Understanding&nbsp;
-		        <a href="/devel/controllers">controllers</a>,&nbsp;
-		        <a href="/devel/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
-		        <a href="/devel/client">client</a>&nbsp;&rsaquo;
+		        <a href="/devel/en/controllers">controllers</a>,&nbsp;
+		        <a href="/devel/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
+		        <a href="/devel/en/client">client</a>&nbsp;&rsaquo;
 		    </li>
-                    <li class="p-list__item"><a href="/devel/tutorial-k8s-static-pv.md">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/devel/tutorial-microk8s.md">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-k8s-static-pv.md">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-microk8s.md">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
@@ -88,7 +88,7 @@ homepage: true
                 <h2>Contribute</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a class="p-link--external" href="https://github.com/juju/juju">Help improve Juju</a></li>
-                    <li class="p-list__item--deep"><a class="p-link--external" href="/devel/contributing">Help improve the documentation</a></li>
+                    <li class="p-list__item--deep"><a class="p-link--external" href="/devel/en/contributing">Help improve the documentation</a></li>
                 </ul>
             </div>
         </div>
