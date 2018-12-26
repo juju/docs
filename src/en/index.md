@@ -40,8 +40,8 @@ homepage: true
 		        <a href="/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
 		        <a href="/en/client">client</a>&nbsp;&rsaquo;
 		    </li>
-                    <li class="p-list__item"><a href="/en/tutorial-k8s-static-pv.md">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tutorial-microk8s.md">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>

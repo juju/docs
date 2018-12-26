@@ -706,7 +706,7 @@ case you would simply reference the bundle name, such as 'wiki-simple':
 juju diff-bundle wiki-simple
 ```
 
-## Saving a bundle and next steps
+## Saving a bundle
 
 If you have created your own bundle you will probably want to save it. This is
 done with the `export-bundle` command, which exports a single model

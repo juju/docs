@@ -1,13 +1,7 @@
 Title: Upgrading a machine series
 TODO:  warning: ubuntu code names hardcoded
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797399
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797593
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797595
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797388
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797396
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797968
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1798094
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1798097
 
 # Upgrading a machine series
 
