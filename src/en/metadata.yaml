@@ -23,36 +23,44 @@ navigation:
         location: charms-deploying.md
       - title: Using constraints
         location: charms-constraints.md
+      - title: Configuring models
+        location: models-config.md
       - title: Configuring applications
         location: charms-config.md
       - title: Managing relations
         location: charms-relations.md
+      - title: Scaling applications
+        location: charms-scaling.md
       - title: Removing things
         location: charms-destroy.md
 
   - title: Administering Juju
 
     children:
-      - title: Scaling applications
-        location: charms-scaling.md
-      - title: Upgrading applications
-        location: charms-upgrading.md
-      - title: Updating a machine series
-        location: upgrade-series.md
+      - title: Upgrading
+        location: upgrading.md
       - title: Controller backups
         location: controllers-backup.md
       - title: Controller high availability
         location: controllers-ha.md
       - title: Application high availability
         location: charms-ha.md
-      - title: Juju users
-        location: users.md
+      - title: Working with multiple users
+        location: multiuser.md
+      - title: Troubleshooting
+        location: troubleshooting.md
+      - title: Juju logs
+        location: troubleshooting-logs.md
 
   - title: Advanced topics
 
     children:
       - title: Charm bundles
         location: charms-bundles.md
+      - title: Machine authentication
+        location: machine-auth.md
+      - title: Migrating models
+        location: models-migrate.md
       - title: Using storage
         location: charms-storage.md
       - title: Working with actions
@@ -74,14 +82,6 @@ navigation:
       - title: Network spaces
         location: network-spaces.md
 
-  - title: Troubleshooting
-
-    children:
-      - title: Troubleshooting guidelines
-        location: troubleshooting.md
-      - title: Juju logs
-        location: troubleshooting-logs.md
-
   - title: Miscellaneous
 
     children:
@@ -101,32 +101,12 @@ navigation:
         location: charms-working-with-units.md
       - title: Application metrics
         location: charms-metrics.md
-      - title: Exposing applications
-        location: charms-exposing.md
 
-  - title: Reference
+  - title: Charm writing
+    location: https://docs.jujucharms.com/2.4/en/developer-getting-started
 
-    children:
-      - title: Release notes
-        location: reference-release-notes.md
-      - title: Juju commands
-        location: commands.md
-      - title: Juju constraints
-        location: reference-constraints.md
-      - title: Juju charm hooks
-        location: reference-charm-hooks.md
-      - title: Juju environment variables
-        location: reference-environment-variables.md
-      - title: Juju hook tools
-        location: reference-hook-tools.md
-      - title: metadata.yaml
-        location: authors-charm-metadata.md
-      - title: Charm writing
-        location: https://docs.jujucharms.com/2.4/en/developer-getting-started
-      - title: API docs
-        location: http://godoc.org/github.com/juju/juju/api
-      - title: Status values
-        location: reference-status.md
+  - title: Reference documents
+    location: reference-documents.md
 
   - title: Contact us
     location: contact-us.md

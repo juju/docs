@@ -46,9 +46,7 @@ Cloud Types
   lxd
   maas
   manual
-  oci
   openstack
-  oracle
   vsphere
 
 Select cloud type: openstack
@@ -224,7 +222,16 @@ juju bootstrap <cloud> <controller name> --config network=<network_id>
 or if the simplestream data is local:
 
 ```bash
-juju bootstrap <cloud> <controller name> --metadata-source ~/simplestreams/images --config network=<network_id>
+juju bootstrap <cloud> <controller name> --config network=<network_id> \
+	--metadata-source ~/simplestreams/images
+```
+
+or if there is an external network configured for instances that are only
+accessible via floating IP:
+
+```bash
+juju bootstrap <cloud> <controller name> --config network=<network_id> \
+	--config external-network=<external_network_id> --config use-floating-ip=true
 ```
 
 For a detailed explanation and examples of the `bootstrap` command see the
@@ -232,9 +239,9 @@ For a detailed explanation and examples of the `bootstrap` command see the
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model, which
-should be reserved for Juju's internal operations, and a model named
-'default', which can be used for deploying user workloads.
+A controller is created with two models - the 'controller' model, which should
+be reserved for Juju's internal operations, and a model named 'default', which
+can be used for deploying user workloads.
 
 See these pages for ideas on what to do next:
 

@@ -56,7 +56,7 @@ reveals the agent's configuration file:
 ```
 
 Consider keeping backups of these files, especially prior to upgrading the
-agents. See [Model upgrades][models-upgrade].
+agents. See [Upgrading models][models-upgrade].
 
 ### The debug-log command
 
@@ -236,7 +236,7 @@ juju ssh mysql/0
 ```
 
 File `/var/lib/juju/agents/unit-mysql-0/agent.conf` is then edited by adding
-the line `LOGGING_OVERRIDE=juju=trace` to the 'values' section.
+the line `LOGGING_OVERRIDE: juju=trace` to the 'values' section.
 
 To be clear, the bottom of the file now looks like:
 
@@ -245,7 +245,7 @@ loggingconfig: <root>=WARNING;unit=DEBUG
 values:
   CONTAINER_TYPE: ""
   NAMESPACE: ""
-  LOGGING_OVERRIDE=juju=trace
+  LOGGING_OVERRIDE: juju=trace
 mongoversion: "0.0"
 ```
 

@@ -29,7 +29,6 @@ See [][].
 
 ## Oracle Cloud Infrastructure (OCI) support
  
-<!-- check out of the box support and replacement of oracle classic -->
 OCI is the new cloud framework from Oracle and Juju now supports it out of the
 box. Juju's cloud name for this cloud is 'oci'. At this time both OCI and
 Oracle Classic are supported but it is expected that Classic will eventually

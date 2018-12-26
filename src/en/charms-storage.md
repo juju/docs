@@ -1,9 +1,9 @@
-Title: Using Juju Storage
+Title: Using Juju storage
 TODO:  bug tracking: https://pad.lv/1708212
        bug tracking: https://pad.lv/1709507
        bug tracking: https://pad.lv/1709508
 
-# Using Juju Storage
+# Using Juju storage
 
 Certain applications can benefit from advanced storage configurations and if a
 charm exists for such an application Juju can declare such requirements both
@@ -542,6 +542,37 @@ juju deploy postgresql --storage pgdata=lxd,8G
 See [Using LXD with Juju][clouds-lxd] for how to use LXD in conjunction with
 Juju, including the use of ZFS as an alternative filesystem.
 
+### Kubernetes (kubernetes)
+
+Kubernetes-based models have access to the 'kubernetes' storage provider, which
+supports the following pool attributes:
+
+- **storage-class**
+
+    The storage class for the Kubernetes cluster to use:
+
+    - `juju-unit-storage`
+    - `juju-charm-storage`
+    - `microk8s-hostpath`
+
+- **storage-provisioner**
+
+    The Kubernetes storage provisioner. For example:
+
+    - `kubernetes.io/no-provisioner`
+    - `kubernetes.io/aws-ebs`
+    - `kubernetes.io/gce-pd`
+
+- **parameters.type**
+
+    Extra parameters. For example:
+
+    - `gp2`
+    - `pd-standard`
+
+Using storage with Kubernetes is covered on the
+[Persistent storage and Kubernetes][charms-storage-k8] page.
+
 #### Loop devices and LXD
 
 LXD (localhost) does not officially support attaching loopback devices for
@@ -613,6 +644,7 @@ For guidance on how to create a charm that uses these storage features see
 
 [clouds-lxd]: ./clouds-LXD.md
 [charms-storage-ceph]: ./charms-storage-ceph.html
+[charms-storage-k8]: ./charms-storage-k8s.md
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
 [generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
