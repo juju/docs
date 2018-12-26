@@ -26,15 +26,22 @@ homepage: true
                 <h2>What's new</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a href="/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/troubleshooting">Troubleshooting&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/reference-release-notes">Release notes&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/clouds-k8s">Using Kubernetes with Juju&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Explore Juju</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/en/tut-lxd">Using Juju locally (LXD)&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/en/tut-users">A multi-user cloud&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/multiuser">Working with multiple users&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item">Understanding&nbsp;
+		        <a href="/en/controllers">controllers</a>,&nbsp;
+		        <a href="/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
+		        <a href="/en/client">client</a>&nbsp;&rsaquo;
+		    </li>
+                    <li class="p-list__item"><a href="/en/tutorial-k8s-static-pv.md">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tutorial-microk8s.md">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
