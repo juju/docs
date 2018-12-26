@@ -13,9 +13,9 @@ Kubernetes ("k8s") provides a flexible architecture for managing containerised
 applications at scale. See the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information.
 
-The objective of this page is how to add an existing Kubernetes cluster to
-Juju. It is not about showing how to install Kubernetes *with* Juju, although
-we do give pointers on how to do so.
+The objective of this page is to show how Juju can make use of an existing
+Kubernetes cluster. It is not about showing how to install Kubernetes *with*
+Juju, although we do give pointers on how to do so.
 
 Essentially, Juju is able to treat the added cluster as it does any other of
 its known clouds (i.e. create models and deploy charms). There are some
