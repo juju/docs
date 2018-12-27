@@ -26,10 +26,10 @@ Example user session:
 
 ```no-highlight
 Cloud Types
+  lxd
   maas
   manual
   openstack
-  oracle
   vsphere
 
 Select cloud type: maas
@@ -100,7 +100,7 @@ juju add-cloud prodmaas maas-clouds.yaml
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 Use the interactive `add-credential` command to add your credentials to the new
@@ -170,7 +170,6 @@ See these pages for ideas on what to do next:
 [upstream-maas]: https://maas.io
 [maas-cli]: https://docs.ubuntu.com/maas/en/manage-cli
 [maas-api]: https://docs.ubuntu.com/maas/en/manage-account#api-key
-[maas-manual]: ./clouds-maas-manual.md
 [create-a-controller-with-constraints]: ./controllers-creating.md#create-a-controller-with-constraints
 [models]: ./models.md
 [charms]: ./charms.md

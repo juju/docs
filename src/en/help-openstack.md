@@ -46,9 +46,7 @@ Cloud Types
   lxd
   maas
   manual
-  oci
   openstack
-  oracle
   vsphere
 
 Select cloud type: openstack

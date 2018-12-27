@@ -3,18 +3,13 @@ TODO:  Bug tracking: https://bugs.launchpad.net/juju/+bug/1749302
        Bug tracking: https://bugs.launchpad.net/juju/+bug/1749583
        INFO: Auth types found at ~/.local/share/juju/public-clouds.yaml
        There is contention whether access-key can be used with keystone v3 (see https://github.com/juju/docs/issues/2868)
-       Needs to be updated for the new Oracle cloud (OCI)
 table_of_contents: True
 
 # Clouds
 
 Juju supports a wide variety of clouds. In addition, many of these are known to
-Juju out of the box. They are Amazon AWS, Microsoft Azure, Google GCE, Oracle
-Compute, Rackspace, Joyent, and LXD.
-
-The remaining supported clouds do need to be added to Juju, and, as will be
-shown, it is simply done. They are VMware vSphere, OpenStack, MAAS, and Manual.
-An Oracle *trial* account also needs to be added.
+Juju out of the box. The remaining supported clouds do need to be added to
+Juju, and, as will be shown, it is simply done.
 
 Once your cloud is known to Juju, whether by default or due to it being added,
 the next step is to add your cloud credentials to Juju. The exception is for a
@@ -23,17 +18,21 @@ local LXD cloud; credentials are added automatically.
 This rest of this page covers general cloud management and an overview of how
 clouds are added. You can still get started by selecting your cloud here:
 
- - [Amazon AWS][clouds-aws]
- - [Microsoft Azure][clouds-azure]
- - [Google GCE][clouds-google]
- - [Oracle Compute][clouds-oracle]
- - [Rackspace][clouds-rackspace]
- - [Joyent][clouds-joyent]
- - [LXD][clouds-lxd]
+ - [Amazon AWS][clouds-aws] *****
+ - [Microsoft Azure][clouds-azure] *****
+ - [Google GCE][clouds-google] *****
+ - [Oracle OCI][clouds-oci] *****
+ - [Rackspace][clouds-rackspace] *****
+ - [Joyent][clouds-joyent] *****
+ - [LXD][clouds-lxd] (local) *****
+ - [LXD][clouds-lxd] (remote)
+ - [Kubernetes][clouds-k8s]
  - [VMware vSphere][clouds-vmware]
  - [OpenStack][clouds-openstack]
  - [MAAS][clouds-maas]
  - [Manual][clouds-manual]
+
+Those clouds known to Juju out of the box are denoted by an *****.
 
 ## General cloud management
 
@@ -47,24 +46,23 @@ juju clouds
 This will return a list very similar to:
 
 ```no-highlight
-Cloud        Regions  Default          Type        Description
-aws               14  us-east-1        ec2         Amazon Web Services
-aws-china          1  cn-north-1       ec2         Amazon China
-aws-gov            1  us-gov-west-1    ec2         Amazon (USA Government)
-azure             24  centralus        azure       Microsoft Azure
-azure-china        2  chinaeast        azure       Microsoft Azure China
-cloudsigma         5  hnl              cloudsigma  CloudSigma Cloud
-google             7  us-east1         gce         Google Cloud Platform
-joyent             6  eu-ams-1         joyent      Joyent Cloud
-oracle             5  uscom-central-1  oracle      Oracle Cloud
-rackspace          6  dfw              rackspace   Rackspace Cloud
-localhost          1  localhost        lxd         LXD Container Hypervisor
+Cloud        Regions  Default        Type        Description
+aws               15  us-east-1      ec2         Amazon Web Services
+aws-china          1  cn-north-1     ec2         Amazon China
+aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
+azure             26  centralus      azure       Microsoft Azure
+azure-china        2  chinaeast      azure       Microsoft Azure China
+cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
+google            13  us-east1       gce         Google Cloud Platform
+joyent             6  eu-ams-1       joyent      Joyent Cloud
+oracle             4  us-phoenix-1   oci         Oracle Cloud Infrastructure
+rackspace          6  dfw            rackspace   Rackspace Cloud
+localhost          1  localhost      lxd         LXD Container Hypervisor
 ```
 
-Each line represents a backing cloud that Juju can interact with. It gives the
-cloud name, the number of cloud regions Juju is aware of, the default region
-(for the current Juju client), the type/API used to control it, and a brief
-description.
+Each line represents a cloud that Juju can interact with. It gives the cloud
+name, the number of cloud regions Juju is aware of, the default region (for the
+current Juju client), the type/API used to control it, and a brief description.
 
 !!! Important:
     The cloud name (e.g. 'aws', 'localhost') is what you will use in any
@@ -125,6 +123,26 @@ cloud):
 juju update-clouds
 ```
 
+To change the definition of an existing cloud, 'oracle' for instance, create a
+[YAML-formatted][yaml] file, say `oracle.yaml`, with contents like:
+
+```no-highlight
+clouds:
+   oracle:
+      type: oci
+      config:
+         compartment-id: <some value>
+```
+
+And then:
+
+```bash
+juju add-cloud --replace oracle oracle.yaml
+```
+
+This will avoid you having to include `--config compartment-id=<some value>` at
+controller-creation time (`bootstrap`).
+
 ## Adding clouds
 
 Adding a cloud is done with the `add-cloud` command, which has both interactive
@@ -147,8 +165,8 @@ configuration file. It has the following format:
 ```yaml
 clouds:
   <cloud_name>:
-    type: <type_of_cloud>
-    auth-types: [<authenticaton_types>]
+    type: <cloud type>
+    auth-types: [<authenticaton types>]
     regions:
       <region-name>:
         endpoint: <https://xxx.yyy.zzz:35574/v3.0/>
@@ -168,6 +186,7 @@ of adding a cloud manually.
 `lxd`		  | n/a, `certificate` (`v.2.5`)
 `maas`		  | `oauth1`
 `manual`	  | n/a
+`oci`	  	  | `httpsig`
 `openstack` 	  | `access-key,userpass`
 `oracle`	  | `userpass`
 `rackspace`	  | `userpass`
@@ -189,8 +208,8 @@ Here are some examples of manually adding a cloud:
 
 [clouds-aws]: ./help-aws.md
 [clouds-azure]: ./help-azure.md
-[clouds-google]: ./google-gce.md
-[clouds-oracle]: ./help-oracle.md
+[clouds-google]: ./help-google.md
+[clouds-oci]: ./clouds-oci.md
 [clouds-rackspace]: ./help-rackspace.md
 [clouds-joyent]: ./help-joyent.md
 [clouds-lxd]: ./clouds-LXD.md
@@ -198,6 +217,7 @@ Here are some examples of manually adding a cloud:
 [clouds-openstack]: ./help-openstack.md
 [clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
+[clouds-k8s]: ./clouds-k8s.md
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [controllers-creating]: ./controllers-creating.md

@@ -1,84 +1,114 @@
-Title: What's new in 2.4
+Title: What's new in 2.5
 
-# What's new in 2.4
+# What's new in 2.5
 
-The latest release of Juju has focused a little more on under-the-hood 
-improvements, making Juju much more efficient at scale, but there are 
-some major changes you should know about, which we have summarised here.
+The major new features in this release are summarised below. See the
+[2.5 release notes][release-notes] for full details.
 
+## Kubernetes "cloud" support
 
-For full details on this release, see the [2.4 release notes][release-notes].
+Juju has been able to install a Kubernetes cluster for a while now. However,
+only until now is Juju able to take a pre-existing cluster and add it to its
+list of backing clouds. This renders the cluster available for charm
+deployment. Kubernetes-specific charms are naturally required.
 
-If you are new to Juju, you will probably want to read the
-[Getting started][getting-started] guide first.
+See [Using Kubernetes with Juju][clouds-k8s].
 
+## Remote LXD support and LXD clustering
 
+A remote LXD cloud is now possible. Like other custom clouds, it is added via
+the `add-cloud` command. The Juju client can then request a controller be
+created on the remote LXD host. This naturally bolsters the already supported
+LXD clustering feature; both features are expected to be used in tandem.
 
-## 18.04 LTS (Bionic) support
+Placement directives are supported for LXD clustering. You can specify upon
+which LXD host (cluster node) a Juju machine will be created. These nodes
+effectively become availability zones for a LXD clustered cloud.
 
-Juju now fully supports running both containers and workloads on the latest
-LTS release of Ubuntu! Currently, the default is to use 16.04 LTS (Xenial),
-but you can choose a different series when bootstrapping or deploying. For
-example, to create a new controller:
+See [Adding a remote LXD cloud][clouds-lxd-advanced-remote] and
+[LXD clustering][clouds-lxd-advanced-clustering].
 
-```bash
-juju bootstrap --bootstrap-series=bionic localhost localcloud
-```
-
-Workloads will automatically be deployed on the newest available series 
-supported by the charm.
-
-
-## Controller network spaces
-
-Two new controller configuration settings have been introduced to make it
-easier to specify which network spaces and/or subnets should be used for
-communication with the controller by workload agents, or between 
-controllers in the case of a Highly Available setup:
-
-  * juju-mgmt-space
-  * juju-ha-space
-
-For more information on how to use these new options, please read the 
-documentation on [configuring controllers][controllers-config].
-
-## Model Ownership
-
-In previous releases, the user who originally created a new model had special
-privileges over it. With this release, multiple users can be given admin
-status, and any user can have admin status taken away, so there is
-nothing unique about the original creator.
-
-## Cloud credential changes
-
-Credentials are essential for the Juju controller to authenticate and perform
-actions on the underlying cloud. Juju has always kept credentials remotely on
-the controller in addition to credentials stored locally by the Juju client.
-This isn't going to change, but the ambiguity of where particular credentials
-are stored has caused some confusion, so a new command has been added.
-
-To discover the credentials for the current user and cloud, run:
-
-```bash
-juju show-credentials
-```
-
-Additionally, the `show-model` command now outputs some additional information
-on credentials, for example:
-
-```bash
-  credential:
-    name: default
-    owner: admin
-    cloud: aws
-```
-will appear in the YAML output.
-
+## Oracle Cloud Infrastructure (OCI) support
  
+OCI is the new cloud framework from Oracle and Juju now supports it out of the
+box. Juju's cloud name for this cloud is 'oci' and it replaces the legacy
+Oracle cloud of 'oracle'.
+
+See [Using Oracle OCI with Juju][clouds-oci].
+
+## Rework of machine series upgrades
+
+Juju workload machines can now have their series updated natively. In previous
+versions the recommended approach was to add a new unit and remove the old one.
+With `v.2.5` a new command makes its appearance: `upgrade-series`. By design,
+the bulk of the underlying operating system is upgraded manually by the user by
+way of standard tooling (e.g. `do-release-upgrade`). Note that the upgrade of
+machines hosting controllers is not supported and the documented method of
+creating a new controller and migrating models is still the recommended
+procedure.
+
+See [Upgrading a machine series][upgrade-series].
+
+## Charm support for LXD profiles
+
+Juju now supports charms that include a LXD profile. A profile is applied to a
+LXD container that the charm is deployed into. Some hardcoded security checks
+are applied automatically when such a charm is deployed and profile information
+is exposed at the machine level with the `status` and `show-machine` commands.
+
+See [Charms and LXD profiles][clouds-lxd-advanced-profiles].
+
+## New command for saving a bundle
+
+A model's configuration can now be saved as a bundle at the command line using
+the new `export-bundle` command. Previously, the Juju GUI was needed for this.
+
+See [Saving a bundle][charms-bundles-export].
+
+## New command for comparing a bundle and model 
+
+A model and a bundle can now be compared using the new `diff-bundle` command.
+This will help in complex enterprise setups where changes have been made to a
+model yet a new bundle deployment of the initial model is desired.
+
+See [Comparing a bundle to a model][charms-bundles-diff].
+
+## Enhancements for adding OpenStack clouds
+
+The adding of an OpenStack cloud, via `add-cloud`, now supports the inclusion
+of a CA certificate in cases where it is necessary. This command also now
+recognises certain environment variables used by OpenStack - typically via its
+`novarc` file. The corresponding values will be used as default values when
+`add-cloud` is used in interactive mode.
+
+See [Adding an OpenStack Cloud][clouds-openstack-adding].
+
+## New command for assigning a remote credential to a model 
+
+Occasionally there is the need to change (or set) what remote credential is
+assigned to a model. This is now possible via the new `set-credential` command.
+
+See [Changing a remote credential for a model][credentials-set-credential].
+
+## Charm Store controller configuration key added
+
+A custom Charm Store can be configured by specifying a URL during the creation
+of a controller (`bootstrap`).
+
+See [Use a custom charm store][controllers-creating-charmstore-url].
+
+
 <!-- LINKS -->
 
-[getting-started]: ./getting-started.md
-[release-notes]: ./reference-release-notes.md#juju_2.4.0
-[controllers-config]: ./controllers-config.md
-[credential-command]: ./commands.md#show-credentials
-
+[release-notes]: ./reference-release-notes.md#juju_2.5.0
+[clouds-k8s]: ./clouds-k8s.md
+[clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
+[clouds-lxd-advanced-clustering]: ./clouds-lxd-advanced.md#lxd-clustering
+[clouds-oci]: ./clouds-oci.md
+[upgrade-series]: ./upgrade-series.md
+[clouds-lxd-advanced-profiles]: ./clouds-lxd-advanced.md#charms-and-lxd-profiles
+[charms-bundles-export]: ./charms-bundles.md#saving-a-bundle
+[charms-bundles-diff]: ./charms-bundles.md#comparing-a-bundle-to-a-model
+[clouds-openstack-adding]: ./help-openstack.md#adding-an-openstack-cloud
+[credentials-set-credential]: ./credentials.md#changing-a-remote-credential-for-a-model
+[controllers-creating-charmstore-url]: ./controllers-creating.md#use-a-custom-charm-store

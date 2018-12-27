@@ -1,6 +1,6 @@
-Title: Model upgrades
+Title: Upgrading models
 
-# Model upgrades
+# Upgrading models
 
 A model is upgraded by upgrading the version of Juju running within it, in the
 form of machine agents and unit agents. Agents are pieces of software that run
@@ -9,10 +9,6 @@ on each machine spawned by Juju, including controllers. See the
 
 A model upgrade is performed with the `upgrade-model` command and acts on all
 machine and unit agents running on all machines in the model.
-
-!!! Note:
-    The client can also be upgraded. See the [Juju client][client-upgrades]
-    page for how to do that.
 
 Several noteworthy points regarding backups:
 
@@ -81,7 +77,6 @@ A model upgrade that does not lead to 100% success will require attention. See
 
 <!-- LINKS -->
 
-[client-upgrades]: client.md#client-upgrades
 [models-upgrade-notes]: models-upgrade-notes.md
 [controller-backups]: controllers-backup.md
 [concepts-agent]: juju-concepts.md#agent

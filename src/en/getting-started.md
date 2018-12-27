@@ -314,7 +314,6 @@ some of the following pages of documentation:
 [jaaslogin]: https://jujucharms.com/login "JAAS login page"
 [models]: ./models.html "Introduction to Juju models"
 [ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
-[users]: ./users-models.html "Users and models"
 [gcedashboard]: https://console.cloud.google.com
 [gcecredentials]: https://console.developers.google.com/apis/credentials
 [install]: ./reference-install.html

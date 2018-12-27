@@ -1,29 +1,25 @@
 Title: Upgrading a machine series
 TODO:  warning: ubuntu code names hardcoded
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797399
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797593
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797595
        bug tracking: https://bugs.launchpad.net/juju/+bug/1797388
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797396
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1797968
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1798094
-       bug tracking: https://bugs.launchpad.net/juju/+bug/1798097
 
 # Upgrading a machine series
 
 Starting with Juju `v.2.5.0`, to upgrade the series of a machine, the
 `upgrade-series` command is used.
 
-The `upgrade-series` command does not support upgrading a controller. See below
-section [Upgrading a controller machine][#upgrading-a-controller] for how to do
-that using an alternate method.
+The `upgrade-series` command does not support upgrading a controller. An error
+will be emitted if you attempt to do so. See below section
+[Upgrading a controller machine][#upgrading-a-controller] for how to do that
+using an alternate method.
 
 ## Upgrading a workload machine
 
 Here is an overview of the process:
 
  1. The user initiates the upgrade.
-    1. The machine is no longer available for charm deployments.
+    1. The machine is no longer available for charm deployments or for hosting
+       new containers.
     1. Juju prepares the machine for the upcoming OS upgrade.
     1. All units on the machine are taken into account.
  1. The user manually performs the upgrade of the operating system and makes
@@ -41,11 +37,11 @@ to Ubuntu 18.04 LTS (Bionic).
 
 ### Initiating the upgrade
 
-You initiate the upgrade with the `prepare` sub-command, the machine ID, and
+You initiate the upgrade with the machine ID, the `prepare` sub-command, and
 the target series:
 
 ```bash
-juju upgrade-series prepare 1 bionic
+juju upgrade-series 1 prepare bionic
 ```
 
 You will be asked to confirm the procedure. Use the `-y` option to avoid this
@@ -54,17 +50,16 @@ prompt.
 Then output will be shown, such as:
 
 ```no-highlight
-leadership pinned for application "apache2"
-machine-1 started upgrade series from series xenial to series bionic
-apache2/0 pre-series-upgrade hook running
-apache2/0 pre-series-upgrade not found, skipping
-machine-1 all necessary binaries and service files written
+machine-1 started upgrade series from "xenial" to "bionic"
+apache2/1 pre-series-upgrade hook running
+apache2/1 pre-series-upgrade hook not found, skipping
+machine-1 binaries and service files written
 
 Juju is now ready for the series to be updated.
 Perform any manual steps required along with "do-release-upgrade".
-When ready run the following to complete the upgrade series process:
+When ready, run the following to complete the upgrade series process:
 
-juju upgrade-series complete 1
+juju upgrade-series 1 complete
 ```
 
 All charms associated with the machine must support the target series in order
@@ -74,6 +69,14 @@ There is a `--force` option available but it should be used with caution.
 The deployed charms will be inspected for a 'pre-series-upgrade' hook. If such
 a hook exists, it will be run. In our example, such a hook was not found in the
 charm.
+
+A machine in "prepare mode" will be noted as such in the output to the `status`
+(or `machines`) command:
+
+```no-highlight
+Machine  State    DNS            Inst id        Series  AZ  Message
+1        started  10.116.98.194  juju-573842-0  xenial      Series upgrade: prepare completed
+```
 
 ### Upgrading the operating system
 
@@ -97,17 +100,17 @@ You should now verify that the machine has been successfully upgraded. Once
 that's done, tell Juju that the machine is ready:
 
 ```bash
-juju upgrade-series complete 1
+juju upgrade-series 1 complete
 ```
 
 Sample output:
 
 ```no-highlight
 machine-1 complete phase started
-machine-1 starting all unit agents after series upgrade
+machine-1 started unit agents after series upgrade
 apache2/0 post-series-upgrade hook running
-apache2/0 post-series-upgrade not found, skipping
-leadership unpinned for application "apache2"
+apache2/0 post-series-upgrade hook not found, skipping
+machine-1 series upgrade complete
 
 Upgrade series for machine "1" has successfully completed
 ```

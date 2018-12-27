@@ -1,6 +1,4 @@
 Title: Models
-TODO:  Review required. Convert to abstract links
-
 
 # Models
 
@@ -15,54 +13,54 @@ immediate use. Models can be added easily at any time.
 
 Common model management tasks are summarized below.
 
-
-
 ^# View model status
    
-   Use the `juju status` command to view the status of a model:
+   Use the `status` command to view the status of a model:
 
    `juju status [options] [filter pattern ...]`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#status) or the `juju help
-   status` command.
-   
+   For command line help and syntax run `juju help status`.
 
 
 ^# Add a model
   
-   Use the `juju add-model` command to add a model to a controller:
+   Use the `add-model` command to add a model to a controller:
    
    `juju add-model [options] <model name> [key=[value] ...]`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#add-model) or the `juju help
-   add-model` command.
-  
+   For command line help and syntax run `juju help add-model`.
+   
+   The [Adding a model][models-adding] page provides a full explanation and
+   includes examples.
 
 
 ^# List all models
 
-   Use the `juju models` command to list all models for a controller:
+   Use the `models` command to list all models for a controller:
    
    `juju models [options]`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#models) or the `juju help
-   models` command.
-  
+   For command line help and syntax run `juju help models`.
 
 
 ^# Examine a model
 
-   Use the `juju show-model` command to examine a specific model:
+   Use the `show-model` command to examine a specific model:
    
    `juju show-model [options]`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#show-model) or the
-   `juju help show-model` command.
+   For command line help and syntax run `juju help show-model`.
 
+
+^# Compare a bundle to a model
+
+   Use the `diff-bundle` command to compare a model with a charm bundle:
+   
+   `juju diff-bundle [options] <bundle file or name>`
+   
+   For command line help and syntax run `juju help diff-bundle`.
+   
+   This topic is treated on the [Charm bundles][charms-bundles-diff] page.
 
 
 ^# Configure a model
@@ -71,38 +69,31 @@ Common model management tasks are summarized below.
    machines in the model. For instance, a logging level and API port can be
    stipulated.
 
-   This is a complex subject. See [Model configuration](./models-config.html).
-
+   This is a complex subject. See [Model configuration][models-config].
 
 
 ^# Set constraints for a model
 
    Charm constraints can be managed at the model level. This will affect all
-   charms used in the model unless overridden by constraints set at the
-   application level. Constraints are used to select minimum requirements for any
-   future machines Juju may create. For instance, a constraint may be set so that
-   machines have a minimum amount of disk space on their root drive.
+   charms used in the model unless overridden. Constraints are used to select
+   minimum requirements for any future machines Juju may create.
 
    This is a complex subject. See
-   [Using constraints](./charms-constraints.html#setting-constraints-for-a-model).
-   
+   [Setting constraints for a model][charms-constraints-models].
 
 
 ^# Destroy a model
 
-   Use the `juju destroy-model` command to remove a model from a controller:
+   Use the `destroy-model` command to remove a model from a controller:
    
    `juju destroy-model [options] <model name>`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#destroy-model) or the `juju help
-   destroy-model` command.
-   
+   For command line help and syntax run `juju help destroy-model`.
 
 
 ^# Change models
    
-   Use the `juju switch` command to go from one model to another:
+   Use the `switch` command to change from one model to another:
    
    `juju switch [<controller or model>|<:model>|<controller>:<model>|<controller:>]`
    
@@ -126,29 +117,24 @@ Common model management tasks are summarized below.
    `juju switch foo:`  
    Selects the last used model in controller 'foo'
 
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#switch) or the `juju help switch`
-   command.
+   For command line help and syntax run `juju help switch`.
    
 
 ^# Migrate models
 
-   Use the `juju migrate` command to move a model from one controller to
-   another. This is useful for load balancing when a controller is too busy, or
-   as a way to upgrade a model's controller to a newer Juju version.
+   Use the `migrate` command to migrate a model from one controller to another.
 
    `juju migrate [options] <model name> <target controller name>`
-
-   For a complete explanation, see [migrating models](./models-migrate.html),
-   the [command reference page](./commands.html#migrate) or the `juju help
-   migrate` command.
    
+   For command line help and syntax run `juju help migrate`.
+
+   For a complete explanation see the [Migrating models][models-migrate] page.
    
 
 ^# Provide SSH access
    
-   Use the `juju add-ssh-key` and `juju import-ssh-key` commands to provide SSH
-   access to all machines, present and future, in a model:
+   Use the `add-ssh-key` and `import-ssh-key` commands to provide SSH access to
+   all machines, present and future, in a model:
    
    `juju add-ssh-key <ssh-key>`
 
@@ -156,53 +142,50 @@ Common model management tasks are summarized below.
 
    `juju import-ssh-key <lp|gh>:<user identity>`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#add-ssh-key) or the
-   `juju help add-ssh-key` or the `juju help import-ssh-key` commands.
+   For command line help and syntax run `juju help add-ssh-key` or
+   `juju help import-ssh-key`.
    
+   For in-depth coverage see page [Machine authentication][machine-auth].
 
 
 ^# List SSH access keys
    
-   Use the `juju ssh-keys` command to list SSH keys currently permitting
-   access to all machines, present and future, in a model:
+   Use the `ssh-keys` command to list SSH keys currently permitting access to
+   all machines, present and future, in a model:
    
    `juju ssh-keys [options]`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#ssh-keys) or the `juju help
-   ssh-keys` command.
-   
+   For command line help and syntax run `juju help ssh-keys`.
 
 
 ^# Remove SSH access
    
-   Use the `juju remove-ssh-key` command to remove SSH access to all machines,
+   Use the `remove-ssh-key` command to remove SSH access to all machines,
    present and future, from a model:
    
    `juju remove-ssh-key <ssh-key-id> ...`
    
-   For complete explanation and syntax, see the
-   [command reference page](./commands.html#remove-ssh-key) or the `juju help
-   remove-ssh-key` command.
-   
+   For command line help and syntax run `juju help remove-ssh-key`.
    
 
 ^# Grant and revoke user access
    
-   This topic is treated in
-   [Users and models](./users-models.html#models-and-user-access).
-
+   If you're using multiple Juju users you will need to manage access to your
+   models. See page [Working with multiple users][multiuser] for a full
+   explanation.
 
 
 ^# View logs
+   
+   Use the `debug-log` command to examine logs on a per-model basis:
+   
+   `juju debug-log [options]`
 
-   Juju logs are viewed at the model level. This allows inspection of
-   activities occuring on multiple Juju machines simultaneously. Due to the
-   expected large volume of data, advanced filtering is available.
+   This allows inspection of activities occurring on multiple Juju machines
+   simultaneously. Due to the expected large volume of data, advanced filtering
+   is available.
 
-   This is a complex subject. See [Juju logs](./troubleshooting-logs.html).
-
+   A full explanation is provided on the [Juju logs][juju-logs] page.
 
 
 ^# Upgrade a model
@@ -211,15 +194,28 @@ Common model management tasks are summarized below.
    running on every machine Juju creates. This upgrade process does not pertain
    to the Juju software package installed on a client system.
 
-   This is a complex subject. See [Model upgrades](./models-upgrade.html).
-
+   See [Upgrading models][models-upgrade] for complete coverage.
 
 
 ^# Cross model relations
    
    Traditionally, when adding a relation between two applications (see
-   [Charm relations](./charms-relations.html)) the applications reside within
-   the same model and controller. It is possible, however, to break out of this
-   paradigm by employing *cross model relations*.
+   [Charm relations][charms-relations]) the applications reside within the same
+   model and controller. It is possible to overcome this limitation by
+   employing *cross model relations*.
 
-   This is a complex subject. See [Cross model relations](./models-cmr.html).
+   This topic is covered on the [Cross model relations][models-cmr] page.
+
+
+<!-- LINKS -->
+
+[models-cmr]: ./models-cmr.md
+[models-adding]: ./models-adding.md
+[models-config]: ./models-config.md
+[models-migrate]: ./models-migrate.md
+[models-upgrade]: ./models-upgrade.md
+[charms-relations]: ./charms-relations.md
+[charms-bundles-diff]: ./charms-bundles.md#comparing-a-bundle-to-a-model
+[charms-constraints-models]: ./charms-constraints.md#setting-constraints-for-a-model
+[juju-logs]: ./troubleshooting-logs.md
+[multiuser]: ./multiuser.md

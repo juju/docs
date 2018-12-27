@@ -23,6 +23,8 @@ navigation:
         location: charms-deploying.md
       - title: Using constraints
         location: charms-constraints.md
+      - title: Configuring models
+        location: models-config.md
       - title: Configuring applications
         location: charms-config.md
       - title: Managing relations
@@ -35,18 +37,16 @@ navigation:
   - title: Administering Juju
 
     children:
-      - title: Upgrading applications
-        location: charms-upgrading.md
-      - title: Upgrading a machine series
-        location: upgrade-series.md
+      - title: Upgrading
+        location: upgrading.md
       - title: Controller backups
         location: controllers-backup.md
       - title: Controller high availability
         location: controllers-ha.md
       - title: Application high availability
         location: charms-ha.md
-      - title: Understanding users
-        location: users.md
+      - title: Working with multiple users
+        location: multiuser.md
       - title: Troubleshooting
         location: troubleshooting.md
       - title: Juju logs
@@ -57,6 +57,10 @@ navigation:
     children:
       - title: Charm bundles
         location: charms-bundles.md
+      - title: Machine authentication
+        location: machine-auth.md
+      - title: Migrating models
+        location: models-migrate.md
       - title: Using storage
         location: charms-storage.md
       - title: Working with actions
