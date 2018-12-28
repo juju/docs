@@ -2550,20 +2550,23 @@ information on it.
    option accepts either a path to a YAML-formatted file or a key=value pair. A
    file should be of this format:
 
-           <charm name>:
-
-   
-   	<option name>: <option value>
-   	...
+   ```
+   <charm name>:
+     <option name>: <option value>
+     ...
+   ```
 
    For example, to deploy 'mediawiki' with file 'mycfg.yaml' that contains:
-           mediawiki:
 
-   
-   	name: my media wiki
-   	admins: me:pwdOne
-   	debug: true
+   ```
+   mediawiki:
+     name: my media wiki
+     admins: me:pwdOne
+     debug: true
+   ```
+
    use
+
            juju deploy mediawiki --config mycfg.yaml
    
    Key=value pairs can also be passed directly in the command. For example, to
@@ -2577,10 +2580,12 @@ information on it.
    
    If a key gets defined multiple times the last value will override any earlier
    values. For example,
+
            juju deploy mediawiki --config name='my media wiki' --config mycfg.yaml
    
    if mycfg.yaml contains a value for 'name', it will override the earlier 'my
    media wiki' value. The same applies to single value options. For example,
+
            juju deploy mediawiki --config name='a media wiki' --config name='my wiki'
    
    the value of 'my wiki' will be used.
