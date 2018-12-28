@@ -1,12 +1,14 @@
-Title:Juju commands and usage
+Title: Juju command reference
 
-# Juju Command reference
+# Juju command reference
 
-You can get a list of all Juju commands by invoking `juju help commands` in a terminal.
+You can get a list of all Juju commands by invoking `juju help commands` in a
+terminal.
 
 To drill down into each command use `juju help <command name>`.
 
-This same information is also provided below. Click on a command to view information on it.
+This same information is also provided below. Click on a command to view
+information on it.
 
 ^# actions
 
@@ -1556,29 +1558,30 @@ This same information is also provided below. Click on a command to view informa
 
    DEPRECATED: Interact with charms.
 
-Flags:
---description  (= false)
-    Show short description of plugin, if any
--h, --help  (= false)
-    Show help on a command or other topic.
+   **Options:**
 
+   _--description  (= false)_
+
+   Show short description of plugin, if any
+
+   _-h, --help  (= false)_
+
+   Show help on a command or other topic.
 
    
    **Details:**
 
 
-   This command is DEPRECATED since Juju 2.3.x, please use 'juju charm-resources' instead.
-   "juju charm" is the the juju CLI equivalent of the "charm" command used
-   by charm authors, though only applicable functionality is mirrored.
+   This command is DEPRECATED since Juju 2.3.x. Use the `charm-resources`
+   command instead. `juju charm` is the Juju CLI equivalent of the `charm`
+   command used by charm authors, though only applicable functionality is
+   mirrored. The `charm` command is available via Charm Tools.
 
-   commands:
+   Sub-commands:
 
-             help           - Show help on a command or other topic.
-
-             list-resources - Alias for 'resources'.
-
-             resources      - DEPRECATED: Display the resources for a charm in the charm store.
-
+      help           - Show help on a command or other topic.
+      list-resources - Alias for 'resources'.
+      resources      - DEPRECATED: Display the resources for a charm in the Charm Store.
 
 
 ^# charm-resources
@@ -2871,7 +2874,7 @@ Flags:
 
    **Summary:**
 
-   Compare a bundle with a model and report any differences.
+   Compares a bundle with a model and reports any differences.
 
    **Options:**
 
@@ -4139,9 +4142,7 @@ Flags:
 
 ^# import-filesystem
 
-   **Usage:** ` juju import-filesystem [options] 
-<storage-provider> <provider-id> <storage-name>
-`
+   **Usage:** ` juju import-filesystem [options] <storage-provider> <provider-id> <storage-name>
 
    **Summary:**
 
@@ -4167,12 +4168,12 @@ Flags:
 
    To import a filesystem, you must specify three things:
 
-          - the storage provider which manages the storage, and with
-            which the storage will be associated
-          - the storage provider ID for the filesystem, or
-            volume that backs the filesystem
-          - the storage name to assign to the filesystem,
-            corresponding to the storage name used by a charm
+   - the storage provider that manages the storage, and with which the storage
+     will be associated
+   - the storage provider ID for the filesystem, or volume that backs the
+     filesystem
+   - the storage name to assign to the filesystem, corresponding to the storage
+     name used by a charm
    
    Once a filesystem is imported, Juju will create an associated storage
    instance using the given storage name.
@@ -4180,14 +4181,11 @@ Flags:
 
    **Examples:**
 
-   Import an existing filesystem backed by an EBS volume,
-   and assign it the "pgdata" storage name. Juju will
-   associate a storage instance ID like "pgdata/0" with
-   the volume and filesystem contained within.
+   Import an existing filesystem backed by an EBS volume, and assign it the
+   "pgdata" storage name. Juju will associate a storage instance ID like
+   "pgdata/0" with the volume and filesystem contained within:
 
        juju import-filesystem ebs vol-123456 pgdata
-
-
 
 
 
