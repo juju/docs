@@ -1,7 +1,6 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
       Hardcoded: Ubuntu codenames
-      Should link to bundles page
 table_of_contents: True
 
 # Deploying applications
@@ -143,6 +142,11 @@ Kubernetes charms (`v.2.5.0`) can be deployed when the backing cloud is a
 Kubernetes cluster. See page [Using Kubernetes with Juju][clouds-k8s] for an
 overview.
 
+## Deploying from a charm bundle
+
+Complex installations requiring multiple charms can be achieved through the use
+of a *bundle*. See page [Charm bundles][charms-bundles] for guidance.
+
 ## Configuring at deployment time
 
 Deployed applications usually start with a sane default configuration. However,
@@ -201,6 +205,7 @@ matter.
 [charms-offline-deploying]: ./charms-offline-deploying.md
 [charms-config]: ./charms-config.md
 [charms-scaling]: ./charms-scaling.md
+[charms-bundles]: ./charms-bundles.md
 [network-spaces]: ./network-spaces.md
 [deploying-multi-series-charms]: ./charms-deploying-advanced.md#multi--series-charms
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines

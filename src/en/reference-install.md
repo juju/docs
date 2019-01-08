@@ -49,7 +49,8 @@ And can be updated with:
 sudo snap refresh juju
 ```
 
-See the [Snapcraft documentation][snapcraft] for more information on snaps. 
+See the [Snapcraft documentation][snapcraft-docs] for more information on
+snaps. 
 
 #### Using a PPA
 
@@ -164,7 +165,7 @@ instructions on how to build Juju from source.
 [release-notes-2]: ./reference-release-notes.md
 [homebrew]: https://brew.sh/
 [contributing]: https://github.com/juju/juju/blob/develop/CONTRIBUTING.md
-[snapcraft]: https://snapcraft.io
+[snapcraft-docs]: https://docs.snapcraft.io
 [snapd-install]: https://snapcraft.io/docs/core/install
 [juju-new-bug]: https://bugs.launchpad.net/juju/+filebug
 [juju-win-signed]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-setup-2.4.7-signed.exe
