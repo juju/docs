@@ -699,8 +699,8 @@ machines:
 
 The bundle shows as only missing machine 2 now, which makes sense.
 
-The target bundle can also reside within in the online Charm Store. In that
-case you would simply reference the bundle name, such as 'wiki-simple':
+The target bundle can also reside within the online Charm Store. In that case
+you would simply reference the bundle name, such as 'wiki-simple':
 
 ```bash
 juju diff-bundle wiki-simple
