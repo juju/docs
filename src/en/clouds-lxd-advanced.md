@@ -266,7 +266,8 @@ devices
             type: unix-char
 ```
 
-See the upstream documentation on [LXD profiles][lxd-upstream-profiles].
+See the LXD documentation to learn about the valid
+[profile configuration options][lxd-upstream-profile-options].
 
 
 <!-- LINKS -->
@@ -279,5 +280,5 @@ See the upstream documentation on [LXD profiles][lxd-upstream-profiles].
 [credentials]: ./credentials.md
 [clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
-[lxd-upstream-profiles]: https://lxd.readthedocs.io/en/latest/profiles/
+[lxd-upstream-profile-options]: https://lxd.readthedocs.io/en/latest/containers/
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
