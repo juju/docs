@@ -3,6 +3,10 @@ TODO:  How to remove a static volume?
 
 # Persistent storage and Kubernetes
 
+*This is in connection to the topic of
+[Using Kubernetes with Juju][clouds-k8s]. See that page for background
+information.*
+
 For each Juju-deployed Kubernetes application an *operator pod* is set up
 automatically whose task it is to run the charm hooks for each unit. Each charm
 also requires such persistent storage so that things like state and resources
@@ -119,6 +123,9 @@ created, they must also be manually removed.
     with the name of the intended model. In the examples above, the model name
     is 'k8s-model'. The remainder of the name, for both operator and charm
     storage, are fixed.
+
+Tutorial [Setting up static Kubernetes storage][tutorial-k8s-static-pv] goes
+over this stuff in a step-by-step fashion.
 
 ## Storage pool creation
 
@@ -250,6 +257,7 @@ with Juju-managed statically provisioned volumes.
 
 <!-- LINKS -->
 
+[clouds-k8s]: ./clouds-k8s.md
 [charms-storage]: ./charms-storage.md
 [kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
 [kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
@@ -257,4 +265,5 @@ with Juju-managed statically provisioned volumes.
 [#creating-storage-pools]: #creating-storage-pools
 [charm-store-staging-mariadb-k8s]: https://staging.jujucharms.com/u/wallyworld/mariadb-k8s/7
 [tutorial-microk8s]: ./tutorial-microk8s.md
+[tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
 [#external-storage-and-storage-precedence-rules]: #external-storage-and-storage-precedence-rules 

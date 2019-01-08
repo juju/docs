@@ -34,20 +34,28 @@ sudo snap install microk8s --classic
 sudo apt purge -y liblxc1 lxcfs lxd lxd-client
 ```
 
-Enable some MicroK8s addons that will provide DNS and storage class support:
-
-```bash
-microk8s.enable dns storage
-```
-
-This will bring about changes to the cluster. See what's going on with the
-`microk8s.kubectl` command:
+See what's going on with the `microk8s.kubectl` command:
 
 ```bash
 microk8s.kubectl get all --all-namespaces
 ```
 
-Sample output:
+Do not proceed until you see output similar to:
+
+```no-highlight
+NAMESPACE     NAME                 TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)         AGE
+default       service/kubernetes   ClusterIP   10.152.183.1    <none>        443/TCP         23m
+```
+
+Now enable some MicroK8s addons that will provide DNS and storage class
+support:
+
+```bash
+microk8s.enable dns storage
+```
+
+This will bring about changes to the cluster. Re-invoking the last command
+should eventually give you something like this:
 
 ```no-highlight
 NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
