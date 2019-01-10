@@ -82,13 +82,13 @@ identity-public-key          | string |          |                          | Se
 identity-url                 | string |          |                          | Sets the URL of the identity manager. Feature not yet implemented.
 max-logs-age                 | string | 72h      | 72h, etc.                | Sets the maximum age for log entries before they are pruned, in human-readable time format
 max-logs-size                | string | 4G       | 400M, 5G, etc.           | Sets the maximum size for the log collection, in human-readable memory format
-max-prune-txn-batch-size **[RT]** | integer | 1e+06   | 100000, 1e+05, etc.      | Sets the maximum number of database transaction records to be pruned during each cleanup pass.
-max-prune-txn-passes **[RT]** | integer | 100     |                          | Sets the maximum number of passes to make during each automatic hourly database transaction record cleanup procedure.
+max-prune-txn-batch-size **[RT]** | integer | 1e+06   | 100000, 1e+05, etc. | Sets the maximum number of database transaction records to be pruned during each cleanup pass. DEPRECATED
+max-prune-txn-passes **[RT]** | integer | 100     |                         | Sets the maximum number of passes to make during each automatic hourly database transaction record cleanup procedure. DEPRECATED
 max-txn-log-size             | string | 10M      | 100M, 1G, etc.           | Sets the maximum size for the capped txn log collection, in human-readable memory format
 mongo-memory-profile         | string | low      | low/default              | Sets whether MongoDB uses the least possible memory or the default MongoDB memory profile
 network                      | string |          |                          | An OpenStack network UUID.
-prune-txn-query-count **[RT]** | integer | 1000    | 10000, 1e+04, etc.       | 
-prune-txn-sleep-time **[RT]** | integer | 10ms    | 5ms, 15ms, etc.          | 
+prune-txn-query-count **[RT]** | integer | 1000  | 10000, 1e+04, etc.       | Sets the number of database transaction records to evaluate for pruning in a single query. Minimum value of '10'. A value of '0' indicates the default.
+prune-txn-sleep-time **[RT]** | string | 10ms    | 5ms, 100ms, etc.         | Sets the amount of time to sleep between each database transaction pruning query. A value of '0' indicates no sleep time. A negative value indicates the default.
 set-numa-control-policy      | bool   | false    | false/true               | Sets whether numactl is preferred for running processes with a specific NUMA (Non-Uniform Memory Architecture) scheduling or memory placement policy for multiprocessor systems where memory is divided into multiple memory nodes
 policy-target-group          | string |          |                          | An OpenStack PTG ID. Use with 'use-openstack-gbp'.
 state-port                   | integer | 37017   |                          | The port to use for mongo connections
