@@ -7,13 +7,16 @@ cases. When a controller is created, it creates two initial models called
 'controller' and 'default', but more models can be added with the `add-model`
 command. See [Creating a controller][controllers-creating] for details.
 
-Model names can be the same when hosted on different controllers, but they must
-be unique when hosted on a single controller.
-
 It is important to understand that credentials used with Juju are always
 associated with a model. When creating a model, therefore, a credential is
 either specified explicitly or a default is used. Read the
 [Credentials][credentials] page for background information.
+
+When a model is added the associated credential is validated with the backing
+cloud. As long as this check passes the model can be created and any of its
+subsequent machines will be created using those credentials. Care is therefore
+advised if the list of credentials to choose from contains multiple credentials
+(accounts) for the same cloud type.
 
 The model creator, by default, is granted 'admin' model access by default. This
 includes the two initial models created at controller-creation time. This
