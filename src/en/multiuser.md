@@ -1,6 +1,5 @@
 Title: Working with multiple users
-TODO: Stuff on user-added models (ssh key and credentials)
-      Check the functionality of admin user access level. This currently appears to do nothing (not destroy models, nor backups) 
+TODO: Check the functionality of admin user access level. This currently appears to do nothing (not destroy models, nor backups) 
       Add "External users" page when ready
 
 # Working with multiple users
@@ -259,8 +258,8 @@ Model            Cloud/Region         Status     Access  Last connection
 admin/euphoric*  localhost/localhost  available  read    never connected
 ```
 
-Notice how the model name is prepended with the remote user's name. The name
-is the 'owner' of the model.
+Notice how the model name is prepended with the remote user's name, which is
+the 'owner' of the model.
 
 Access can be viewed on a per-model basis by using the `show-model` command.
 Here we query model 'mara':

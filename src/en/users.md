@@ -45,7 +45,6 @@ Actions available to a system user and the corresponding Juju commands:
  - Add credentials (`add-credential` and `autoload-credentials`)
  - List credentials (`credentials`)
  - Create controllers (`bootstrap`)
- - Log in to a controller (`login`)
 
 Once a system user has created a controller they are provided automatically, at
 the Juju level, with an administrator of that controller and inherit all the
@@ -59,9 +58,9 @@ decision as to whether this should be allowed.
 ## Newly-created users
 
 A newly-created user is automatically granted login access to the controller.
-Once logged in, the user is allowed to perform the following additional
-actions:
+Once logged in, the user is allowed to perform additional actions:
 
+ - Log in to a controller (`login`)
  - List the user (`users`)
  - Show details for the user (`show-user`)
  - Log out of a controller (`logout`)
