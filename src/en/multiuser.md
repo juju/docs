@@ -350,6 +350,11 @@ Confirm this action with `juju show-user --user jim`.
 As usual, if a controller is not specified (`-c`) the default controller is the
 currently active one.
 
+## Next steps
+
+To explore using Juju with multiple users consider tutorial
+[Multi-user basic setup][tutorial-multiuser-basic].
+
 
 <!-- LINKS -->
 
@@ -358,3 +363,4 @@ currently active one.
 [users-external]: ./users-external.md
 [credentials]: ./credentials.md
 [models-adding]: ./models-adding.md
+[tutorial-multiuser-basic]: ./tutorial-multiuser-basic.md
