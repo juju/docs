@@ -1,6 +1,6 @@
-Title: Setting up static Kubernetes storage
+Title: Setting up static Kubernetes storage - tutorial
 
-# Setting up static Kubernetes storage
+# Setting up static Kubernetes storage - tutorial
 
 *This is in connection to the topic of
 [Using Kubernetes with Juju][clouds-k8s]. See that page for background
