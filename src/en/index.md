@@ -42,6 +42,7 @@ homepage: true
 		    </li>
                     <li class="p-list__item"><a href="/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/en/tutorial-multiuser">Multi-user basic setup&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>

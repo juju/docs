@@ -1,9 +1,9 @@
-Title: Using Juju locally (LXD)
+Title: Using Juju locally (LXD) - tutorial
 TODO:  Warning: Ubuntu release versions hardcoded
        tutorials at the bottom may get renamed
        sudo is not required for lxd > 3.0.1 (edit when appropriate)
 
-# Using Juju locally (LXD)
+# Using Juju locally (LXD) - tutorial
 
 This guide will get you started quickly with Juju by setting up everything you
 need on a single [Ubuntu 18.04 LTS][Bionic-download] (Bionic) system. It does

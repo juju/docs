@@ -1,7 +1,7 @@
-Title: Using Juju with MicroK8s
+Title: Using Juju with MicroK8s - tutorial
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1804495
 
-# Using Juju with MicroK8s
+# Using Juju with MicroK8s - tutorial
 
 *This is in connection to the topic of
 [Using Kubernetes with Juju][clouds-k8s]. See that page for background
