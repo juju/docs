@@ -186,6 +186,8 @@ default for the first machine in a model).
 The operator user can now deploy charms as normal. See
 [Deploying applications][charms-deploying] for help.
 
+That's the end of this tutorial!
+
 
 <!-- LINKS -->
 
