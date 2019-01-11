@@ -49,7 +49,9 @@ Enter region name: dc1
 Enter another region? (Y/n): n
 
 Cloud "myvscloud" successfully added
-You may bootstrap with 'juju bootstrap myvscloud'
+
+You will need to add credentials for this cloud (`juju add-credential myvscloud`)
+before creating a controller (`juju bootstrap myvscloud`).
 ```
 
 The 'API endpoint url' in this case is the IP address of the vSphere server.

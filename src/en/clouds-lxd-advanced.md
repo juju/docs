@@ -80,11 +80,8 @@ Select cloud type: lxd
 Enter a name for your lxd cloud: lxd-remote
 
 Enter the API endpoint url for the remote LXD server: https://10.55.60.244:8443                                                                                                   
-
 Auth Types
   certificate
-
-Select one or more auth types separated by commas [certificate]: 
 
 Enter region [default]: 
 
@@ -94,8 +91,8 @@ Enter another region? (y/N): n
 
 Cloud "lxd-remote" successfully added
 
-You may need to `juju add-credential lxd-remote' if your cloud needs additional credentials
-Then you can bootstrap with 'juju bootstrap lxd-remote'
+You will need to add credentials for this cloud (`juju add-credential lxd-remote`)
+before creating a controller (`juju bootstrap lxd-remote`).
 ```
 
 !!! Important:
