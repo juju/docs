@@ -39,7 +39,9 @@ Enter a name for your maas cloud: maas-cloud
 Enter the API endpoint url: http://10.55.60.29:5240/MAAS
 
 Cloud "maas-cloud" successfully added
-You may bootstrap with 'juju bootstrap maas-cloud'
+
+You will need to add credentials for this cloud (`juju add-credential maas-cloud`)
+before creating a controller (`juju bootstrap maas-cloud`).
 ```
 
 We've called the new cloud 'maas-cloud' and used an endpoint of
