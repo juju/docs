@@ -25,8 +25,8 @@ juju update-clouds
     The previous iteration of Oracle's public cloud is now known to Juju as
     'oracle-classic'. It is supported (see
     [2.3 documentation][clouds-oracle-classic]) but should be considered
-    deprecated.  These instructions cover Oracle OCI only and is known to Juju
-    as cloud 'oci'.
+    deprecated. These instructions cover Oracle OCI only and is known to Juju
+    as cloud 'oracle'.
 
 ## Understanding and preparing your OCI account
 
