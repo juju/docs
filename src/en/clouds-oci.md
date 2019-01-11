@@ -21,6 +21,13 @@ running:
 juju update-clouds
 ```
 
+!!! Note:
+    The previous iteration of Oracle's public cloud is now known to Juju as
+    'oracle-classic'. It is supported (see
+    [2.3 documentation][clouds-oracle-classic]) but should be considered
+    deprecated.  These instructions cover Oracle OCI only and is known to Juju
+    as cloud 'oci'.
+
 ## Understanding and preparing your OCI account
 
 The instructions on this page refer to certain OCI concepts. Familiarise
@@ -216,6 +223,7 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
+[clouds-oracle-classic]: https://docs.jujucharms.com/2.3/en/help-oracle
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [oracle-oci]: https://cloud.oracle.com/en_US/cloud-infrastructure
 [oracle-oci-concepts]: https://docs.cloud.oracle.com/iaas/Content/GSG/Concepts/concepts.htm
