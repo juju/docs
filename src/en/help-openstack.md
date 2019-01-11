@@ -71,8 +71,9 @@ Enter another region? (Y/n): n
 
 Successfully read CA Certificate from /home/ubuntu/test_certs/cacert.pem
 Cloud "myopenstack" successfully added
-You may need to `juju add-credential myopenstack' if your cloud needs additional credentials
-Then you can bootstrap with ‘juju bootstrap myopenstack’
+
+You will need to add credentials for this cloud (`juju add-credential myopenstack`)
+before creating a controller (`juju bootstrap myopenstack`).
 ```
 
 Note that it is possible to choose more than one authorisation method - just
