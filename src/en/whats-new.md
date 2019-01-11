@@ -5,7 +5,7 @@ Title: What's new in 2.5
 The major new features in this release are summarised below. See the
 [2.5 release notes][release-notes] for full details.
 
-## Kubernetes "cloud" support
+## Kubernetes workloads support
 
 Juju has been able to install a Kubernetes cluster for a while now. However,
 only until now is Juju able to take a pre-existing cluster and add it to its
@@ -31,8 +31,8 @@ See [Adding a remote LXD cloud][clouds-lxd-advanced-remote] and
 ## Oracle Cloud Infrastructure (OCI) support
  
 OCI is the new cloud framework from Oracle and Juju now supports it out of the
-box. Juju's cloud name for this cloud is 'oci' and it replaces the legacy
-Oracle cloud of 'oracle'.
+box. Juju's cloud name for this cloud is 'oci'. The legacy Oracle cloud of
+'oracle' has been renamed 'oracle-classic' and should be considered deprecated.
 
 See [Using Oracle OCI with Juju][clouds-oci].
 
@@ -49,7 +49,7 @@ procedure.
 
 See [Upgrading a machine series][upgrade-series].
 
-## Charm support for LXD profiles
+## Support for charms with LXD profiles
 
 Juju now supports charms that include a LXD profile. A profile is applied to a
 LXD container that the charm is deployed into. Some hardcoded security checks
