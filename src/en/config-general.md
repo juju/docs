@@ -218,6 +218,7 @@ ca-cert | string |  |  | The certificate of the CA that signed the state server 
 ca-cert-path | string |  |  | Path to file containing CA certificate
 ca-private-key | string |  |  | The private key of the CA that signed the state server certificate, in PEM format
 ca-private-key-path | string |  |  | Path to file containing CA private key
+cloudimg-base-url | string |  |  | The URL at which container images are found. Overrides the default of `https://cloud-images.ubuntu.com`.
 default-series | string |  | valid series name, e.g. 'trusty' | The default series of Ubuntu to use for deploying charms
 development | bool | false |  | Whether the environment is in development mode
 disable-network-management | bool | false |  | Whether the provider should control networks (only applies to MAAS environments, this should usually be set to false(default) otherwise Juju will not be able to create containers)
