@@ -8,7 +8,7 @@ The major new features in this release are summarised below. See the
 ## Kubernetes workloads support
 
 Juju has been able to install a Kubernetes cluster for a while now. However,
-only until now is Juju able to take a pre-existing cluster and add it to its
+only until 2.5 is Juju able to take a pre-existing cluster and add it to its
 list of backing clouds. This renders the cluster available for charm
 deployment. Kubernetes-specific charms are naturally required.
 
