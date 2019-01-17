@@ -109,8 +109,9 @@ of a model to grant access to that model with "juju grant".
 
 ## User login, logout, and password changing
 
-A newly-created user is granted controller access of 'login' out of the box. So
-besides logging in the user cannot do much else.
+A newly-created user is granted controller access of 'login' out of the box
+(implicitly: `juju grant -c gce tom login`). So besides logging in, the user
+cannot do much else.
 
 Registration implies a controller login (as can be seen by the previous
 command's messaging). To log out, use the `logout` command:
