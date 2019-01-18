@@ -1,28 +1,28 @@
-Title: Restricting changes to the running Juju environment
+Title: Disabling commands
+TODO:  Table needs verification
 
 # Restricting changes to running models
 
-Deployed models can be protected from unintentional changes by disabling
-commands that can alter a model.
+Commands can be disabled on a per-model basis. This is to protect the model
+from unintentional changes. This is accomplished through the use of the
+`disable-command` command with one of three progressively restrictive command
+groups:
 
-This is accomplished through the use of the `disable-command` command with one
-of three progressively restrictive command groups:
+ - destroy-model
+ - remove-object
+ - all
 
-- destroy-model
-- remove-object
-- all
+By disabling the `destroy-model` group, for instance, users lose the ability to
+destroy both the model and its controller. Specifying the `remove-object` group
+adds to these restrictions by disabling the removal of machines, relations,
+applications, and units. The `all` group disables the complete set of commands
+that can change the configuration of a model.
 
-By disabling the `destroy-model` group, for instance, the user loses the ability
-to destroy both the model and its controller. Specifying the `remove-object`
-group adds to these restrictions by disabling the removal of machines,
-relations, applications and units. The `all` group disables the complete set of
-commands that can change the configuration of a model.
+To give users an idea as to why a command is disabled, an optional message
+argument can be passed.
 
-To give the user some feedback on why a command might be disabled, an optional
-message argument can be passed as part of the disable command.
-
-For example, the following could be used to prevent execution of both the
-`destroy-model` and `destroy-controller` commands:
+For example, to prevent execution of both the `destroy-model` and
+`destroy-controller` commands:
 
 ```bash
 juju disable-command destroy-model "Check with SA before destruction."
@@ -41,20 +41,25 @@ To enable the command run
     juju enable-command destroy-model
 ```
 
+!!! Important: 
+    The `--force` option supported by some commands overrides disabled
+    commands.
+
 ## Re-enabling a command
 
-The reverse of `disable-command` is `enable-command.` This can be used with
-the corresponding group to restore a user's access to that group's commands: 
+To re-enable a command the `enable-command` is used.
+
+For example, to restore the commands associated with the 'destroy-model'
+command group:
 
 ```bash
 juju enable-command destroy-model
 ```
   
-By default, these actions are performed against the currently selected
-controller and model, but specific models can be targeted by using the
-additional '-m' or '--model' argument.
+As usual, these actions are performed against the currently selected
+controller and model.
 
-If you need to list which commands have been disabled, use `disabled-commands`:
+To list which commands have been disabled, use `disabled-commands`:
 
 ```bash
 juju disabled-commands
@@ -68,11 +73,12 @@ This will output will list any group that's currently disabled:
 Disabled commands  Message
 all
 ```
-!!! Warning: 
-    In some cases, the disable command will only take effect after the
-    user has logged out of Juju and logged back in again.
 
-## Commands within each enable and disable group
+!!! Note: 
+    In some cases, the disable command will only take effect after the user has
+    logged out of Juju (`juju logout`) and logged back in again (`juju login`).
+
+## Commands within each command group
 
 | destroy-model      | remove-object      | all                  |
 |--------------------|--------------------|----------------------|
@@ -104,10 +110,3 @@ all
 |                    |                    | unexpose             |
 |                    |                    | upgrade-charm        |
 |                    |                    | upgrade-model        |
-
-!!! Note: 
-    The '--force' option recognized by some Juju commands bypasses any
-    restriction level that would otherwise apply. If your policy is to use
-    restrictions then the immediate use of the '--force' option should not be part
-    of your workflow. If you must use it, do so after having first run the Juju
-    command without it to ensure you are aware of any possible restrictions.

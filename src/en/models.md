@@ -2,8 +2,8 @@ Title: Models
 
 # Models
 
-A Juju *model* is an environment associated with a *controller* (see
-[Controllers](./controllers.html)). When a controller is created two models are
+A *model* is an environment associated with a *controller* (see
+[Controllers][controllers]). When a controller is created two models are
 provisioned along with it. These initial models are named 'controller' and
 'default'. The 'controller' model is for internal Juju management and is not
 intended for general workloads. The 'default' model, however, is ready for
@@ -11,15 +11,7 @@ immediate use. Models can be added easily at any time.
 
 ## Model management
 
-Common model management tasks are summarized below.
-
-^# View model status
-   
-   Use the `status` command to view the status of a model:
-
-   `juju status [options] [filter pattern ...]`
-   
-   For command line help and syntax run `juju help status`.
+Common model management tasks are summarised below, in alphabetical order.
 
 
 ^# Add a model
@@ -32,63 +24,6 @@ Common model management tasks are summarized below.
    
    The [Adding a model][models-adding] page provides a full explanation and
    includes examples.
-
-
-^# List all models
-
-   Use the `models` command to list all models for a controller:
-   
-   `juju models [options]`
-   
-   For command line help and syntax run `juju help models`.
-
-
-^# Examine a model
-
-   Use the `show-model` command to examine a specific model:
-   
-   `juju show-model [options]`
-   
-   For command line help and syntax run `juju help show-model`.
-
-
-^# Compare a bundle to a model
-
-   Use the `diff-bundle` command to compare a model with a charm bundle:
-   
-   `juju diff-bundle [options] <bundle file or name>`
-   
-   For command line help and syntax run `juju help diff-bundle`.
-   
-   This topic is treated on the [Charm bundles][charms-bundles-diff] page.
-
-
-^# Configure a model
-
-   Configuration can occur at the model level. This will affect all Juju
-   machines in the model. For instance, a logging level and API port can be
-   stipulated.
-
-   This is a complex subject. See [Model configuration][models-config].
-
-
-^# Set constraints for a model
-
-   Charm constraints can be managed at the model level. This will affect all
-   charms used in the model unless overridden. Constraints are used to select
-   minimum requirements for any future machines Juju may create.
-
-   This is a complex subject. See
-   [Setting constraints for a model][charms-constraints-models].
-
-
-^# Destroy a model
-
-   Use the `destroy-model` command to remove a model from a controller:
-   
-   `juju destroy-model [options] <model name>`
-   
-   For command line help and syntax run `juju help destroy-model`.
 
 
 ^# Change models
@@ -118,6 +53,91 @@ Common model management tasks are summarized below.
    Selects the last used model in controller 'foo'
 
    For command line help and syntax run `juju help switch`.
+
+
+^# Compare a bundle to a model
+
+   Use the `diff-bundle` command to compare a model with a charm bundle:
+   
+   `juju diff-bundle [options] <bundle file or name>`
+   
+   For command line help and syntax run `juju help diff-bundle`.
+   
+   This topic is treated on the [Charm bundles][charms-bundles-diff] page.
+
+
+^# Configure a model
+
+   Configuration can occur at the model level. This will affect all Juju
+   machines in the model. For instance, a logging level and API port can be
+   stipulated.
+
+   This is a complex subject. See [Model configuration][models-config].
+
+
+^# Cross model relations
+   
+   Traditionally, when adding a relation between two applications (see
+   [Charm relations][charms-relations]) the applications reside within the same
+   model and controller. It is possible to overcome this limitation by
+   employing *cross model relations*.
+
+   This topic is covered on the [Cross model relations][models-cmr] page.
+
+
+^# Destroy a model
+
+   Use the `destroy-model` command to remove a model from a controller:
+   
+   `juju destroy-model [options] <model name>`
+   
+   For command line help and syntax run `juju help destroy-model`.
+
+
+^# Disable commands
+
+   Use the `disable-command` command to disable commands within a model:
+   
+   `juju disable-command [options] <command set> [message...]`
+   
+   For command line help and syntax run `juju help disable-command`.
+   
+   The [Disabling commands][juju-block] page gives more information.
+
+
+^# Examine a model
+
+   Use the `show-model` command to examine a specific model:
+   
+   `juju show-model [options]`
+   
+   For command line help and syntax run `juju help show-model`.
+
+
+^# List all models
+
+   Use the `models` command to list all models for a controller:
+   
+   `juju models [options]`
+   
+   For command line help and syntax run `juju help models`.
+
+
+^# List SSH access keys
+   
+   Use the `ssh-keys` command to list SSH keys currently permitting access to
+   all machines, present and future, in a model:
+   
+   `juju ssh-keys [options]`
+   
+   For command line help and syntax run `juju help ssh-keys`.
+   
+
+^# Manage user access
+   
+   If you're using multiple Juju users you will need to manage access to your
+   models. See page [Working with multiple users][multiuser] for a full
+   explanation.
    
 
 ^# Migrate models
@@ -148,16 +168,6 @@ Common model management tasks are summarized below.
    For in-depth coverage see page [Machine authentication][machine-auth].
 
 
-^# List SSH access keys
-   
-   Use the `ssh-keys` command to list SSH keys currently permitting access to
-   all machines, present and future, in a model:
-   
-   `juju ssh-keys [options]`
-   
-   For command line help and syntax run `juju help ssh-keys`.
-
-
 ^# Remove SSH access
    
    Use the `remove-ssh-key` command to remove SSH access to all machines,
@@ -166,13 +176,25 @@ Common model management tasks are summarized below.
    `juju remove-ssh-key <ssh-key-id> ...`
    
    For command line help and syntax run `juju help remove-ssh-key`.
-   
 
-^# Grant and revoke user access
+
+^# Set constraints for a model
+
+   Charm constraints can be managed at the model level. This will affect all
+   charms used in the model unless overridden. Constraints are used to select
+   minimum requirements for any future machines Juju may create.
+
+   This is a complex subject. See
+   [Setting constraints for a model][charms-constraints-models].
+
+
+^# Upgrade a model
    
-   If you're using multiple Juju users you will need to manage access to your
-   models. See page [Working with multiple users][multiuser] for a full
-   explanation.
+   Juju software is upgraded at the model level. This affects the Juju agents
+   running on every machine Juju creates. This upgrade process does not pertain
+   to the Juju software package installed on a client system.
+
+   See [Upgrading models][models-upgrade] for complete coverage.
 
 
 ^# View logs
@@ -188,27 +210,18 @@ Common model management tasks are summarized below.
    A full explanation is provided on the [Juju logs][juju-logs] page.
 
 
-^# Upgrade a model
+^# View model status
    
-   Juju software is upgraded at the model level. This affects the Juju agents
-   running on every machine Juju creates. This upgrade process does not pertain
-   to the Juju software package installed on a client system.
+   Use the `status` command to view the status of a model:
 
-   See [Upgrading models][models-upgrade] for complete coverage.
-
-
-^# Cross model relations
+   `juju status [options] [filter pattern ...]`
    
-   Traditionally, when adding a relation between two applications (see
-   [Charm relations][charms-relations]) the applications reside within the same
-   model and controller. It is possible to overcome this limitation by
-   employing *cross model relations*.
-
-   This topic is covered on the [Cross model relations][models-cmr] page.
+   For command line help and syntax run `juju help status`.
 
 
 <!-- LINKS -->
 
+[controllers]: ./controllers.md
 [models-cmr]: ./models-cmr.md
 [models-adding]: ./models-adding.md
 [models-config]: ./models-config.md
@@ -219,3 +232,5 @@ Common model management tasks are summarized below.
 [charms-constraints-models]: ./charms-constraints.md#setting-constraints-for-a-model
 [juju-logs]: ./troubleshooting-logs.md
 [multiuser]: ./multiuser.md
+[juju-block]: ./juju-block.md
+[machine-auth]: ./machine-auth.md
