@@ -1,7 +1,7 @@
 Title: Disabling commands
 TODO:  Table needs verification
 
-# Restricting changes to running models
+# Disabling commands
 
 Commands can be disabled on a per-model basis. This is to protect the model
 from unintentional changes. This is accomplished through the use of the
