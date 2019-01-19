@@ -74,8 +74,8 @@ sudo snap install juju --classic
 ```
 
 !!! Note:
-    The `--classic` flag is not supported on all distros. In that case, you'll
-    need to use `--devmode` instead.
+    In the advent that option `--classic` is not supported on your chosen
+    distros, use the `--devmode` option.
 
 For CentOS, you can download Juju from the following archive and install it
 manually:
@@ -148,11 +148,22 @@ sudo apt install juju
 !!! Note:
     The alpha builds are only available with snaps (via the 'edge' channel).
 
+### Installing multiple Juju series
+
+Some environments may see the need to install both the 1.x and the 2.x series
+of Juju. See page [Running multiple versions of Juju][juju-coexist] for
+guidance.
+
 ### Other platforms
 
 All development release binaries are published on
 [Launchpad][juju-launchpad-binaries]. Note that leading edge builds are only
 available with snaps (via the 'edge' channel).
+
+## Juju plugins
+
+Juju functionality can be extended through the use of plugins. See the 
+[Juju plugins][juju-plugins] page for information.
 
 ## Building from source
 
@@ -172,5 +183,7 @@ instructions on how to build Juju from source.
 [juju-win-signed-md5]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-setup-2.4.7-signed.exe/+md5
 [juju-centos]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-2.4.7-centos7.tar.gz
 [juju-centos-md5]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-2.4.7-centos7.tar.gz/+md5
+[juju-plugins]: ./juju-plugins.md
+[juju-coexist]: ./juju-coexist.md
 [juju-launchpad-binaries]: https://launchpad.net/juju/+series
 [centos-and-other-linuxes]: #centos-and-other-linuxes
