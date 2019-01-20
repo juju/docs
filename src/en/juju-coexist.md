@@ -1,76 +1,90 @@
 Title: Running multiple versions of Juju
-TODO: Update when upgrade path is available
+TODO: Update when upgrade path from 1.25 to 2.x is available
 
 # Running multiple versions of Juju
 
-You may wish to use the 2.x series of Juju for new projects, tests, and
-development work, but still require to support legacy deployments, which were
-built on and use the 1.x series of Juju.
+You may wish to use the 2.x series of Juju for new projects, tests, or
+development work, but still require to support legacy deployments, which use
+the 1.x series. It is possible to install both series on the same host but how
+it's done depends on your OS.
 
-Juju 2.x has been designed with the ability to co-exist with earlier versions,
-so you can install both. The details vary depending on your OS, as detailed
-below.
+The data directory for 1.x is `~/.juju` and for 2.x it is
+`~/.local/share/juju/`. Keep these as-is; do not attempt to co-locate files in
+a central directory.
 
-## Ubuntu 16.04 LTS (Xenial) and later
-
-Running 
+The instructions given in this guide must be followed by a user logout, login,
+and a verification of what series is associated with the called binary. For
+example, if the called binary is `juju-1` then a verification consists of:
 
 ```bash
-sudo apt install juju
+juju-1 version
 ```
 
-...will install the latest Juju 2.x. If you also want to run the legacy
-1.x series, you may install that separately:
+!!! Note:
+    On Ubuntu 18.04 LTS (Bionic) the 1.x series is not available.
+
+## Ubuntu and 2.x
+
+On Ubuntu, install 2.x using [these][install-ubuntu] standard instructions.
+
+## Ubuntu 16.04 LTS (Xenial) and 1.x
+
+On Xenial, how to install 1.x depends on which series you want to be the
+default binary.
+
+### To make 2.x be the default
+
+To let 2.x be the default install 1.x with the following deb:
 
 ```bash
 sudo apt install juju-1.25
 ```
 
-**OR**, if you wish to run Juju 1.x as the "primary" Juju (i.e. the version the
-`juju` command points to by default), you can do this:
+Here, `juju` will call 2.x and `juju-1` will call 1.x.
+
+### To make 1.x be the default
+
+To let 1.x be the default install 1.x with this deb:
 
 ```bash
 sudo apt install juju-1-default
 ```
 
-Juju 2.x will be available by running the `juju-2.0` command.
+Now, `juju` will call 1.x and `/snap/bin/juju` will call 2.x.
 
-### Data directories
+## Ubuntu 14.04 LTS (Trusty) and 1.x
 
-The 1.x series keeps data in `~/.juju`.
-The 2.x series keeps data in `~/.local/share/juju/`.
-
-You can alter these by setting the environment variables `JUJU_HOME` and
-`JUJU_DATA` respectively. **DO NOT** co-locate the files in these directories
-or unfortunate things will happen.
-
-## Ubuntu 14.04 LTS (Trusty)
-
-Both series 1.x and 2.x can co-exist in Trusty. If you have already installed
-and used 1.x and subsequently install 2.x, the binary for 2.x will be installed
-at `/usr/lib/juju-2.0/bin/juju`.
-
-You can replicate the experience for Xenial by using the `ùpdate-alternatives`
-command to add 2.x as an alternative for the binary to call when issuing the
-`juju` command, and to add a `juju-1` command for the 1.x series:
+On Trusty, there is only one way to install 1.x:
 
 ```bash
-update-alternatives --install /usr/bin/juju juju /usr/lib/juju-2.0/bin/juju 1
-update-alternatives --install /usr/bin/juju-1 juju-1 /usr/lib/juju-1.25.6/bin/juju 0
-update-alternatives --config juju
+sudo apt install juju
 ```
 
-This last command will present a choice for which version to use for the `juju`
-command.
+### To make 2.x be the default
 
-### Data directories
+There's no fancy way to make 2.x be called by `juju` by default.
 
-The 1.x series keeps data in `~/.juju`
-The 2.x series keeps data in `~/.local/share/juju/`
+Edit your PATH environment variable so that `/snap/bin` appears before
+`/usr/bin`. For the Bash shell, one way is to add a line at the bottom of
+`~/.profile`. For example:
 
-You can alter these by setting the environment variables `JUJU_HOME` and
-`JUJU_DATA` respectively. **DO NOT** co-locate the files in these directories
-or unfortunate things will happen.
+```no-highlight
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/snap/bin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+```
+
+To fully reflect the corresponding Xenial scenario, you can create a symbolic
+link for the 1.x series:
+
+```bash
+sudo ln -s /usr/bin/juju /usr/bin/juju-1
+```
+
+After these changes, `juju` will call 2.x and `juju-1` will call 1.x.
+
+### To make 1.x be the default
+
+In this scenario, by default, `juju` will call 1.x and `/snap/bin/juju` will
+call 2.x.
 
 ## Other Linux 
 
@@ -79,9 +93,9 @@ for Juju which should also work on other flavours of Linux. As these tarballs
 simply contain an executable binary, you can place them wherever you wish,
 renaming them if required.
 
-It is recommended to install them in `/usr/lib/juju-1.25/bin/` and 
-`/usr/lib/juju-2.0/bin`. After which you can also use `ùpdate-alternatives`
-to configure which one to use:
+It is recommended to install them in `/usr/lib/juju-1.25/bin` and
+`/usr/lib/juju-2.0/bin`. After which you can use `ùpdate-alternatives` to
+configure which one to use:
 
 ```bash
 update-alternatives --install /usr/bin/juju juju /usr/lib/juju-2.0/bin/juju 1
@@ -134,7 +148,7 @@ and name the files differently when installing and using multiple versions.
 
 <!-- LINKS -->
 
-[install]: ./reference-install.html#stable
+[install-ubuntu]: ./reference-install.md#ubuntu
 [install-centos]: ./reference-install.md#centos-and-other-linuxes
 [install-windows]: ./reference-install.md#windows
 [install-macos]: ./reference-install.md#macos
