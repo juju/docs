@@ -150,9 +150,9 @@ sudo apt install juju
 
 ### Installing multiple Juju series
 
-Some environments may see the need to install both the 1.x and the 2.x series
-of Juju. See page [Running multiple versions of Juju][juju-coexist] for
-guidance.
+Some environments may see the need to run both the 1.x and the 2.x series
+of Juju concurrently. See page
+[Running multiple versions of Juju][juju-coexist] for guidance.
 
 ### Other platforms
 
