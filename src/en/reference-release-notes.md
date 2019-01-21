@@ -178,6 +178,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
   For a detailed breakdown of fixed bugs:
 
+  [https://launchpad.net/juju/+milestone/2.5-rc2](https://launchpad.net/juju/+milestone/2.5-rc2)
   [https://launchpad.net/juju/+milestone/2.5-rc1](https://launchpad.net/juju/+milestone/2.5-rc1)  
   [https://launchpad.net/juju/+milestone/2.5-beta3](https://launchpad.net/juju/+milestone/2.5-beta3)  
   [https://launchpad.net/juju/+milestone/2.5-beta1](https://launchpad.net/juju/+milestone/2.5-beta1)
@@ -193,7 +194,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
   ## Get Juju
   
-  The recommened install method is by snaps:
+  The recommended install method is by snaps:
   
       sudo snap install juju --classic
   
