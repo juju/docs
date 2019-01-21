@@ -8,7 +8,11 @@ release notes for the 1.x series are available [here][release-notes-1].
 ^# Juju 2.5.0
 
   This is a big release that includes support for Kubernetes workloads, LXD
-  remote clustering, managed OS series upgrades, and many others.
+  remote clustering, managed OS series upgrades, support for charms with LXD
+  profiles, Oracle OCI cloud support, and bundle enhancements.
+  
+  For highlights of this release, please see the [What's new in 2.5][whats-new]
+  page in the documentation. Further details are below.
 
   ## New and improved
 
