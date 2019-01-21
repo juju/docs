@@ -11,8 +11,9 @@ release notes for the 1.x series are available [here][release-notes-1].
   remote clustering, managed OS series upgrades, support for charms with LXD
   profiles, Oracle OCI cloud support, and bundle enhancements.
   
-  For highlights of this release, please see the [What's new in 2.5][whats-new]
-  page in the documentation. Further details are below.
+  For highlights of this release, please see the
+  [What's new in 2.5](https://docs.jujucharms.com/2.5/en/whats-new) page in the
+  documentation. Further details are below.
 
   ## New and improved
 
@@ -531,8 +532,9 @@ release notes for the 1.x series are available [here][release-notes-1].
   guiding Juju to the correct management network all aid in keeping your
   infrastructure running smoothly.  
   
-  For highlights of this release, please see the [What's new in 2.4][whats-new]
-  page in the documentation. Further details are below.
+  For highlights of this release, please see the
+  [What's new in 2.4](https://docs.jujucharms.com/2.4/en/whats-new) page in the
+  documentation. Further details are below.
   
   ## New and improved.
 
@@ -3282,7 +3284,6 @@ release notes for the 1.x series are available [here][release-notes-1].
 
 <!-- LINKS -->
 
-[whats-new]: ./whats-new.md
 [release-notes-1]: ./reference-release-notes-1.md
 [reference-install]: ./reference-install.md
 [juju-discourse-forum]: https://discourse.jujucharms.com/
