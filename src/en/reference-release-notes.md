@@ -7,17 +7,18 @@ release notes for the 1.x series are available [here][release-notes-1].
 
 ^# Juju 2.5.0
 
-  ????????????????????????????????????
-  
+  This is a big release that includes support for Kubernetes workloads, LXD
+  remote clustering, managed OS series upgrades, and many others.
+
   ## New and improved
 
   **Kubernetes workloads support**  
   Juju has been able to install a Kubernetes cluster for a while now. However,
-  only until now is Juju able to take a pre-existing cluster and add it to its
-  list of backing clouds. This renders the cluster available for charm
+  only until `v.2.5` is Juju able to take a pre-existing cluster and add it to
+  its list of backing clouds. This renders the cluster available for charm
   deployment. Kubernetes-specific charms are naturally required.
 
-  Documentation: [https://docs.jujucharms.com/2.5/en/clouds-k8s](https://docs.jujucharms.com/2.5/en/clouds-k8s)
+  Documentation: [https://docs.jujucharms.com/2.5/clouds-k8s](https://docs.jujucharms.com/2.5/en/clouds-k8s)
   
   **LXD clustering support**  
   Juju now supports managing models on a remote LXD cluster. Leveraging the
@@ -28,7 +29,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   scenarios or just providing a great dense "micro cloud" for a team to work
   against. 
   
-  - Documentation: [https://docs.jujucharms.com/2.5/en/clouds-lxd-advanced](https://docs.jujucharms.com/2.5/en/clouds-lxd-advanced#lxd-clustering)
+  - Documentation: [https://docs.jujucharms.com/2.5/clouds-lxd-advanced](https://docs.jujucharms.com/2.5/en/clouds-lxd-advanced#lxd-clustering)
   - Tips on setting up the LXD cluster networking:
     [https://discourse.jujucharms.com/t/manual-network-setup-for-lxd-clustering/261](https://discourse.jujucharms.com/t/manual-network-setup-for-lxd-clustering/261)
   
@@ -40,7 +41,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   migrate your infrastructure without redeploying and keep up with the latest
   LTS releases available. 
   
-  Documentation: [https://docs.jujucharms.com/2.5/en/upgrade-series](https://docs.jujucharms.com/2.5/en/upgrade-series)
+  Documentation: [https://docs.jujucharms.com/2.5/upgrade-series](https://docs.jujucharms.com/2.5/en/upgrade-series)
   
   The OpenStack charms are updated to support this in their latest release. You
   can see a charm that uses this feature
@@ -81,7 +82,7 @@ release notes for the 1.x series are available [here][release-notes-1].
       juju diff-bundle canonical-kubernetes --overlay local-config.yaml --overlay extra.yaml
       juju diff-bundle localbundle.yaml --map-machines 3=4
   
-  Documentation: [https://docs.jujucharms.com/2.5/en/charms-bundles](https://docs.jujucharms.com/2.5/en/charms-bundles#comparing-a-bundle-to-a-model)
+  Documentation: [https://docs.jujucharms.com/2.5/charms-bundles](https://docs.jujucharms.com/2.5/en/charms-bundles#comparing-a-bundle-to-a-model)
   
   **Support for charms with LXD profiles**  
   Sometimes an application needs to have a LXD profile with some tweaks in
@@ -94,7 +95,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   it is provided the tweaks it needs. 
   
   Documentation:
-  [https://docs.jujucharms.com/2.5/en/clouds-lxd-advanced](https://docs.jujucharms.com/2.5/en/clouds-lxd-advanced#charms-and-lxd-profiles)
+  [https://docs.jujucharms.com/2.5/clouds-lxd-advanced](https://docs.jujucharms.com/2.5/en/clouds-lxd-advanced#charms-and-lxd-profiles)
 
   A charm in development that uses this feature can be seen
   [here](https://jujucharms.com/u/openstack-charmers-next/neutron-openvswitch/)
@@ -108,7 +109,7 @@ release notes for the 1.x series are available [here][release-notes-1].
   If you wish to use the older legacy cloud you can find it listed as "OCI
   Classic".
   
-  Documentation: [https://docs.jujucharms.com/2.5/en/clouds-oci](https://docs.jujucharms.com/2.5/en/clouds-oci)
+  Documentation: [https://docs.jujucharms.com/2.5/clouds-oci](https://docs.jujucharms.com/2.5/en/clouds-oci)
   
   **Credential Management and Validation**  
   Juju uses a cloud credential to bootstrap a controller or to add a model.
@@ -137,14 +138,14 @@ release notes for the 1.x series are available [here][release-notes-1].
   of OS_CACERT, or provide the location of the certificate and Juju will take
   it from there.
   
-  Documentation: [https://docs.jujucharms.com/2.5/en/help-openstack](https://docs.jujucharms.com/2.5/en/help-openstack#adding-an-openstack-cloud)
+  Documentation: [https://docs.jujucharms.com/2.5/help-openstack](https://docs.jujucharms.com/2.5/en/help-openstack#adding-an-openstack-cloud)
   
   **Adding zones as a valid constraint**  
   You can now select one or more zones to be a constraint on the deployment. If
   you wish to use a subset of the available zones you can list them at deploy
   time and all units will respect that selection over time. 
   
-  Documentation: [https://docs.jujucharms.com/2.5/en/charms-constraints](https://docs.jujucharms.com/2.5/en/charms-constraints)
+  Documentation: [https://docs.jujucharms.com/2.5/charms-constraints](https://docs.jujucharms.com/2.5/en/charms-constraints)
   
   **New config-changed hook behaviour**  
   The  config-changed hook is now only run when needed. This solves a problem
