@@ -99,7 +99,7 @@ release notes for the 1.x series are available [here][release-notes-1].
 
   A charm in development that uses this feature can be seen
   [here](https://jujucharms.com/u/openstack-charmers-next/neutron-openvswitch/)
-  (see the `lxd-profile.yaml` in the file listing):
+  (see the `lxd-profile.yaml` in the file listing).
   
   **Oracle Cloud Infrastructure support**  
   The Oracle cloud has been updated and now supports
