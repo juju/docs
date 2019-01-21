@@ -1,6 +1,5 @@
 Title: Working with multiple users
 TODO: Check the functionality of admin user access level. This currently appears to do nothing (not destroy models, nor backups) 
-      Add "External users" page when ready
 
 # Working with multiple users
 
@@ -352,8 +351,10 @@ currently active one.
 
 ## Next steps
 
-To explore using Juju with multiple users consider tutorial
-[Multi-user basic setup][tutorial-multiuser-basic].
+To explore using Juju with multiple users consider the following tutorials:
+
+ - [Multi-user basic setup][tutorial-multiuser-basic]
+ - [Multi-user external setup][tutorial-multiuser-external]
 
 
 <!-- LINKS -->
@@ -364,3 +365,4 @@ To explore using Juju with multiple users consider tutorial
 [credentials]: ./credentials.md
 [models-adding]: ./models-adding.md
 [tutorial-multiuser-basic]: ./tutorial-multiuser-basic.md
+[tutorial-multiuser-external]: ./tutorial-multiuser-external.md
