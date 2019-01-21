@@ -252,7 +252,7 @@ how to do this.
 [charms-constraints]: ./charms-constraints.md
 [controllers-config]: ./controllers-config.md
 [models-config]: ./models-config.md
-[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.md
+[troubleshooting-logs-remote]: ./troubleshooting-logs.md#remote-logging
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
 [clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 
