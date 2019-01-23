@@ -117,7 +117,7 @@ credentials:
       auth-type: access-key
       access-key: AKIAIH7SUFMBP455BSQ
       secret-key: HEg5Y1DuGabiLt72LyCLkKnOw+NZkgszh3qIZbWv
-    javier:
+    jlaurin:
       auth-type: access-key
       access-key: AKIAIFII8EH5BOCYSJMA
       secret-key: WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq
