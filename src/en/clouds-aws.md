@@ -1,5 +1,4 @@
 Title: Using Amazon AWS with Juju
-TODO:  Review required (use style from the other cloud pages)
 
 # Using Amazon AWS with Juju
 
@@ -31,58 +30,77 @@ access that comes with using root-level secret keys.
 
 To create both a user and a group for use with Juju, click on your name from
 the AWS Management Console at [http://console.aws.amazon.com][aws] and select
-"My Security Credentials" from the drop-down menu.
+"My Security Credentials" from the drop-down menu:
 
-![Amazon accounts page with Security Creds](./media/getting_started-aws_security.png)
+![AWS credentials drop-down](./media/getting_started-aws_security2.png)
 
-Unless already disabled, a warning will appear, notifying you that any
-generated account credentials will provide unlimited access to your AWS
-resources.
+If you see a pop-up with the button "Get Started with IAM Users" go
+ahead and click on it and then "Add user". If you do not see such a pop-up
+then, in the top bar, choose "Services" > "IAM" > "Users" and then "Add user":
 
-Click on "Get Started with IAM Users" and click "Add user" to initiate user
-creation.
-
-![Amazon IAM set user details](./media/getting_started-aws_newuser.png)
+![AWS IAM set user details](./media/getting_started-aws_newuser2.png)
 
 Enter a name for your user and set `Programmatic access` as the AWS access type
 before clicking "Next: Permissions" to continue. 
 
-On the next page you can create a group which, by default, will contain your
-new user. Give the group a name and enable `AdministratorAccess`, or adequate
-access that corresponds to your requirements and security policies. 
+On the next page create a group which, by default, will contain your new user.
+Name the group and select one or many pre-existing policies that correspond to
+your requirements. Here we've chosen `AdministratorAccess`, which is the most
+privileged policy available:
 
-![Amazon IAM group creation](./media/getting_started-aws_groups.png)
+![AWS IAM group creation](./media/getting_started-aws_groups.png)
 
-Click the "Create group" button and you'll see an overview of both the new
-user and the group details. Click "Create user" to accept these details.
+Click the "Create group" button and then the "Next: Tags" button. Tags are
+optional and here we immediately pressed "Next: Review". On the next page click
+"Create user". The resulting page will declare user creation a success:
 
-The next page will declare user creation a success and include both the 
-`Access key ID` and the `Secret access key` for your new user, as well as the
-option to download these details as an CSV.
+![AWS IAM user csv](./media/getting_started-aws_credentials-csv2.png)
 
-![Amazon Access Credentials page showing key values](./media/getting_started-aws_credentials-csv.png)
+Click on the "Download .csv" button to get a copy of this user's credentials.
+The contents of this file will look similar to this:
+
+```no-highlight
+jlaurin,,AKIAIFII8EH5BOCYSJMA,WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq,https://466421367158.signin.aws.amazon.com/console
+```
+
+The next section will have you add credentials to Juju in the form of an
+"access-key" and a "secret-key". In the above, these correspond to
+'AKIAIFII5EH5FOCYZJMA' and 'WXg6S5Y1DvwuGt72LwzLKnItt+GRwlkn668sXHqq'.
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
-In order to access AWS, you will need to add credentials to Juju. This can be
-done in one of three ways.
+In order to access Amazon AWS, you will need to add credentials to Juju. This
+can be done in one of three ways (as shown below).
+
+Alternately, you can use your credentials with [Juju as a Service][jaas], where
+charms can be deployed within a graphical environment that comes equipped with
+a ready-made controller.
 
 ### Using the interactive method
 
-Armed with the gathered information, you can add credentials with the command:
+Armed with the gathered information, credentials can be added interactively:
 
 ```bash
 juju add-credential aws
 ```
 
-The command will interactively prompt you for the information needed for the
-chosen cloud.
+The command will prompt you for information that the chosen cloud needs. An
+example session follows:
 
-Alternately, you can use these credentials with [Juju as a Service][jaas] where
-you can deploy charms using a web GUI.
+```no-highlight
+Enter credential name: jlaurin
+
+Using auth-type "access-key".
+
+Enter access-key: AKIAIFII5EH5FOCYZJMA
+
+Enter secret-key: ******************************
+
+Credential "jlaurin" added locally for cloud "aws".
+```
 
 ### Using a file
 
@@ -94,8 +112,8 @@ the `add-credential` command to the file:
 juju add-credential aws -f mycreds.yaml
 ```
 
-See section [Adding credentials from a file][credentials-adding-from-file] on
-the Credentials page for guidance on what such a file looks like.
+See section [Adding credentials from a file][credentials-adding-from-file] for
+guidance on what such a file looks like.
 
 ### Using environment variables
 

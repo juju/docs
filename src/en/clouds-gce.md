@@ -210,7 +210,7 @@ gcloud services list --project juju-gce-1
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 In order to access Google GCE, you will need to add credentials to Juju. This
