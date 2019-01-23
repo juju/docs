@@ -23,3 +23,6 @@
 
 # Redirect help-google to clouds-gce
 "~^/(?<version>[0-9-\._]+|devel)/en/help-google/?$" /${version}/en/clouds-gce;
+
+# Redirect help-aws to clouds-aws
+"~^/(?<version>[0-9-\._]+|devel)/en/help-aws/?$" /${version}/en/clouds-aws;
