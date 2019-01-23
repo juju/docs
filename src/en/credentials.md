@@ -423,16 +423,7 @@ juju remove-credential aws bob
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
-[clouds-aws]: ./help-aws.md
-[clouds-azure]: ./help-azure.md
-[clouds-google]: ./help-google.md
-[clouds-joyent]: ./help-joyent.md
-[clouds-rackspace]: ./help-rackspace.md
-[clouds-maas]: ./clouds-maas.md
-[clouds-oracle]: ./help-oracle.md
-[clouds-openstack]: ./help-openstack.md
-[clouds-vmware]: ./help-vmware.md
-[clouds-aws-using-env-variables]: help-aws.md#using-environment-variables
-[clouds-google-using-env-variables]: help-google.md#using-environment-variables
-[clouds-openstack-using-env-variables]: help-openstack.md#using-environment-variables
+[clouds-aws-using-env-variables]: ./clouds-aws.md#using-environment-variables
+[clouds-google-using-env-variables]: ./help-google.md#using-environment-variables
+[clouds-openstack-using-env-variables]: ./help-openstack.md#using-environment-variables
 [clouds-adding-clouds-manually]: ./clouds.md#adding-clouds-manually
