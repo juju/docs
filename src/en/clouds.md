@@ -207,7 +207,7 @@ Here are some examples of manually adding a cloud:
 
 <!-- LINKS -->
 
-[clouds-aws]: ./clouds-aws.md
+
 [clouds-azure]: ./help-azure.md
 [clouds-google]: ./help-google.md
 [clouds-oci]: ./clouds-oci.md
