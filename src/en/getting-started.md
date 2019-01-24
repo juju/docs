@@ -2,15 +2,21 @@ Title: Getting started with Juju
 
 # Getting started with Juju
 
-Juju works with public clouds, private clouds, MAAS, and LXD. A central Juju
-machine, the controller, processes all of the events that occur between the
-Juju client and the workload machines.
+?????? Blurb about what Juju is ??????
+Juju works with public clouds, private clouds, MAAS, and LXD. 
 
-The instructions on this page will show you how to get started with Juju by
-using the online-hosted JAAS (Juju as a Service) controller.
+A central Juju machine, the controller, processes all of the events that occur
+between the Juju client and the workload machines. The instructions on this
+page will show you how to get started with Juju by using the online-hosted JAAS
+(Juju as a Service) controller.
 
-A good alternative method for learning about Juju is to use it with local LXD
-containers. See tutorial [Using Juju locally (LXD)][tutorial-lxd].
+Using JAAS does not preclude the use of the traditional command line client for
+managing Juju. Anything you do in JAAS is transparent to the Juju client, and
+vice versa. We'll provide instructions for doing so along with a crash course
+on client usage.
+
+An alternative method for learning about Juju is to run it alongside LXD
+containers (see tutorial [Using Juju locally (LXD)][tutorial-lxd]).
 
 ## JAAS
 
@@ -32,8 +38,7 @@ JAAS.
 
 ### Create a model
 
-Applications are contained within *models* and are installed via *charms*. 
-
+Applications are contained within *models* and are installed via *charms*.
 Create your first model by pressing the "Start building" button.
 
 <style>
@@ -111,8 +116,13 @@ Press the blue "Deploy changes" button to proceed.
 </table>
 
 After you press "Deploy changes" you can adjust your model name. You will then
-need to decide which cloud you want to use.
+be asked which cloud you want to apply the model towards.
 
+!!! Note:
+    Driving Juju from the command line client would require us to inform Juju
+    about credentials at model-creation time. JAAS allows for a slight change
+    in workflow in this respect.
+    
 ## Adding credentials
 
 After selecting a cloud, a form will appear for submitting your credentials to
@@ -257,13 +267,14 @@ on the command line.
 Congratulations! You just deployed a workload in the cloud without hours of
 looking up configuration options or wrestling with install scripts!
 
-To discover more about what Juju can do for you, we suggest taking a look at
-some of the following resources:
+To delve into the conceptual world of Juju we suggest taking a look at the
+following resources:
 
- - [Charms][charms]
+ - [Controllers][controllers]
  - [Models][models]
- - [Using Juju locally (LXD)][tutorial-lxd]
- - [Multi-user cloud][tutorial-users]
+ - [Client][client]
+ - [Charms][charms]
+ - [Concepts and terms][concepts]
 
 
 <!-- LINKS -->
@@ -271,16 +282,18 @@ some of the following resources:
 [jaas-login]: https://jujucharms.com/login
 [ubuntu-sso]: https://login.ubuntu.com/
 [install]: ./reference-install.md
-[models]: ./models.md
-[charms]: ./charms.md
 [charms-bundles]: ./charms-bundles.md
 [charm-store]: https://jujucharms.com/store
 [charm-cdk]: https://jujucharms.com/canonical-kubernetes/
 [tutorial-lxd]: ./tut-lxd.md
-[tutorial-users]: ./tut-users.md
 [clouds-azure]: ./help-azure.md
 [clouds-aws]: ./clouds-aws.md
 [clouds-gce]: ./help-google.md
 [clouds-aws-creds]: ./clouds-aws.md#credentials
 [clouds-azure-creds]: ./help-azure.md#credentials
 [clouds-gce-creds]: ./help-google.md#download-credentials
+[controllers]: ./controllers.md
+[models]: ./models.md
+[client]: ./client.md
+[charms]: ./charms.md
+[concepts]: ./juju-concepts.md
