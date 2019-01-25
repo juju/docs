@@ -5,32 +5,20 @@ Title: Getting started with Juju
 ?????? Blurb about what Juju is ??????
 Juju works with public clouds, private clouds, MAAS, and LXD. 
 
-A central Juju machine, the controller, processes all of the events that occur
-between the Juju client and the workload machines. The instructions on this
-page will show you how to get started with Juju by using the online-hosted JAAS
-(Juju as a Service) controller.
+(Juju as a Service) 
 
-Using JAAS does not preclude the use of the traditional command line client for
-managing Juju. Anything you do in JAAS is transparent to the Juju client, and
-vice versa. We'll provide instructions for doing so along with a crash course
-on client usage.
-
-An alternative method for learning about Juju is to run it alongside LXD
-containers (see tutorial [Using Juju locally (LXD)][tutorial-lxd]).
+One such machine, the *controller*, acts as the central management node on a
+per-cloud basis. This guide foregoes the need to create a controller through
+the use of *JAAS*, the graphical online controller.
 
 ## JAAS
 
 JAAS supports the following public clouds: [Amazon AWS][clouds-aws],
 [Google GCE][clouds-gce], and [Microsoft Azure][clouds-azure]. An account with
-one of these clouds will therefore be needed (we'll later upload the account's
-credentials to JAAS).
+one of these clouds will therefore be required.
 
-!!! Note:
-    You may want to create a separate set of cloud credentials for use with
-    JAAS.
-
-You will also need an [Ubuntu SSO account][ubuntu-sso] to authenticate with
-JAAS.
+You will also need an [Ubuntu SSO account][ubuntu-sso] in order to authenticate
+with JAAS.
 
 ### Log in to JAAS
 
@@ -133,6 +121,9 @@ credentials for your cloud:
  - [Microsoft Azure][clouds-azure-creds]
  - [Google GCE][clouds-gce-creds]
 
+!!! Positive "Pro tip":
+    Generate a dedicated set of credentials for use with JAAS.
+
 ## Deploy
 
 Click on "Deploy" to confirm your cloud information and build your model (and
@@ -172,6 +163,11 @@ expected.
     username in the top-left of the window.
 
 ## Using the command line client
+
+Using JAAS does not preclude the use of the traditional command line *client*
+for managing Juju. Anything you do in JAAS is transparent to the Juju client,
+and vice versa, providing the same (JAAS) controller is being used. We'll
+provide insight into this along with a crash course on client usage.
 
 Experienced Juju operators manage Juju from the command line client, and that
 includes the work done via JAAS. The client is obtained by installing Juju on
@@ -275,6 +271,9 @@ following resources:
  - [Client][client]
  - [Charms][charms]
  - [Concepts and terms][concepts]
+
+For a more practical approach we recommend the
+[Using Juju locally (LXD)][tutorial-lxd] tutorial.
 
 
 <!-- LINKS -->
