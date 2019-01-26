@@ -6,32 +6,37 @@ TODO:  Warning: Ubuntu release versions hardcoded
 # Using Juju locally (LXD) - tutorial
 
 This guide will get you started quickly with Juju by setting up everything you
-need on a single [Ubuntu 18.04 LTS][Bionic-download] (Bionic) system. It does
+need on a single [Ubuntu 18.04 LTS][bionic-download] (Bionic) system. It does
 so by having Juju machines based on fast and secure containers, by way of
 [LXD][lxd-upstream].
 
-Using LXD with Juju provides an experience very similar to any other Juju
-backing-cloud, including the large public clouds. In addition, because it is
+Using LXD with Juju provides an experience very similar to any other 
+backing cloud, including the large public clouds. In addition, because it is
 very easy to set up and uses minimal resources, a Juju & LXD combination is an
 efficient way to develop, test, and replicate software deployments. LXD has
-become an essential tool for every Juju operator.
+become an essential part of every Juju operator's toolbox.
 
 These instructions will deliver the best-possible experience with Juju. They
-will have you use a recent stable version of LXD as well as a modern filesystem
-upon which to run the containers ([ZFS][ZFS-wiki]).
+will have you use the most recent stable version of LXD as well as a modern
+filesystem upon which to run the containers ([ZFS][zfs-wiki]).
+
+!!! Important:
+    We'll be removing the LXD deb package and replacing it with the snap. Find
+    another system for this tutorial if it's already being used with LXD.
 
 ## Install the software
 
-**Juju** is installed, as a snap, with the following command:
+Install Juju and LXD:
 
 ```bash
 sudo snap install juju --classic
+sudo snap install lxd
 ```
 
-**LXD** and **ZFS** are installed like so:
+Remove the LXD deb package:
 
 ```bash
-sudo apt install lxd zfsutils-linux
+sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
 ## User group
@@ -68,7 +73,7 @@ chosen such that it will not conflict with an existing local one.
 Begin by entering:
 
 ```bash
-sudo lxd init
+lxd init
 ```
 
 The session below is what was used to write this guide. Note that pressing
@@ -109,7 +114,8 @@ Our example gives:
 
 So the subnet address is **10.216.208.0/24**.
 
-IPv6 was disabled because Juju does not support it at this time.
+IPv6 was disabled (answer 'none') because Juju does not support it at this
+time.
 
 !!! Note:
     LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it
@@ -126,11 +132,10 @@ applications.
 
 Create a controller with the `bootstrap` command by supplying the cloud name
 and, optionally, a controller name. The built-in LXD cloud is known as
-'localhost' and we'll call our controller 'lxd-test'. The command therefore
-becomes:
+'localhost' and we'll call our controller 'lxd'. The command therefore becomes:
 
 ```bash
-juju bootstrap localhost lxd-test
+juju bootstrap localhost lxd
 ```
 
 This may take a few minutes as LXD must download an image to use for the new
@@ -147,7 +152,7 @@ juju controllers
 ```
 
 This will return a list of the controllers known to Juju. You can see our
-'lxd-test' listed:
+'lxd' listed:
 
 ```no-highlight
 Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
@@ -167,7 +172,7 @@ juju whoami
 Our example gives the following output:
 
 ```no-highlight
-Controller:  lxd-test
+Controller:  lxd
 Model:       default
 User:        admin
 ```
@@ -182,9 +187,9 @@ How about a MediaWiki site?
 juju deploy wiki-simple
 ```
 
-This will fetch a *bundle* from the Charm Store. A bundle is a pre-packaged set
-of applications, in this case 'MediaWiki' and a database to run it with. These
-will be installed and configured to work together. Sweet.
+This will download a *bundle* from the Charm Store. A bundle is a pre-packaged
+set of applications, in this case 'MediaWiki' and a database to run it with.
+These will be installed and configured to work together. Sweet.
 
 You can check on how far Juju has got by running the `status` command:
 
@@ -238,12 +243,10 @@ To continue your journey with Juju we suggest the following topics:
 
 <!-- LINKS -->
 
-[LXD-upstream]: https://linuxcontainers.org/lxd/
-[Bionic-download]: http://www.ubuntu.com/download/
-[ZFS-wiki]: https://wiki.ubuntu.com/ZFS
+[lxd-upstream]: https://linuxcontainers.org/lxd/
+[bionic-download]: http://www.ubuntu.com/download/
+[zfs-wiki]: https://wiki.ubuntu.com/ZFS
 [charm-store]: https://jujucharms.com
 [charms]: ./charms.md
 [clouds]: ./clouds.md
-[concepts]: ./juju-concepts.md
-[long-term-support]: https://wiki.ubuntu.com/LTS
 [tut-users]: ./tut-users.md
