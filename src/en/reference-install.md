@@ -4,8 +4,7 @@ Title: Installing Juju
 
 Stable versions of Juju are available on Ubuntu, various other Linux
 distributions, macOS, and Windows. Development releases are also available for
-testing. Read on for how to install a stable or development version of Juju on
-your chosen platform.
+testing.
 
 ## Version 2.5.0
 
