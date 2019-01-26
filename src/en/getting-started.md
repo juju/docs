@@ -2,33 +2,35 @@ Title: Getting started with Juju
 
 # Getting started with Juju
 
-Juju works with public clouds, private clouds, and locally with LXD. A central
-Juju controller (machine) is used to process all of the events that occur
-between the Juju client and the workload machines.
+Juju is an open source application modelling tool. With it, you can deploy,
+configure, scale, and operate your software on public and private clouds. In so
+doing, Juju creates machines in the cloud you've chosen to use. One such
+machine, the *controller*, acts as the central management node for that cloud.
 
-The instructions on this page will show you how to get started with Juju by
-using the online hosted Juju controller, the Juju as a Service (JAAS)
-controller. If you'd prefer to test it out locally, see the
-[Using Juju locally (LXD)][tut-lxd] guide.
+This guide will introduce you to Juju through the use of *JAAS* (Juju as a
+Service). JAAS is a web application that is equipped with everything you need
+to start using Juju, including a controller.
 
-## JAAS
+The clouds that JAAS supports are: [Amazon AWS][upstream-aws],
+[Google GCE][upstream-gce], and [Microsoft Azure][upstream-azure]. You will
+therefore need an account on one of these clouds in order to use JAAS. Note
+that Juju itself supports many more [clouds][clouds].
 
-JAAS supports deploying, configuring, and operating your applications on the
-three largest public clouds: [Amazon Web Services][aws],
-[Google Compute Engine][gce], and [Microsoft Azure][azure].
+The use of JAAS does not preclude the use of the command line *client* for
+managing Juju. Anything you do in JAAS is transparent to the Juju client, and
+vice versa, providing the same controller is being used. We'll provide insight
+into this along with a crash course on client usage.
 
-All you will need is an account with one of the above clouds, its user
-credentials, and, for authentication, an Ubuntu Single Sign On (SSO) account.
+## Log in to JAAS
 
-If you don't yet have an Ubuntu SSO account you can sign up for one
-[here][ubuntuSSO] (it's easy and free).
+Ensure you have an [Ubuntu SSO account][ubuntu-sso] before contacting JAAS.
 
-You can now [log in to JAAS][jaaslogin].
+[Log in to JAAS][jaas-login] now!
 
-## Create a model
+## Configure a model
 
-If this is your first time using JAAS you won't have any models yet. Press the
-'Start building' button to begin the journey.
+Applications are contained within *models* and are installed via *charms*.
+Configure your model by pressing the "Start a new model" button.
 
 <style>
 table th, table td {
@@ -52,276 +54,345 @@ table.logos th, table.logos td{
   }
 </style>
 
-<table width="500" border-width="0px" cellpadding="5">
-
+<table width="500" border-width="0px" cellpadding="0px">
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-login-1.png" alt="Login to JAAS" />
-<br />
-Press the green 'Start building' button to get started...
+<img src="./media/jaas-login-1-2.png" alt="Logged in to JAAS" />
+Press the "Start a new model" button.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-login-2.png" alt="Login to JAAS" />
-<br />
-... and reveal your (currently empty) model.
+<img src="./media/jaas-login-2-2.png" alt="New empty model" />
+This new model is currently empty.
 </td>
 
 </tr>
-
 </table>
 
-You build your [model][models] by adding and relating applications from the
-[Charm Store][charmstore]. Press the green '+' symbol in the middle of the web
-UI to search for applications in the Charm Store.
+Press the green circle in the middle of the canvas to be transported to the
+[Charm Store][charm-store] where you can use the search facility (top-right) to
+locate a charm or *bundle* (a collection of charms).
 
-You will see a list of available charms and bundles with a description of each.
-Select a [charm][charms] or [bundle][charms-bundles] to learn more about it.
+Notice how the Charm Store is integrated into the JAAS experience.
 
-When you have selected a charm or bundle it can be added to your model by
-pressing the 'Add to model' button.
+Here, we've decided to search for the '[kubernetes-core][charm-kc]' bundle.
+This bundle is complex enough to be interesting but not overwhelming. It
+involves five applications and two machines.
 
-Hint: to see how easy JAAS makes complex deployments, try the
-[Canonical Kubernetes bundle][k8].
+If you're looking for the high-octane experience, choose the
+'[canonical-kubernetes][charm-cdk]' bundle.
+
+A charm/bundle is added to your current JAAS model by pressing the "Add to
+model" button.
+
+<table width="500" border-width="0px" cellpadding="0px">
+<tr>
+
+<td align="center" valign="center" border-width="0px" >
+<img src="./media/jaas-store-1.png" alt="Search the Charm Store" />
+Search the Charm Store.
+</td>
+
+<td align="center" valign="center" border-width="0px">
+<img src="./media/jaas-store-2.png" alt="Add to model" />
+Add a charm/bundle by pressing "Add to model".
+</td>
 
 <table width="500" border-width="0px" cellpadding="5">
 
 <tr>
+</table>
+
+Once a charm/bundle has been added to your model a simulated construction will
+begin. At this time your chosen cloud has not yet been solicited. What we've
+done so far is "primed" our desired configuration. This is particular to how
+JAAS works; the Juju client operates in a more direct fashion.
+
+Once you hit the "Deploy changes" button you will be able to name your model
+and select the cloud you want to use. Here we've called the model 'k8s-core'.
+
+<table width="500" border-width="0px" cellpadding="0px">
+<tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-kubernetes.png" alt="Canonical kubernetes bundle" />
-<br />
-Press the green 'Add to model' button to select the solution.
+<img src="./media/jaas-bundle-selected.png" alt="Add a bundle" />
+This bundle has been added to the model.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-changes.png" alt="deploying changes in JAAS" />
-<br />
-Press the blue 'Deploy changes' button to proceed.
+<img src="./media/jaas-select-cloud.png" alt="Name model and select cloud" />
+This model has been named. A cloud is not yet selected.
 </td>
 
 </tr>
-
 </table>
 
-After you press `Deploy changes` you can adjust your model name and choose a
-cloud. When you select a cloud, you will be guided through the process of
-entering credentials for it.
+## Credentials and SSH keys
 
-## Prepare your cloud credentials
+After having selected a cloud, a form will appear for submitting your
+credentials to JAAS. The below resources are available if you need help with
+gathering credentials:
 
-We recommend that you generate a new set of credentials exclusively for use
-with JAAS. Typically, this involves downloading a file from your chosen cloud's
-web console.
+ - [Amazon AWS credentials][clouds-aws-creds]
+ - [Microsoft Azure credentials][clouds-azure-creds]
+ - [Google GCE credentials][clouds-gce-creds]
 
-See [Cloud credentials][credentials] for more information, along with the
-following links for your specific cloud:
+!!! Positive "Pro tip":
+    Generate a set of credentials dedicated to the use of JAAS.
 
-- [Amazon Web Services][aws-creds]
-- [Microsoft Azure][azure-creds]
-- [Google Compute Engine][gce-creds]
+There is also the option of adding public SSH keys to the model. This results
+in every machine residing within it having those keys installed (in the
+'ubuntu' user account). Once a key has been selected you must press the "Add
+keys" button.
 
 ## Deploy
 
-Click on `Deploy` to confirm your cloud information and build your model (and
-its applications).
+Click on the big "Deploy" button to confirm your cloud information, create your
+model, and deploy the charm/bundle.
 
-Deploying takes a few minutes - during this time, instances are being
-created in the cloud, software is being installed, applications are being
-related to each other and configuration is being applied.
+The complexity of the chosen charm/bundle determines the deployment time.
+During this time, cloud instances are being created, software is being
+installed, *relations* (the lines between the charms) are being set up, and
+default configuration is being applied.
 
-<table width="500" border-width="0px" cellpadding="5">
+<table width="500" border-width="0px" cellpadding="0px">
+<tr>
+
+<td align="center" valign="center" border-width="0px" >
+<img src="./media/jaas-ssh-keys.png" alt="Specify SSH keys" />
+SSH keys have been added and the model is ready to deploy.
+</td>
+
+<td align="center" valign="center" border-width="0px">
+<img src="./media/jaas-deploy-1-2.png" alt="Deployment initiated" />
+This bundle's deployment has just been initiated.
+</td>
+
+</tr>
+</table>
+
+As the applications become operational, the colours on the canvas will reflect
+the state of the charms. Amber indicates "working" and grey indicates "idle". A
+successful deployment should show grey everywhere.
+
+<table width="500" border-width="0px" cellpadding="0px">
 
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-deploy-1.png" alt="description here" />
-<br />
-Deploying a bundle can take a few minutes...
+<img src="./media/jaas-deploy-2-2.png" alt="Bundle is still deploying" />
+This bundles is still deploying.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-2.png" alt="description here" />
-<br />
-When complete, the application icons will turn grey.
+<img src="./media/jaas-deploy-3.png" alt="Bundle is deployed" />
+This bundle is now deployed.
 </td>
 
 </tr>
 
 </table>
 
-As the applications become operational, the colours in the model view will
-change to grey to indicate an idle state, and the pending notices (amber
-circles) on the left will disappear to show that everything is working as
-expected.
+Congratulations! You just deployed a respectable workload in the cloud without
+hours of looking up configuration options or wrestling with install scripts!
 
-!!! Tip:
-    You can check and manage existing models through the JAAS web UI by
-    clicking on your username.
+## Removing charms and models
 
-## Use the command line
+An individual charm can be removed by clicking on it and choosing the "Destroy"
+button. If there is no other charm being hosted by the underlying machine then
+the machine will also be destroyed.
 
-Juju can also be used from the command line. Models you've created with the
-JAAS website can also be operated via the normal Juju command line. In order
-to use the command line, you will first need to install the Juju client
-software on your machine.
+A model can be removed by clicking on your username in the top-left area of the
+window and hitting its trash bin icon. If you change your mind just click on
+the model name to return to the canvas.
 
-Juju is available for various types of Linux, macOS, and Windows.
-Click on the sections below for the relevant instructions or visit the
-[install instructions][install] for a thorough run down of your options.
+When a model is removed all machines and charms contained within it are also
+permanently removed.
 
-Get started quickly by picking your OS from below:
+!!! Positive "Pro tip":
+    Model removal is often used as a way to quickly wipe out one's work. Try to
+    therefore always organise your work on a per-model basis.
 
-<style>
-details  {
-    padding-bottom: 6px;
-}
-</style>
+You can either remove your work now, via the JAAS web UI, or do so later using
+the Juju client.
 
-^# On an OS which supports snap packages
+## Using the command line client
 
-   For Ubuntu 16.04 LTS (Xenial) and other OSes which have snaps enabled
-   ([see the snapcraft.io site][snapcraft]) you can install the latest
-   stable release of Juju with the command:
+Experienced Juju operators manage Juju from the command line client, and that
+includes the work done via JAAS. The client is obtained by installing Juju on
+your machine, where Windows, macOS, Ubuntu, and other Linux are supported. See
+the [install][install] page for guidance.
 
-         sudo snap install juju --classic
+### Log in to JAAS
 
-   You can check which version of Juju you have installed with:
-
-         sudo snap list juju
-
-   And update it if necessary with:
-
-         sudo snap refresh juju
-
-   It is possible to install other versions, including beta releases of
-   Juju via a snap package. See the [install][install] for more information.
-
-
-^# From the Ubuntu PPA
-
-   A PPA resource is available containing the latest stable version of
-   Juju. To install:
-
-       sudo add-apt-repository -yu ppa:juju/stable
-       sudo apt install juju
-
-^# For Windows
-
-   A Windows installer is available for Juju.
-
-   [juju-setup-2.3.1.exe](https://launchpad.net/juju/2.3/2.3.1/+download/juju-setup-2.3.1-signed.exe)([md5](https://launchpad.net/juju/2.3/2.3.1/+download/juju-setup-2.3.1-signed.exe/+md5))
-
-   Please see the [install docs][install] for other
-   versions.
-
-^# For macOS
-
-   The easiest way to install Juju on macOS is with the brew package
-   manager. With brew installed, simply enter the following into a
-   terminal:
-
-       brew install juju
-
-   If you previously installed Juju with brew, the package can be
-   updated with the following:
-
-       brew upgrade juju
-
-   For alternative installation methods, see the [install docs][install].
-
-^# For CentOS
-
-   A pre-compiled binary is available for CentOS.
-
-   Please see the [install docs][install] for a link to the latest
-   version.
-
-
-## Log in to JAAS
-
-To connect to JAAS from the command line you'll need to log in to the JAAS
-controller. Enter the following command:
+To manage JAAS with the client, log in to the JAAS controller:
 
 ```bash
 juju login jaas
 ```
 
-This command will open a new window in your default web browser and use
-[Ubuntu SSO][ubuntuSSO] to authorise your account. If the browser doesn't open,
-you can manually copy and paste the unique authorisation URL from the command
-output.
+This should direct your web browser to the [Ubuntu SSO][ubuntu-sso] site that
+will authenticate your account. If this doesn't occur, just use the URL printed
+in the output.
 
-After successful authentication, you will be asked to enter a descriptive name
-for the JAAS controller (we suggest JAAS). Now you can operate your models or
-applications in JAAS from the command line. You can see a list of all of your
-controllers using the command:
+Example output (once authentication has taken place):
 
-```bash
-juju controllers
+```no-highlight
+Opening an authorization web page in your browser.
+If it does not open, please open this URL:
+https://api.jujucharms.com/identity/v1/login?waitid=3c45e5b19bbe2cfd14ad140d915b9b3c
+Couldn't find a suitable web browser!
+Set the BROWSER environment variable to your desired browser.
+Welcome, javier-larin@external. You are now logged into "jaas".
+
+current model set to "javier-larin@external/k8s-core".
 ```
 
-## View models
+To see a list of your controllers:
 
-You view the list of your models on the controller with the command:
+```bash
+juju controllers --refresh
+```
+
+Output:
+
+```no-highlight
+Controller  Model     User                   Access     Cloud/Region  Models  Machines  HA  Version
+jaas*       k8s-core  javier-larin@external  (unknown)                     1         3   -  2.4.7
+```
+
+There's our JAAS controller. The asterisk denotes the currently active one (in
+a non-JAAS context there could be multiple controllers).
+
+Now that we are connected to the JAAS controller our entire JAAS environment
+can be managed from the client. Already we see evidence of our 'k8s-core'
+model.
+
+### Basic commands
+
+Juju has a large number of [commands][commands] at its disposal. Here, we will
+cover only the most rudimentary ones.
+
+To list all models of the currently active controller:
 
 ```bash
 juju models
 ```
 
-You can switch focus between your models at any time:
+To check the status of the currently active model:
+
+```bash
+juju status
+```
+
+To switch to a different model:
 
 ```bash
 juju switch mymodel
 ```
 
-## Remove models
-
-The model you created earlier is running in your selected cloud. If you want
-to permanently remove it, you can use the JAAS GUI, or run the command:
+To create a model in the currently active controller:
 
 ```bash
-juju destroy-model mymodel
+juju add-model mymodel-1
 ```
 
-This process may take a few minutes to complete, as Juju releases
-the running resources back to the cloud.
+In a JAAS context you will need to add your current cloud name as an extra
+argument. For AWS:
+
+```bash
+juju add-model mymodel-1 aws
+```
+
+To deploy a charm or bundle (and thus installing a similarly-named application
+on one machine):
+
+```bash
+juju deploy some-charm-or-bundle
+```
+
+!!! Important:
+    Unless Juju is told to do otherwise, a new charm implies a new cloud
+    instance.
+
+To scale out an application by creating two more instantiations (*units*) of
+it on new machines:
+
+```bash
+juju add-unit -n 2 some-application
+```
+
+To remove an application, including all instantiations, along with its
+associated machines (provided they are not hosting another application's
+units):
+
+```bash
+juju remove-application some-application
+```
+
+To destroy a model, along with any associated machines and applications (here
+our JAAS 'k8s-core' model) :
+
+```bash
+juju destroy-model k8s-core
+```
+
+To log out of the currently active controller:
+
+```bash
+juju logout
+```
+
+To unregister a controller from your local client (here the JAAS controller):
+
+```bash
+juju unregister jaas
+```
+
+This command is not destructive in nature. In a JAAS context in particular, it
+does not affect your JAAS environment, which can still be accessed either via
+the JAAS web UI or by logging in again at the command line.
 
 ## Next steps
 
-Congratulations! You have now deployed a complex workload in the cloud without
-hours of looking up configuration options or wrestling with install scripts!
+To delve into the conceptual world of Juju we suggest visiting the following
+attractions:
 
-To discover more about what Juju can do for you, we suggest taking a look at
-some of the following pages of documentation:
-
- - [Using Juju locally (LXD)][tut-lxd]
- - [Multi-user cloud][tut-users]
+ - [Controllers][controllers]
  - [Models][models]
+ - [Client][client]
+ - [Charms][charms]
+ - [Concepts and terms][concepts]
+
+For a more practical approach we recommend the
+[Using Juju locally (LXD)][tutorial-lxd] tutorial.
+
+!!! Important:
+    Ensure you have removed any work done within JAAS. If you followed all the
+    steps in this guide there were two instances created in your cloud.
 
 
 <!-- LINKS -->
 
-[azure]: ./help-azure.html "Using the Microsoft Azure public cloud"
-[aws]: ./help-aws.html "Using Amazon AWS with Juju"
-[charms-bundles]: ./charms-bundles.html "Charm bundles"
-[k8]: https://jujucharms.com/canonical-kubernetes/
-[charms]: ./charms.html "Introduction to charms"
-[credentials]: ./credentials.html
-[gce]: ./help-google.html "Using the Google Compute Engine public cloud"
-[jaascli]: ./jaas-cli.html "Using JAAS from the command line"
-[jaaslogin]: https://jujucharms.com/login "JAAS login page"
-[models]: ./models.html "Introduction to Juju models"
-[ubuntuSSO]: https://login.ubuntu.com/ "Ubuntu single sign on"
-[gcedashboard]: https://console.cloud.google.com
-[gcecredentials]: https://console.developers.google.com/apis/credentials
-[install]: ./reference-install.html
-[tut-lxd]: ./tut-lxd.md
-[tut-users]: ./tut-users.md
+[jaas-login]: https://jujucharms.com/login
+[ubuntu-sso]: https://login.ubuntu.com/
+[install]: ./reference-install.md
+[charms-bundles]: ./charms-bundles.md
+[charm-store]: https://jujucharms.com/store
+[charm-cdk]: https://jujucharms.com/canonical-kubernetes/
+[charm-kc]: https://jujucharms.com/kubernetes-core/
+[tutorial-lxd]: ./tut-lxd.md
+[upstream-aws]: https://aws.amazon.com
+[upstream-azure]: https://azure.microsoft.com
+[upstream-gce]: https://cloud.google.com
+[clouds-aws-creds]: ./clouds-aws.md#gathering-credential-information
+[clouds-azure-creds]: ./help-azure.md#adding-credentials
+[clouds-gce-creds]: ./help-google.md#gathering-credential-information
+[controllers]: ./controllers.md
+[clouds]: ./clouds.md
 [models]: ./models.md
-[snapcraft]: https://snapcraft.io
-[aws-creds]: ./help-aws.html#credentials
-[azure-creds]: ./help-azure.html#credentials
-[gce-creds]: ./help-google.html#download-credentials
-[charmstore]: https://jujucharms.com/store
+[client]: ./client.md
+[charms]: ./charms.md
+[concepts]: ./juju-concepts.md
+[commands]: ./commands.md
