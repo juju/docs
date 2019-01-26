@@ -40,10 +40,6 @@ Several steps are required to add Azure credentials to Juju:
     See [Updating remote credentials][updating-remote-credentials] for
     guidance.
 
-Alternately, you can use your credentials with [Juju as a Service][jaas], where
-charms can be deployed within a graphical environment that comes equipped with
-a ready-made controller.
-
 ### Installing the CLI tool
 
 You will need to import your Azure credentials into Juju using the
@@ -196,7 +192,6 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
-[jaas]: ./getting-started.md
 [updating-remote-credentials]: ./credentials.md#updating-remote-credentials
 [azureportal]: http://portal.azure.com
 [azurecli]: https://docs.microsoft.com/en-us/cli/azure/overview 
