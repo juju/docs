@@ -210,7 +210,7 @@ Here are some examples of manually adding a cloud:
 
 [clouds-aws]: ./clouds-aws.md
 [clouds-azure]: ./help-azure.md
-[clouds-google]: ./help-google.md
+[clouds-google]: ./clouds-gce.md
 [clouds-oci]: ./clouds-oci.md
 [clouds-rackspace]: ./help-rackspace.md
 [clouds-joyent]: ./help-joyent.md
