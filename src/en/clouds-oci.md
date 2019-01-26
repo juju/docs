@@ -141,6 +141,10 @@ management.
 In order to access Oracle OCI, you will need to add credentials to Juju. This
 can be done in one of two ways (as shown below).
 
+Alternately, you can use your credentials with [Juju as a Service][jaas], where
+charms can be deployed within a graphical environment that comes equipped with
+a ready-made controller.
+
 ### Using the interactive method
 
 Armed with the gathered information, credentials can be added interactively
@@ -228,6 +232,7 @@ See these pages for ideas on what to do next:
 [oracle-oci-cli]: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm
 [oracle-oci-console]: https://console.us-phoenix-1.oraclecloud.com/
 [credentials]: ./credentials.md
+[jaas]: ./getting-started.md
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
 [clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 [controllers-creating]: ./controllers-creating.md
