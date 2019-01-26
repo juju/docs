@@ -388,7 +388,7 @@ For a more practical approach we recommend the
 [upstream-gce]: https://cloud.google.com
 [clouds-aws-creds]: ./clouds-aws.md#gathering-credential-information
 [clouds-azure-creds]: ./help-azure.md#adding-credentials
-[clouds-gce-creds]: ./help-google.md#gathering-credential-information
+[clouds-gce-creds]: ./clouds-gce.md#gathering-credential-information
 [controllers]: ./controllers.md
 [clouds]: ./clouds.md
 [models]: ./models.md
