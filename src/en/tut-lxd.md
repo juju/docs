@@ -1,7 +1,6 @@
 Title: Using Juju locally (LXD) - tutorial
 TODO:  Warning: Ubuntu release versions hardcoded
        tutorials at the bottom may get renamed
-       sudo is not required for lxd > 3.0.1 (edit when appropriate)
 
 # Using Juju locally (LXD) - tutorial
 
@@ -10,54 +9,45 @@ need on a single [Ubuntu 18.04 LTS][bionic-download] (Bionic) system. It does
 so by having Juju machines based on fast and secure containers, by way of
 [LXD][lxd-upstream].
 
-Using LXD with Juju provides an experience very similar to any other 
-backing cloud, including the large public clouds. In addition, because it is
-very easy to set up and uses minimal resources, a Juju & LXD combination is an
-efficient way to develop, test, and replicate software deployments. LXD has
-become an essential part of every Juju operator's toolbox.
-
-These instructions will deliver the best-possible experience with Juju. They
-will have you use the most recent stable version of LXD as well as a modern
-filesystem upon which to run the containers ([ZFS][zfs-wiki]).
+Using LXD with Juju provides an experience very similar to any other backing
+cloud. In addition, because it is very easy to set up and uses minimal
+resources, a Juju & LXD combination is an efficient way to develop, test, and
+replicate software deployments. LXD has become an essential part of every Juju
+operator's toolbox.
 
 !!! Important:
     We'll be removing the LXD deb package and replacing it with the snap. Find
-    another system for this tutorial if it's already being used with LXD.
+    another system for this tutorial if LXD is already in use.
 
-## Install the software
+## Software
 
-Install Juju and LXD:
+Install Juju and LXD. Then remove the LXD deb package:
 
 ```bash
 sudo snap install juju --classic
 sudo snap install lxd
-```
-
-Remove the LXD deb package:
-
-```bash
 sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
 ## User group
 
-In order to use LXD, the system user that will act as the Juju operator must be
-a member of the 'lxd' user group. Ensure that this is the case (below we assume
-this user is 'john'):
+Ideally, the system user that will act as the Juju operator should be a member
+of the 'lxd' user group. Ensure that this is the case (below we assume this
+user is 'john'):
 
 ```bash
 sudo adduser john lxd
 ```
 
-The user will be in the 'lxd' group when they next log in. If the intended Juju
-operator is the current user all that's needed is a group membership refresh:
+The user will now be in the 'lxd' group when they next log in. If the intended
+Juju operator is the current user all that's needed is a group membership
+refresh:
 
 ```bash
 newgrp lxd
 ```
 
-You can confirm the active group membership for the current user by running the
-command:
+To confirm the active group membership for the current user:
 
 ```bash
 groups
@@ -66,9 +56,10 @@ groups
 ## LXD initialisation
 
 LXD has an optional interactive initialisation method and it's what we'll use
-here. This process will both set up ZFS and the containers' subnet. Choosing
-to auto-configure networking is the way go as a subnet will be intelligently
-chosen such that it will not conflict with an existing local one.
+here. Among other things, this process will both set up storage (ZFS) and the
+containers' subnet. We'll choose to have networking auto-configured (answer
+'auto') as a subnet will be chosen such that it will not conflict with an
+existing one.
 
 Begin by entering:
 
@@ -76,29 +67,31 @@ Begin by entering:
 lxd init
 ```
 
-The session below is what was used to write this guide. Note that pressing
-Enter (a null answer) will accept the default answer (provided in square
-brackets).
+The session below is what was used in this guide. Note that pressing Enter (a
+null answer) will accept the default answer (provided in square brackets).
 
 ```no-highlight
 Would you like to use LXD clustering? (yes/no) [default=no]: 
 Do you want to configure a new storage pool? (yes/no) [default=yes]: 
-Name of the new storage pool [default=default]: lxd
-Name of the storage backend to use (btrfs, dir, lvm, zfs) [default=zfs]: 
+Name of the new storage pool [default=default]: 
+Name of the storage backend to use (btrfs, ceph, dir, lvm, zfs) [default=zfs]: 
 Create a new ZFS pool? (yes/no) [default=yes]: 
 Would you like to use an existing block device? (yes/no) [default=no]: 
-Size in GB of the new loop device (1GB minimum) [default=15GB]:
+Size in GB of the new loop device (1GB minimum) [default=15GB]: 
 Would you like to connect to a MAAS server? (yes/no) [default=no]: 
 Would you like to create a new local network bridge? (yes/no) [default=yes]: 
 What should the new bridge be called? [default=lxdbr0]: 
-What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]:     
+What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: 
 What IPv6 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: none
 Would you like LXD to be available over the network? (yes/no) [default=no]: 
 Would you like stale cached images to be updated automatically? (yes/no) [default=yes] 
-Would you like a YAML "lxd init" preseed to be printed? (yes/no) [default=no]:
+would you like a YAML "lxd init" preseed to be printed? (yes/no) [default=no]:
 ```
 
 LXD is now configured to work with Juju.
+
+IPv6 was disabled (answer 'none') because Juju does not support it at this
+time.
 
 The (IPv4) subnet can be derived from the bridge's address:
 
@@ -109,13 +102,10 @@ lxc network get lxdbr0 ipv4.address
 Our example gives:
 
 ```no-highlight
-10.216.208.1/24
+10.238.229.1/24
 ```
 
-So the subnet address is **10.216.208.0/24**.
-
-IPv6 was disabled (answer 'none') because Juju does not support it at this
-time.
+So the subnet address is **10.238.229.0/24**.
 
 !!! Note:
     LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it
@@ -131,8 +121,8 @@ controller manages both the state and events for your models that host the
 applications.
 
 Create a controller with the `bootstrap` command by supplying the cloud name
-and, optionally, a controller name. The built-in LXD cloud is known as
-'localhost' and we'll call our controller 'lxd'. The command therefore becomes:
+and, optionally, a controller name. The local LXD cloud is known as 'localhost'
+and we'll call our controller 'lxd'. The command therefore becomes:
 
 ```bash
 juju bootstrap localhost lxd
@@ -141,7 +131,7 @@ juju bootstrap localhost lxd
 This may take a few minutes as LXD must download an image to use for the new
 LXD container. A cache will be used for subsequent containers.
 
-The container will also run Bionic, which is now the default for any Juju
+The container will also run Bionic, the current default for any Juju
 controller.
 
 Once the process has completed you can check that the controller has been
@@ -151,8 +141,8 @@ created:
 juju controllers
 ```
 
-This will return a list of the controllers known to Juju. You can see our
-'lxd' listed:
+This will return a list of all the controllers known to your Juju client. You
+can see our 'lxd' listed:
 
 ```no-highlight
 Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
