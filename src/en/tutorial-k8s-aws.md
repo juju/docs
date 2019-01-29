@@ -59,6 +59,9 @@ juju deploy kubernetes-core --overlay k8s-aws-overlay.yaml
 juju trust aws-integrator
 ```
 
+The `trust` command grants 'aws-integrator' access to the credential used in
+the `bootstrap` command.
+
 It will take about ten minutes to get a stable `status` command output:
 
 ```bash
