@@ -37,14 +37,10 @@ The following criteria are assumed:
 Let's begin by creating a controller. We'll call it 'aws-k8s':
 
 ```bash
-juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore aws aws-k8s
+juju bootstrap aws aws-k8s
 ```
 
-!!! Note:
-    We've used the staging Charm Store in these instructions as the standard
-    site does not yet support Kubernetes charms.
-    
-Deploy Kubernetes using the 'kubernetes-core' bundle:
+Now deploy Kubernetes:
 
 ```bash
 juju deploy kubernetes-core
@@ -60,28 +56,28 @@ juju status
 Our example's output:
 
 ```no-highlight
-Model    Controller  Cloud/Region   Version    SLA          Timestamp
-default  aws-k8s     aws/us-east-1  2.5-beta2  unsupported  21:33:30Z
+Model    Controller  Cloud/Region   Version  SLA          Timestamp
+default  aws-k8s     aws/us-east-1  2.5.0    unsupported  23:19:45Z
 
 App                Version  Status  Scale  Charm              Store       Rev  OS      Notes
-easyrsa            3.0.1    active      1  easyrsa            jujucharms  117  ubuntu  
-etcd               3.2.10   active      1  etcd               jujucharms  209  ubuntu  
-flannel            0.10.0   active      2  flannel            jujucharms  146  ubuntu  
-kubernetes-master  1.12.2   active      1  kubernetes-master  jujucharms  219  ubuntu  exposed
-kubernetes-worker  1.12.2   active      1  kubernetes-worker  jujucharms  239  ubuntu  exposed
+easyrsa            3.0.1    active      1  easyrsa            jujucharms  195  ubuntu  
+etcd               3.2.10   active      1  etcd               jujucharms  378  ubuntu  
+flannel            0.10.0   active      2  flannel            jujucharms  351  ubuntu  
+kubernetes-master  1.13.2   active      1  kubernetes-master  jujucharms  542  ubuntu  exposed
+kubernetes-worker  1.13.2   active      1  kubernetes-worker  jujucharms  398  ubuntu  exposed
 
 Unit                  Workload  Agent  Machine  Public address  Ports           Message
-easyrsa/0*            active    idle   0/lxd/0  10.90.92.117                    Certificate Authority connected.
-etcd/0*               active    idle   0        54.158.28.106   2379/tcp        Healthy with 1 known peer
-kubernetes-master/0*  active    idle   0        54.158.28.106   6443/tcp        Kubernetes master running.
-  flannel/0*          active    idle            54.158.28.106                   Flannel subnet 10.1.19.1/24
-kubernetes-worker/0*  active    idle   1        35.174.241.18   80/tcp,443/tcp  Kubernetes worker running.
-  flannel/1           active    idle            35.174.241.18                   Flannel subnet 10.1.5.1/24
+easyrsa/0*            active    idle   0/lxd/0  10.213.157.48                   Certificate Authority connected.
+etcd/0*               active    idle   0        54.236.253.89   2379/tcp        Healthy with 1 known peer
+kubernetes-master/0*  active    idle   0        54.236.253.89   6443/tcp        Kubernetes master running.
+  flannel/1           active    idle            54.236.253.89                   Flannel subnet 10.1.35.1/24
+kubernetes-worker/0*  active    idle   1        34.205.37.5     80/tcp,443/tcp  Kubernetes worker running.
+  flannel/0*          active    idle            34.205.37.5                     Flannel subnet 10.1.28.1/24
 
 Machine  State    DNS            Inst id              Series  AZ          Message
-0        started  54.158.28.106  i-00ccf0eb4565c019d  bionic  us-east-1a  running
-0/lxd/0  started  10.90.92.117   juju-590f65-0-lxd-0  bionic  us-east-1a  Container started
-1        started  35.174.241.18  i-0168d3ad2c1f7b27c  bionic  us-east-1b  running
+0        started  54.236.253.89  i-0c4d170f529709dc0  bionic  us-east-1a  running
+0/lxd/0  started  10.213.157.48  juju-79c582-0-lxd-0  bionic  us-east-1a  Container started
+1        started  34.205.37.5    i-0e769efd3646a56e1  bionic  us-east-1b  running
 ```
 
 ## Adding the cluster to Juju
@@ -117,8 +113,8 @@ Controller: aws-k8s
 
 Model       Cloud/Region   Status     Machines  Cores  Access  Last connection
 controller  aws/us-east-1  available         1      4  admin   just now
-default     aws/us-east-1  available         3      8  admin   35 minutes ago
-k8s-model*  k8s-cloud      available         0      -  admin   14 seconds ago
+default     aws/us-east-1  available         3      8  admin   27 seconds ago
+k8s-model*  k8s-cloud      available         0      -  admin   never connected
 ```
 
 Adding a model for a Kubernetes cloud unlocks the 'kubernetes' storage
@@ -301,14 +297,14 @@ We can now deploy a Kubernetes charm. For example, here we deploy a charm by
 requesting the use of the 'k8s-pool' charm storage pool we just set up:
 
 ```bash
-juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
+juju deploy cs:~juju/mariadb-k8s --storage database=k8s-pool,10M
 ```
 
 The output to `juju status` should soon look like the following:
 
 ```no-highlight
 Model      Controller  Cloud/Region  Version    SLA          Timestamp
-k8s-model  aws-k8s     k8s-cloud     2.5-beta2  unsupported  20:42:28Z
+k8s-model  aws-k8s     k8s-cloud     2.5.0      unsupported  20:42:28Z
 
 App          Version  Status  Scale  Charm        Store       Rev  OS          Address        Notes
 mariadb-k8s           active      1  mariadb-k8s  jujucharms   13  kubernetes  10.152.183.87  
