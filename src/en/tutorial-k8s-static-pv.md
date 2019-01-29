@@ -1,4 +1,5 @@
 Title: Setting up static Kubernetes storage - tutorial
+TODO:  How to add a bespoke cluster to Juju?
 
 # Setting up static Kubernetes storage - tutorial
 
@@ -6,24 +7,20 @@ Title: Setting up static Kubernetes storage - tutorial
 [Using Kubernetes with Juju][clouds-k8s]. See that page for background
 information.*
 
-This tutorial will show the steps required to create Kubernetes persistent
-storage volumes for use with Juju. This is normally done when the backing cloud
-you're using does not have a storage type that is supported natively by
-Kubernetes. There is no reason, however, why you cannot use statically
-provisioned volumes with any cloud. Here, we'll use AWS as our backing cloud.
-Kubernetes does support AWS/EBS volumes (as shown
-[here][kubernetes-supported-volume-types]; see 'AWSElasticBlockStore') but it
-does require the use of the
-[`aws-integrator`][charm-store-staging-aws-integrator] charm, which we'll cover
-in a separate tutorial.
+This tutorial will show the steps required to create Kubernetes **static**
+persistent volumes (PVs) for use with Kubernetes-specific charms. This is
+normally done when the backing cloud you're using does not have a storage type
+that is supported natively by Kubernetes. There is no reason, however, why you
+cannot use statically provisioned volumes with any cloud. Here, we'll use AWS
+as our backing cloud.
 
 The [Persistent storage and Kubernetes][charms-storage-k8s] page provides a
 theoretical background on how Kubernetes storage works with Juju.
 
 Note that static volumes are dependent upon the Kubernetes
 [`hostPath`][kubernetes-hostpath] volume type. This restricts us to a single
-worker node cluster. The 'kubernetes-core' bundle provides this and that's
-we'll be using here.
+worker node cluster. The '[kubernetes-core][charm-kc]' bundle provides this and
+that's we'll be using here.
 
 ## Pre-requisites
 
@@ -32,23 +29,22 @@ The following criteria are assumed:
  - that you're using Ubuntu 18.04 LTS
  - that Juju (stable snap channel) is installed. See the
    [Installing Juju][install] page.
- - that a credential for the 'aws' cloud has been added to Juju. See
-   the [Credentials][credentials] page.
+ - that a credential for the 'aws' cloud has been added to Juju. See the
+   [Using Amazon AWS with Juju][clouds-aws] page.
 
 ## Installing Kubernetes
 
-Let's begin by creating a controller. We're calling 'aws-k8s':
+Let's begin by creating a controller. We'll call it 'aws-k8s':
 
 ```bash
 juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore aws aws-k8s
 ```
 
-!!! Note:                                                                                                                                                                                                        
-    We've used the staging Charm Store in these instructions as the standard                                                                                                                                     
-    site does not yet support Kubernetes charms. 
-
-Deploy Kubernetes using the 'kubernetes-core' bundle, which will give us a
-minimalist cluster:
+!!! Note:
+    We've used the staging Charm Store in these instructions as the standard
+    site does not yet support Kubernetes charms.
+    
+Deploy Kubernetes using the 'kubernetes-core' bundle:
 
 ```bash
 juju deploy kubernetes-core
@@ -136,8 +132,8 @@ Kubernetes  kubernetes
 
 ## Static persistent volumes
 
-We will now create persistent volumes, or PVs in Kubernetes parlance. Another
-way of saying this is that we will set up statically provisioned storage.
+We will now create Kubernetes persistent volumes (PVs). Another way of saying
+this is that we will set up statically provisioned storage.
 
 There are two types of storage: operator storage and charm storage (also called
 unit storage). The bare minimum is one volume for operator storage. The
@@ -149,6 +145,9 @@ itself.
 The creation of volumes is a two-step process. First set up definition files
 for each PV, and second, create the actual PVs using `kubectl`, the Kubernetes
 configuration management tool. We'll look at these two steps now.
+
+Tutorial [Using the aws-integrator charm][tutorial-k8s-aws] shows
+how to set up dynamic PVs.
 
 ### Defining persistent volumes
 
@@ -243,14 +242,14 @@ Juju model was added a Kubernetes "namespace" was set up with the same name.
 ## Creating Juju storage pools
 
 Whether or not storage volumes are provisioned statically or dynamically Juju
-storage pools must be created. This must be done for both operator storage
-and charm storage on a per-model basis. The command to use is
-`create-storage-pool`.
+storage pools must be created. This is done for operator storage and, if a
+charm has storage requirements, for charm storage. All on a per-model basis.
+The command to use is `create-storage-pool`.
 
-The number of storage pools is dependent on the storage classes referenced in
-the PV definition files. The simplest arrangement is to have a single storage
-pool for each storage type and this is the approach our definition files above
-have taken. The two storage classes are 'k8s-model-juju-operator-storage' and
+The number of storage pools is dependent on the storage classes listed in the
+PV definition files. The simplest arrangement is to have a single storage pool
+for each storage type and this is the approach our definition files above have
+taken. The two storage classes are 'k8s-model-juju-operator-storage' and
 'k8s-model-juju-unit-storage' .
 
 Naturally, then, during the creation process of a storage pool the storage
@@ -260,14 +259,14 @@ storage class name when it informs the cluster. Omit, therefore, the model name
 portion of the storage class when creating the pool.
 
 The storage pool name for operator storage *must* be called 'operator-storage'
-while the pool name for charm storage is arbitrary. Here, we'll call it
-'k8s-pool'. It is the storage pool name that will be referenced at charm
-deployment time.
+while the pool name for charm storage is arbitrary. Here, our charm *does* have
+storage requirements so we'll need a pool for it. We'll call it 'k8s-pool'. It
+is this charm storage pool that will be used at charm deployment time.
 
 For static volumes, the Kubernetes "storage provisioner" is called
-'kubernetes.io/no-provisioner'.
+`kubernetes.io/no-provisioner`.
 
-Finally, the "storage provider" is called 'kubernetes'. This provider became
+Finally, the "storage provider" is called `kubernetes`. This provider became
 available upon the addition of the Kubernetes model.
 
 Putting this all together, then, our two storage pools are created as shown
@@ -362,6 +361,13 @@ above ('juju-database-0-juju-mariadb-k8s-0').
 In the lower part we're told what has "claimed" the two used volumes. Each of
 these claims have requested the use of the appropriate storage class.
 
+If something goes wrong the following command can be used to drill down into
+the various objects:
+
+```bash
+kubectl -n k8s-model describe pods,sc,pv,pvc
+```
+
 ## Removing configuration and software
 
 To remove all traces of Kubernetes and its configuration follow these steps:
@@ -379,7 +385,7 @@ This leaves us with Juju and `kubetl` installed as well as an AWS controller.
 To remove even those things proceed as follows:
 
 ```bash
-juju destroy-controller -y aws-k8s
+juju destroy-controller -y --destroy-all-models aws-k8s
 sudo snap remove juju
 sudo snap remove kubectl
 ```
@@ -388,11 +394,13 @@ That's the end of this tutorial!
 
 ## Next steps
 
-To explore using Juju with the MicroK8s project consider tutorial
-[Using Juju with MicroK8s][tutorial-microk8s].
+Consider the following tutorials:
 
-To gain experience with a standalone (non-Juju) MicroK8s installation you can
-go through Ubuntu tutorial
+ - [Using the aws-integrator charm][tutorial-k8s-aws]
+ - [Using Juju with MicroK8s][tutorial-microk8s]
+
+To gain experience with a standalone (non-Juju) MicroK8s installation check
+out Ubuntu tutorial
 [Install a local Kubernetes with MicroK8s][ubuntu-tutorial-kubernetes-microk8s].
 
 
@@ -402,12 +410,12 @@ go through Ubuntu tutorial
 [upstream-cncf]: https://www.cncf.io/certification/software-conformance/
 [charms-storage-k8s]: ./charms-storage-k8s.md
 [ubuntu-tutorial-kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
-[charm-store-staging-aws-integrator]: https://staging.jujucharms.com/u/johnsca/aws-integrator
-[kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
-[credentials]: ./credentials.md
 [install]: ./reference-install.md
 [tutorial-microk8s]: ./tutorial-microk8s.md
+[tutorial-k8s-aws]: ./tutorial-k8s-aws.md
 [kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
+[clouds-aws]: ./clouds-aws.md
+[charm-kc]: https://jujucharms.com/kubernetes-core/
 
 <!-- IMAGES -->
 
