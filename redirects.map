@@ -37,7 +37,7 @@
 "~^/(?<version>[0-9-\._]+|devel)/en/help-vmware/?$" /${version}/en/clouds-vsphere;
 
 # Redirect help-openstack to clouds-openstack
-"~^/(?<version>[0-9-\._]+|devel)/en/help-openstack/?$" /${version}/en/clouds-openstack ;
+"~^/(?<version>[0-9-\._]+|devel)/en/help-openstack/?$" /${version}/en/clouds-openstack;
 
 # Redirect help-azure to clouds-azure
 "~^/(?<version>[0-9-\._]+|devel)/en/help-azure/?$" /${version}/en/clouds-azure;
