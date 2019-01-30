@@ -310,9 +310,9 @@ on **[deploying charms][deploy]**, **[charm relations][relations]** and
 
 <!-- LINKS -->
 
-[deploy]: ./charms-deploying.html
-[relations]: ./charms-relations.html
-[scaling]: ./charms-scaling.html
-[credentials]: ./credentials.html
-[clouds]: ./clouds.html
-[clouds-gce]: ./help-google.html
+[deploy]: ./charms-deploying.md
+[relations]: ./charms-relations.md
+[scaling]: ./charms-scaling.md
+[credentials]: ./credentials.md
+[clouds]: ./clouds.md
+[clouds-gce]: ./clouds-gce.md

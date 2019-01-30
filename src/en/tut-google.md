@@ -46,7 +46,7 @@ localhost          1  localhost        lxd         LXD Container Hypervisor
 
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
-[Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
+[Amazon AWS][clouds-aws] or [Microsoft Azure][clouds-azure], or any of the listed
 clouds you have credentials for.
 
 ## Download GCE credentials
@@ -218,20 +218,20 @@ to want to share. Find out how easy it is to
 
 <!-- LINKS -->
 
-[tut-lxd]: ./tut-lxd.html
-[helpaws]: ./help-aws.html
-[helpazure]: ./help-azure.html
+[tut-lxd]: ./tut-lxd.md
+[clouds-aws]: ./clouds-aws.md
+[clouds-azure]: ./clouds-azure.md
 [gcetrial]: https://console.cloud.google.com/freetrial
 [gcedashboard]: https://console.cloud.google.com
-[gcenewproject]: ./help-google.html#create-a-project
-[install]: ./reference-install.html
-[jujuterms]: ./juju-concepts.html
+[gcenewproject]: ./clouds-gce.md#create-a-project
+[install]: ./reference-install.md
+[jujuterms]: ./juju-concepts.md
 [charmhaproxy]: https://jujucharms.com/haproxy/37
 [charmpsql]: https://jujucharms.com/postgresql/105
 [bundleopenstack]: https://jujucharms.com/openstack-base/
 [bundlekubernetes]: https://jujucharms.com/canonical-kubernetes/
 [charmstore]: https://jujucharms.com/store
-[diycharm]: ./developer-getting-started.html
-[jujugui]: ./controllers-gui.html
-[tutuser]: ./tut-users.html
+[diycharm]: ./developer-getting-started.md
+[jujugui]: ./controllers-gui.md
+[tutuser]: ./tut-users.md
 [mediawiki]: https://www.mediawiki.org/wiki/MediaWiki

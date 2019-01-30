@@ -155,7 +155,7 @@ default, when creating regular EC2 instances.
 
 Whether you created a secondary VPC out of necessity or preference you will
 need to inform Juju about it. See
-[AWS specific features][anchor__aws-specific-features] for how to do this.
+[AWS specific features][#aws-specific-features] for how to do this.
 
 Here, Fan networking will be leveraged by deploying and relating applications
 that are running in different LXD containers, where the containers are housed
@@ -204,4 +204,4 @@ Connection to 252.0.169.174 80 port [tcp/http] succeeded!
 [fan-fanctl-man-page]: http://manpages.ubuntu.com/cgi-bin/search.py?q=fanctl
 [fan-aws-vpc]: ./charms-fan-aws-vpc.html
 [models-config]: ./models-config.html
-[anchor__aws-specific-features]: ./help-aws.html#aws-specific-features
+[#aws-specific-features]: ./clouds-aws.html#aws-specific-features

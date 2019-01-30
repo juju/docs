@@ -106,8 +106,7 @@ on that user's system, the credential can be added:
 juju add-credential localhost -f localhost-credentials.yaml
 ```
 
-See [Cloud credentials][credentials] for more details on how credentials are
-used. 
+See [Credentials][credentials] for more details on how credentials are used. 
 
 ## Useful LXD client commands
 
@@ -197,7 +196,7 @@ assistance with the daemon. See upstream documentation for
 
 <!-- LINKS -->
 
-[clouds-lxd]: ./clouds-LXD.md
+[clouds-lxd]: ./clouds-lxd.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
 [logs]: ./troubleshooting-logs.md
