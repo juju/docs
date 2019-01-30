@@ -2,10 +2,7 @@ Title: Using Kubernetes with Juju
 TODO:  Should eventually link to k8s-charm developer documentation
        Add architectural overview/diagram
        Consider manually adding a cluster via `add-cloud` and `add-credential`
-       Change from staging store to production store when available
        Write tutorial on building a cluster using GCE with gcp-integrator
-       Write tutorial on building a cluster using AWS with aws-integrator
-       Example done with AWS since a LXD bundle needs each of its charms to specify profile edits according to https://is.gd/dqXGN2
 
 # Using Kubernetes with Juju
 
@@ -54,11 +51,6 @@ The `scale-application` command is used to scale a Kubernetes cluster. The
 
 A Kubernetes cloud also requires Kubernetes-specific charms.
 
-!!! Note:
-    Kubernetes charms are currently only available on the
-    [staging Charm Store][charm-store-staging] and are for developmental and
-    testing purposes only.
-
 ## Using Kubernetes with Juju
 
 First off, a Kubernetes cluster will be required. Essentially, you will use it
@@ -80,13 +72,13 @@ Juju:
 There are many ways to obtain a Kubernetes cluster. Here is a list of
 suggestions:
 
- - Use the [kubernetes-core][kubernetes-core-charm] bundle, which gives a
-   minimal two-machine cluster available in the Charm Store. The tutorial
+ - Use the '[kubernetes-core][charm-kc]' bundle, which gives a minimal
+   two-machine cluster available in the Charm Store. Tutorial
    [Setting up static Kubernetes storage][tutorial-k8s-static-pv] uses this
    bundle.
- - Use the [canonical-kubernetes][kubernetes-cdk-charm] bundle. This is the
-   Canonical Distribution of Kubernetes (CDK), which is a more sophisticated
-   version of 'kubernetes-core'.
+ - Use the '[canonical-kubernetes][charm-cdk]' bundle. This is the Canonical
+   Distribution of Kubernetes (CDK), which is a more sophisticated version of
+   'kubernetes-core'.
  - Use the [conjure-up][upstream-conjure-up] installer. See the following
    resources for guidance:
      - The Ubuntu tutorial:
@@ -98,7 +90,8 @@ suggestions:
    tutorial [Using Juju with MicroK8s][tutorial-microk8s].
  - Use a bundle made for the major cloud vendors. There are special
    "integrator" charms that assist with such deployments.
-   [Search the Charm Store][charm-store-staging-integrator] for 'integrator'.
+   [Search the Charm Store][charm-store-integrator] for 'integrator'. Tutorial
+   [Using the aws-integrator charm][tutorial-k8s-aws] demonstrates this.
  - Use a public Kubernetes cloud vendor such as
    [Amazon EKS][upstream-eks-kubernetes],
    [Azure AKS][upstream-aks-kubernetes], and
@@ -242,16 +235,16 @@ conjunction with the configured ingress controller (default: nginx).
 
 <!-- LINKS -->
 
-[kubernetes-core-charm]: https://jujucharms.com/kubernetes-core/
+[charm-cdk]: https://jujucharms.com/canonical-kubernetes/
+[charm-kc]: https://jujucharms.com/kubernetes-core/
 [ubuntu-tutorial_install-kubernetes-with-conjure-up]: https://tutorials.ubuntu.com/tutorial/install-kubernetes-with-conjure-up#0
-[kubernetes-cdk-charm]: https://jujucharms.com/u/containers/canonical-kubernetes/
-[charm-store-staging]: https://staging.jujucharms.com
-[charm-store-staging-integrator]: https://staging.jujucharms.com/q/integrator
+[charm-store-integrator]: https://jujucharms.com/q/integrator
 [charms-storage-k8s]: ./charms-storage-k8s.md
 [charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
 [charms-storage-juju-deploy]: ./charms-storage.md#juju-deploy
 [tutorial-microk8s]: ./tutorial-microk8s.md
 [tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
+[tutorial-k8s-aws]: ./tutorial-k8s-aws.md
 [kubernetes-deploying-on-lxd]: https://github.com/juju-solutions/bundle-canonical-kubernetes/wiki/Deploying-on-LXD
 
 [upstream-kubernetes-docs]: https://kubernetes.io/docs

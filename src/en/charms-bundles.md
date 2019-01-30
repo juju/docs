@@ -1,6 +1,5 @@
 Title: Charm bundles
 TODO:  Check more complex bundles after the release of 2.0
-       Add example portraying bundle overlay
 table_of_contents: True
 
 # Charm bundles
@@ -276,7 +275,7 @@ juju deploy bundle.yaml
 ### Overlay bundles
 
 The `--overlay` option can be used when you want to use a standard bundle but
-keep **model-specific** configuration in a separate file. The overlay files
+keep model-specific configuration in a separate file. The overlay files
 constitute bundles in their own right. The "overlay bundle" can specify new
 applications, change values, and also specify the removal of an application in
 the base bundle.
@@ -295,6 +294,9 @@ For example:
 ```bash
 juju deploy wiki-simple --overlay ~/model-a/wiki-simple.yaml
 ```
+
+Tutorial [Using the aws-integrator charm][tutorial-k8s-aws] provides an
+example of an "overlay" is used.
 
 ### Bundle placement directives
 
@@ -740,3 +742,4 @@ Once the bundle is saved you can consider these
 [developer-resources]: ./developer-resources.md
 [charms-bundles-gui]: ./charms-bundles-gui.md
 [charms-bundles-gui-exporting]: ./charms-bundles-gui.md#exporting-and-importing-bundles-with-the-GUI
+[tutorial-k8s-aws]: ./tutorial-k8s-aws.md
