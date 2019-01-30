@@ -27,7 +27,7 @@ juju update-clouds
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 In order to authenticate itself to the Joyent cloud, Juju will need the 
