@@ -60,7 +60,8 @@ juju trust aws-integrator
 ```
 
 The `trust` command grants 'aws-integrator' access to the credential used in
-the `bootstrap` command.
+the `bootstrap` command. This charm acts as a proxy for the Kubernetes nodes to
+create and attach dynamic storage volumes in the AWS backing cloud.
 
 It will take about ten minutes to get a stable `status` command output:
 

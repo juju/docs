@@ -35,7 +35,11 @@ within Kubernetes itself).
 
 Juju-managed storage can be provisioned either dynamically or statically.
 
-The topic of storage is covered in a non-Kubernetes context on the
+See Kubernetes [Storage classes][kubernetes-supported-volume-types]
+documentation for the list of storage backends ("provisioners") supported by
+Kubernetes.
+
+Generic Juju storage (non-Kubernetes) is covered on the
 [Using Juju Storage][charms-storage] page.
 
 ## Juju-managed storage
@@ -49,9 +53,6 @@ In both cases, a Juju storage pool needs to be created by the Juju operator.
 The second type is needed when the storage system for your chosen backing cloud
 is not supported by Kubernetes. This situation therefore demands that volumes
 be set up prior to the creation of the storage pool.
-
-See [Types of volumes][kubernetes-supported-volume-types] for the list of
-Kubernetes supported storage backends.
 
 !!! Important:
     Static volumes are mainly intended for testing/prototyping. They need the
@@ -147,18 +148,27 @@ first time.
 The pool name for operator storage *must* be called 'operator-storage' while a
 pool name for charm storage is arbitrary.
 
-The storage class name for operator storage *must* be called
-'juju-operator-storage' while a storage class name for charm storage *must* be
-called 'juju-unit-storage'.
+The storage class names for both operator storage and charm storage do not need
+to be stated. Juju will create a name if one is not explicitly given. This is
+not true, however, for static volumes because a volume definition requires a
+storage class name.
 
 The standard `storage-pools` command is used to list Juju storage pools.
+
+When creating a pool, if a storage class name is provided, Juju will prefix the
+current model's name to that storage class name. Given a model name of
+'k8s-model' and a storage class name of 'juju-operator-storage', the final
+storage class name associated with the pool becomes
+'k8s-model-juju-operator-storage'. This is really only pertinent when using
+static volumes as the complete storage class name must be included in the
+volume definition files.
 
 ### Creating operator storage pools
 
 The below examples show how to create operator storage pools for various
 scenarios.
 
-For AWS using EBS volumes (dynamically provisioned):
+For AWS using SSD/gp2 backed EBS volumes (dynamically provisioned):
 
 ```bash
 juju create-storage-pool operator-storage kubernetes \
@@ -186,20 +196,13 @@ juju create-storage-pool operator-storage kubernetes \
 For MicroK8s, a special storage class name of 'microk8s-hostpath' is always
 used.
 
-For LXD (statically provisioned):
+For any cloud (statically provisioned):
 
 ```bash
 juju create-storage-pool operator-storage kubernetes \
 	storage-class=juju-operator-storage \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
-
-!!! Important:
-    When creating a pool, Juju will prefix the current model's name to the
-    stated storage class name. In the above example, assuming a model name of
-    'k8s-model', the final storage class name associated with the pool becomes
-    'k8s-model-juju-operator-storage'. It is this name that you must use when
-    defining a static volume (YAML file).
     
 ### Creating charm storage pools
 
@@ -213,9 +216,8 @@ juju create-storage-pool k8s-pool kubernetes \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
 
-As with the operator storage static volume scenario, the final storage class
-name associated with pool 'k8s-pool', assuming a model of 'k8s-model', becomes
-'k8s-model-juju-unit-storage'.
+The final storage class name associated with above pool 'k8s-pool', assuming a
+model of 'k8s-model', becomes 'k8s-model-juju-unit-storage'.
 
 For `microk8s`, the only difference from the creation of the corresponding
 operator storage pool is the pool name:
@@ -251,15 +253,12 @@ For charm storage the rules are similar:
      - `default`
  1. a storage class with label `storageclass.kubernetes.io/is-default-class`
 
-Notice that for both operator and charm storage, the first rule is compatible
-with Juju-managed statically provisioned volumes.
-
 
 <!-- LINKS -->
 
 [clouds-k8s]: ./clouds-k8s.md
 [charms-storage]: ./charms-storage.md
-[kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
+[kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
 [kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
