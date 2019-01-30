@@ -30,23 +30,23 @@ navigation:
 
         children:
           - title: Amazon AWS
-            location: help-aws.md
+            location: clouds-aws.md
           - title: Microsoft Azure
-            location: help-azure.md
+            location: clouds-azure.md
           - title: Google GCE
             location: clouds-gce.md
           - title: Oracle Compute
             location: help-oracle.md
           - title: Rackspace
-            location: help-rackspace.md
+            location: clouds-rackspace.md
           - title: Joyent
-            location: help-joyent.md
+            location: clouds-joyent.md
           - title: LXD
-            location: clouds-LXD.md
+            location: clouds-lxd.md
           - title: VMware vSphere
-            location: help-vmware.md
+            location: clouds-vsphere.md
           - title: OpenStack
-            location: help-openstack.md
+            location: clouds-openstack.md
           - title: MAAS
             location: clouds-maas.md
           - title: Manual
