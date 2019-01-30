@@ -571,7 +571,7 @@ supports the following pool attributes:
     - `pd-standard`
 
 Using storage with Kubernetes is covered on the
-[Persistent storage and Kubernetes][charms-storage-k8] page.
+[Persistent storage and Kubernetes][charms-storage-k8s] page.
 
 #### Loop devices and LXD
 
@@ -644,7 +644,7 @@ For guidance on how to create a charm that uses these storage features see
 
 [clouds-lxd]: ./clouds-lxd.md
 [charms-storage-ceph]: ./charms-storage-ceph.md
-[charms-storage-k8]: ./charms-storage-k8s.md
+[charms-storage-k8s]: ./charms-storage-k8s.md
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
 [generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
