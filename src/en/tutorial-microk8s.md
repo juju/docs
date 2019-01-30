@@ -34,7 +34,7 @@ sudo snap install microk8s --classic
 sudo apt purge -y liblxc1 lxcfs lxd lxd-client
 ```
 
-See what's going on with the `microk8s.kubectl` command:
+Let's see what's going on by using the `microk8s.kubectl` command:
 
 ```bash
 microk8s.kubectl get all --all-namespaces
@@ -84,12 +84,10 @@ machine is established all Juju-deployed applications will be contained within
 the Kubernetes cluster itself; Juju deployments will not cause LXD containers
 to be created.
 
-So let's bring Juju into the picture by creating a controller now. At the time
-of writing the production Charm Store was not yet updated with Kubernetes
-charms. For now, we'll use the staging site instead:
+So let's bring Juju into the picture by creating a controller now:
 
 ```bash
-juju bootstrap --config charmstore-url=https://api.staging.jujucharms.com/charmstore localhost lxd
+juju bootstrap localhost lxd
 ```
 
 This will take about five minutes to finish. After which we'll have a
@@ -136,8 +134,10 @@ storage out of the box. Below we create two storage pools, one for operator
 storage and one for charm storage:
 
 ```bash
-juju create-storage-pool operator-storage kubernetes storage-class=microk8s-hostpath
-juju create-storage-pool mariadb-pv kubernetes storage-class=microk8s-hostpath
+juju create-storage-pool operator-storage kubernetes \
+	storage-class=microk8s-hostpath
+juju create-storage-pool mariadb-pv kubernetes \
+	storage-class=microk8s-hostpath
 ```
 
 See the [Persistent storage and Kubernetes][charms-storage-k8s] page for
@@ -149,7 +149,7 @@ We can now deploy a Kubernetes charm. For example, here we deploy a charm by
 requesting the use of the 'mariadb-pv' charm storage pool we just set up:
 
 ```bash
-juju deploy cs:~wallyworld/mariadb-k8s --storage database=mariadb-pv,10M
+juju deploy cs:~juju/mariadb-k8s --storage database=mariadb-pv,10M
 ```
 
 The output to `juju status` should soon look like the following:
