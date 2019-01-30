@@ -87,8 +87,8 @@ not all units in the set will become unavailable at the same time.
 
 <!-- LINKS -->
 
-[controller-ha]: ./controllers-ha.html
+[controller-ha]: ./controllers-ha.md
 [maaszones]: https://docs.ubuntu.com/maas/en/manage-zones
-[jujuclouds]: ./clouds.html
+[jujuclouds]: ./clouds.md
 [azure-sla]: https://azure.microsoft.com/en-gb/support/legal/sla/
-[clouds-azure]: ./help-azure.html
+[clouds-azure]: ./clouds-azure.md

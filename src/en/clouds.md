@@ -29,7 +29,7 @@ how clouds are added. You can still get started by selecting your cloud here:
  - [Rackspace][clouds-rackspace] *****
  - [Joyent][clouds-joyent] *****
  - [LXD][clouds-lxd] (local) *****
- - [VMware vSphere][clouds-vmware]
+ - [VMware vSphere][clouds-vsphere]
  - [OpenStack][clouds-openstack]
  - [MAAS][clouds-maas]
  - [Manual][clouds-manual]
@@ -188,14 +188,14 @@ Here are some examples of manually adding a cloud:
 <!-- LINKS -->
 
 [clouds-aws]: ./clouds-aws.md
-[clouds-azure]: ./help-azure.md
-[clouds-google]: ./help-google.md
 [clouds-oracle]: ./help-oracle.md
-[clouds-rackspace]: ./help-rackspace.md
-[clouds-joyent]: ./help-joyent.md
-[clouds-lxd]: ./clouds-LXD.md
-[clouds-vmware]: ./help-vmware.md
-[clouds-openstack]: ./help-openstack.md
+[clouds-azure]: ./clouds-azure.md
+[clouds-google]: ./clouds-gce.md
+[clouds-rackspace]: ./clouds-rackspace.md
+[clouds-joyent]: ./clouds-joyent.md
+[clouds-lxd]: ./clouds-lxd.md
+[clouds-vsphere]: ./clouds-vsphere.md
+[clouds-openstack]: ./clouds-openstack.md
 [clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
 
@@ -204,5 +204,5 @@ Here are some examples of manually adding a cloud:
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
 
 [clouds-maas-manual]: ./clouds-maas.md#manually-adding-maas-clouds
-[clouds-openstack-manual]: ./help-openstack.md#manually-adding-an-openstack-cloud
-[clouds-vsphere-manual]: ./help-vmware.md#manually-adding-a-vsphere-cloud
+[clouds-openstack-manual]: ./clouds-openstack.md#manually-adding-an-openstack-cloud
+[clouds-vsphere-manual]: ./clouds-vsphere.md#manually-adding-a-vsphere-cloud
