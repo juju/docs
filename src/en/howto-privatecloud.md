@@ -326,11 +326,11 @@ controller.
 
 <!-- LINKS -->
 
-[bootstrap]: ./help-openstack.html#bootstrap-with-juju
+[bootstrap]: ./clouds-openstack.md#bootstrap-with-juju
 [glance-simplestreams-sync]: https://jujucharms.com/glance-simplestreams-sync/
 [gsscharm]: #using-the-glance-simplestreams-sync-charm-to-configure-image-streams.
 [lp1611987]: https://bugs.launchpad.net/charm-glance-simplestreams-sync/+bug/1611987
 [general]: #create-image-metadata-with-juju
 [object-store]:#upload-the-simplestreams-metadata-to-an-object-store
 [image-streams]: #image-streams
-[controllers-creating]: ./controllers-creating.html
+[controllers-creating]: ./controllers-creating.md
