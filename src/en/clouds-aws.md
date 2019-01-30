@@ -1,4 +1,5 @@
 Title: Using Amazon AWS with Juju
+TODO:  Consider the aws cli tool
 
 # Using Amazon AWS with Juju
 
