@@ -520,7 +520,7 @@ in that credential being related to two models.
 [clouds-lxd-resources-non-admin-creds]: ./clouds-lxd-resources.md#non-admin-user-credentials
 [clouds-aws-using-env-variables]: ./clouds-aws.md#using-environment-variables
 [clouds-google-using-env-variables]: ./clouds-gce.md#using-environment-variables
-[clouds-openstack-using-env-variables]: ./help-openstack.md#using-environment-variables
+[clouds-openstack-using-env-variables]: ./clouds-openstack.md#using-environment-variables
 [clouds-adding-clouds-manually]: ./clouds.md#adding-clouds-manually
 
 [#setting-default-credentials]: #setting-default-credentials
