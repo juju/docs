@@ -270,12 +270,12 @@ See the LXD documentation to learn about the valid
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-lxd]: ./clouds-LXD.md
+[clouds-lxd]: ./clouds-lxd.md
 [#clouds-lxd-remote-add-manual]: #manually-adding-a-remote-lxd-cloud
 [controllers-creating]: ./controllers-creating.md
 [clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [credentials]: ./credentials.md
-[clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
+[clouds-lxd-creating-a-controller]: ./clouds-lxd.md#creating-a-controller
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
 [lxd-upstream-profile-options]: https://lxd.readthedocs.io/en/latest/containers/
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines

@@ -55,11 +55,14 @@ to operate legacy systems and still use the powerful new features of 2.0.
 Please see the [additional information][coexist] on running multiple versions 
 of Juju.
 
-[clouds-lxd]: ./clouds-LXD.md
-[users]: ./tut-users.html
-[aboutjuju]: ./about-juju.html
-[user-guide]: ./users.html
-[coexist]: ./juju-coexist.html
-[releasenotes]: ./reference-release-notes.html
-[referenceguide]: ./commands.html
+
+<!-- LINKS -->
+
+[clouds-lxd]: ./clouds-lxd.md
+[users]: ./tut-users.md
+[aboutjuju]: ./about-juju.md
+[user-guide]: ./users.md
+[coexist]: ./juju-coexist.md
+[releasenotes]: ./reference-release-notes.md
+[referenceguide]: ./commands.md
 [commandchanges]: ./command-changes.html
