@@ -202,10 +202,9 @@ to reveal their contents.
 Note that operator storage needs a minimum of 1024 MiB.
 
 !!! Important:
-    The storage class name for a statically provisioned volume must be prefixed
-    with the name of the intended model. In the files above, the model name is
-    'k8s-model'. The remainder of the name, for both operator and charm
-    storage, is fixed.
+    When defining statically provisioned volumes, the intended storage class
+    name must be prefixed with the name of the intended model. In the files
+    above, the model name is 'k8s-model'.
 
 ### Creating persistent volumes
 
@@ -213,7 +212,7 @@ The actual creation of the volumes is very easy. Simply refer the `kubectl`
 command to the files. We begin by installing the tool if it's not yet present:
 
 ```bash
-sudo snap install --classic kubectl
+sudo snap install kubectl --classic 
 kubectl create -f operator-storage.yaml
 kubectl create -f charm-storage-vol1.yaml
 kubectl create -f charm-storage-vol2.yaml
@@ -248,11 +247,11 @@ for each storage type and this is the approach our definition files above have
 taken. The two storage classes are 'k8s-model-juju-operator-storage' and
 'k8s-model-juju-unit-storage' .
 
-Naturally, then, during the creation process of a storage pool the storage
-class is referenced. However, Juju will automatically prepend the name of the
-current model (or that of the model specified via `-m`) to the referenced
+Naturally, then, during the creation of a storage pool for static volumes the
+storage class is needed. However, Juju will automatically prepend the name of
+the current model (or that of the model specified via `-m`) to the referenced
 storage class name when it informs the cluster. Omit, therefore, the model name
-portion of the storage class when creating the pool.
+portion of the storage class when creating such a pool.
 
 The storage pool name for operator storage *must* be called 'operator-storage'
 while the pool name for charm storage is arbitrary. Here, our charm *does* have
