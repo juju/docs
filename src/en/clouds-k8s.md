@@ -12,16 +12,17 @@ applications at scale. See the
 
 The objective of this page is to give an overview of how an existing Kubernetes
 cluster can be integrated with Juju and what the general workflow is once
-that's done. Links will be provided to material that presents more theory as
-well as to practical tutorials. Although this page is not about showing how to
-install Kubernetes itself, we do give pointers on how to do so.
+that's done. Links will be provided at the end to
+[theoretical and practical][#theory-and-tutorials] material. Finally, although
+this page is not about showing how to install Kubernetes itself, we do give
+pointers on how to do so.
+
+## Juju Kubernetes-specific workflow
 
 Essentially, Juju is able to treat the added cluster as it does any other of
 its known clouds (i.e. create models and deploy charms). There are some
-differences to working with such a cloud and they are called out in the
-following section.
-
-## Juju Kubernetes-specific workflow
+differences to working with such a cloud and they are called out in this
+section.
 
 The k8s-specific Juju commands are `add-k8s`, `remove-k8s`, and
 `scale-application`. All other concepts and commands are applied in the
@@ -207,3 +208,5 @@ The following practical guides are available:
 [upstream-microk8s]: https://microk8s.io
 [upstream-conjure-up]: https://conjure-up.io/
 [upstream-conjure-up-guide]: https://docs.conjure-up.io/stable/en/walkthrough
+
+[#theory-and-tutorials]: #storage-theory-and-practical-guides
