@@ -10,9 +10,6 @@ This tutorial will demonstrate the use of the '[aws-integrator][charm-aws]'
 charm with the AWS cloud to make Kubernetes **dynamic** persistent volumes
 (PVs) available for use with Kubernetes-specific charms.
 
-The [Persistent storage and Kubernetes][charms-storage-k8s] page provides a
-theoretical background on how Kubernetes storage works with Juju.
-
 ## Pre-requisites
 
 The following criteria are assumed:
@@ -136,35 +133,22 @@ cluster and its various objects using the `kubectl` tool.
 
 ## Creating Juju storage pools
 
-Whether or not storage volumes are provisioned statically or dynamically Juju
-storage pools must be created. This is done for operator storage and, if a
-charm has storage requirements, for charm storage as well. All on a per-model
-basis. The command to use is `create-storage-pool`.
-
 The storage pool name for operator storage *must* be called 'operator-storage'
-while the pool name for charm storage is arbitrary. Here, one of our charms
-*does* have storage requirements so we'll need a pool for it. We'll call it
-'k8s-pool'. It is this charm storage pool that will be used at charm
-deployment time.
+while the pool name for charm storage is arbitrary. Here, our charm has
+storage requirements so we'll need a pool for it. We'll call it 'k8s-pool'. It
+is this charm storage pool that will be used at charm deployment time.
 
-For dynamic AWS volumes, the Kubernetes "storage provisioner" is called
-`kubernetes.io/aws-ebs`. We will also request a general purpose SSD drive by
-passing the `gp2` parameter.
+For dynamic AWS volumes, the Kubernetes provisioner is `kubernetes.io/aws-ebs`.
+We will also request a general purpose SSD drive by passing the `gp2`
+parameter.
 
-Finally, the "storage provider" is called `kubernetes`. This provider became
-available upon the addition of the Kubernetes model.
-
-Pulling all this together, then, our storage pools are created as shown below.
-
-Operator storage pool:
+Our two storage pools are therefore created like this:
 
 ```bash
 juju create-storage-pool operator-storage kubernetes \
 	storage-class=juju-operator-storage \
 	storage-provisioner=kubernetes.io/aws-ebs parameters.type=gp2
 ```
-
-Charm storage pool:
 
 ```bash
 juju create-storage-pool k8s-pool kubernetes \
@@ -234,7 +218,6 @@ out Ubuntu tutorial
 <!-- LINKS -->
 
 [clouds-k8s]: ./clouds-k8s.md
-[charms-storage-k8s]: ./charms-storage-k8s.md
 [ubuntu-tutorial-kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
 [charm-store-staging-aws-integrator]: https://staging.jujucharms.com/u/johnsca/aws-integrator
 [kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/volumes/#types-of-volumes
