@@ -14,9 +14,6 @@ that is supported natively by Kubernetes. There is no reason, however, why you
 cannot use statically provisioned volumes with any cloud. Here, we'll use AWS
 as our backing cloud.
 
-The [Persistent storage and Kubernetes][charms-storage-k8s] page provides a
-theoretical background on how Kubernetes storage works with Juju.
-
 Note that static volumes are dependent upon the Kubernetes
 [`hostPath`][kubernetes-hostpath] volume type. This restricts us to a single
 worker node cluster. The '[kubernetes-core][charm-kc]' bundle provides this and
@@ -128,8 +125,8 @@ Kubernetes  kubernetes
 
 ## Static persistent volumes
 
-We will now create Kubernetes persistent volumes (PVs). Another way of saying
-this is that we will set up statically provisioned storage.
+We will now manually create Kubernetes persistent volumes (PVs). Another way of
+saying this is that we will set up statically provisioned storage.
 
 There are two types of storage: operator storage and charm storage (also called
 unit storage). The bare minimum is one volume for operator storage. The
@@ -141,9 +138,6 @@ itself.
 The creation of volumes is a two-step process. First set up definition files
 for each PV, and second, create the actual PVs using `kubectl`, the Kubernetes
 configuration management tool. We'll look at these two steps now.
-
-Tutorial [Using the aws-integrator charm][tutorial-k8s-aws] shows
-how to set up dynamic PVs.
 
 ### Defining persistent volumes
 
@@ -236,46 +230,21 @@ Juju model was added a Kubernetes "namespace" was set up with the same name.
 
 ## Creating Juju storage pools
 
-Whether or not storage volumes are provisioned statically or dynamically Juju
-storage pools must be created. This is done for operator storage and, if a
-charm has storage requirements, for charm storage. All on a per-model basis.
-The command to use is `create-storage-pool`.
-
-The number of storage pools is dependent on the storage classes listed in the
-PV definition files. The simplest arrangement is to have a single storage pool
-for each storage type and this is the approach our definition files above have
-taken. The two storage classes are 'k8s-model-juju-operator-storage' and
-'k8s-model-juju-unit-storage' .
-
-Naturally, then, during the creation of a storage pool for static volumes the
-storage class is needed. However, Juju will automatically prepend the name of
-the current model (or that of the model specified via `-m`) to the referenced
-storage class name when it informs the cluster. Omit, therefore, the model name
-portion of the storage class when creating such a pool.
-
 The storage pool name for operator storage *must* be called 'operator-storage'
-while the pool name for charm storage is arbitrary. Here, our charm *does* have
+while the pool name for charm storage is arbitrary. Here, our charm has
 storage requirements so we'll need a pool for it. We'll call it 'k8s-pool'. It
 is this charm storage pool that will be used at charm deployment time.
 
-For static volumes, the Kubernetes "storage provisioner" is called
+For static volumes, the Kubernetes provisioner is
 `kubernetes.io/no-provisioner`.
 
-Finally, the "storage provider" is called `kubernetes`. This provider became
-available upon the addition of the Kubernetes model.
-
-Putting this all together, then, our two storage pools are created as shown
-below.
-
-Operator storage pool:
+Our two storage pools are therefore created like this:
 
 ```bash
 juju create-storage-pool operator-storage kubernetes \
 	storage-class=juju-operator-storage \
 	storage-provisioner=kubernetes.io/no-provisioner
 ```
-
-Charm storage pool:
 
 ```bash
 juju create-storage-pool k8s-pool kubernetes \
@@ -284,7 +253,7 @@ juju create-storage-pool k8s-pool kubernetes \
 ```
 
 Perform a verification by listing all current storage pools with the
-`storage-pools` command. Our example's output:
+`storage-pools` command. Our example yields this output:
 
 ![juju storage-pools][storage-pools]
 
@@ -403,7 +372,6 @@ out Ubuntu tutorial
 
 [clouds-k8s]: ./clouds-k8s.md
 [upstream-cncf]: https://www.cncf.io/certification/software-conformance/
-[charms-storage-k8s]: ./charms-storage-k8s.md
 [ubuntu-tutorial-kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
 [install]: ./reference-install.md
 [tutorial-microk8s]: ./tutorial-microk8s.md
