@@ -12,9 +12,9 @@ applications at scale. See the
 
 The objective of this page is to give an overview of how an existing Kubernetes
 cluster can be integrated with Juju and what the general workflow is once
-that's done. Links will be provided to pages that preset more theory as well as
-to practical tutorials. Although this page is not about showing how to install
-Kubernetes itself, we do give pointers on how to do so.
+that's done. Links will be provided to material that presents more theory as
+well as to practical tutorials. Although this page is not about showing how to
+install Kubernetes itself, we do give pointers on how to do so.
 
 Essentially, Juju is able to treat the added cluster as it does any other of
 its known clouds (i.e. create models and deploy charms). There are some
@@ -166,8 +166,8 @@ conjunction with the configured ingress controller (default: nginx).
 
 ## Storage theory and practical guides
 
-Page [Persistent storage and Kubernetes][charms-storage-k8s] explains how Juju
-works with Kubernetes storage.
+The [Persistent storage and Kubernetes][charms-storage-k8s] page provides the
+theory on how Juju works with Kubernetes storage.
 
 The following practical guides are available:
 
