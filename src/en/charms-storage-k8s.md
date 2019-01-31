@@ -35,10 +35,6 @@ within Kubernetes itself).
 
 Juju-managed storage can be provisioned either dynamically or statically.
 
-See Kubernetes [Storage classes][kubernetes-supported-volume-types]
-documentation for the list of storage backends ("provisioners") supported by
-Kubernetes.
-
 Generic Juju storage (non-Kubernetes) is covered on the
 [Using Juju Storage][charms-storage] page.
 
@@ -163,8 +159,9 @@ provider becomes available upon the addition of a Kubernetes model.
 
 For static volumes, the provisioner is `kubernetes.io/no-provisioner`.
 
-For dynamic volumes, the provisioner varies, depending on the underlying
-storage backend. Examples are given in the next two sections that follow.
+For dynamic volumes, the provisioner is dependant upon the underlying
+[storage backend][kubernetes-provisioners]. Examples are given in the next two
+sections that follow.
 
 The storage class names for both operator storage and charm storage do not need
 to be stated. Juju will create a name if one is not explicitly given. This is
@@ -280,7 +277,7 @@ For charm storage the rules are similar:
 
 [clouds-k8s]: ./clouds-k8s.md
 [charms-storage]: ./charms-storage.md
-[kubernetes-supported-volume-types]: https://kubernetes.io/docs/concepts/storage/storage-classes/
+[kubernetes-provisioners]: https://kubernetes.io/docs/concepts/storage/storage-classes/#provisioner
 [kubernetes-hostpath]: https://kubernetes.io/docs/concepts/storage/volumes/#hostpath
 [kubernetes-classes]: https://kubernetes.io/docs/concepts/storage/storage-classes/
 [#creating-storage-pools]: #creating-storage-pools
