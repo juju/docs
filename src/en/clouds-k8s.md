@@ -2,7 +2,7 @@ Title: Using Kubernetes with Juju
 TODO:  Should eventually link to k8s-charm developer documentation
        Add architectural overview/diagram
        Consider manually adding a cluster via `add-cloud` and `add-credential`
-       Write tutorial on building a cluster using GCE with gcp-integrator
+       Write tutorial on building a cluster using GCE with azure-integrator
 
 # Using Kubernetes with Juju
 
@@ -10,18 +10,16 @@ Kubernetes ("k8s") provides a flexible architecture for managing containerised
 applications at scale. See the
 [Kubernetes documentation][upstream-kubernetes-docs] for more information.
 
-The objective of this page is how to add an existing Kubernetes cluster to
-Juju. It is not about showing how to install Kubernetes *with* Juju, although
-we do give pointers on how to do so.
+The objective of this page is to give an overview of how an existing Kubernetes
+cluster can be integrated with Juju and what the general workflow is once
+that's done. Links will be provided to pages that preset more theory as well as
+to practical tutorials. Although this page is not about showing how to install
+Kubernetes itself, we do give pointers on how to do so.
 
 Essentially, Juju is able to treat the added cluster as it does any other of
 its known clouds (i.e. create models and deploy charms). There are some
 differences to working with such a cloud and they are called out in the
 following section.
-
-This document refers to page
-[Persistent storage and Kubernetes][charms-storage-k8s] in a few places. You
-may want to familiarise yourself with it now.
 
 ## Juju Kubernetes-specific workflow
 
@@ -49,7 +47,7 @@ list of known clouds.
 The `scale-application` command is used to scale a Kubernetes cluster. The
 `add-unit` and `remove-unit` commands do not apply to a Kubernetes model.
 
-A Kubernetes cloud also requires Kubernetes-specific charms.
+Charms need to be written specifically for a Juju:Kubernetes context.
 
 ## Using Kubernetes with Juju
 
@@ -73,25 +71,16 @@ There are many ways to obtain a Kubernetes cluster. Here is a list of
 suggestions:
 
  - Use the '[kubernetes-core][charm-kc]' bundle, which gives a minimal
-   two-machine cluster available in the Charm Store. Tutorial
-   [Setting up static Kubernetes storage][tutorial-k8s-static-pv] uses this
-   bundle.
+   two-machine cluster available in the Charm Store.
  - Use the '[canonical-kubernetes][charm-cdk]' bundle. This is the Canonical
    Distribution of Kubernetes (CDK), which is a more sophisticated version of
    'kubernetes-core'.
- - Use the [conjure-up][upstream-conjure-up] installer. See the following
-   resources for guidance:
-     - The Ubuntu tutorial:
-       [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up]
-     - The upstream getting started guide:
-       [Spell Walkthrough][upstream-conjure-up-guide]
- - Use [MicroK8s][upstream-microk8s]. This gives you get a local, fully
-   compliant Kubernetes deployment with dynamic persistent volume support. See
-   tutorial [Using Juju with MicroK8s][tutorial-microk8s].
- - Use a bundle made for the major cloud vendors. There are special
-   "integrator" charms that assist with such deployments.
-   [Search the Charm Store][charm-store-integrator] for 'integrator'. Tutorial
-   [Using the aws-integrator charm][tutorial-k8s-aws] demonstrates this.
+ - Use the [conjure-up][upstream-conjure-up] installer.
+ - Use [MicroK8s][upstream-microk8s]. This gives you a local, fully compliant
+   Kubernetes deployment with dynamic persistent volume support.
+ - When Kubernetes is deployed via charms, special integrator charms made for
+   specific cloud vendors can greatly assist (e.g. storage).
+   [Search the Charm Store][charm-store-integrator] for 'integrator'.
  - Use a public Kubernetes cloud vendor such as
    [Amazon EKS][upstream-eks-kubernetes],
    [Azure AKS][upstream-aks-kubernetes], and
@@ -103,96 +92,39 @@ suggestions:
 
 ### Add the cluster to Juju
 
-We will need some information about the cluster in order to add it to Juju.
-This is found within the main Kubernetes configuration file.
+Information about the cluster is needed in order to add it to Juju. This is
+found within the main Kubernetes configuration file that can be copied over
+from the Kubernetes master node (and saved as `~/.kube/config`). We can then
+take advantage of the `add-k8s` command as it will parse the configuration file
+if copied to the above path. This allows us to quickly add the cluster.
 
-!!! Note:
-    The `conjure-up` installer adds the cluster for you. The rest of this
-    section can be skipped if that's what you used.
-
-The configuration file can be copied over from the Kubernetes master node (and
-saved as `~/.kube/config`). Here is one way you can do this if Juju was used to
-install the cluster:
-
-```bash
-mkdir ~/.kube
-juju scp kubernetes-master/0:config ~/.kube/config
-```
-
-We can now take advantage of the `add-k8s` command as it will parse the
-configuration file if copied to the above path. This allows us to quickly add
-the cluster, which we have arbitrarily called 'k8s-cloud':
-
-```bash
-juju add-k8s k8s-cloud
-```
-
-Confirm the successful addition of the cloud with the `clouds` command.
+Note that the `conjure-up` installer adds the cluster for you.
 
 ### Add a model
 
-Add a model in the usual way. We've arbitrarily called it 'k8s-model':
-
-```bash
-juju add-model k8s-model k8s-cloud
-```
-
-This will cause a Kubernetes namespace in the cluster to be created that will
-host all of the pods and other resources for that model. The namespace is the
-name of the Juju model. A Kubernetes Juju model also starts off with a storage
-pool called 'kubernetes'. You can see this with the `storage-pools` command.
-
-!!! Note:
-    We reuse the model name of 'k8s-model' elsewhere on this page to designate,
-    in general, a Kubernetes Juju model.
+Add a model in the usual way, with the `add-model` command. This will cause a
+Kubernetes namespace in the cluster to be created that will host all of the
+pods and other resources for that model. The namespace is the name of the Juju
+model. A Kubernetes Juju model also starts off with a storage pool called
+'kubernetes'.
 
 ### Create persistent storage
 
 Create persistent static volumes for operator storage if your chosen backing
 cloud's storage is not supported natively by Kubernetes. You will need to do
-the same for charm storage if your charm has storage requirements. Here, we
-show examples for creating static volumes for both types:
-
-```bash
-kubectl create -f operator-storage.yaml
-kubectl create -f charm-storage-vol1.yaml
-```
-
-For in-depth coverage on this topic see tutorial
-[Setting up static Kubernetes storage][tutorial-k8s-static-pv].
+the same for charm storage if your charm has storage requirements. This is done
+with the Kubernetes tool `kubectl`.
 
 ### Create storage pools
 
-Create storage pools for operator storage and, if needed, charm storage. We
-show examples for creating pools of both types:
-
-```bash
-juju create-storage-pool operator-storage kubernetes \
-	storage-class=juju-operator-storage \
-	storage-provisioner=kubernetes.io/no-provisioner
-juju create-storage-pool k8s-pool kubernetes \
-	storage-class=juju-unit-storage \
-	storage-provisioner=kubernetes.io/no-provisioner
-```
-
-The above tutorial also covers storage pool creation!
+Create storage pools for operator storage and, if needed, charm storage. This
+is done in the usual way, with the `create-storage-pool` command.
 
 ### Deploy a Kubernetes charm
 
-A Kubernetes-specific charm is deployed in standard fashion. If the charm has
-storage requirements you will need to specify them, as you do with a normal
-charm. For example, here is a charm that uses the previously created charm
-storage called 'k8s-pool':
-
-```bash
-juju deploy cs:~wallyworld/mariadb-k8s --storage database=k8s-pool,10M
-```
-
-The [Using Juju storage][charms-storage-juju-deploy] page covers the above
-syntax.
-
-If you want to deploy a Kubernetes bundle see section
-[Kubernetes bundles][charms-bundles-k8s].
+A Kubernetes-specific charm is deployed in standard fashion, with the `deploy`
+command. If the charm has storage requirements you will need to specify them,
+as you do with a normal charm.
 
 #### Configuration
 
@@ -232,6 +164,27 @@ Keys 'juju-external-hostname' and 'juju-application-path' control how the
 application is exposed externally using a Kubernetes Ingress Resource in
 conjunction with the configured ingress controller (default: nginx).
 
+## Storage theory and practical guides
+
+Page [Persistent storage and Kubernetes][charms-storage-k8s] explains how Juju
+works with Kubernetes storage.
+
+The following practical guides are available:
+
+ - The `conjure-up` installer can be used to install Kubernetes. See the
+   following resources for guidance:
+     - The Ubuntu tutorial:
+       [Install Kubernetes with conjure-up][ubuntu-tutorial_install-kubernetes-with-conjure-up]
+     - The upstream getting started guide:
+       [Spell Walkthrough][upstream-conjure-up-guide]
+ - Tutorial [Setting up static Kubernetes storage][tutorial-k8s-static-pv]
+   shows how to set up statically provisioned persistent volumes with Juju by
+   way of the 'kubernetes-core' charm.
+ - Tutorial [Using Juju with MicroK8s][tutorial-microk8s] provides steps for
+   getting started with Juju and MicroK8s.
+ - Tutorial [Using the aws-integrator charm][tutorial-k8s-aws] demonstrates
+   deploying Kubernetes with Juju on AWS with an integrator charm.
+
 
 <!-- LINKS -->
 
@@ -240,8 +193,6 @@ conjunction with the configured ingress controller (default: nginx).
 [ubuntu-tutorial_install-kubernetes-with-conjure-up]: https://tutorials.ubuntu.com/tutorial/install-kubernetes-with-conjure-up#0
 [charm-store-integrator]: https://jujucharms.com/q/integrator
 [charms-storage-k8s]: ./charms-storage-k8s.md
-[charms-bundles-k8s]: ./charms-bundles.md#kubernetes-bundles
-[charms-storage-juju-deploy]: ./charms-storage.md#juju-deploy
 [tutorial-microk8s]: ./tutorial-microk8s.md
 [tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
 [tutorial-k8s-aws]: ./tutorial-k8s-aws.md
