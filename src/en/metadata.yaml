@@ -5,6 +5,8 @@ navigation:
     children:
       - title: Home
         location: index.md
+      - title: Getting started with Juju
+        location: getting-started.md
       - title: Install Juju
         location: reference-install.md
       - title: Concepts

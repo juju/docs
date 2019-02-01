@@ -1,8 +1,8 @@
-Title: Using Juju locally (LXD) - tutorial
+Title: Basic client usage - tutorial
 TODO:  Warning: Ubuntu release versions hardcoded
        tutorials at the bottom may get renamed
 
-# Using Juju locally (LXD) - tutorial
+# Basic client usage - tutorial
 
 This guide will get you started quickly with Juju by setting up everything you
 need on a single [Ubuntu 18.04 LTS][bionic-download] (Bionic) system. It does
@@ -12,8 +12,7 @@ so by having Juju machines based on fast and secure containers, by way of
 Using LXD with Juju provides an experience very similar to any other backing
 cloud. In addition, because it is very easy to set up and uses minimal
 resources, a Juju & LXD combination is an efficient way to develop, test, and
-replicate software deployments. LXD has become an essential part of every Juju
-operator's toolbox.
+replicate software deployments. 
 
 !!! Important:
     We'll be removing the LXD deb package and replacing it with the snap. Find
