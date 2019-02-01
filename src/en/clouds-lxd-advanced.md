@@ -145,7 +145,7 @@ juju add-cloud lxd-remote-manual lxd-cloud.yaml
 ### Adding credentials
 
 As opposed to a local LXD cloud, in a remote context, credentials need to be
-added prior to creating a controller (see [Cloud credentials][credentials] for
+added prior to creating a controller (see [Credentials][credentials] for
 background information).
 
 Use the `add-credential` command to add credentials to the new cloud:
