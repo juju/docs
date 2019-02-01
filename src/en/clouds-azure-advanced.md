@@ -172,9 +172,9 @@ controller-creation step.
 
 <!-- LINKS -->
 
-[clouds-azure]: ./help-azure.html
-[clouds-azure-controller]: ./help-azure.html#create-the-juju-controller
-[clouds-azure-cli-install]: ./help-azure.html#install-the-cli-tool
-[clouds-azure-cli-login]: ./help-azure.html#log-in-to-azure
+[clouds-azure]: ./clouds-azure.md
+[clouds-azure-controller]: ./clouds-azure.md#create-the-juju-controller
+[clouds-azure-cli-install]: ./clouds-azure.md#install-the-cli-tool
+[clouds-azure-cli-login]: ./clouds-azure.md#log-in-to-azure
 [azurecli-rbac]: https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-cli
 [azurecli-az-ad-sp]: https://docs.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac

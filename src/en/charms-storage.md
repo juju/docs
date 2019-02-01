@@ -141,7 +141,7 @@ tmpfs    tmpfs
     The name given to a default storage pool will often be the same as the
     name of the storage provider upon which it is based.
 
-Depending on the storage provider (see [below][anchor__storage-providers]),
+Depending on the storage provider (see [below][#storage-providers]),
 custom storage pools can be created. In the case of AWS, the 'ebs' storage
 provider supports several configuration attributes:
 
@@ -316,7 +316,7 @@ dependent upon cloud type. Above, it is given by the backing LXD pool and the
 volume name (obtained with `lxc storage volume list <lxd-pool>`), all separated
 by a `:`. A provider ID from another cloud may look entirely different. The LXD
 storage provider and associated LXD pools are described in detail
-[below][anchor__storage-providers-lxd].
+[below][#storage-providers-lxd].
 
 ### Cross-model storage
 
@@ -343,7 +343,7 @@ juju upgrade-charm postgresql --storage pgdata=10G
 
 If such a constraint was not provided, 'rootfs' would be used (as described in
 the section on deploying with
-[storage constraints][anchor__storage-constraints-juju-deploy]).
+[storage constraints][#storage-constraints-juju-deploy]).
 
 !!! Warning:
     Specifying new constraints may be necessary when upgrading to a revision of
@@ -372,7 +372,7 @@ to all types of models:
     a mounted file system but is stored in volatile memory.
 
 Loop devices require extra configuration to be used within LXD. For that,
-please refer to [Loop devices and LXD][anchor__loop-devices-and-lxd] (below).
+please refer to [Loop devices and LXD][#loop-devices-and-lxd] (below).
 
 ### AWS/EBS (ebs)
 
@@ -571,7 +571,7 @@ supports the following pool attributes:
     - `pd-standard`
 
 Using storage with Kubernetes is covered on the
-[Persistent storage and Kubernetes][charms-storage-k8] page.
+[Persistent storage and Kubernetes][charms-storage-k8s] page.
 
 #### Loop devices and LXD
 
@@ -642,16 +642,16 @@ For guidance on how to create a charm that uses these storage features see
 [commands-remove-storage]: ./commands.html#remove-storage
 [commands-upgrade-charm]: ./commands.html#upgrade-charm
 
-[clouds-lxd]: ./clouds-LXD.md
-[charms-storage-ceph]: ./charms-storage-ceph.html
-[charms-storage-k8]: ./charms-storage-k8s.md
+[clouds-lxd]: ./clouds-lxd.md
+[charms-storage-ceph]: ./charms-storage-ceph.md
+[charms-storage-k8s]: ./charms-storage-k8s.md
 [generic-storage-loop]: https://en.wikipedia.org/wiki/Loop_device
 [generic-storage-rootfs]: https://www.kernel.org/doc/Documentation/filesystems/ramfs-rootfs-initramfs.txt
 [generic-storage-tmpfs]: https://en.wikipedia.org/wiki/Tmpfs
 [charm-store-postgresql]: https://jujucharms.com/postgresql
 [charm-store-ceph-osd]: https://jujucharms.com/ceph-osd
 [ceph-charm]: https://jujucharms.com/ceph-osd
-[developer-storage]: ./developer-storage.html
+[developer-storage]: ./developer-storage.md
 [aws-iops-ssd-volumes]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html#EBSVolumeTypes_piops
 [aws-ebs-volume-types]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html
 [wikipedia-iops]: https://en.wikipedia.org/wiki/IOPS
@@ -659,7 +659,7 @@ For guidance on how to create a charm that uses these storage features see
 [upstream-lxd-storage-configuration]: https://github.com/lxc/lxd/blob/master/doc/storage.md
 [microsoft-managed-disks]: https://docs.microsoft.com/en-us/azure/virtual-machines/windows/managed-disks-overview
 
-[anchor__loop-devices-and-lxd]: #loop-devices-and-lxd
-[anchor__storage-constraints-juju-deploy]: #juju-deploy
-[anchor__storage-providers]: #storage-providers
-[anchor__storage-providers-lxd]: #lxd-(lxd)
+[#loop-devices-and-lxd]: #loop-devices-and-lxd
+[#storage-constraints-juju-deploy]: #juju-deploy
+[#storage-providers]: #storage-providers
+[#storage-providers-lxd]: #lxd-(lxd)

@@ -109,6 +109,6 @@ See [Use a custom charm store][controllers-creating-charmstore-url].
 [clouds-lxd-advanced-profiles]: ./clouds-lxd-advanced.md#charms-and-lxd-profiles
 [charms-bundles-export]: ./charms-bundles.md#saving-a-bundle
 [charms-bundles-diff]: ./charms-bundles.md#comparing-a-bundle-to-a-model
-[clouds-openstack-adding]: ./help-openstack.md#adding-an-openstack-cloud
+[clouds-openstack-adding]: ./clouds-openstack.md#adding-an-openstack-cloud
 [credentials-set-credential]: ./credentials.md#changing-a-remote-credential-for-a-model
 [controllers-creating-charmstore-url]: ./controllers-creating.md#use-a-custom-charm-store
