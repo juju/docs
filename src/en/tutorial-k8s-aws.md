@@ -14,13 +14,13 @@ charm with the AWS cloud to make Kubernetes **dynamic** persistent volumes
 
 The following criteria are assumed:
 
- - that you're using Ubuntu 18.04 LTS
- - that Juju (stable snap channel) is installed. See the
-   [Installing Juju][install] page.
- - that a credential for the 'aws' cloud has been added to Juju. See the
+ - You're using Ubuntu 18.04 LTS.
+ - Juju (stable snap channel) is installed. See the [Installing Juju][install]
+   page.
+ - A credential for the 'aws' cloud has been added to Juju. See the
    [Using Amazon AWS with Juju][clouds-aws] page.
- - sufficient permissions assigned to the above credential for 'aws-integrator'
-   to perform its operations (see
+ - Sufficient permissions are assigned to the above credential in order for
+   'aws-integrator' to perform operations (see
    [Permissions Requirements][github-aws-integrator-permissions]; this tutorial
    assigns the IAM security policy of 'AdministratorAccess').
 

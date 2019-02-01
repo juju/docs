@@ -4,114 +4,71 @@ TODO:  Warning: Ubuntu release versions hardcoded
 
 # Basic client usage - tutorial
 
-This guide will get you started quickly with Juju by setting up everything you
-need on a single [Ubuntu 18.04 LTS][bionic-download] (Bionic) system. It does
-so by having Juju machines based on fast and secure containers, by way of
-[LXD][lxd-upstream].
-
-Using LXD with Juju provides an experience very similar to any other backing
-cloud. In addition, because it is very easy to set up and uses minimal
-resources, a Juju & LXD combination is an efficient way to develop, test, and
-replicate software deployments. 
+The goal of this tutorial is to give new Juju users a taste of what it's like
+to use the command line client. It uses [LXD][lxd-upstream] as the backing
+cloud due to it easy accessibility and low resource usage.
 
 !!! Important:
-    We'll be removing the LXD deb package and replacing it with the snap. Find
-    another system for this tutorial if LXD is already in use.
+    We'll be removing the LXD deb package and replacing it with the snap.
+    Either find another system for this tutorial if LXD is already in use or
+    follow the included instructions to migrate existing containers.
 
-## Software
+## Pre-requisites
 
-Install Juju and LXD. Then remove the LXD deb package:
+The following criteria are assumed:
+
+ - You're using Ubuntu 18.04 LTS (Bionic).
+ - Juju (stable snap channel) is installed. See the [Installing Juju][install]
+   page.
+ - LXD is either not in use **or** you are willing to migrate existing
+   containers to the snap.
+
+## Installing LXD
+
+On Ubuntu, LXD is normally installed by default as an APT (deb) package. We
+recommend a transition to the snap package.
+
+!!! Important:
+    When transitioning to the snap, any possibly existing containers will need
+    to be migrated over. See [Using the LXD snap][lxd-snap] for instructions.
+
+Below, we add the snap and remove the deb:
 
 ```bash
-sudo snap install juju --classic
 sudo snap install lxd
 sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
-## User group
-
-Ideally, the system user that will act as the Juju operator should be a member
-of the 'lxd' user group. Ensure that this is the case (below we assume this
-user is 'john'):
+In order to use LXD, the system user who will act as the Juju operator must be
+a member of the 'lxd' user group. Ensure that this is the case (below we assume
+this user is 'john'):
 
 ```bash
 sudo adduser john lxd
 ```
 
-The user will now be in the 'lxd' group when they next log in. If the intended
-Juju operator is the current user all that's needed is a group membership
-refresh:
+The user will be in the 'lxd' group when they next log in. If the intended Juju
+operator is the current user all that's needed is a group membership refresh:
 
 ```bash
 newgrp lxd
 ```
 
-To confirm the active group membership for the current user:
+You can confirm the active group membership for the current user in this way:
 
 ```bash
 groups
 ```
 
-## LXD initialisation
+## LXD configuration
 
-LXD has an optional interactive initialisation method and it's what we'll use
-here. Among other things, this process will both set up storage (ZFS) and the
-containers' subnet. We'll choose to have networking auto-configured (answer
-'auto') as a subnet will be chosen such that it will not conflict with an
-existing one.
-
-Begin by entering:
+To quickly configure LXD for general use and disable IPv6 (Juju does not
+support it):
 
 ```bash
-lxd init
+lxd init --auto
+lxc network set lxdbr0 ipv6.address none
 ```
-
-The session below is what was used in this guide. Note that pressing Enter (a
-null answer) will accept the default answer (provided in square brackets).
-
-```no-highlight
-Would you like to use LXD clustering? (yes/no) [default=no]: 
-Do you want to configure a new storage pool? (yes/no) [default=yes]: 
-Name of the new storage pool [default=default]: 
-Name of the storage backend to use (btrfs, ceph, dir, lvm, zfs) [default=zfs]: 
-Create a new ZFS pool? (yes/no) [default=yes]: 
-Would you like to use an existing block device? (yes/no) [default=no]: 
-Size in GB of the new loop device (1GB minimum) [default=15GB]: 
-Would you like to connect to a MAAS server? (yes/no) [default=no]: 
-Would you like to create a new local network bridge? (yes/no) [default=yes]: 
-What should the new bridge be called? [default=lxdbr0]: 
-What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: 
-What IPv6 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]: none
-Would you like LXD to be available over the network? (yes/no) [default=no]: 
-Would you like stale cached images to be updated automatically? (yes/no) [default=yes] 
-would you like a YAML "lxd init" preseed to be printed? (yes/no) [default=no]:
-```
-
-LXD is now configured to work with Juju.
-
-IPv6 was disabled (answer 'none') because Juju does not support it at this
-time.
-
-The (IPv4) subnet can be derived from the bridge's address:
-
-```bash
-lxc network get lxdbr0 ipv4.address
-```
-
-Our example gives:
-
-```no-highlight
-10.238.229.1/24
-```
-
-So the subnet address is **10.238.229.0/24**.
-
-!!! Note:
-    LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it
-    created. If you subsequently add/change firewall settings (e.g. with
-    `ufw`), ensure that such changes have not interfered with Juju's ability to
-    communicate with LXD. Juju requires inbound traffic for TCP port 8443 from
-    the LXD subnet.
 
 ## Create a controller
 
@@ -145,7 +102,7 @@ can see our 'lxd' listed:
 
 ```no-highlight
 Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
-lxd-test*   default  admin  superuser  localhost/localhost       2         1  none  2.4.3
+lxd*        default  admin  superuser  localhost/localhost       2         1  none  2.5.0
 ```
 
 A newly-created controller has two models: The 'controller' model, which should
@@ -233,9 +190,6 @@ To continue your journey with Juju we suggest the following topics:
 <!-- LINKS -->
 
 [lxd-upstream]: https://linuxcontainers.org/lxd/
-[bionic-download]: http://www.ubuntu.com/download/
-[zfs-wiki]: https://wiki.ubuntu.com/ZFS
 [charm-store]: https://jujucharms.com
 [charms]: ./charms.md
-[clouds]: ./clouds.md
 [tut-users]: ./tut-users.md
