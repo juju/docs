@@ -1,5 +1,6 @@
 Title: Additional LXD resources
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
+       non-admin section should be moved to lxd-advanced
 table_of_contents: True
 
 # Additional LXD resources
@@ -43,8 +44,9 @@ Image cache expiration and image synchronization mechanisms are built-in.
 
 To grant a regular user access to a LXD-based controller a certificate
 credential is required. This certificate is generated and shared with the user
-who will then use it as a credential. See [Creating users][users-creating] for
-details on adding users, registering them, and granting them permissions.
+who will then use it as a credential. See
+[Working with multiple users][multiuser] for details on adding users, granting
+them permissions, and registering controllers.
 
 On the LXD host generate the certificate with the `autoload-credentials`
 command. Use the below sample session as a guide:
@@ -172,3 +174,4 @@ assistance with the daemon. See upstream documentation for
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
+[multiuser]: ./multiuser.md
