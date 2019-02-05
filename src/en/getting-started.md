@@ -323,9 +323,8 @@ it on new machines:
 juju add-unit -n 2 some-application
 ```
 
-To remove an application, including all instantiations, along with its
-associated machines (provided they are not hosting another application's
-units):
+To remove an application, including all units, along with associated machines
+(provided they are not hosting another application's units).
 
 ```bash
 juju remove-application some-application
