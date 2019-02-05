@@ -107,32 +107,30 @@ the agents have been omitted:
 
 ![units][img__units]
 
-## Remove vs Destroy vs Kill
+## Detach vs Remove vs Destroy vs Kill
 
-Several commands in Juju have a prefix of `remove-`, `destroy-`, or `kill-`.
-Each prefix has a specific meaning in Juju, which increase in extent or
-severity:
+In Juju, there is a distinction between the similar seeming terms "detach",
+"remove", "destroy", and "kill". These terms are used consistently and are also
+ordered such that their meaning or effect increases in extent or severity.
 
-* `remove-` commands, such as `remove-application`, `remove-relation`, or
-  `remove-unit`, affect a single logical entity **within** a model. They can
-  be destructive, but only to at most a single application. Some of these
-  commands can be disabled via `juju disable-command remove-object`.
-
-* `destroy-model` and `destroy-controller` are destructive commands that
-  affect the entire model or even the entire controller. Generally, these
-  will refuse to operate on models which have persistent storage in them or
-  controllers which have active models in them. This can be overridden with
-  the `--destroy-storage` or `--destroy-all-models` flags, respectively. These
-  commands can be disabled via `juju disable-command destroy-model`.
-
-* `kill-controller` is the only kill command, and it is used to ensure that
-  the controller is destroyed, forcibly if necessary. This will start out by
-  trying to cleanly destroy the controller in the same way as
-  `destroy-controller`, but after a timeout (default: 5 minutes), it will
-  forcibly remove all machines and resources for the controller directly via
-  the underlying cloud provider. It is a good idea after doing this to manually
-  check for any remaining resources, such as ones allocated directly by charms
-  themselves, via your cloud's API or interface.
+ - *Detach* in Juju means to decouple a resource from a logical entity (such as
+   an application) within the model. The resource will remain available in the
+   model for later access with Juju, and underlying cloud resources used by it
+   also remain in place.
+ - *Remove* in Juju means to cleanly remove a single logical entity from the
+   model. This is a destructive process, meaning the entity will no longer be
+   available via Juju, and any underlying cloud resources used by it will be
+   freed (however, this can often be overridden on a case-by-case basis to
+   leave the underlying cloud resources in place).
+ - *Destroy* in Juju means to cleanly teardown an entire model, or even an
+   entire controller, along with everything in it. There are some safe-guards
+   to help avoid accidentally destroying models that are in use, but this is
+   inherently a destructive process.
+ - *Kill* in Juju means to forcibly teardown an entire controller, along with
+   everything in it. This is obviously a very destructive process and is
+   reserved for cleaning up resources used by broken or otherwise unresponsive
+   controllers. It is also recommended to manually check the underlying cloud
+   to ensure that all resources were found and cleaned up.
 
 ## Endpoint
 
