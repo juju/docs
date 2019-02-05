@@ -1,11 +1,13 @@
 Title: Basic client usage - tutorial
 TODO:  Warning: Ubuntu release versions hardcoded
-       Include 'Next steps' and link to planned tutorials (tutorial-bundles.md, tutorial-constraints.md)
+       Include links to planned tutorials (tutorial-bundles.md, tutorial-constraints.md)
 
 # Basic client usage - tutorial
 
-The goal of this tutorial is to give new Juju users a taste of what it's like
-to use the command line client.
+The goal of this tutorial is to give new Juju operators a solid introduction to
+the command line client. In so doing, several important concepts are
+introduced. It also discusses the use of command prefixes and aliases. Further
+reading suggestions are included at the end.
 
 ## Prerequisites
 
@@ -194,7 +196,7 @@ juju add-unit -n 1 apache2
 
 ### Viewing the model status
 
-The `status` command is one that you'll use often. It gives current information
+The `status` command is one that you'll use often. It gives live information
 for a given model.
 
 ```bash
@@ -223,7 +225,32 @@ Machine  State    DNS            Inst id              Series  AZ  Message
 2        started  10.243.67.141  juju-ded876-2        bionic      Running
 ```
 
-Note that the `machines` command output is a subset of the `status` command
+The output is broken up into four sections.
+
+The **top** section mentions basic information such as the names of the current
+model and controller ('alpha' and 'lxd' respectively), followed by the cloud
+name ('localhost'), what version is running on the agents in the current model,
+whether Juju is being used in a third-party context (see
+[Managed solutions][experts-sla]) and finally the timestamp of the current
+controller.
+
+The **App** section contains information at the application level. It is
+closely related to the providence of an application's charm. The 'Scale' tells
+us how many units exist for an application while the 'Rev' column shows the
+charm's revision number.
+
+The **Unit** section contains information at the unit level. It lists them,
+along with information that is passed back from the *unit agent*. The type of
+data available is is very charm-specific. For instance, the 'unknown' workload
+message for the apache2 units is not necessarily a bad thing. It's just that
+the associated charm was not written to give something more insightful.
+
+The **Machine** section contains information at the machine level. It lists
+machines by their ID (e.g. '0/lxd/0' or just '1'). The 'Inst id' is the
+instance id of the machine that gets passed to the cloud provider as the
+instance name.
+
+Notice how the `machines` command output is a subset of the `status` command
 output.
 
 ### Inspecting the logs
@@ -337,3 +364,4 @@ following documentation pages:
 [troubleshooting-logs]: ./troubleshooting-logs.md
 [machine-auth]: ./machine-auth.md
 [charms-destroy]: ./charms-destroy.md
+[experts-sla]: ./experts-sla.md
