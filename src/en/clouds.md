@@ -16,7 +16,8 @@ the next step is to add your cloud credentials to Juju. The exception is for a
 local LXD cloud; credentials are added automatically.
 
 This rest of this page covers general cloud management and an overview of how
-clouds are added. You can still get started by selecting your cloud here:
+clouds are added. However, you can get started right away by selecting your
+cloud here:
 
  - [Amazon AWS][clouds-aws] *****
  - [Microsoft Azure][clouds-azure] *****

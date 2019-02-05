@@ -11,6 +11,7 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
+ - LXD and group membership
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -39,6 +40,29 @@ Juju pulls official cloud images from the 'ubuntu' remote
 subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 
 Image cache expiration and image synchronization mechanisms are built-in.
+
+## LXD and group membership
+
+In order to use LXD, the system user who will act as the Juju operator must be
+an active member of the 'lxd' user group. Ensure that this is the case (below
+we assume this user is 'john'):
+
+```bash
+sudo adduser john lxd
+```
+
+The user will be in the 'lxd' group when they next log in. If the intended Juju
+operator is the current user all that's needed is a group membership refresh:
+
+```bash
+newgrp lxd
+```
+
+You can confirm the active group membership for the current user in this way:
+
+```bash
+groups
+```
 
 ## Non-admin user credentials
 
@@ -139,9 +163,11 @@ under the current installation then simply remove the software:
 sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
+### Migrating containers
+
 If containers do exist under the old system the `lxd.migrate` utility should be
-used to migrate them to the new system. Once the migration is complete, you
-will be prompted to have the old software removed.
+used to migrate them so that they can be managed by the snap binaries. Once the
+migration is complete, you will be prompted to have the old software removed.
 
 Start the migration tool by running:
 

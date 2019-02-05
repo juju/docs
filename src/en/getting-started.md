@@ -356,17 +356,8 @@ the JAAS web UI or by logging in again at the command line.
 
 ## Next steps
 
-To delve into the conceptual world of Juju we suggest visiting the following
-attractions:
-
- - [Controllers][controllers]
- - [Models][models]
- - [Client][client]
- - [Charms][charms]
- - [Concepts and terms][concepts]
-
-For a more practical approach we recommend the
-[Using Juju locally (LXD)][tutorial-lxd] tutorial.
+For a more in-depth look at client commands we recommend the
+[Basic client usage][tutorial-client-basic] tutorial.
 
 !!! Important:
     Ensure you have removed any work done within JAAS. If you followed all the
@@ -382,17 +373,12 @@ For a more practical approach we recommend the
 [charm-store]: https://jujucharms.com/store
 [charm-cdk]: https://jujucharms.com/canonical-kubernetes/
 [charm-kc]: https://jujucharms.com/kubernetes-core/
-[tutorial-lxd]: ./tut-lxd.md
 [upstream-aws]: https://aws.amazon.com
 [upstream-azure]: https://azure.microsoft.com
 [upstream-gce]: https://cloud.google.com
 [clouds-aws-creds]: ./clouds-aws.md#gathering-credential-information
 [clouds-azure-creds]: ./clouds-azure.md#adding-credentials
 [clouds-gce-creds]: ./clouds-gce.md#gathering-credential-information
-[controllers]: ./controllers.md
 [clouds]: ./clouds.md
-[models]: ./models.md
-[client]: ./client.md
-[charms]: ./charms.md
-[concepts]: ./juju-concepts.md
 [commands]: ./commands.md
+[tutorial-client-basic]: ./tutorial-client-basic.md

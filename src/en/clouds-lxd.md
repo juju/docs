@@ -5,8 +5,8 @@ table_of_contents: True
 # Using LXD with Juju
 
 Juju already has knowledge of the (local) LXD cloud, known to Juju as cloud
-'localhost'. In addition, LXD does not require an account with a public cloud
-vendor nor do credentials need to be added (this is done automatically via
+'localhost'. In addition, LXD does not require an account with a remote cloud
+service nor do credentials need to be added (this is done automatically via
 certificates). LXD is thus a backing cloud that is trivial to set up and has
 become an essential part of every Juju operator's toolbox.
 
@@ -17,50 +17,45 @@ elsewhere:
  - [Adding a remote LXD cloud][clouds-lxd-advanced-remote] (`v.2.5.0`)
  - [Charms and LXD profiles][clouds-lxd-advanced-profiles] (`v.2.5.0`)
 
+!!! Important:
+    We'll be removing the LXD deb package and replacing it with the snap.
+    Either find another system if LXD is already in use or follow the included
+    instructions to migrate existing containers.
+
 ## Installing LXD
 
 On Ubuntu, LXD is normally installed by default as an APT (deb) package. We
-recommend a transition to the snap package.
-
-!!! Important:
-    When transitioning to the snap, any possibly existing containers will need
-    to be migrated over. See [Using the LXD snap][lxd-snap] for instructions.
-
-Below, we add the snap and remove the deb:
+recommend the snap package instead:
 
 ```bash
 sudo snap install lxd
+```
+
+If you're transitioning existing containers to the now-installed snap, migrate
+them now. Choose 'yes' when prompted (at the end) to remove the old deb
+packages:
+
+```bash
+sudo lxd.migrate
+```
+
+Otherwise, remove the deb packages manually:
+
+```bash
 sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
-In order to use LXD, the system user who will act as the Juju operator must be
-a member of the 'lxd' user group. Ensure that this is the case (below we assume
-this user is 'john'):
-
-```bash
-sudo adduser john lxd
-```
-
-The user will be in the 'lxd' group when they next log in. If the intended Juju
-operator is the current user all that's needed is a group membership refresh:
-
-```bash
-newgrp lxd
-```
-
-You can confirm the active group membership for the current user in this way:
-
-```bash
-groups
-```
-
-## LXD configuration
+## Configuring LXD
 
 To quickly configure LXD for general use:
 
 ```bash
 lxd init --auto
 ```
+
+!!! Note:
+    If you get a permission denied error see
+    [LXD and group membership][lxd-and-group-membership].
 
 This will configure LXD to use the legacy 'dir' (filesystem) for storage. To
 use a different backend, such as ZFS, you can do:
@@ -181,10 +176,10 @@ See these pages for ideas on what to do next:
 [models]: ./models.md
 [charms]: ./charms.md
 [controllers-creating]: ./controllers-creating.md
-[lxd-snap]: ./clouds-lxd-resources.md#using-the-lxd-snap
 [clouds-lxd-resources]: ./clouds-lxd-resources.md
 [clouds-lxd-advanced]: ./clouds-lxd-advanced.md
 [clouds-lxd-advanced-cluster]: ./clouds-lxd-advanced.md#lxd-clustering
 [clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
 [clouds-lxd-advanced-profiles]: ./clouds-lxd-advanced.md#charms-and-lxd-profiles
 [charms-constraints-lxd]: ./charms-constraints.md#constraints-and-lxd-containers
+[lxd-and-group-membership]: ./clouds-lxd-resources.md#lxd-and-group-membership
