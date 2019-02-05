@@ -245,5 +245,6 @@ out Ubuntu tutorial
 [upstream-microk8s]: https://microk8s.io
 [upstream-cncf]: https://www.cncf.io/certification/software-conformance/
 [upstream-kubectl-viewing]: https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources
-[ubuntu-tutorial_kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
+[ubuntu-tutorial-kubernetes-microk8s]: https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s
+[tutorial-k8s-aws]: ./tutorial-k8s-aws.md
 [tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
