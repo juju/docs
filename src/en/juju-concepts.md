@@ -107,6 +107,33 @@ the agents have been omitted:
 
 ![units][img__units]
 
+## Remove vs Destroy vs Kill
+
+Several commands in Juju have a prefix of `remove-`, `destroy-`, or `kill-`.
+Each prefix has a specific meaning in Juju, which increase in extent or
+severity:
+
+* `remove-` commands, such as `remove-application`, `remove-relation`, or
+  `remove-unit`, affect a single logical entity **within** a model. They can
+  be destructive, but only to at most a single application. Some of these
+  commands can be disabled via `juju disable-command remove-object`.
+
+* `destroy-model` and `destroy-controller` are destructive commands that
+  affect the entire model or even the entire controller. Generally, these
+  will refuse to operate on models which have persistent storage in them or
+  controllers which have active models in them. This can be overridden with
+  the `--destroy-storage` or `--destroy-all-models` flags, respectively. These
+  commands can be disabled via `juju disable-command destroy-model`.
+
+* `kill-controller` is the only kill command, and it is used to ensure that
+  the controller is destroyed, forcibly if necessary. This will start out by
+  trying to cleanly destroy the controller in the same way as
+  `destroy-controller`, but after a timeout (default: 5 minutes), it will
+  forcibly remove all machines and resources for the controller directly via
+  the underlying cloud provider. It is a good idea after doing this to manually
+  check for any remaining resources, such as ones allocated directly by charms
+  themselves, via your cloud's API or interface.
+
 ## Endpoint
 
 An *endpoint* (or application endpoint) is used to connect to another
