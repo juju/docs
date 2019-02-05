@@ -15,11 +15,6 @@ less than 10 minutes. But you could just as easily use Amazon AWS or Microsoft
 Azure, and just as easily deploy Kubernetes, Cassandra or even OpenStack. It's
 the magic of Juju that makes it happen.
 
-!!! Note:
-    If you already have a controller, such as the one created in the
-    [Using Juju locally (LXD)][tut-lxd] page, this new controller will be
-    seamlessly added alongside.
-
 ## Installation
 
 First, install Juju, if you have not done so already. See
@@ -219,7 +214,6 @@ to want to share. Find out how easy it is to
 
 <!-- LINKS -->
 
-[tut-lxd]: ./tut-lxd.md
 [clouds-aws]: ./clouds-aws.md
 [clouds-azure]: ./clouds-azure.md
 [gcetrial]: https://console.cloud.google.com/freetrial

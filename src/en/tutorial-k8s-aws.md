@@ -10,9 +10,9 @@ This tutorial will demonstrate the use of the '[aws-integrator][charm-aws]'
 charm with the AWS cloud to make Kubernetes **dynamic** persistent volumes
 (PVs) available for use with Kubernetes-specific charms.
 
-## Pre-requisites
+## Prerequisites
 
-The following criteria are assumed:
+The following prerequisites are assumed as a starting point for this tutorial:
 
  - You're using Ubuntu 18.04 LTS.
  - Juju (stable snap channel) is installed. See the [Installing Juju][install]
