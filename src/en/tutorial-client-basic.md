@@ -21,7 +21,42 @@ This guide uses LXD (`v.3.9`) as a backing cloud due to its accessibility and
 low resource usage. Choose a local LXD cloud if you're not sure what to use
 (see [Using LXD with Juju][clouds-lxd]).
 
-## Listing initial information
+## Command prefixes and aliases
+
+As you gain more experience with the client, you will encounter command
+prefixes whose meanings may not be immediately apparent.
+
+A good example of this are the `destroy-` and `remove-` prefixes, such as in
+the commands `destroy-model` and `remove-user`. These two prefixes differ in
+terms of severity. Generally speaking, `destroy-` indicates a destructive
+action that is difficult to reverse whereas `remove-` does not.
+
+There is an even more drastic-sounding "remove" prefix: `kill-`, but it is
+featured in a sole command: `kill-controller`. The latter command differs
+from `destroy-controller` in that it has the ability to terminate the
+controller machine directly via the cloud provider, without cleaning up any
+machines that may be running in workload models.
+
+The `show-` prefix is used to drill down into an object to reveal details. It
+is akin to the verb "describe".
+
+There are command aliases, that typically employ a prefix, that point to their
+corresponding commands. This practice is for simplifying the life of the
+operator. The `list-` alias/prefix is a good example, where `list-clouds`
+points to `clouds`.
+
+The list of aliases can be obtained in this way:
+
+```bash
+juju help commands | grep Alias
+```
+
+## Fundamental commands
+
+Juju makes available to the operator a wide variety of commands. In this
+section, we'll cover the basic ones. 
+
+### Listing initial information
 
 List the controller:
 
@@ -29,8 +64,8 @@ List the controller:
 juju controllers
 ```
 
-This will return a list of all the controllers known to your Juju client. Here,
-a controller named 'lxd' is listed:
+This will return a list of all the controllers known to your Juju client.
+Below, we have a controller named 'lxd':
 
 ```no-highlight
 Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
@@ -71,7 +106,7 @@ Model:       default
 User:        admin
 ```
 
-## Deploying an application
+### Deploying an application
 
 Applications are contained within models and are installed via *charms*. By
 default, charms are downloaded from the online [Charm Store][charm-store]
@@ -86,7 +121,7 @@ juju deploy redis
 This causes a similarly-named application ("redis") to be installed on a
 newly-created machine within the backing cloud.
 
-## Adding a model
+### Adding a model
 
 To create a model, named 'alpha', in the currently active controller:
 
@@ -97,7 +132,7 @@ juju add-model alpha
 By default, when a model is created the currently active model becomes the new
 model.
 
-## Changing models
+### Changing models
 
 To manually change to a different model, say the original 'default' model:
 
@@ -105,7 +140,7 @@ To manually change to a different model, say the original 'default' model:
 juju switch default
 ```
 
-## Adding a machine
+### Adding a machine
 
 To request that machine be created that is devoid of an application:
 
@@ -116,7 +151,7 @@ juju add-machine -m alpha -n 2
 Here we've used the `-m` option to explicitly select a model (i.e. we don't
 want the currently active model, which at this time is 'default').
 
-## Listing machines
+### Listing machines
 
 To change context to model 'alpha' and then list the model's machines:
 
@@ -133,7 +168,7 @@ Machine  State    DNS            Inst id        Series  AZ  Message
 1        started  10.243.67.53   juju-ded876-1  bionic      Running
 ```
 
-## Deploying to a LXD container
+### Deploying to a LXD container
 
 To deploy 'apache2' to a new LXD container on existing machine '0':
 
@@ -148,16 +183,16 @@ a charm upon on. To deploy 'mongodb' on the second available machine ('1'):
 juju deploy mongodb
 ```
 
-## Scaling up an application
+### Scaling up an application
 
-To scale out the 'apache2' application by creating one more instantiation
-(*units*) of it on a new machine:
+To scale out the 'apache2' application by creating one or more instantiations
+(*units*) of it on new machines:
 
 ```bash
 juju add-unit -n 1 apache2
 ```
 
-## Viewing the model status
+### Viewing the model status
 
 The `status` command is one that you'll use often. It gives current information
 for a given model.
@@ -191,7 +226,7 @@ Machine  State    DNS            Inst id              Series  AZ  Message
 Note that the `machines` command output is a subset of the `status` command
 output.
 
-## Inspecting the logs
+### Inspecting the logs
 
 Juju logs are inspected on a per-model basis using a specific utility.
 
@@ -204,7 +239,7 @@ juju debug-log -m alpha
 There are a number of ways to configure the behaviour of the `debug-log`
 command.
 
-## Connecting to a machine via SSH
+### Connecting to a machine via SSH
 
 The system user who created the controller (`bootstrap` command) will
 automatically have SSH access to all machines in the original two default
@@ -223,23 +258,42 @@ This command will always get you to the controller machine:
 juju ssh -m controller 0
 ```
 
-## Removing an application
+### Removing an application
 
-To remove the 'apache2' application, including all instantiations, along with
-its associated machines (provided they are not hosting another application's
-units).
+To remove the 'apache2' application, including all units, along with associated
+machines (provided they are not hosting another application's units).
 
 ```bash
 juju remove-application apache2
 ```
 
-## Removing a machine
+### Removing a unit
+
+To remove just a single unit, such as 'apache2/1':
 
 ```bash
-juju remove-machine ??
+juju remove-unit apache2/1
 ```
 
-## Destroying a model
+Like the `remove-application` command, this command will also remove the
+machine if it is now devoid of units.
+
+### Removing a machine
+
+To remove the machine whose ID is '1':
+
+```bash
+juju remove-machine 1
+```
+
+Note that it is not possible to remove a machine (without the `--force` option)
+that is hosting a unit. An error will be emitted:
+
+```no-highlight
+removing machine 1 failed: machine 1 has unit "mongodb/0" assigned
+```
+
+### Destroying a model
 
 Removing a model is a quick way to remove all applications and machines
 within that model. Begin anew with the creation of a new one.
@@ -250,7 +304,7 @@ To destroy the model called 'alpha':
 juju destroy-model alpha
 ```
 
-## Destroying a controller
+### Destroying a controller
 
 When a controller is destroyed, all its models, applications, and machines are
 as well.
@@ -263,28 +317,23 @@ juju destroy-controller lxd
 
 ## Next steps
 
-At this point, we suggest delving into the conceptual world of Juju. Consider
-the following pages:
+Based on the material covered in this tutorial, we suggest looking at the
+following documentation pages:
 
  - [Concepts and terms][concepts]
- - [Controllers][controllers]
- - [Models][models]
- - [Client][client]
- - [Charms][charms]
+ - [Deploying applications][charms-deploying]
  - [Juju logs][troubleshooting-logs]
  - [Machine authentication][machine-auth]
-
+ - [Removing things][charms-destroy]
 
 <!-- LINKS -->
 
 [clouds-lxd]: ./clouds-lxd.md
 [charm-store]: https://jujucharms.com
 [install]: ./reference-install.md
-[controllers]: ./controllers.md
 [clouds]: ./clouds.md
-[models]: ./models.md
-[client]: ./client.md
-[charms]: ./charms.md
 [concepts]: ./juju-concepts.md
+[charms-deploying]: ./charms-deploying.md
 [troubleshooting-logs]: ./troubleshooting-logs.md
 [machine-auth]: ./machine-auth.md
+[charms-destroy]: ./charms-destroy.md
