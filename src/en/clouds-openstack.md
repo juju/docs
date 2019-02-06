@@ -4,9 +4,9 @@ TODO:  Review required (use style from the other cloud pages)
 
 # Using OpenStack with Juju
 
-Although Juju doesn't have baked-in knowledge of *your* OpenStack cloud, it
-does know how such clouds work in general. We just need to provide some
-information to add it to the list of known clouds.
+Although Juju doesn't have baked-in knowledge of your OpenStack cloud, it does
+know how such clouds work in general. We just need to provide some information
+to add it to the list of known clouds.
 
 ## Image metadata
 
@@ -129,7 +129,7 @@ account.
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 In order to access OpenStack, you will need to add credentials to Juju. This
