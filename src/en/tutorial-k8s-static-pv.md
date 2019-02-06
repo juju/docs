@@ -19,14 +19,14 @@ Note that static volumes are dependent upon the Kubernetes
 worker node cluster. The '[kubernetes-core][charm-kc]' bundle provides this and
 that's we'll be using here.
 
-## Pre-requisites
+## Prerequisites
 
-The following criteria are assumed:
+The following prerequisites are assumed as a starting point for this tutorial:
 
- - that you're using Ubuntu 18.04 LTS
- - that Juju (stable snap channel) is installed. See the
-   [Installing Juju][install] page.
- - that a credential for the 'aws' cloud has been added to Juju. See the
+ - You're using Ubuntu 18.04 LTS.
+ - Juju (stable snap channel) is installed. See the [Installing Juju][install]
+   page.
+ - A credential for the 'aws' cloud has been added to Juju. See the
    [Using Amazon AWS with Juju][clouds-aws] page.
 
 ## Installing Kubernetes
