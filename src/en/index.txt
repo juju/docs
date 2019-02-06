@@ -148,8 +148,8 @@ troubleshooting-upgrade.md
 troubleshooting.md
 tut-charms.md
 tut-google.md
-tut-lxd.md
 tut-users.md
+tutorial-client-basic.md
 tutorial-k8s-aws.md
 tutorial-k8s-static-pv.md
 tutorial-microk8s.md
