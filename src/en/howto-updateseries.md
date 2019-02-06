@@ -61,7 +61,7 @@ on machine '1' will be used. The series will be updated from 'trusty' to
 First, for every application, specify the new series:
 
 ```bash
-juju set-series ghost xenial
+juju update-series ghost xenial
 ```
 
 Then add a new unit of the application to replace each existing unit and remove
@@ -100,7 +100,7 @@ manually and update the agent data, as shown here:
 Let Juju know what series should be used for any new units of the application:
 
 ```bash
-juju set-series ghost xenial
+juju update-series ghost xenial
 ```
 
 #### Upgrade the existing machine
@@ -165,7 +165,7 @@ Once all machines and agents have been updated we need to inform Juju of this
 fact. Here we refer to our example machine with an ID of '1':
 
 ```bash
-juju set-series 1 xenial
+juju update-series 1 xenial
 ```
 
 
