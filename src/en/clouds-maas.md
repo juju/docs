@@ -11,7 +11,7 @@ treats cloud instances.
 
 ## Adding a MAAS cloud
 
-Use the interactive `add-cloud` command to add your MAAS cloud to Juju's list
+Use the `add-cloud` command to interactively add your MAAS cloud to Juju's list
 of clouds. You will need to supply a name you wish to call your cloud and the
 unique MAAS API endpoint.
 
@@ -105,8 +105,8 @@ juju add-cloud prodmaas maas-clouds.yaml
 The [Credentials][credentials] page offers a full treatment of credential
 management.
 
-Use the interactive `add-credential` command to add your credentials to the new
-cloud:
+Use the `add-credential` command to interactively add your credentials to the
+new cloud:
 
 ```bash
 juju add-credential maas-cloud
