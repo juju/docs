@@ -322,7 +322,7 @@ removing machine 1 failed: machine 1 has unit "mongodb/0" assigned
 
 ### Destroying a model
 
-Removing a model is a quick way to remove all applications and machines
+Destroying a model is a quick way to remove all applications and machines
 within that model. Begin anew with the creation of a new one.
 
 To destroy the model called 'alpha':
