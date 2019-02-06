@@ -4,8 +4,8 @@ TODO:  Remote logging: strongly consider adding a sub-page (rsyslog TLS tutorial
 
 # Juju logs
 
-There are various logging resources available to the Juju operator. This page will
-explain these and show how to use them. It will cover:
+There are various logging resources available to the Juju operator. This page
+will explain these and show how to use them. It will cover:
 
  - [Model logs][#model-logs]
  - [Remote logging][#remote-logging]
@@ -14,7 +14,7 @@ explain these and show how to use them. It will cover:
 ## Model logs
 
 Model logs can be considered as Juju's "regular logs" and are intended to be
-inspected with the `juju debug-log` command. This method provides logs on a
+inspected with the `debug-log` command. This method provides logs on a
 per-model basis and is therefore more convenient than reading individual logs
 on multiple (Juju) machines directly on the file system. The latter can
 nonetheless be done in exceptional circumstances and some explanation is
@@ -40,8 +40,8 @@ drwxr-xr-x 2 root root 4.0K Apr 28 00:42 machine-2
 drwxr-xr-x 4 root root 4.0K Apr 28 00:42 unit-nfs2-0
 ```
 
-So there are two agents running on this Juju machine. One for the machine
-itself and one for a service unit.
+So there are two agents running on this machine. One for the machine itself and
+one for a service unit.
 
 The contents of one of these directories
 
@@ -60,10 +60,10 @@ agents. See [Upgrading models][models-upgrade].
 
 ### The debug-log command
 
-The `juju debug-log` command shows the consolidated logs of all Juju agents
-(machines and units) running in a model. The `juju switch` command is used
-to change models. Alternatively, a model can be chosen with the '-m' option.
-The default model is the current model.
+The `debug-log` command shows the consolidated logs of all Juju agents
+(machines and units) running in a model. The `switch` command is used to change
+models. Alternatively, a model can be chosen with the '-m' option. The default
+model is the current model.
 
 The 'controller' model captures logs related to internal management (controller
 activity) such as adding machines and services to the database. Whereas a
@@ -71,7 +71,7 @@ hosted model will provide logs concerning activities that take place post-
 provisioning.
 
 Due to the above, when deploying a service, it is normal for there to be an
-absence of logging in the hosted model since logging first takes place in the
+absence of logging in the workload model since logging first takes place in the
 'controller' model.
 
 The output is a fixed number of existing log lines (number specified by
@@ -82,8 +82,7 @@ The exception to the streaming is when limiting the output (option '--limit';
 see below) and that limit is attained. In all other cases the command will need
 to be interrupted with 'Ctrl-C' in order to regain the shell prompt.
 
-For complete syntax, see the [Command reference][commands] page. The `juju help
-debug-log` command also provides reminders and more examples.
+For complete syntax, see the [Command reference][commands] page.
 
 #### Examples:
 
