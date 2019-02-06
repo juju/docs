@@ -25,33 +25,32 @@ low resource usage. Choose a local LXD cloud if you're not sure what to use
 
 ## Command prefixes and aliases
 
-As you gain more experience with the client, you will encounter command
-prefixes whose meanings may not be immediately apparent.
+As you gain more experience with the client, you will discover a common set of
+command prefixes: `add-`, `create-`, `destroy-`, `get-`, `list-`, `remove-`,
+`set-`, and `show-`.
 
-A good example of this are the `destroy-` and `remove-` prefixes, such as in
-the commands `destroy-model` and `remove-user`. These two prefixes differ in
-terms of severity. Generally speaking, `destroy-` indicates a destructive
-action that is difficult to reverse whereas `remove-` does not.
+Generally their meanings are self-evident but some require explanation. A good
+example of this are the `destroy-` and `remove-` prefixes, such as in the
+commands `destroy-model` and `remove-user`. These two prefixes differ in terms
+of severity. Basically, `destroy-` indicates a destructive action that is
+difficult to reverse whereas `remove-` does not.
 
-There is an even more drastic-sounding "remove" prefix: `kill-`, but it is
-featured in a sole command: `kill-controller`. The latter command differs
-from `destroy-controller` in that it has the ability to terminate the
-controller machine directly via the cloud provider, without cleaning up any
-machines that may be running in workload models.
+There is a `kill-` prefix but it is reserved for a single command:
+`kill-controller`. The latter differs from `destroy-controller` in that it has
+the ability to terminate the controller machine directly via the cloud
+provider, without cleaning up any machines that may be running in workload
+models.
 
-The `show-` prefix is used to drill down into an object to reveal details. It
-is akin to the verb "describe".
-
-There are command aliases, that typically employ a prefix, that point to their
-corresponding commands. This practice is for simplifying the life of the
-operator. The `list-` alias/prefix is a good example, where `list-clouds`
-points to `clouds`.
-
-The list of aliases can be obtained in this way:
+The `list-` prefix can often be omitted as there is usually a corresponding
+command alias available. For instance, `clouds` can be used instead of
+`list-clouds`. The list of aliases can be obtained in this way:
 
 ```bash
 juju help commands | grep Alias
 ```
+
+The `show-` prefix is used to drill down into an object to reveal details. It
+is akin to the verb "describe".
 
 ## Fundamental commands
 
@@ -120,8 +119,13 @@ To deploy a charm, such as 'redis', in the currently active model:
 juju deploy redis
 ```
 
-This causes a similarly-named application ("redis") to be installed on a
-newly-created machine within the backing cloud.
+This results in an identically-named application ("redis") to be installed on a
+newly-created machine within the backing cloud. You can assign a custom name to
+the application by specifying that name as an argument:
+
+```bash
+juju deploy redis datastore
+```
 
 ### Adding a model
 
@@ -144,7 +148,7 @@ juju switch default
 
 ### Adding a machine
 
-To request that machine be created that is devoid of an application:
+To request that two machines be created that are devoid of an application:
 
 ```bash
 juju add-machine -m alpha -n 2
@@ -187,12 +191,15 @@ juju deploy mongodb
 
 ### Scaling up an application
 
-To scale out the 'apache2' application by creating one or more instantiations
-(*units*) of it on new machines:
+To scale out the 'apache2' application by creating another instantiation
+(*unit*) of it on a new machine:
 
 ```bash
-juju add-unit -n 1 apache2
+juju add-unit apache2
 ```
+
+Like the `add-machine` command, the `-n` option is available if multiple units
+are desired.
 
 ### Viewing the model status
 
@@ -229,10 +236,9 @@ The output is broken up into four sections.
 
 The **top** section mentions basic information such as the names of the current
 model and controller ('alpha' and 'lxd' respectively), followed by the cloud
-name ('localhost'), what version is running on the agents in the current model,
-whether Juju is being used in a third-party context (see
-[Managed solutions][experts-sla]) and finally the timestamp of the current
-controller.
+name ('localhost'), what version of Juju the model is running, whether Juju is
+being used in a third-party context (see [Managed solutions][experts-sla]), and
+finally, the timestamp of the current controller.
 
 The **App** section contains information at the application level. It is
 closely related to the providence of an application's charm. The 'Scale' tells
@@ -313,12 +319,9 @@ To remove the machine whose ID is '1':
 juju remove-machine 1
 ```
 
-Note that it is not possible to remove a machine (without the `--force` option)
-that is hosting a unit. An error will be emitted:
-
-```no-highlight
-removing machine 1 failed: machine 1 has unit "mongodb/0" assigned
-```
+As a safety precaution, a machine cannot be removed if it is hosting a unit.
+Either remove all of its units first or, as a last resort, use the `--force`
+option.
 
 ### Destroying a model
 
@@ -344,8 +347,8 @@ juju destroy-controller lxd
 
 ## Next steps
 
-Based on the material covered in this tutorial, we suggest looking at the
-following documentation pages:
+Based on the material covered in this tutorial, we suggest the following for
+further reading:
 
  - [Concepts and terms][concepts]
  - [Deploying applications][charms-deploying]

@@ -32,17 +32,13 @@ homepage: true
                 </ul>
             </div>
             <div class="col-6">
-                <h2>Explore Juju</h2>
+                <h2>Doc updates</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/2.5/en/multiuser">Working with multiple users&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item">Understanding&nbsp;
-		        <a href="/2.5/en/controllers">controllers</a>,&nbsp;
-		        <a href="/2.5/en/models">models</a>,&nbsp;and&nbsp;the&nbsp;Juju&nbsp;
-		        <a href="/2.5/en/client">client</a>&nbsp;&rsaquo;
-		    </li>
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.5/en/tutorial-client-basic">Basic client usage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.5/en/tutorial-k8s-aws">Using the aws-integrator charm&nbsp;&rsaquo;</a></li>
                     <li class="p-list__item"><a href="/2.5/en/tutorial-multiuser-basic">Multi-user basic setup&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.5/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/2.5/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
