@@ -296,7 +296,7 @@ juju deploy wiki-simple --overlay ~/model-a/wiki-simple.yaml
 ```
 
 Tutorial [Using the aws-integrator charm][tutorial-k8s-aws] provides an
-example of an "overlay" is used.
+example of how an "overlay" is used.
 
 ### Bundle placement directives
 
