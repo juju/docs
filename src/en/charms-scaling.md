@@ -7,8 +7,8 @@ TODO:  More direction ito how users discover "built-in scaling" (e.g. the store 
 The capability of a service to adjust its resource footprint to a level
 appropriate for fulfilling client demands placed upon it is known as
 *scalability*. Scaling *vertically* affects the resources of existing machines
-(memory, CPU, disk space) whereas scaling *horizontally* involves the number of
-application units available.
+(memory, CPU, disk space) whereas scaling *horizontally*, in Juju, involves the
+number of application units available.
 
 Units are not always synonymous with machines however. Multiple units can be
 placed onto a single machine (co-location) and still be considered horizontal
