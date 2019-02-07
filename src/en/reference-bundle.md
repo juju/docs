@@ -2,46 +2,121 @@ Title: Bundle reference
 
 # Bundle reference
 
- Comments start with a hash
-# There are six top level
+A bundle is defined by a [YAML-formatted][yaml] file with a fixed set of
+elements. This document will present and define these elements. See page
+[Charm bundles][charms-bundles] for an overview of bundle usage.
+
+In this document, comments (lines that begin with a '#' character) are used to
+explain various parts of the file. In addition, any line that is not a comment
+should be considered as an example. If such a line is duplicated it is for the
+purposes of showing another example. Do not duplicate lines in a real bundle
+file.
+
+There are six top level elements:
+
+`description`  
+`series`  
+`tags`  
+`applications`  
+`machines`  
+`relations`
+
+Some of these are simple key:value pairs while others contain nested
+configuration.
+
+```no-highlight
+#
+# description: <string>
+#
+# Optional
+#
+# Provides a description for the bundle. Visible in the Charm Store only.
+#
+
+description: This is a test bundle.
+
+description: |
+
+  This description is long and has multiple lines. Use the vertical bar as
+  shown in this example.
 
 #
 # series: <string>
 #
 # Optional
 #
-# It sets the default series for any machine or application that does not have
-# a series set explicitly in some other way.
+# Sets the default series for any machine or application in the bundle that
+# does not have a series set explicitly via a charm URL (see 'charm' under
+# 'applications').
 #
 
 series: bionic
 
 #
-# description: <string>
+# tags: [<comma delimited list of strings>]
 #
-# description is used primarily for information purposes and shown in
-# the charm store, and isn't currently shown anywhere in Juju once
-# the bundle is deployed
+# Optional
+#
+# Sets descriptive tags. A tag is used for organisational purposes in the
+# Charm Store. See https://docs.jujucharms.com/authors-charm-metadata for the
+# list of valid tags.
+#
 
-description: This bundle does something very cool
+tags: [monitoring]
 
-# tags: (list of strings)
-# tags are again used just for the charmstore, and I believe that these
-# items are a particular curated list that is understood by the
-# charmstore, but I'm not entirely sure. The examples here just show how
-# multiple values would look, not actual useful tags.
 tags: [database, utility]
-# tags: [one-item]
 
-# applications: (map of string to application data)
-# The application data is a nested structure, which I'll document by
-# example. The key value is used as the name of the application.
+#
+# applications:
+#
+# Required
+#
+# The top level of a nested structure containing application data. Immediately
+# below is an overview of this structure. It is followed by a detailed
+# breakdown of the various elements.
+#
+# applications:
+#   <application name>
+#     charm: <string>
+#     series: <string>
+#     resources:
+#       <charm key>: <value>
+#     num_units: <integer>
+#     to: <string>
+#     expose: <boolean>
+#     options:
+#       <charm key>: <value>
+#       <charm key>: <value>
+#     annotations:
+#       gui-x: <integer>
+#       gui-y: <integer>
+#     constraints: <list of standard constraints>
+#     storage:
+#       <charm key>: <list of storage constraints>
+#     devices:
+#       <charm key>: <list of device constraints> ?
+#     bindings:
+#       <charm key>: <list of device constraints> ?
+#     plan: <string>
+#
+
 applications:
+
+  #
+  # <application name>
+  #
+  # Sets the name of the application. It is typically the same as the charm
+  # name.
+  #
+  
   easyrsa:
+
     # charm: (string)
     # This is required, and should be a fully qualify charm URI for
     # public bundles. This means it has the -<revid> at the end of the
     # charm name.
+    #
+
     charm: cs:~containers/easyrsa-195
 
     # series: (string) - optional
@@ -102,52 +177,83 @@ applications:
     #     specified unit is in a container, then the container is
     #     created on the same host, so the units become siblings.
 
-    # expose: (boolean) - optional
-    # If true the application is exposed.
+    #
+    # expose: <boolean>
+    #
+    # Optional
+    #
+    # A value of 'true' exposes the application. Default: 'false'.
+    #
+
     expose: true
 
-    # options: (map of string to value)
+    #
+    # options:
+    #
     # This is charm config specified for the application. The keys and
     # values correspond to the config specified by the charm.
+    #
+
     options:
        key: value-1
        other: 23.4
 
+    #
     # annotations: (map of string to string)
     # All application have annotations which are almost always hidden
     # from the user. The GUI uses this to store x,y coordinates for the
     # location of the application on the canvas. Not much else uses
     # annotations at this stage, and there is no CLI to set or read
     # them.
+    #
+
     annotations:
       gui-x: '450'
       gui-y: '550'
 
+    #
     # constraints: (string)
     # if specified, the value needs to be a valid constraints string.
     # Any constraints specified here are saved with the application so
     # additional units added later use the same constraints
-    constraints: root-disk=8G
+    #
 
+    constraints: root-disk=8G
+    constraints: cores=4 mem=4G root-disk=16G
+
+    #
     # storage: (map string to string)
+    #
+
     storage:
       database: ebs,10G,1
 
+    #
     # devices: (map string to string)
     # Also Ian for more details.
+    #
 
+    #
     # bindings: (map string to string)
     # Maps how relation endpoints are mapped to spaces.
     # This is used to limit certain relations to certain underly network
     # devices. Only really makes sense in environments where machines
     # have multiple network devices. Like deploying openstack on MAAS.
     # Definitely advanced usage.
+    #
 
-    # plan: (string)
-    # This is new to me and probably Casey Marshall is the right person
-    # to get plan information.
+    #
+    # plan: <string>
+    #
+    # This is for third-party Juju support only. It sets the Managed Solutions
+    # plan for the application. The string has the format
+    # <reseller-name>/<plan name>. The plan name of 'default' can be used and
+    # is set by the reseller.
+    #
 
+#
 # machines: (map of string to machine data)
+#
 # I'll also document the machine doc by example. The keys while strings
 # are actually the machine IDs, which are numbers.
 # Only top level machines can be specified this way, no containers.
@@ -161,19 +267,29 @@ machines:
      # Machines can have constraints, annotations, and series keys.
      # They have the same meanings as the application ones.
 
-# relations: (list of list of strings)
-# The relations specify the relations to add between applications.
-# Each top level list value is a relation, and that top level item
-# is to be another list of two string values.
-# The applications specified in the relations must be defined in the
-# applications section.
-# The string values identify <application>:<relation name>.
-# The relation name isn't strictly necessary if juju can determine
-# which endpoint to use itself. However it is best practice to be
-# explicit in bundles and specify the relation name for both ends
-# of the relation.
+#
+# relations:
+#
+# Required
+#
+# States the relations to add between applications. Each relation consists of
+# two adjacent lines, where double and single dashes are used to distinguish
+# between neighbouring relations. Eache side of a relation (each line) has the
+# format '<application>:<endpoint>', where 'application' must be found under
+# the 'applications' element in this bundle file. Including 'endpoint' is not
+# stricly necessary as it might be determined automatically. However, it is
+# best practice to do so.
+#
+
 relations:
 - - kubernetes-master:kube-api-endpoint
   - kubeapi-load-balancer:apiserver
 - - kubernetes-master:loadbalancer
   - kubeapi-load-balancer:loadbalancer
+```
+
+
+<!-- LINKS -->
+
+[charms-bundles]: ./charms-bundles.md
+[yaml]: http://www.yaml.org/spec/1.2/spec.html
