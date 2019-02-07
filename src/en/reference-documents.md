@@ -3,7 +3,8 @@ Title: Reference documents
 # Reference documents
 
  - [Release notes][release-notes]
- - [Juju commands][commands]
+ - [Command reference][commands]
+ - [Bundle reference][reference-bundle]
  - [Juju constraints][reference-constraints]
  - [Juju charm hooks][reference-charm-hooks]
  - [Juju environment variables][reference-environment-variables]
@@ -17,6 +18,7 @@ Title: Reference documents
 
 [release-notes]: ./reference-release-notes.md
 [commands]: ./commands.md
+[reference-bundle]: ./reference-bundle.md
 [reference-constraints]: ./reference-constraints.md
 [reference-charm-hooks]: ./reference-charm-hooks.md
 [reference-environment-variables]: ./reference-environment-variables.md

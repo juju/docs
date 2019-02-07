@@ -1,6 +1,6 @@
-Title: Juju command reference
+Title: Command reference
 
-# Juju command reference
+# Command reference
 
 You can get a list of all Juju commands by invoking `juju help commands` in a
 terminal.
