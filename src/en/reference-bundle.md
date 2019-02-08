@@ -111,10 +111,13 @@ applications:
   
   easyrsa:
 
-    # charm: (string)
-    # This is required, and should be a fully qualify charm URI for
-    # public bundles. This means it has the -<revid> at the end of the
-    # charm name.
+    #
+    # charm: <string>
+    #
+    # Required
+    #
+    # A fully qualified charm URI should be used for public bundles. This means
+    # it has the -<revid> at the end of the charm name.
     #
 
     charm: cs:~containers/easyrsa-195
@@ -252,20 +255,24 @@ applications:
     #
 
 #
-# machines: (map of string to machine data)
+# machines:
 #
-# I'll also document the machine doc by example. The keys while strings
-# are actually the machine IDs, which are numbers.
-# Only top level machines can be specified this way, no containers.
-# Since the values are strings, they need to be quoted to disambiguate
-# the parsed value from an integer.
+# Optional
+#
+# Provides machines that have been targeted by the 'to' key under the
+# '<application name>' element. A machine is denoted by that same machine ID,
+# and must be quoted. Keys for 'constraints', 'annotations', and 'series' can
+# optionally be added to each machine. Containers are not valid machines in
+# this context.
+#
+
 machines:
-  # It is possible to specify a machine with no extra information by
-  # just leaving nothing after the :
   "1":
   "2":
-     # Machines can have constraints, annotations, and series keys.
-     # They have the same meanings as the application ones.
+    series: bionic
+    constraints: "cores=2 mem=2G"
+  "3":
+    constraints: "cores=3 root-disk=1T"
 
 #
 # relations:
@@ -275,8 +282,8 @@ machines:
 # States the relations to add between applications. Each relation consists of
 # two adjacent lines, where double and single dashes are used to distinguish
 # between neighbouring relations. Eache side of a relation (each line) has the
-# format '<application>:<endpoint>', where 'application' must be found under
-# the 'applications' element in this bundle file. Including 'endpoint' is not
+# format '<application>:<endpoint>', where 'application' must also be
+# represented under the 'applications' element. Including 'endpoint' is not
 # stricly necessary as it might be determined automatically. However, it is
 # best practice to do so.
 #
