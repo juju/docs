@@ -3,16 +3,36 @@ Title: Bundle reference
 # Bundle reference
 
 A bundle is defined by a [YAML-formatted][yaml] file with a fixed set of
-elements. This document will present and define these elements. See page
-[Charm bundles][charms-bundles] for an overview of bundle usage.
+elements. This document will define the properties allowed in such a file and
+give the format of expressing them by way of examples.
 
-In this document, comments (lines that begin with a '#' character) are used to
-explain various parts of the file. In addition, any line that is not a comment
-should be considered as an example. If such a line is duplicated it is for the
-purposes of showing another example. Do not duplicate lines in a real bundle
+A bundle file makes available a number of charm series settings. A section on
+how a charm's series is ultimately determined is therefore presented first.
+
+Page [Charm bundles][charms-bundles] gives an overview of bundle usage.
+
+## Charm series
+
+What series a charm will use can be influenced in several ways. Some of these
+are set within the bundle file while some are not. When using bundles, the
+series is determined using rules of precedence (most preferred to least):
+
+ - the series stated in a charm URL (see `charm` under the
+   `<application name>` element)
+ - the series stated for an application (see `series` under the
+   `<application name>` element)
+ - the series given by the top level `series` element
+ - the top-most series specified in a charm's `metadata.yaml` file
+
+## Bundle file properties and format
+
+Comments (lines that begin with a '#' character) are used to explain various
+parts of the file. In addition, any line that is not a comment should be
+considered as an example. If such a line is duplicated it is for the sole
+purpose of showing another example. Do not duplicate lines in a real bundle
 file.
 
-There are six top level elements:
+A bundle file has six top level elements:
 
 `description`  
 `series`  
@@ -41,9 +61,9 @@ description: |
 #
 # series: <string>
 #
-# Sets the default series for any machine or application in the bundle that
-# does not have a series set explicitly via a charm URL (see 'charm' under
-# 'applications'). Optional.
+# Sets the default series for all applications in the bundle. This also affects
+# machines devoid of applications. Optional. See 'Charm series' above for how a
+# final series is determined.
 #
 
 series: bionic
@@ -63,40 +83,13 @@ tags: [database, utility]
 #
 # applications:
 #
-# The top level of a nested structure containing application data. Immediately
-# below is an overview of this structure. It is followed by a detailed
-# breakdown of the various elements.
-#
-# applications:
-#   <application name>
-#     charm: <string>
-#     series: <string>
-#     resources:
-#       <charm key>: <value>
-#     num_units: <integer>
-#     to: <string>
-#     expose: <boolean>
-#     options:
-#       <charm key>: <value>
-#       <charm key>: <value>
-#     annotations:
-#       gui-x: <integer>
-#       gui-y: <integer>
-#     constraints: <space delimited list of strings>
-#     storage:
-#       <charm key>: <list of storage constraints>
-#     devices:
-#       <charm key>: <list of device constraints> ?
-#     bindings:
-#       <endpoint>: <network-space>
-#       <endpoint>: <network-space>
-#     plan: <string>
+# The top level of a nested structure containing application data.
 #
 
 applications:
 
   #
-  # <application name>
+  # <application name>:
   #
   # Sets the name of the application. It is typically the same as the charm
   # name.
@@ -107,78 +100,112 @@ applications:
     #
     # charm: <string>
     #
-    # States what charm to use. Use a fully qualified charm URI for public
-    # bundles. In particular, include the revision number by appending
-    # '-<revision-id>' to the charm name.
+    # States what charm to use for the application. A fully qualified charm URI
+    # should be used for public bundles. In particular, the revision number
+    # should be appended to the charm name (e.g. name-123). A series can
+    # specified within the URI. See 'Charm series' above for how a final series
+    # is determined.
     #
 
     charm: cs:~containers/easyrsa-195
 
+    charm: cs:xenial/easyrsa-195
+
     #
     # series: <string>
     #
-    # This series would define which series to use for deploying the
-    # application. The determination of the series actually used
-    # starts with this value, if not this one, the top level series
-    # should be used, if there isn't one there, the recommended series
-    # from the charm is used (the first in the list of supported series)
-    # if there isn't one there, the model default series is used.
+    # Sets the series for the application. Optional. See 'Charm series' above
+    # for how a final series is determined.
+    #
 
     series: bionic
 
-    # resources: (map of string to [int or string])
-    # The key in the map is the name of the resource defined by the
-    # charm. If the value is an integer it refers to the resource
-    # revision stored in the charmstore for the specified charm
-    # resource.
-    # If the value is a string, it is the path to a local file to
-    # upload as the resource for the application.
+    #
+    # resources: <map of string to [int or string]>
+    #
+    # States what charm resource to use. Optional. The keys are
+    # application-specific and are found within the corresponding charm's
+    # metadata.yaml file. To refer to the resource revision stored in the Charm
+    # Store an integer value is used. To refer to a local resource a string
+    # (file path) is used. For the latter, both absolute and relative (to the
+    # bundle file) paths are supported.
+    #
+
     resources:
       easyrsa: 5
-      # paths are relative to where the bundle file is
-      # easyrsa: ./relative/path/to/file
-      # easyrsa: /absolute/path/to/file
 
-    # num_units: (int)
-    # Specifies the number of units to deploy.
-    # There have long been arguments around whether we should treat a
-    # missing value as one or zero. Currently it is treated as zero.
-    # The reason we haven't made the default one is that subordinate
-    # charms cannot have any units added the normal way, and the code
-    # that pulls the bundle apart into actions doesn't have access to
-    # the charm internals, so can't know if the charm is a subordinate
-    # or not.
-    num_units: 1
+    resources:
+      easyrsa: ./relative/path/to/file
 
-    # to: (list of strings)
-    # This controls the placement of the specified number of units.
-    # The list can be up to <num_units> long, but not longer.
-    # The string value should match the regular-expression-like
-    # patthern:
-    #    (<containertype>:)?(<unit>|<application>|<machine>|new)
-    # Any specified application, machine or unit must be defined
-    # in the bundle.
-    # Here are the meanings of the values:
-    #  new - units are placed on new machines
-    #  <container>:new - units are placed inside a container on a
-    #      new machine (e.g.  lxd:new, kvm:new)
-    #  <machine> - place a unit on the specified machine. (e.g.  [1])
-    #     Note, the 1 doesn't have to be quoted as the list is parsed
-    #     as a list of strings, so it won't be identified as an integer.
-    #  <container>:<machine> - place the unit inside a new container of
-    #     the specified type on the specified machine (e.g. [lxd:1])
-    #  <unit> - place a unit next to the specified unit. The specified
-    #     unit must be a different application and not have a loop in
-    #     placement directives.
-    #  <container>:<unit> - put the unit in a container on the machine
-    #     that hosts the specified unit. Here is an edge case. If the
-    #     specified unit is in a container, then the container is
-    #     created on the same host, so the units become siblings.
+    resources:
+      easyrsa: /absolute/path/to/file
 
+    #
+    # num_units: <integer>
+    #
+    # Specifies the number of units to deploy. The default value is '0'. 
+    #
+
+    num_units: 2
+# Any specified unit, application, or machine must be defined in the
+    # bundle. 
+    #
+    # to: <comma separated list of strings>
+    #
+    # Dictates the placement (destination) of the deployed units. Optional. The
+    # list of destinations cannot be greater than the number of units requested
+    # (see 'numb_units' above). The possible values are given below (the
+    # examples assume 'num_units: 2'):
+    #
+    #  new
+    #     Units are placed on new machines. This is the default value.
+
+    to: new, new
+    
+    #  <machine>
+    #     Units are placed on existing machines, which are expressed by their
+    #     (unquoted) IDs.
+
+    to: 1, 2
+    
+    #  <unit>
+    #     Units are placed next to the specified unit, which must be of a
+    #     different application and must not create a loop in the placement
+    #     logic.
+
+    to: 1, new
+    
+    #  <application>
+    #     Units are placed inside a container on the machine that hosts the
+    #     specified unit. If the specified unit itself resides within a
+    #     container, then the resulting container becomes a peer of the other
+    #     (no nested containers).
+
+    to: 1, new
+    
+    #  <container-type>:new
+    #     Units are placed inside a container on a new machine. The value for
+    #     `<container-type>` can be either 'lxd' or 'kvm'.
+
+    to: 1, new
+    
+    #  <container-type>:<machine>
+    #     Units are placed inside a new container on an existing machine.
+
+    to: 1, new
+    
+    #  <container-type>:<unit>
+    #     Units are placed inside a container on the machine that hosts the
+    #     specified unit. If the specified unit itself resides within a
+    #     container, then the resulting container becomes a peer of the other
+    #     (no nested containers).
+
+    to: 1, new
+    
     #
     # expose: <boolean>
     #
-    # Exposes the applilcation. Default value is 'false'.
+    # Exposes the applilcation. The default value is 'false'.
     #
 
     expose: true
@@ -211,9 +238,8 @@ applications:
     # constraints: <space delimited list of strings>
     #
     # Sets constraints for the application. As per normal behaviour, these
-    # constraints become the application's default constraints (i.e. units
-    # added subsequent to bundle deployment will have these constraints
-    # applied.
+    # become the application's default constraints (i.e. units added subsequent
+    # to bundle deployment will have these constraints applied).
     #
 
     constraints: root-disk=8G
@@ -232,15 +258,14 @@ applications:
     #
 
     #
-    # bindings:
+    # bindings: <map of string to string>
     #
     # Maps endpoints to network spaces. Used to constrain relations to specific
-    # underlying network devices in environments where machines have multiple
-    # devices.
+    # subnets in environments where machines have multiple network devices.
     #
 
     bindings:
-      kube-api-endpoint: int
+      kube-api-endpoint: internal
       loadbalancer: dmz
     
     #
@@ -254,7 +279,7 @@ applications:
     plan: acme-support/default
 
 #
-# machines:
+# machines: <map of string to machine data>
 #
 # Provides machines that have been targeted by the 'to' key under the
 # '<application name>' element. A machine is denoted by that same machine ID,
@@ -271,8 +296,8 @@ machines:
   "3":
     constraints: cores=3 root-disk=1T
 
-#
-# relations:
+
+# relations: <list of list of strings>
 #
 # States the relations to add between applications. Each relation consists of a
 # pair of lines, where one line begins with double dashes and the other begins
