@@ -28,8 +28,6 @@ configuration.
 #
 # description: <string>
 #
-# Optional
-#
 # Provides a description for the bundle. Visible in the Charm Store only.
 #
 
@@ -43,11 +41,9 @@ description: |
 #
 # series: <string>
 #
-# Optional
-#
 # Sets the default series for any machine or application in the bundle that
 # does not have a series set explicitly via a charm URL (see 'charm' under
-# 'applications').
+# 'applications'). Optional.
 #
 
 series: bionic
@@ -55,11 +51,9 @@ series: bionic
 #
 # tags: [<comma delimited list of strings>]
 #
-# Optional
-#
 # Sets descriptive tags. A tag is used for organisational purposes in the
 # Charm Store. See https://docs.jujucharms.com/authors-charm-metadata for the
-# list of valid tags.
+# list of valid tags. Optional.
 #
 
 tags: [monitoring]
@@ -68,8 +62,6 @@ tags: [database, utility]
 
 #
 # applications:
-#
-# Required
 #
 # The top level of a nested structure containing application data. Immediately
 # below is an overview of this structure. It is followed by a detailed
@@ -90,13 +82,14 @@ tags: [database, utility]
 #     annotations:
 #       gui-x: <integer>
 #       gui-y: <integer>
-#     constraints: <list of standard constraints>
+#     constraints: <space delimited list of strings>
 #     storage:
 #       <charm key>: <list of storage constraints>
 #     devices:
 #       <charm key>: <list of device constraints> ?
 #     bindings:
-#       <charm key>: <list of device constraints> ?
+#       <endpoint>: <network-space>
+#       <endpoint>: <network-space>
 #     plan: <string>
 #
 
@@ -114,21 +107,23 @@ applications:
     #
     # charm: <string>
     #
-    # Required
-    #
-    # A fully qualified charm URI should be used for public bundles. This means
-    # it has the -<revid> at the end of the charm name.
+    # States what charm to use. Use a fully qualified charm URI for public
+    # bundles. In particular, include the revision number by appending
+    # '-<revision-id>' to the charm name.
     #
 
     charm: cs:~containers/easyrsa-195
 
-    # series: (string) - optional
+    #
+    # series: <string>
+    #
     # This series would define which series to use for deploying the
     # application. The determination of the series actually used
     # starts with this value, if not this one, the top level series
     # should be used, if there isn't one there, the recommended series
     # from the charm is used (the first in the list of supported series)
     # if there isn't one there, the model default series is used.
+
     series: bionic
 
     # resources: (map of string to [int or string])
@@ -183,81 +178,83 @@ applications:
     #
     # expose: <boolean>
     #
-    # Optional
-    #
-    # A value of 'true' exposes the application. Default: 'false'.
+    # Exposes the applilcation. Default value is 'false'.
     #
 
     expose: true
 
     #
-    # options:
+    # options: <map of string to string>
     #
-    # This is charm config specified for the application. The keys and
-    # values correspond to the config specified by the charm.
+    # Sets configuration options for the application. The keys are
+    # application-specific and are found within the corresponding charm's
+    # metadata.yaml file.
     #
 
     options:
-       key: value-1
-       other: 23.4
+       osd-devices: /dev/sdb
+       worker-multiplier: 0.25
 
     #
-    # annotations: (map of string to string)
-    # All application have annotations which are almost always hidden
-    # from the user. The GUI uses this to store x,y coordinates for the
-    # location of the application on the canvas. Not much else uses
-    # annotations at this stage, and there is no CLI to set or read
-    # them.
+    # annotations: <map of string to string>
+    #
+    # Affects the GUI only. It provides horizontal and vertical placement of
+    # the application's icon on the GUI's canvas. Annotations are expressed in
+    # terms of 'x' and 'y' coordinates.
     #
 
     annotations:
-      gui-x: '450'
-      gui-y: '550'
+      gui-x: 450
+      gui-y: 550
 
     #
-    # constraints: (string)
-    # if specified, the value needs to be a valid constraints string.
-    # Any constraints specified here are saved with the application so
-    # additional units added later use the same constraints
+    # constraints: <space delimited list of strings>
+    #
+    # Sets constraints for the application. As per normal behaviour, these
+    # constraints become the application's default constraints (i.e. units
+    # added subsequent to bundle deployment will have these constraints
+    # applied.
     #
 
     constraints: root-disk=8G
+
     constraints: cores=4 mem=4G root-disk=16G
 
     #
-    # storage: (map string to string)
+    # storage:
     #
 
     storage:
       database: ebs,10G,1
 
     #
-    # devices: (map string to string)
-    # Also Ian for more details.
+    # devices:
     #
 
     #
-    # bindings: (map string to string)
-    # Maps how relation endpoints are mapped to spaces.
-    # This is used to limit certain relations to certain underly network
-    # devices. Only really makes sense in environments where machines
-    # have multiple network devices. Like deploying openstack on MAAS.
-    # Definitely advanced usage.
+    # bindings:
+    #
+    # Maps endpoints to network spaces. Used to constrain relations to specific
+    # underlying network devices in environments where machines have multiple
+    # devices.
     #
 
+    bindings:
+      kube-api-endpoint: int
+      loadbalancer: dmz
+    
     #
     # plan: <string>
     #
-    # This is for third-party Juju support only. It sets the Managed Solutions
-    # plan for the application. The string has the format
-    # <reseller-name>/<plan name>. The plan name of 'default' can be used and
-    # is set by the reseller.
+    # This is for third-party Juju support only. It sets the "managed
+    # solutions" plan for the application. The string has the format
+    # '<reseller-name>/<plan name>'.
     #
+
+    plan: acme-support/default
 
 #
 # machines:
-#
-# Optional
 #
 # Provides machines that have been targeted by the 'to' key under the
 # '<application name>' element. A machine is denoted by that same machine ID,
@@ -270,22 +267,20 @@ machines:
   "1":
   "2":
     series: bionic
-    constraints: "cores=2 mem=2G"
+    constraints: cores=2 mem=2G
   "3":
-    constraints: "cores=3 root-disk=1T"
+    constraints: cores=3 root-disk=1T
 
 #
 # relations:
 #
-# Required
-#
-# States the relations to add between applications. Each relation consists of
-# two adjacent lines, where double and single dashes are used to distinguish
-# between neighbouring relations. Eache side of a relation (each line) has the
-# format '<application>:<endpoint>', where 'application' must also be
-# represented under the 'applications' element. Including 'endpoint' is not
-# stricly necessary as it might be determined automatically. However, it is
-# best practice to do so.
+# States the relations to add between applications. Each relation consists of a
+# pair of lines, where one line begins with double dashes and the other begins
+# with a single dash. Eache side of a relation (each line) has the format
+# '<application>:<endpoint>', where 'application' must also be represented
+# under the 'applications' element. Including 'endpoint' is not stricly
+# necessary as it might be determined automatically. However, it is best
+# practice to do so.
 #
 
 relations:
