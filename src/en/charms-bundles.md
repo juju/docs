@@ -476,8 +476,8 @@ controller is unable to contact the Charm Store.
 ### Setting up subordinate charms
 
 To set up a subordinate charm simply do not use the placement key `to` and do
-not specify any units with the `num_units` key. The vital part with
-subordinates is to create the relation between it and the principle charm under
+not specify any units with the `num_units` key. The vital part with a
+subordinate is to create the relation between it and the principle charm under
 the `relations` element.
 
 ## Comparing a bundle to a model
