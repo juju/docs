@@ -1,4 +1,4 @@
-Title: General configuration options
+Title: Configuring models
 TODO: Check accuracy of key table
       Confirm 'all' harvest mode state. Seems it should be "'Dead' or
 	'Unknown'" OR "a combination of modes 'destroyed' and 'unknown'".
