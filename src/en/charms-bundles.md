@@ -1,5 +1,6 @@
 Title: Charm bundles
 TODO:  Check more complex bundles after the release of 2.0
+       Review with reference-bundle.md page in mind
 table_of_contents: True
 
 # Charm bundles

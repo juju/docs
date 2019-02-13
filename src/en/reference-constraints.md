@@ -42,9 +42,9 @@ For in-depth coverage and examples see the
     mega-/giga-/tera-/peta- bytes.
 
  - `root-disk`  
-    Disk space on the root drive. The value is MiB unless an optional suffix of
-    M/G/T/P is used per the `mem` constraint. Additional storage that may be
-    attached separately does not count towards this value.
+    Disk space on the root drive (MiB). An optional suffix of M/G/T/P is used
+    as per the `mem` constraint. Additional storage that may be attached
+    separately does not count towards this value.
 
  - `tags`  
     Comma-delimited tags assigned to the machine. Tags can be positive, 
