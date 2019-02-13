@@ -46,7 +46,7 @@ configuration.
 
 ```no-highlight
 #
-# description: <string>
+# description:
 #
 # Provides a description for the bundle. Visible in the Charm Store only.
 #
@@ -59,21 +59,21 @@ description: |
   shown in this example.
 
 #
-# series: <string>
+# series:
 #
 # Sets the default series for all applications in the bundle. This also affects
-# machines devoid of applications. Optional. See 'Charm series' above for how a
-# final series is determined.
+# machines devoid of applications. See 'Charm series' above for how a final
+# series is determined.
 #
 
 series: bionic
 
 #
-# tags: [<comma delimited list of strings>]
+# tags:
 #
 # Sets descriptive tags. A tag is used for organisational purposes in the
 # Charm Store. See https://docs.jujucharms.com/authors-charm-metadata for the
-# list of valid tags. Optional.
+# list of valid tags.
 #
 
 tags: [monitoring]
@@ -98,7 +98,7 @@ applications:
   easyrsa:
 
     #
-    # charm: <string>
+    # charm:
     #
     # States what charm to use for the application. A fully qualified charm URI
     # should be used for public bundles. In particular, the revision number
@@ -112,23 +112,23 @@ applications:
     charm: cs:xenial/easyrsa-195
 
     #
-    # series: <string>
+    # series:
     #
-    # Sets the series for the application. Optional. See 'Charm series' above
-    # for how a final series is determined.
+    # Sets the series for the application. See 'Charm series' above for how a
+    # final series is determined.
     #
 
     series: bionic
 
     #
-    # resources: <map of string to [int or string]>
+    # resources:
     #
-    # States what charm resource to use. Optional. The keys are
-    # application-specific and are found within the corresponding charm's
-    # metadata.yaml file. To refer to the resource revision stored in the Charm
-    # Store an integer value is used. To refer to a local resource a string
-    # (file path) is used. For the latter, both absolute and relative (to the
-    # bundle file) paths are supported.
+    # States what charm resource to use. The keys are application-specific and
+    # are found within the corresponding charm's metadata.yaml file. To refer
+    # to the resource revision stored in the Charm Store an integer value is
+    # used. To refer to a local resource a string (file path) is used. For the
+    # latter, both absolute and relative (to the bundle file) paths are
+    # supported.
     #
 
     resources:
@@ -141,77 +141,84 @@ applications:
       easyrsa: /absolute/path/to/file
 
     #
-    # num_units: <integer>
+    # num_units:
     #
     # Specifies the number of units to deploy. The default value is '0'. 
     #
 
     num_units: 2
-# Any specified unit, application, or machine must be defined in the
-    # bundle. 
+
     #
-    # to: <comma separated list of strings>
+    # to:
     #
-    # Dictates the placement (destination) of the deployed units. Optional. The
-    # list of destinations cannot be greater than the number of units requested
-    # (see 'numb_units' above). The possible values are given below (the
-    # examples assume 'num_units: 2'):
+    # Dictates the placement (destination) of the deployed units in terms of
+    # machines, applications, units, and containers that are defined elsewhere
+    # in the bundle. The number of destinations cannot be greater than the
+    # number of requested units (see 'numb_units' above). Zones are not
+    # supported; see the 'constraints' element instead. The value types are
+    # given below.
     #
     #  new
-    #     Units are placed on new machines. This is the default value.
-
-    to: new, new
-    
+    #     Unit is placed on a new machine. This is the default value type; it
+    #     does not require stating. This type also gets used if the number of
+    #     destinations is less than than 'num_units'.
+    #
     #  <machine>
-    #     Units are placed on existing machines, which are expressed by their
-    #     (unquoted) IDs.
-
-    to: 1, 2
-    
+    #     Unit is placed on an existing machine denoted by its (unquoted) ID.
+    #
     #  <unit>
-    #     Units are placed next to the specified unit, which must be of a
-    #     different application and must not create a loop in the placement
-    #     logic.
-
-    to: 1, new
-    
+    #     Unit is placed on the same machine as the specified unit. Doing so
+    #     must not create a loop in the placement logic. The specified unit
+    #     must be for an application that is different from the one being
+    #     placed. Example: ["django/0"] .
+    #
     #  <application>
-    #     Units are placed inside a container on the machine that hosts the
-    #     specified unit. If the specified unit itself resides within a
-    #     container, then the resulting container becomes a peer of the other
-    #     (no nested containers).
-
-    to: 1, new
-    
+    #     The application's existing units are iterated over in ascending
+    #     order, with each one being assigned as the destination for a unit to
+    #     be placed. New machines are used when 'num_units' is greater than the
+    #     number of available units. The same results can be had by stating the
+    #     units explictily with the 'unit' type above. Example: ["django"] .
+    #
     #  <container-type>:new
-    #     Units are placed inside a container on a new machine. The value for
-    #     `<container-type>` can be either 'lxd' or 'kvm'.
-
-    to: 1, new
-    
+    #     Unit is placed inside a container on a new machine. The value for
+    #     `<container-type>` can be either 'lxd' or 'kvm'. A new machine is the
+    #     default and does not require stating. Example: ["lxd:new"] or just
+    #     ["lxd"] .
+    #
     #  <container-type>:<machine>
-    #     Units are placed inside a new container on an existing machine.
-
-    to: 1, new
-    
+    #     Unit is placed inside a new container on an existing machine.
+    #     Example: ["lxd:2"] .
+    #
     #  <container-type>:<unit>
-    #     Units are placed inside a container on the machine that hosts the
+    #     Unit is placed inside a container on the machine that hosts the
     #     specified unit. If the specified unit itself resides within a
-    #     container, then the resulting container becomes a peer of the other
-    #     (no nested containers).
+    #     container, then the resulting container becomes a peer (sibling) of
+    #     the other (i.e. no nested containers). Example: ["lxd:glance/3"] .
+    #
 
-    to: 1, new
+    to: 3, new
     
+    to: ["django/0", "django/1", "django/2"]
+
+    to: ["django"]
+
+    to: ["lxd"]
+
+    to: ["lxd:2", "lxd:3"]
+
+    to: ["lxd:nova-compute/2", "lxd:glance/3"]
+
     #
-    # expose: <boolean>
+    # expose:
     #
-    # Exposes the applilcation. The default value is 'false'.
+    # Exposes the application using a boolean value. The default value is
+    # 'false'.
     #
 
     expose: true
 
     #
-    # options: <map of string to string>
+    # options:
     #
     # Sets configuration options for the application. The keys are
     # application-specific and are found within the corresponding charm's
@@ -219,11 +226,11 @@ applications:
     #
 
     options:
-       osd-devices: /dev/sdb
-       worker-multiplier: 0.25
+      osd-devices: /dev/sdb
+      worker-multiplier: 0.25
 
     #
-    # annotations: <map of string to string>
+    # annotations:
     #
     # Affects the GUI only. It provides horizontal and vertical placement of
     # the application's icon on the GUI's canvas. Annotations are expressed in
@@ -235,19 +242,27 @@ applications:
       gui-y: 550
 
     #
-    # constraints: <space delimited list of strings>
+    # constraints:
     #
-    # Sets constraints for the application. As per normal behaviour, these
-    # become the application's default constraints (i.e. units added subsequent
-    # to bundle deployment will have these constraints applied).
+    # Sets standard constraints for the application. As per normal behaviour,
+    # these become the application's default constraints (i.e. units added
+    # subsequent to bundle deployment will have these constraints applied).
     #
 
     constraints: root-disk=8G
 
     constraints: cores=4 mem=4G root-disk=16G
 
+    constraints: zones=us-east-1a
+
     #
     # storage:
+    #
+    # Sets storage constraints for the application. There are three such
+    # constraints: 'pool', 'size', and 'count'. The key (label) is
+    # application-specific and are found within the corresponding charm's
+    # metadata.yaml file. A value string is one that would be used in the
+    # argument to the `--storage` option for the `deploy` command.
     #
 
     storage:
@@ -256,9 +271,18 @@ applications:
     #
     # devices:
     #
-
+    # Sets GPU device constraints for the application in a Kubernetes model.
+    # The key (device name or label) and possible value (device type) are
+    # application-specific and are found within the corresponding charm's
+    # metadata.yaml file. A value string is one that would be used in the
+    # argument to the `--device` option for the `deploy` command.
     #
-    # bindings: <map of string to string>
+
+    devices:
+      miner=1,nvidia.com/gpu
+    
+    #
+    # bindings:
     #
     # Maps endpoints to network spaces. Used to constrain relations to specific
     # subnets in environments where machines have multiple network devices.
@@ -269,7 +293,7 @@ applications:
       loadbalancer: dmz
     
     #
-    # plan: <string>
+    # plan:
     #
     # This is for third-party Juju support only. It sets the "managed
     # solutions" plan for the application. The string has the format
@@ -279,7 +303,7 @@ applications:
     plan: acme-support/default
 
 #
-# machines: <map of string to machine data>
+# machines:
 #
 # Provides machines that have been targeted by the 'to' key under the
 # '<application name>' element. A machine is denoted by that same machine ID,
@@ -296,14 +320,14 @@ machines:
   "3":
     constraints: cores=3 root-disk=1T
 
-
-# relations: <list of list of strings>
+#
+# relations:
 #
 # States the relations to add between applications. Each relation consists of a
-# pair of lines, where one line begins with double dashes and the other begins
+# pair of lines, where one line begins with two dashes and the other begins
 # with a single dash. Eache side of a relation (each line) has the format
 # '<application>:<endpoint>', where 'application' must also be represented
-# under the 'applications' element. Including 'endpoint' is not stricly
+# under the 'applications' element. Including the endpoint is not stricly
 # necessary as it might be determined automatically. However, it is best
 # practice to do so.
 #
