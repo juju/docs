@@ -1,4 +1,4 @@
-Title: General configuration options
+Title: Configuring controllers
 TODO: Check accuracy of key table: https://github.com/juju/juju/blob/ec89c99e51fa83cd1a2cb5e5f24e73d5b096de20/controller/config.go#L29)
       Check accuracy of key table: https://github.com/juju/juju/provider/*/config.go 
       error: table's default value keys do not show up with controller-config (e.g. bootstrap-). See above note.

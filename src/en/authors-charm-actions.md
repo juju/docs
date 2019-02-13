@@ -1,6 +1,6 @@
 Title: Implementing actions in Juju charms  
 
-# Actions for the Charm author
+# Implementing actions in Juju charms
 
 Actions are scripts, binaries, or other executables defined on a charm which may
 be invoked or queued remotely by the user on demand.  For example, the Charm
