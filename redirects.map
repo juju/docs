@@ -47,3 +47,6 @@
 
 # Redirect clouds-LXD to clouds-lxd
 "~^/(?<version>[0-9-\._]+|devel)/en/clouds-LXD/?$" /${version}/en/clouds-lxd;
+
+# Redirect tut-lxd to clouds-lxd
+"~^/(?<version>[0-9-\._]+|devel)/en/tut-lxd/?$" /${version}/en/clouds-lxd;
