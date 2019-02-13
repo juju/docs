@@ -2,6 +2,8 @@ Title: Bundle reference
 
 # Bundle reference
 
+*This reference page applies to non-Kubernetes bundles only.*
+
 A bundle is defined by a [YAML-formatted][yaml] file with a fixed set of
 elements. This document will define the properties allowed in such a file and
 give the format of expressing them by way of examples.
@@ -17,12 +19,11 @@ What series a charm will use can be influenced in several ways. Some of these
 are set within the bundle file while some are not. When using bundles, the
 series is determined using rules of precedence (most preferred to least):
 
- - the series stated in a charm URL (see `charm` under the
-   `<application name>` element)
  - the series stated for an application (see `series` under the
    `<application name>` element)
  - the series given by the top level `series` element
  - the top-most series specified in a charm's `metadata.yaml` file
+ - the most recent LTS release
 
 ## Bundle file properties and format
 
@@ -102,14 +103,10 @@ applications:
     #
     # States what charm to use for the application. A fully qualified charm URI
     # should be used for public bundles. In particular, the revision number
-    # should be appended to the charm name (e.g. name-123). A series can
-    # specified within the URI. See 'Charm series' above for how a final series
-    # is determined.
+    # should be appended to the charm name (e.g. name-123).
     #
 
     charm: cs:~containers/easyrsa-195
-
-    charm: cs:xenial/easyrsa-195
 
     #
     # series:
@@ -166,45 +163,53 @@ applications:
     #  <machine>
     #     Unit is placed on an existing machine denoted by its (unquoted) ID.
     #
+
+    to: 3, new
+
+    #
     #  <unit>
     #     Unit is placed on the same machine as the specified unit. Doing so
     #     must not create a loop in the placement logic. The specified unit
     #     must be for an application that is different from the one being
-    #     placed. Example: ["django/0"] .
+    #     placed.
+    #
+    
+    to: ["django/0", "django/1", "django/2"]
+
     #
     #  <application>
     #     The application's existing units are iterated over in ascending
     #     order, with each one being assigned as the destination for a unit to
     #     be placed. New machines are used when 'num_units' is greater than the
-    #     number of available units. The same results can be had by stating the
-    #     units explictily with the 'unit' type above. Example: ["django"] .
+    #     number of available units. The same results can be obtained by
+    #     stating the units explictily with the 'unit' type above.
+    #
+
+    to: ["django"]
+
     #
     #  <container-type>:new
     #     Unit is placed inside a container on a new machine. The value for
     #     `<container-type>` can be either 'lxd' or 'kvm'. A new machine is the
-    #     default and does not require stating. Example: ["lxd:new"] or just
-    #     ["lxd"] .
+    #     default and does not require stating, so ["lxd:new"] or just ["lxd"].
+    #
+
+    to: ["lxd"]
+
     #
     #  <container-type>:<machine>
     #     Unit is placed inside a new container on an existing machine.
-    #     Example: ["lxd:2"] .
+    #
+
+    to: ["lxd:2", "lxd:3"]
+
     #
     #  <container-type>:<unit>
     #     Unit is placed inside a container on the machine that hosts the
     #     specified unit. If the specified unit itself resides within a
     #     container, then the resulting container becomes a peer (sibling) of
-    #     the other (i.e. no nested containers). Example: ["lxd:glance/3"] .
+    #     the other (i.e. no nested containers).
     #
-
-    to: 3, new
-    
-    to: ["django/0", "django/1", "django/2"]
-
-    to: ["django"]
-
-    to: ["lxd"]
-
-    to: ["lxd:2", "lxd:3"]
 
     to: ["lxd:nova-compute/2", "lxd:glance/3"]
 
@@ -268,19 +273,6 @@ applications:
     storage:
       database: ebs,10G,1
 
-    #
-    # devices:
-    #
-    # Sets GPU device constraints for the application in a Kubernetes model.
-    # The key (device name or label) and possible value (device type) are
-    # application-specific and are found within the corresponding charm's
-    # metadata.yaml file. A value string is one that would be used in the
-    # argument to the `--device` option for the `deploy` command.
-    #
-
-    devices:
-      miner=1,nvidia.com/gpu
-    
     #
     # bindings:
     #
