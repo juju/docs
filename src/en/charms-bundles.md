@@ -1,55 +1,51 @@
 Title: Charm bundles
-TODO:  Check more complex bundles after the release of 2.0
-       Review with reference-bundle.md page in mind
-table_of_contents: True
+TODO:  Give an example of setting up a subordinate
 
 # Charm bundles
 
 Although charms can be deployed in isolation, they are typically used alongside
 other charms in order to implement more complex solutions, whether it be as
-simple as MediaWiki and a database, or as complex as a full OpenStack cloud. A
+simple as MediaWiki and a database, or as complex as an OpenStack cloud. A
 charm bundle, or just *bundle*, is an encapsulation of such a compound
 deployment and includes all the associated relations and configurations that
 the deployment requires. A huge plus is that a bundle is installed exactly like
 a charm is: with the `deploy` command or via the GUI (see
 [Adding bundles with the GUI][charms-bundles-gui]).
 
+The [Bundle reference][reference-bundle] page provides the structure of a
+bundle file and defines all its properties.
+
 ## Inside a bundle
 
-A bundle is defined with a file in YAML format and is often called the "bundle
-file". Here is a bundle file with "charm definitions" for MySQL and WordPress
+Here is a simple bundle file that features the MySQL and WordPress applications
 with a relation between the two: 
 
 ```yaml
-series: xenial
 description: "A simple WordPress deployment."
+series: xenial
 applications:
   wordpress:
-    charm: "cs:trusty/wordpress-5"
+    charm: "cs:wordpress-5"
     num_units: 1
     annotations:
       "gui-x": "339.5"
       "gui-y": "-171"
-    to:
-      - "0"
+    to: 0
   mysql:
-    charm: "cs:trusty/mysql-57"
+    charm: "cs:mysql-57"
     num_units: 1
     annotations:
       "gui-x": "79.5"
       "gui-y": "-142"
-    to:
-      - "1"
+    to: 1
 relations:
   - - "wordpress:db"
     - "mysql:db"
 machines:
   "0":
-    series: trusty
-    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: cores=1 mem=1740 root-disk=8192
   "1":
-    series: trusty
-    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: cores=2 mem=2048 root-disk=8192
 ```
 
 ### Kubernetes bundles
@@ -69,7 +65,7 @@ For example:
 bundle: kubernetes
 applications:
   mariadb:
-    charm: cs:~wallyworld/mariadb-k8s
+    charm: cs:~juju/mariadb-k8s
     scale: 2
     constraints: mem=1G
     options:
@@ -77,7 +73,7 @@ applications:
     storage:
       database: 20M,mariadb-pv
   gitlab:
-    charm: cs:~wallyworld/gitlab-k8s
+    charm: cs:~juju/gitlab-k8s
     placement: foo=bar
     scale: 1
 relations:
@@ -128,60 +124,52 @@ exists). We'll see this in the [Creating bundles][#creating-bundles] section.
 
 ## Configuring bundles
 
-Below we present two ways in which existing bundles can be tweaked for your
+Below we present two ways in which existing bundles can be customised for your
 environment:
 
- * Setting charm constraints in a bundle
- * Setting charm configuration options in a bundle
+ - Setting application constraints
+ - Setting application configuration options
 
-### Setting charm constraints in a bundle
+### Setting application constraints
 
 To make a bundle as reusable as possible, it's common to set minimum
 constraints for its associated charms, much like you would when deploying
 charms from the command line. This is done by including a `constraints` field
 to a charm's definition.
 
-For example, to add memory and CPU constraints to the 'mysql' charm:
+For example, to add memory and CPU constraints to MySQL:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 1
-  constraints:
-    mem=2G
-    cores=4
+  constraints: mem=2G cores=4
   annotations:
     "gui-x": "139"
     "gui-y": "168"
 ```
 
-Here we show how to colocate applications along with constrained LXD containers
-on a single machine:
+Here we show how to co-locate applications along with constrained LXD
+containers on a single machine:
 
-```no-highlight
+```yaml
 applications:
   wordpress:
-    charm: "cs:trusty/wordpress-5"
+    charm: "cs:wordpress-5"
     num_units: 1
-    constraints:
-      mem=1G
-      cores=1
+    constraints: mem=1G cores=1
     annotations:
       "gui-x": "339.5"
       "gui-y": "-171"
-    to:
-    - lxd:0
+    to: lxd:0
   mysql:
-    charm: "cs:trusty/mysql-57"
+    charm: "cs:mysql-57"
     num_units: 1
-    constraints:
-      mem=2G
-      cores=2
+    constraints: mem=2G cores=2
     annotations:
       "gui-x": "79.5"
       "gui-y": "-142"
-    to:
-    - lxd:0
+    to: lxd:0
 relations:
   - - "wordpress:db"
     - "mysql:db"
@@ -194,13 +182,13 @@ machines:
 Refer to the [Using constraints][charms-constraints] page for in-depth coverage
 of constraints.
 
-### Setting charm configuration options in a bundle
+### Setting application configuration options
 
 When deploying an application, the charm you use will often support or even
 require specific configuration options to be set. This is done by including an
-`options` field to a charm's definition.
+`options` field to the application.
 
-For example, to set the 'flavor' of the MySQL charm to 'percona':
+For example, to set the "flavor" of MySQL to 'percona':
 
 ```yaml
 mysql:
@@ -234,36 +222,30 @@ to learn about a charm's options.
 ## Creating bundles
 
 Bundles can continue to be modified to the point that you are effectively
-creating a new bundle. This section presents the following methods:
+creating a new bundle. This section presents the following topics:
 
- * Using local charms
- * Overlay bundles
- * Bundle placement directives
- * Machine specifications in a bundle
- * Recycling machines
- * Binding endpoints within a bundle
- * Bundles and charm resources
-
-!!! Note:
-    Make sure you've added a brief explanation of what your bundle does within
-    the `description` field of your bundle's YAML file. 
+ - Using local charms
+ - Overlay bundles
+ - Bundle placement directives
+ - Machine specifications in a bundle
+ - Recycling machines
+ - Binding endpoints within a bundle
+ - Bundles and charm resources
+ - Setting up subordinate charms
 
 ### Using local charms
 
 To integrate a local charm into a bundle a local bundle file, say
 `bundle.yaml`, will be needed and where the `charm` field points to the
-directory of the charm in question. An absolute or a relative (to the bundle
-file) path can be used. Here is an example:
+directory of the charm in question. Here is an example:
 
-```bash
+```yaml
 series: xenial
 applications:
   mysql:
     charm: "/home/ubuntu/charms/mysql"
     num_units: 1
-    constraints:
-      mem=2G
-      cores=4
+    constraints: mem=2G cores=4
 ```
 
 The bundle can then be deployed by using the file as the argument instead of a
@@ -301,42 +283,33 @@ example of how an "overlay" is used.
 
 ### Bundle placement directives
 
-You can co-locate applications using the placement key `to` in the charm's
-definition. When LXD is supported by the backing cloud it is also possible to
-isolate charms by including the container format in the placement directive.
+You can co-locate applications by using the `to` key. When LXD is supported by
+the backing cloud it is also possible to isolate charms by including the
+container format in the placement directive.
 
 For example:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 1
-  to:
-  - lxd:wordpress/0
+  to: ["lxd:wordpress/0"]
   annotations:
     "gui-x": "139"
     "gui-y": "168"
 ```
 
 This will install the MySQL application into a LXD container on the same
-machine as the wordpress/0 unit. You can check the output from `juju status` to
-see where each application has been deployed:
-
-```no-highlight
-Unit         Workload  Agent       Machine  Public address  Ports  Message
-mysql/0      waiting   allocating  0/lxd/0                         waiting for machine
-wordpress/0  waiting   allocating  0        10.1.110.193           waiting for machine
-```
+machine as the 'wordpress/0' unit.
 
 Alternatively, to install MySQL into a LXD container on machine '1', use the
 following syntax:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 1
-  to:
-  - lxd:1
+  to: ["lxd:1"]
   annotations:
     "gui-x": "139"
     "gui-y": "168"
@@ -354,17 +327,16 @@ by using the placement key `to`. For example:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 1
-  to:
-    - "0"
+  to: 0
   annotations:
     "gui-x": "139"
     "gui-y": "168"
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: arch=amd64 cores=1 mem=1740 root-disk=8192
 ```
 
 This will install the MySQL application on machine '0', which has been assigned
@@ -375,34 +347,23 @@ application. For example:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 2
-  to:
-    - "0"
-    - "1"
+  to: 0, 1
   annotations:
     "gui-x": "139"
     "gui-y": "168"
 machines:
   "0":
     series: trusty
-    constraints: "arch=amd64 cores=1 cpu-power=100 mem=1740 root-disk=8192"
+    constraints: arch=amd64 cores=1 mem=1740 root-disk=8192
   "1":
     series: trusty
-    constraints: "arch=amd64 cores=4 cpu-power=500 mem=4096 root-disk=8192"
+    constraints: arch=amd64 cores=4 mem=4096 root-disk=8192
 ```
 
 This will install one unit of the MySQL application on machine '0' and the
 other on machine '1'. 
-
-The output from `juju status` will show this deployment as follows:
-
-```no-highlight
-Unit         Workload  Agent       Machine  Public address  Ports  Message
-mysql/0      waiting   allocating  0                               waiting for machine
-mysql/1      waiting   allocating  1                               waiting for machine
-wordpress/0  waiting   allocating  1                               waiting for machine
-```
 
 ### Recycling machines
 
@@ -432,7 +393,7 @@ charm's definition. For example:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 1
   bindings:
     shared-db: database
@@ -442,10 +403,10 @@ mysql:
 This is equivalent to:
 
 ```bash
-juju deploy cs:trusty/mysql-57 --bind "shared-db=database cluster=internal"
+juju deploy cs:mysql-57 --bind "shared-db=database cluster=internal"
 ```
 
-The following connects charm endpoints to specific spaces and includes a
+The following connects application endpoints to specific spaces and includes a
 default space, `default-space`, for any interfaces not specified:
 
 ```bash
@@ -457,7 +418,7 @@ following:
 
 ```yaml
 mysql:
-  charm: "cs:trusty/mysql-57"
+  charm: "cs:mysql-57"
   num_units: 1
   bindings:
     "": default-space
@@ -466,28 +427,26 @@ mysql:
 ```
 
 It is not currently possible to declare a default space in the bundle for all
-application endpoints. The workaround is to list all endpoints explicitly.
+endpoints. The workaround is to list all endpoints explicitly.
 
 ### Bundles and charm resources
 
 Bundles support charm resources (see [Using resources][developer-resources])
-through the use of the `resources` field. For example, consider the following
-charm's metadata.yaml file that specifies a resource:
+through the use of the `resources` key. Consider the following charm
+`metadata.yaml` file that includes a resource called `pictures`:
 
 ```yaml
 name: example-charm
 summary: "example charm."
 description: This is an example charm.
 resources:
-  example:
+  pictures:
     type: file
-    filename: example.zip
-    description: "This charm needs example.zip to operate"
+    filename: pictures.zip
+    description: "This charm needs pictures.zip to operate"
 ```
 
-If this charm were to be used as part of a bundle, it might be desirable to use
-a specific revision for the bundle. Revisions are specified in the bundle file
-under the charm's field in the `applications` section:
+It might be desirable to use a specific resource revision in a bundle:
 
 ```yaml
 applications:
@@ -495,13 +454,12 @@ applications:
    charm: "cs:example-charm"
    series: trusty
    resources:
-     example: 1
+     pictures: 1
 ```
 
-So the charm specifies that it requires a resource called `example` and the
-bundle stipulates a revision of '1' of that resource (from the Charm Store).
+So here we specify a revision of '1' from the Charm Store.
 
-The `resources` field can also specify a local path to a resource instead:
+The `resources` key can also specify a local path to a resource instead:
 
 ```yaml
 applications:
@@ -509,11 +467,18 @@ applications:
    charm: "cs:example-charm"
    series: trusty
    resources:
-     example: "./example.zip"
+     pictures: "./pictures.zip"
 ```
 
-Local paths to resources can be useful, for example, in network restricted
-environments where a Juju controller is unable to contact the Charm Store.
+Local resources can be useful in network restricted environments where the
+controller is unable to contact the Charm Store.
+
+### Setting up subordinate charms
+
+To set up a subordinate charm simply do not use the placement key `to` and do
+not specify any units with the `num_units` key. The vital part with a
+subordinate is to create the relation between it and the principle charm under
+the `relations` element.
 
 ## Comparing a bundle to a model
 
@@ -525,7 +490,7 @@ command:
 
 ```no-highlight
 Model  Controller  Cloud/Region         Version  SLA          Timestamp
-docs   lxd         localhost/localhost  2.5-rc1  unsupported  05:22:22Z
+docs   lxd         localhost/localhost  2.5.0    unsupported  05:22:22Z
 
 App        Version  Status   Scale  Charm      Store       Rev  OS      Notes
 haproxy             unknown      1  haproxy    jujucharms   46  ubuntu  
@@ -554,12 +519,12 @@ Now say we have a bundle file `bundle.yaml` with these contents:
 ```yaml
 applications:
   mediawiki:
-    charm: "cs:trusty/mediawiki-5"
+    charm: "cs:mediawiki-5"
     num_units: 1
     options:
       name: Central library
   mysql:
-    charm: "cs:trusty/mysql-55"
+    charm: "cs:mysql-55"
     num_units: 1
     options:
       "binlog-format": MIXED
@@ -598,7 +563,7 @@ applications:
     missing: bundle
   mediawiki:
     charm:
-      bundle: cs:trusty/mediawiki-5
+      bundle: cs:mediawiki-5
       model: cs:mediawiki-19
     series:
       bundle: ""
@@ -641,18 +606,16 @@ bundle file `changes.yaml` with these machine related contents:
 ```yaml
 applications:
   mediawiki:
-    to:
-      - "2"
+    to: 2
   mysql:
-    to:
-      - "3"
+    to: 3
 machines:
   "2":
     series: trusty
-    constraints: "arch=amd64 cores=1"
+    constraints: arch=amd64 cores=1
   "3":
     series: trusty
-    constraints: "arch=amd64 cores=1"
+    constraints: arch=amd64 cores=1
 ```
 
 Here, by means of the `--overlay` option, we can add this extra information to
@@ -744,3 +707,4 @@ Once the bundle is saved you can consider these
 [charms-bundles-gui]: ./charms-bundles-gui.md
 [charms-bundles-gui-exporting]: ./charms-bundles-gui.md#exporting-and-importing-bundles-with-the-GUI
 [tutorial-k8s-aws]: ./tutorial-k8s-aws.md
+[reference-bundle]: ./reference-bundle.md

@@ -1,28 +1,35 @@
 Title: Deploying applications
 TODO: Add 'centos' and 'windows' stuff to series talk
       Hardcoded: Ubuntu codenames
+      Add complete precedence rules for choosing charm series
 table_of_contents: True
 
 # Deploying applications
 
 The fundamental purpose of Juju is to deploy and manage software applications
-in a way that is fast and easy. All this is done with the help of *charms*,
-which are bits of code that contain all the necessary intelligence to do these
-things. Charms can exist online (in the [Charm Store][charm-store]) or on your
-local filesystem (previously downloaded from the store or written locally).
+in a way that is easy and repeatable. All this is done with the help of
+*charms*, which are bits of code that contain all the necessary intelligence to
+do these things. Charms can exist online (in the [Charm Store][charm-store]) or
+on your local filesystem (previously downloaded from the store or written
+locally).
 
-Charms use the concept of *series* analogous as to how Juju does with Ubuntu
-series ('Xenial', 'Bionic', etc). For the most part, this is transparent as
-Juju will use the most relevant charm to ensure things "just work". The
-default series can be configured at a model level, see
-[Configuring models][models-config] for further details. In the absence of this
-setting, the default is to use the series specified by the charm.
+This page collects together the following major topics related to deploying
+applications with Juju:
 
-Deploying a charm does not make its related application instantly accessible.
-This is because most clouds enforce default network security policies that
-prohibit incoming traffic. Thankfully, Juju can request that the necessary
-changes be made. See section below entitled
-[Exposing deployed applications][#exposing-deployed-applications].
+ - [Deploying from the Charm Store][#deploying-from-the-charm-store]
+ - [Deploying from a local charm][#deploying-from-a-local-charm]
+ - [Relating deployed applications][#relating-deployed-applications]
+ - [Exposing deployed applications][#exposing-deployed-applications]
+ - [Deploying a multi-series charm][#deploying-a-multi-series-charm]
+ - [Deploying a subordinate charm][#deploying-a-subordinate-charm]
+ - [Deploying a Kubernetes charm][#deploying-a-Kubernetes-charm]
+ - [Deploying from a charm bundle][#deploying-from-a-charm-bundle]
+ - [Configuring at deployment time][#configuring-at-deployment-time]
+ - [Deploying to LXD containers][#deploying-to-lxd-containers]
+ - [Deploying to specific machines][#deploying-to-specific-machines]
+ - [Deploying to specific availability zones][#deploying-to-specific-availability-zones]
+ - [Deploying to network spaces][#deploying-to-network-spaces]
+ - [Scaling out deployed applications][#scaling-out-deployed-applications]
 
 ## Deploying from the Charm Store
 
@@ -97,6 +104,13 @@ See [Upgrading applications][charms-upgrading] for how charm upgrades work.
 It is possible to deploy applications using local charms. See
 [Deploying charms offline][charms-offline-deploying] for further guidance.
 
+## Relating deployed applications
+
+Many charms work in conjunction with other charms, such as a charm requiring a
+database that another charm provides. In order to "marry" charms like this a
+*relation* needs to be set up between them. The
+[Managing relations][charms-relations] page provides details.
+
 ## Exposing deployed applications
 
 Once an application is deployed changes need to be made to the backing cloud's
@@ -135,6 +149,13 @@ juju unexpose wordpress
 Some charms support more than one series. It is also possible to force a charm
 to deploy to a different series. See the documentation on
 [Multi-series charms][deploying-multi-series-charms] to learn more.
+
+## Deploying a subordinate charm
+
+A *subordinate* charm is a charm that augments the functionality of another
+regular charm, which in this context becomes known as the *principle* charm.
+When a subordinate charm is deployed no units are created. This happens only
+once a relation has been established between the principal and the subordinate.
 
 ## Deploying a Kubernetes charm
 
@@ -200,16 +221,30 @@ matter.
 <!-- LINKS -->
 
 [charm-store]: https://jujucharms.com/store
-[models-config]: ./models-config.md
 [charms-upgrading]: ./charms-upgrading.md
 [charms-offline-deploying]: ./charms-offline-deploying.md
 [charms-config]: ./charms-config.md
 [charms-scaling]: ./charms-scaling.md
 [charms-bundles]: ./charms-bundles.md
+[charms-relations]: ./charms-relations.md
+[clouds-k8s]: ./clouds-k8s.md
 [network-spaces]: ./network-spaces.md
 [deploying-multi-series-charms]: ./charms-deploying-advanced.md#multi--series-charms
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines
 [deploying-to-specific-zones]: ./charms-deploying-advanced.md#deploying-to-specific-availability-zones
 [deploying-to-network-spaces]: ./charms-deploying-advanced.md#deploying-to-network-spaces
+
+[#deploying-from-the-charm-store]: #deploying-from-the-charm-store
+[#deploying-from-a-local-charm]: #deploying-from-a-local-charm
+[#relating-deployed-applications]: #relating-deployed-applications
 [#exposing-deployed-applications]: #exposing-deployed-applications
-[clouds-k8s]: ./clouds-k8s.md
+[#deploying-a-multi-series-charm]: #deploying-a-multi-series-charm
+[#deploying-a-subordinate-charm]: #deploying-a-subordinate-charm
+[#deploying-a-Kubernetes-charm]: #deploying-a-Kubernetes-charm
+[#deploying-from-a-charm-bundle]: #deploying-from-a-charm-bundle
+[#configuring-at-deployment-time]: #configuring-at-deployment-time
+[#deploying-to-lxd-containers]: #deploying-to-lxd-containers
+[#deploying-to-specific-machines]: #deploying-to-specific-machines
+[#deploying-to-specific-availability-zones]: #deploying-to-specific-availability-zones
+[#deploying-to-network-spaces]: #deploying-to-network-spaces
+[#scaling-out-deployed-applications]: #scaling-out-deployed-applications
