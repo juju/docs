@@ -178,11 +178,11 @@ instructions on how to build Juju from source.
 [snapcraft-docs]: https://docs.snapcraft.io
 [snapd-install]: https://snapcraft.io/docs/core/install
 [juju-new-bug]: https://bugs.launchpad.net/juju/+filebug
+[juju-plugins]: ./juju-plugins.md
+[juju-coexist]: ./juju-coexist.md
 [juju-win-signed]: https://launchpad.net/juju/2.5/2.5.0/+download/juju-setup-2.5.0-signed.exe
 [juju-win-signed-md5]: https://launchpad.net/juju/2.5/2.5.0/+download/juju-setup-2.5.0-signed.exe/+md5
 [juju-centos]: https://launchpad.net/juju/2.5/2.5.0/+download/juju-2.5.0-centos7.tar.gz
 [juju-centos-md5]: https://launchpad.net/juju/2.5/2.5.0/+download/juju-2.5.0-centos7.tar.gz/+md5
-[juju-plugins]: ./juju-plugins.md
-[juju-coexist]: ./juju-coexist.md
 [juju-launchpad-binaries]: https://launchpad.net/juju/+series
 [centos-and-other-linuxes]: #centos-and-other-linuxes

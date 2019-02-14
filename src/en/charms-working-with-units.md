@@ -1,7 +1,6 @@
 Title: Working with units  
-TODO:  Convert into a tutorial
 
-# Working with units
+# Using Units
 
 Each node that Juju manages is referred to as a "unit". Generally speaking,
 when using Juju you interact with the applications at the application level. 

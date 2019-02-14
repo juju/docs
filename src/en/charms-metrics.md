@@ -1,4 +1,4 @@
-Title: Application metrics
+Title: Juju Metrics
 
 # Application metrics
 
@@ -23,7 +23,7 @@ supporting devops. Juju’s metrics complement these fine-grained, lower-level
 data sources with a model-level overview -- a starting point for deeper
 analysis.
 
-## Using metrics
+# Using metrics
 
 View the most recent measurements from workloads that collect them with the
 `juju metrics` command.
@@ -90,7 +90,7 @@ Producing output ideal for integrating with data analysis and automation systems
   value: "7"
 ```
 
-## What does a charm measure?
+# What does a charm measure?
 
 The measurements collected by a charm are declared in its `metrics.yaml`. For
 example:
@@ -109,7 +109,7 @@ For a more detailed explanation of `metrics.yaml`, refer to the
 [Metric types](./developer-metrics.html#metric-types) section in the developer
 documentation.
 
-## What else are metrics used for?
+# What else are metrics used for?
 
 Measurements collected by Juju are also sent to Canonical, where they are
 aggregated across all deployments of the charm for analytics.

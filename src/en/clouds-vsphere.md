@@ -81,7 +81,7 @@ Datacenters' from the hierarchical menu on the left. The values you need are
 listed in the 'Name' column, such as the 'dc0' and 'dc1' data centres shown
 here:
 
-![vSphere web client showing data centres](./media/config-vsphere-datacenters.png)
+![vSphere web client showing data centres](https://assets.ubuntu.com/v1/386b31c4-config-vsphere-datacenters.png)
 
 The manual method necessitates the use of a [YAML-formatted][yaml]
 configuration file. Here is an example:

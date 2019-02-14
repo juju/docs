@@ -1,18 +1,19 @@
-Title: Collecting Juju metrics
+Title: Configure metrics gathering with Prometheus
 
-# Collecting Juju metrics
+#  Configure metrics gathering with Prometheus
 
-While it is possible to write charms that collect metrics about charms (see
-[Metric collecting charms][developer-metrics]), it is also possible to collect
-metrics about Juju itself. Each controller provides an HTTPS endpoint to
-expose [Prometheus][prometheus] metrics. To feed these metrics into Prometheus,
-you must add a new *scrape target* to your already installed and running
-Prometheus instance. For this use case, the only constraint on where Prometheus
-is running is that the server must be able to contact the controller's API
-address/port.
+## Overview
 
-The Juju controller's metrics endpoint requires authorisation, so create a user
-and password for Prometheus to use:
+While it is possible to [write charms that collect metrics][developer-metrics] about
+charms, it is also possible to collect metrics about Juju itself. Starting with
+Juju 2.1 each Juju controller provides an HTTPS endpoint to expose [Prometheus][prometheus]
+metrics. To feed these metrics into Prometheus, you must add a new scrape
+target to your already installed and running Prometheus instance. For this use
+case, the only constraint on where Prometheus is running is that Prometheus
+must be able to contact the Juju controller's API server address/port.
+
+The Juju controller's metrics endpoint requires authorisation, so create a
+user and password for Prometheus to use:
 
 ```
 juju add-user prometheus
@@ -36,7 +37,7 @@ can configure your Prometheus instance to skip validation, or enter this to
 store the controller’s CA certificate in a file for Prometheus to verify the
 server’s certificate against:
 
-```bash
+```
 juju controller-config ca-cert > /path/to/juju-ca.crt
 ```
 
@@ -56,8 +57,5 @@ scrape_configs:
       ca_file: /path/to/juju-ca.crt
 ```
 
-
-<!-- LINKS -->
-
-[developer-metrics]: ./developer-metrics.md
-[prometheus]: https://prometheus.io
+[developer-metrics]: ./developer-metrics.html
+[prometheus]: https://prometheus.io/
