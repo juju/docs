@@ -1,6 +1,6 @@
-Title: Metric collecting charms
+Title: Juju Metrics
 
-# Metric collecting charms
+# Writing charms that collect metrics
 
 Knowing an application's configuration isn’t enough to effectively operate and
 manage it. Consider that a well-designed application will have as few

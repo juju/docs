@@ -1,6 +1,6 @@
-Title: Application groups  
+Title: Groups of applications  
 
-# Application groups
+# Grouping applications
 
 Juju deploys units of an application from a charm. The simplest way to do this 
 is
@@ -83,6 +83,7 @@ juju deploy mediawiki mywiki
 juju add-relation mywiki:db masterdb:db
 juju add-relation mywiki:slave slavedb:db
 ```
+
 
 ## Upgrade Groups and/or Config Groups
 

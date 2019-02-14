@@ -14,7 +14,7 @@ homepage: true
         <div class="u-equal-height">
             <div class="col-6">
                 <h2>Getting started</h2>
-                <p><a href="/2.5/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
+                <p><a href="/devel/en/getting-started">Getting started with Juju&nbsp;&rsaquo;</a></p>
             </div>
             <div class="col-6 u-align--right">
                 <img style="border: 0" src="https://assets.ubuntu.com/v1/843c77b6-juju-at-a-glace.svg">
@@ -25,20 +25,20 @@ homepage: true
             <div class="col-6">
                 <h2>What's new</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/2.5/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/clouds-k8s">Using Kubernetes with Juju&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/whats-new">New features in 2.5&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-lxd-advanced">Remote and clustered LXD clouds&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-oci">Oracle OCI cloud support&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/clouds-k8s">Using Kubernetes with Juju&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
             <div class="col-6">
                 <h2>Doc updates</h2>
                 <ul class="p-list">
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-client-basic">Basic client usage&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-k8s-aws">Using the aws-integrator charm&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-multiuser-basic">Multi-user basic setup&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
-                    <li class="p-list__item"><a href="/2.5/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-client-basic">Basic client usage&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-k8s-aws">Using the aws-integrator charm&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-multiuser-basic">Multi-user basic setup&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-microk8s">Using Juju with MicroK8s&nbsp;&rsaquo;</a></li>
+                    <li class="p-list__item"><a href="/devel/en/tutorial-k8s-static-pv">Setting up static Kubernetes storage&nbsp;&rsaquo;</a></li>
                 </ul>
             </div>
         </div>
@@ -54,10 +54,8 @@ homepage: true
                     </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/fa38eb81-picto-business-midaubergine.svg');
-                        height:1.5rem;width: 1.5rem;top:
-			2px;margin-right:.5rem;"></i> <a
-			class="p-link--external"
-			href="https://docs.jujucharms.com/stable/experts-sla">Managed solutions</a>
+                        height:1.5rem;width: 1.5rem;top: 2px;margin-right:.5rem;"></i>
+                        <a href="/devel/en/experts-sla">Managed solutions</a>
                     </li>
                     <li class="p-list__item">
                         <i class="p-icon" style="background-image:url('https://assets.ubuntu.com/v1/4ef84d88-picto-quote-warmgrey.svg');
@@ -85,7 +83,7 @@ homepage: true
                 <h2>Contribute</h2>
                 <ul class="p-list">
                     <li class="p-list__item"><a class="p-link--external" href="https://github.com/juju/juju">Help improve Juju</a></li>
-                    <li class="p-list__item--deep"><a class="p-link--external" href="/2.5/en/contributing">Help improve the documentation</a></li>
+                    <li class="p-list__item"><a href="/devel/en/contributing">Help improve the documentation</a></li>
                 </ul>
             </div>
         </div>
