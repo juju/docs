@@ -4,24 +4,11 @@ TODO:  Hardcoded: Ubuntu code names
 
 # Creating a controller
 
-The `bootstrap` command is used to create a controller for a given cloud:
+This page collects together examples that show the various ways a controller
+can be created. They also demonstrate configurations that can be applied to a
+cloud environment at controller-creation time.
 
-`juju bootstrap <cloud name> [<controller name>]`
-
-The controller name is optional. If one is not supplied, then a name is
-assigned based on the cloud and region.
-
-To learn about configuration options available at bootstrap time, see:
-
- - [Configuring controllers][controllers-config]
- - [Configuring models][models-config]
- - [Using constraints][charms-constraints]
-
-## Examples
-
-This list of examples provides a good overview of the different things that can
-be done at controller-creation time:
-
+ - [Common invocation][#common-invocation]
  - [Create a controller interactively][#create-a-controller-interactively]
  - [Set default model constraints for a controller][#set-default-model-constraints-for-a-controller]
  - [Set controller constraints for a new controller][#set-controller-constraints-for-a-new-controller]
@@ -37,6 +24,32 @@ be done at controller-creation time:
  - [Specifying an agent version][#specifying-an-agent-version]
  - [Passing a cloud-specific setting][#passing-a-cloud-specific-setting]
  - [Include configuration options at the cloud level][#include-configuration-options-at-the-cloud-level]
+
+!!! Note:
+    A requirement for creating a controller is that a cloud has been chosen and
+    that credentials have been added for it. See the [Clouds][clouds] page for
+    guidance.
+
+To learn more about configuration options available at bootstrap time, see
+these resources:
+
+ - [Configuring controllers][controllers-config]
+ - [Configuring models][models-config]
+ - [Using constraints][charms-constraints]
+
+A controller is created with the `bootstrap` command.
+
+### Common invocation
+
+A very common way to create a controller is by just specifying a cloud name and
+a controller name:
+
+```bash
+juju bootstrap aws aws-controller
+```
+
+Note that if a controller name is not specified one will be assigned based on
+the cloud name and the cloud's default region.
 
 ### Create a controller interactively
 
@@ -249,6 +262,7 @@ how to do this.
 
 <!-- LINKS -->
 
+[clouds]: ./clouds.md
 [charms-constraints]: ./charms-constraints.md
 [controllers-config]: ./controllers-config.md
 [models-config]: ./models-config.md
@@ -256,6 +270,7 @@ how to do this.
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
 [clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 
+[#common-invocation]: #common-invocation
 [#create-a-controller-interactively]: #create-a-controller-interactively
 [#set-default-model-constraints-for-a-controller]: #set-default-model-constraints-for-a-controller
 [#set-controller-constraints-for-a-new-controller]: #set-controller-constraints-for-a-new-controller
