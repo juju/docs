@@ -33,13 +33,13 @@ To create both a user and a group for use with Juju, click on your name from
 the AWS Management Console at [http://console.aws.amazon.com][aws] and select
 "My Security Credentials" from the drop-down menu:
 
-![AWS credentials drop-down](./media/getting_started-aws_security2.png)
+![AWS credentials drop-down](https://assets.ubuntu.com/v1/b8c092cd-getting_started-aws_security2.png)
 
 If you see a pop-up with the button "Get Started with IAM Users" go
 ahead and click on it and then "Add user". If you do not see such a pop-up
 then, in the top bar, choose "Services" > "IAM" > "Users" and then "Add user":
 
-![AWS IAM set user details](./media/getting_started-aws_newuser2.png)
+![AWS IAM set user details](https://assets.ubuntu.com/v1/90a979b4-getting_started-aws_newuser2.png)
 
 Enter a name for your user and set `Programmatic access` as the AWS access type
 before clicking "Next: Permissions" to continue. 
@@ -49,13 +49,13 @@ Name the group and select one or many pre-existing policies that correspond to
 your requirements. Here we've chosen `AdministratorAccess`, which is the most
 privileged policy available:
 
-![AWS IAM group creation](./media/getting_started-aws_groups.png)
+![AWS IAM group creation](https://assets.ubuntu.com/v1/17a687c6-getting_started-aws_groups.png)
 
 Click the "Create group" button and then the "Next: Tags" button. Tags are
 optional and here we immediately pressed "Next: Review". On the next page click
 "Create user". The resulting page will declare user creation a success:
 
-![AWS IAM user csv](./media/getting_started-aws_credentials-csv2.png)
+![AWS IAM user csv](https://assets.ubuntu.com/v1/c7a1cf49-getting_started-aws_credentials-csv2.png)
 
 Click on the "Download .csv" button to get a copy of this user's credentials.
 The contents of this file will look similar to this:
