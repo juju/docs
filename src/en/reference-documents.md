@@ -2,7 +2,7 @@ Title: Reference documents
 
 # Reference documents
 
- - [Release notes][release-notes]
+ - [Release Notes][release-notes]
  - [Command reference][commands]
  - [Bundle reference][reference-bundle]
  - [Juju constraints][reference-constraints]
