@@ -12,7 +12,7 @@ in this manner they are said to have formed a *relation*.
 
 !!! Note:
     A requirement for a relation is that both applications are currently
-    *deployed*. See the [Deploying applications][charms-deploying] page for
+    deployed. See the [Deploying applications][charms-deploying] page for
     guidance.
 
 ## Creating relations
