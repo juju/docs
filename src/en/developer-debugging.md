@@ -171,21 +171,44 @@ for more information on the automatic retry feature and how to disable this
 behaviour. Note that option `--no-retry` can be used to prevent re-execution of
 failed hooks on the unit.
 
-## Debugging reactive Charms
+## Debugging reactive charms
 
-Debugging a reactive Charm is similar to debugging a regular charm: you use `juju debug-hooks` to get into the hook context and you start the reactive framework by executing the hook file in the `hooks/` directory. That hook will start the reactive framework and [run your handlers based on which flags are set](https://charmsreactive.readthedocs.io/en/latest/dispatch.html). Note that the reactive framework **resets all flags to their original value when a handler crashes.** Changes to flags happen immediately, but they are only persisted at the end of a complete and successful run of the reactive framework. All unpersisted changes are discarded when a hook crashes. This is the case because a Juju hook is transactional: all changes such as open ports are discarded when the hook fails.
+Debugging a reactive charm is similar to debugging a regular charm: 
+use `juju debug-hooks` to get into the hook context and you start the reactive
+framework by executing the hook file in the `hooks/` directory. That hook will 
+start the reactive framework and 
+[run your handlers based on which flags are set](https://charmsreactive.readthedocs.io/en/latest/dispatch.html).
 
-*Tip: If essential hooks such as `install` and `config-changed` are not in the `hooks` directory of your Charm, you forgot to include `layer:basic` in your `layer.yaml` file.*
+Note that the reactive framework **resets all flags to their original value
+when a handler crashes.** Changes to flags happen immediately, but only persist
+at the end of a complete and successful run of the reactive framework. All unpersisted
+changes are discarded when a hook crashes. This is the case because a Juju hook is
+transactional: **all** changes are discarded when the hook fails.
+
+!!! Tip: 
+    If essential hooks such as `install` and `config-changed` are not in the
+    `hooks` directory of your Charm, you forgot to include `layer:basic` in
+    your `layer.yaml` file.*
 
 ### charms.reactive command
 
-charms.reactive has a commandline tool that can help you debugging Charms. You can use it to view, set and clear flags in a debug-hooks session. *Charms built with older versions of the reactive framework might require you to use `state` instead of `flag`.*
+There is a command line charms.reactive tool that can help with debugging charms.
+You can use it to view, set and clear flags **within a debug-hooks session**. 
 
-**Show flags**
+!!! Note: Charms built with older versions of the reactive framework might 
+    require you to use `state` instead of `flag`.
 
-```shell
-$ charms.reactive -p get_flags
+#### Showing flags
 
+Within a debug-hooks session, running the command:
+
+```bash
+charms.reactive -p get_flags
+```
+
+Will return the current flags, for example:
+
+```no-highlight
 {
  'etcd.installed': None,
  'etcd.leader.configured': None,
@@ -195,12 +218,15 @@ $ charms.reactive -p get_flags
  }
 ```
 
-*Note that all flag changes are reset when a handler crashes so this command will only show you the initial values at the start of the hook.*
+All flag changes are reset when a handler crashes so this command will only show
+the initial values when the hook was started.
 
-**Set flags**
+#### Setting flags
 
-```shell
-$ charms.reactive set_flag cache.cleared
+To set a particular flag, use the command:
+
+```bash
+charms.reactive set_flag <flag>
 ```
 
 
@@ -253,7 +279,7 @@ Some useful definitions in the context of tmux:
 
 A session may look something like this:
 
-![Image showing byobu and tmux ](https://assets.ubuntu.com/v1/7e65b1af-tmux-annotation.png)
+![Image showing byobu and tmux](https://assets.ubuntu.com/v1/7e65b1af-tmux-annotation.png)
 
 Key:
 
