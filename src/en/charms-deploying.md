@@ -13,8 +13,7 @@ do these things. Charms can exist online (in the [Charm Store][charm-store]) or
 on your local filesystem (previously downloaded from the store or written
 locally).
 
-This page collects together the following major topics related to deploying
-applications with Juju:
+This page collects together topics related to deploying applications:
 
  - [Deploying from the Charm Store][#deploying-from-the-charm-store]
  - [Deploying from a local charm][#deploying-from-a-local-charm]
@@ -30,6 +29,10 @@ applications with Juju:
  - [Deploying to specific availability zones][#deploying-to-specific-availability-zones]
  - [Deploying to network spaces][#deploying-to-network-spaces]
  - [Scaling out deployed applications][#scaling-out-deployed-applications]
+
+!!! Note:
+    A requirement for a deployment is that a controller has been created. See
+    the [Creating a controller][controllers-creating] page for guidance.
 
 ## Deploying from the Charm Store
 
@@ -220,6 +223,7 @@ matter.
 
 <!-- LINKS -->
 
+[controllers-creating]: ./controllers-creating.md
 [charm-store]: https://jujucharms.com/store
 [charms-upgrading]: ./charms-upgrading.md
 [charms-offline-deploying]: ./charms-offline-deploying.md

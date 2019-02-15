@@ -4,24 +4,11 @@ TODO:  Hardcoded: Ubuntu code names
 
 # Creating a controller
 
-The `bootstrap` command is used to create a controller for a given cloud:
+This page collects together examples that show the various ways a controller
+can be created. They also demonstrate configurations that can be applied to a
+cloud environment at controller-creation time.
 
-`juju bootstrap <cloud name> [<controller name>]`
-
-The controller name is optional. If one is not supplied, then a name is
-assigned based on the cloud and region.
-
-To learn about configuration options available at bootstrap time, see:
-
- - [Configuring controllers][controllers-config]
- - [Configuring models][models-config]
- - [Using constraints][charms-constraints]
-
-## Examples
-
-This list of examples provides a good overview of the different things that can
-be done at controller-creation time:
-
+ - [Common invocation][#common-invocation]
  - [Create a controller interactively][#create-a-controller-interactively]
  - [Set default model constraints for a controller][#set-default-model-constraints-for-a-controller]
  - [Set controller constraints for a new controller][#set-controller-constraints-for-a-new-controller]
@@ -38,21 +25,47 @@ be done at controller-creation time:
  - [Passing a cloud-specific setting][#passing-a-cloud-specific-setting]
  - [Include configuration options at the cloud level][#include-configuration-options-at-the-cloud-level]
 
+!!! Note:
+    A requirement for creating a controller is that a cloud has been chosen and
+    that credentials have been added for it. See the [Clouds][clouds] page for
+    guidance.
+
+To learn more about configuration options available at bootstrap time, see
+these resources:
+
+ - [Configuring controllers][controllers-config]
+ - [Configuring models][models-config]
+ - [Using constraints][charms-constraints]
+
+A controller is created with the `bootstrap` command.
+
+### Common invocation
+
+A very common way to create a controller is by just specifying a cloud name and
+a controller name:
+
+```bash
+juju bootstrap aws aws-controller
+```
+
+Note that if a controller name is not specified one will be assigned based on
+the cloud name and the cloud's default region.
+
 ### Create a controller interactively
 
-You can create a controller interactively like this:
+You can create a controller interactively by omitting a cloud name altogether:
 
 ```bash
 juju bootstrap
 ```
 
 You will be prompted for what cloud and region to use as well as the controller
-name. Do not use this method if you want to specify anything else.
+name. Do not use this method if you intend on specifying anything else.
 
 ### Set default model constraints for a controller
 
-Below, all machines (including the controller) in the LXD controller's models
-will have at least 4GiB of memory:
+Default model constraints can be set. Here, all machines (including the
+controller) in a LXD controller's models will have at least 4GiB of memory:
 
 ```bash
 juju bootstrap --constraints mem=4G localhost
@@ -60,8 +73,7 @@ juju bootstrap --constraints mem=4G localhost
 
 ### Set controller constraints for a new controller
 
-This example shows how to request at least 4GiB of memory and two CPUs for an
-AWS controller:
+To request at least 4GiB of memory and two CPUs for just an AWS controller:
 
 ```bash
 juju bootstrap --bootstrap-constraints "mem=4G cores=2" aws
@@ -74,8 +86,7 @@ given via `--bootstrap-constraints` will be used.
 
 The controller will be deployed upon Ubuntu 18.04 LTS (Bionic) by default.
     
-For our example, we name the resulting LXD controller 'lxd-bionic' to reflect
-that:
+Here, we name the resulting LXD controller 'lxd-bionic' to reflect that:
 
 ```bash
 juju bootstrap localhost lxd-bionic
@@ -149,7 +160,7 @@ You can change the default timeout and retry delays used by Juju by setting the
 following keys in your configuration:
 
 | Key                        | Default (seconds) | Purpose |
-|:---------------------------|:------------------|:---------|
+|:---------------------------|:------------------|:--------|
 bootstrap-timeout            | 600    | How long to wait for a connection to the controller
 bootstrap-retry-delay        | 5      | How long to wait between connection attempts to a controller
 bootstrap-address-delay      | 10     | How often to refresh controller addresses from the API server
@@ -249,6 +260,7 @@ how to do this.
 
 <!-- LINKS -->
 
+[clouds]: ./clouds.md
 [charms-constraints]: ./charms-constraints.md
 [controllers-config]: ./controllers-config.md
 [models-config]: ./models-config.md
@@ -256,6 +268,7 @@ how to do this.
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
 [clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 
+[#common-invocation]: #common-invocation
 [#create-a-controller-interactively]: #create-a-controller-interactively
 [#set-default-model-constraints-for-a-controller]: #set-default-model-constraints-for-a-controller
 [#set-controller-constraints-for-a-new-controller]: #set-controller-constraints-for-a-new-controller
