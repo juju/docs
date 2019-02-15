@@ -245,8 +245,9 @@ Notes:
 
 ## Images
 
-An image should not be overly cropped - allow for context. When ready, place
-the image file in the `media` directory.
+An image should not be overly cropped - allow for context.
+
+When ready, upload the image to an image host - e.g. https://manager.assets.ubuntu.com.
 
 In terms of linking, they are managed very similarly to hyperlinks. However,
 they are placed on their own line; are preceded by an exclamation point; and
@@ -259,7 +260,7 @@ both the label and destination have a specific naming convention:
 The bottom of the file will look like:
 
 ```no-highlight
-[img__webui_descriptor]: ../media/filename__webui_descriptor.png
+[img__webui_descriptor]: https://assets.ubuntu.com/v1/hash-filename__webui_descriptor.png
 ```
 
 Explanation:
@@ -278,22 +279,12 @@ For example:
 
 ...
 
-[img__2.1_enable-dhcp]: ../media/installconfig-networking-dhcp__2.1_enable-dhcp.png
-[img__enable-fire-alarm]: ../media/installconfig-networking-dhcp__enable-fire-alarm.png
+[img__2.1_enable-dhcp]: https://assets.ubuntu.com/v1/a2e5f7-installconfig-networking-dhcp__2.1_enable-dhcp.png
+[img__enable-fire-alarm]: https://assets.ubuntu.com/v1/b4e32a-installconfig-networking-dhcp__enable-fire-alarm.png
 ```
 
 If the image is not of the Juju web UI then simply omit the version part, like
 in the second image above.
-
-### Central images directory
-
-For publication (on the web site), all branch series use the `htmldocs/media`
-directory in the 'master' branch. This means:
-
-- You must be very careful when renaming or removing an image in master as it
-  will affect all non-master branches.
-- Any image introduced in a non-master branch must be *forward-ported* to the
-  master branch.
 
 ## Capitalization
 

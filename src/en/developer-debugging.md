@@ -125,7 +125,7 @@ that has been trapped.
 context](./authors-hook-environment.html).
   - Additionally, the environment variable`$JUJU_HOOK_NAME` is set
 appropriately.
-  ![Image showing tmux debug hooks session](./media/developer-debugging-1.png)
+  ![Image showing tmux debug hooks session](https://assets.ubuntu.com/v1/1f7ed897-developer-debugging-1.png)
 
 To proceed, you should **manually execute the hook**, or perform whatever other
 actions you want. At any time during a debug-hooks window 1 session you can run
@@ -201,6 +201,7 @@ You can use it to view, set and clear flags **within a debug-hooks session**.
 #### Showing flags
 
 Within a debug-hooks session, running the command:
+
 ```bash
 charms.reactive -p get_flags
 ```
@@ -224,7 +225,7 @@ the initial values when the hook was started.
 
 To set a particular flag, use the command:
 
-```shell
+```bash
 charms.reactive set_flag <flag>
 ```
 
@@ -278,7 +279,7 @@ Some useful definitions in the context of tmux:
 
 A session may look something like this:
 
-![Image showing byobu and tmux ](./media/tmux-annotation.png)
+![Image showing byobu and tmux](https://assets.ubuntu.com/v1/7e65b1af-tmux-annotation.png)
 
 Key:
 

@@ -42,7 +42,7 @@ username, password and tenant name (which is actually a number):
     the cloud control panel in the top-right corner (under your username), as
     shown in the following image:
 
-![Rackspace control panel showing tenant id](./media/config-rackspace_tenant_id.png)
+![Rackspace control panel showing tenant id](https://assets.ubuntu.com/v1/ec435490-config-rackspace_tenant_id.png)
 
 
 Credentials can now be added by running the following command:
@@ -75,7 +75,7 @@ Rackspace will provision an instance to run the controller on.
 The controller will now be visible in the
 [Rackspace cloud control panel][rscontrolpanel]:
 
-![bootstrap machine 0 in Rackspace portal](./media/config-rackspace_portal-machine_0.png)
+![bootstrap machine 0 in Rackspace portal](https://assets.ubuntu.com/v1/259ef4ad-config-rackspace_portal-machine_0.png)
 
 For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
