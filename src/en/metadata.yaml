@@ -93,8 +93,6 @@ navigation:
         location: juju-block.md
       - title: CentOS support
         location: juju-centos.md
-      - title: Juju plugins
-        location: juju-plugins.md
       - title: Collecting Juju metrics
         location: howto-prometheus.md
       - title: Application groups  
