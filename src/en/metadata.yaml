@@ -142,8 +142,6 @@ navigation:
             location: juju-centos.md
           - title: Network spaces
             location: network-spaces.md
-          - title: Juju plugins
-            location: juju-plugins.md
 
       - title: How to...
 
