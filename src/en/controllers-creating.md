@@ -53,19 +53,19 @@ the cloud name and the cloud's default region.
 
 ### Create a controller interactively
 
-You can create a controller interactively like this:
+You can create a controller interactively by omitting a cloud name altogether:
 
 ```bash
 juju bootstrap
 ```
 
 You will be prompted for what cloud and region to use as well as the controller
-name. Do not use this method if you want to specify anything else.
+name. Do not use this method if you intend on specifying anything else.
 
 ### Set default model constraints for a controller
 
-Below, all machines (including the controller) in the LXD controller's models
-will have at least 4GiB of memory:
+Default model constraints can be set. Here, all machines (including the
+controller) in a LXD controller's models will have at least 4GiB of memory:
 
 ```bash
 juju bootstrap --constraints mem=4G localhost
@@ -73,8 +73,7 @@ juju bootstrap --constraints mem=4G localhost
 
 ### Set controller constraints for a new controller
 
-This example shows how to request at least 4GiB of memory and two CPUs for an
-AWS controller:
+To request at least 4GiB of memory and two CPUs for just an AWS controller:
 
 ```bash
 juju bootstrap --bootstrap-constraints "mem=4G cores=2" aws
@@ -87,8 +86,7 @@ given via `--bootstrap-constraints` will be used.
 
 The controller will be deployed upon Ubuntu 18.04 LTS (Bionic) by default.
     
-For our example, we name the resulting LXD controller 'lxd-bionic' to reflect
-that:
+Here, we name the resulting LXD controller 'lxd-bionic' to reflect that:
 
 ```bash
 juju bootstrap localhost lxd-bionic
@@ -162,7 +160,7 @@ You can change the default timeout and retry delays used by Juju by setting the
 following keys in your configuration:
 
 | Key                        | Default (seconds) | Purpose |
-|:---------------------------|:------------------|:---------|
+|:---------------------------|:------------------|:--------|
 bootstrap-timeout            | 600    | How long to wait for a connection to the controller
 bootstrap-retry-delay        | 5      | How long to wait between connection attempts to a controller
 bootstrap-address-delay      | 10     | How often to refresh controller addresses from the API server
