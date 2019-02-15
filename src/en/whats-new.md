@@ -3,7 +3,7 @@ Title: What's new in 2.5
 # What's new in 2.5
 
 The major new features in this release are summarised below. See the
-[2.5 release notes][release-notes] for full details.
+[Release Notes][release-notes-2] for full details.
 
 ## Kubernetes workloads support
 
@@ -100,7 +100,7 @@ See [Use a custom charm store][controllers-creating-charmstore-url].
 
 <!-- LINKS -->
 
-[release-notes]: ./reference-release-notes.md#juju_2.5.0
+[release-notes-2]: ./reference-release-notes.md
 [clouds-k8s]: ./clouds-k8s.md
 [clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
 [clouds-lxd-advanced-clustering]: ./clouds-lxd-advanced.md#lxd-clustering
