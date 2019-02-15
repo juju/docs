@@ -166,7 +166,7 @@ provision an instance to run the controller on.
 This will result in the controller environment being visible in the
 [Azure portal][azureportal].
 
-![Juju environment in Azure portal](media/azure_portal-environment.png)
+![Juju environment in Azure portal](https://assets.ubuntu.com/v1/95d6cd3e-azure_portal-environment.png)
 
 For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
