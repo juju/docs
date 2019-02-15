@@ -18,8 +18,7 @@ promulgation
 
 - [ ] Verify charm proof doesn't have any errors.
 - [ ] Ensure the charm source is available and in a public repository
-- [ ] Make sure the charm has bugs-url and homepage set via
-      `charm set bug-url="https://example.com/issues" && charm set homepage="https://example.com"`
+- [ ] Make sure the charm has bugs-url and homepage set via `charm set bug-url="https://example.com/issues" && charm set homepage="https://example.com"`
 
 ## Request promulgation
 
@@ -42,3 +41,4 @@ To promulgate a Juju charm a member of the
 <!-- LINKS -->
 
 [launchpad-group-charmers]: https://launchpad.net/~charmers
+[juju-discourse]: https://discourse.jujucharms.com

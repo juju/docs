@@ -22,38 +22,6 @@ To install on other Linux distributions see the upstream
 There are no recent builds of Charm Tools for other operating systems. Check
 the [Charm Tools project][charm-tools] for further information.
 
-
-<!--
-
-REMOVING THESE PLATFORMS UNTIL THEIR BUILDS ARE UPDATED.
-
-## macOS
-
-Charm Tools is available via [Homebrew](http://brew.sh/). Make sure you're
-running the latest version of Homebrew before proceeding.
-
-To install, run the following:
-
-```bash
-brew install charm-tools
-```
-
-## Windows
-Charm Tools is available for, and tested on, Microsoft Windows 7 and 8. While
-the installer may work on previous versions of Windows there is no guarantee.
-
-To install, first download the Charm Tools installer from
-[launchpad](https://launchpad.net/charm-tools/1.2/1.2.9/+download/charm-tools_1.2.9.exe).
-Once downloaded, execute the installer and follow the on-
-screen prompts. After installation you can access Charm Tools via the
-`charm` command from either the command line or PowerShell.
-
-To uninstall, please remove Charm Tools from the Add/Remove Software section of
-the Windows Control Panel
-
--->
-
-
 ## Usage
 
 All the functionality provided by the Charm Tools is accessed via the `charm`
