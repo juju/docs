@@ -110,6 +110,6 @@ juju upgrade-charm postgresql --force-series
 
 <!-- LINKS -->
 
-[charm-tools]: ./tools-charm-tools.html
-[dev-upgrade-charm]: ./developer-upgrade-charm.html
-[deploy-charm_channels]: ./charms-deploying.html#channels
+[charm-tools]: ./tools-charm-tools.md
+[dev-upgrade-charm]: ./developer-upgrade-charm.md
+[deploy-charm_channels]: ./charms-deploying.md#channels
