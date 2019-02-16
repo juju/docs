@@ -1,28 +1,17 @@
-Title: The Juju GUI
+Title: Juju GUI
 TODO: some screenshots show 'services' rather than 'applications'
 
-# The Juju GUI
+# Juju GUI
 
-Juju has a graphical user interface (GUI) available to help with the tasks of 
-managing and monitoring your Juju environment. From Juju 2.0 onwards, unless 
-you bootstrap your controller with the `--no-gui` option, the GUI is 
-automatically embedded within every Juju controller.
-
-The GUI is a JavaScript and HTML web application that is encapsulated in its 
-own charm. Once installed, the GUI will talk with Juju over a websocket to 
-provide a real-time interface with the applications installed, the units that 
-comprise them, and the machines available. Additionally, the GUI can talk with 
-the charm store in order to search, browse, and deploy charms to your
-environment.
+Juju has a graphical user interface (GUI) available to help with the tasks of
+managing and monitoring your Juju environment. The GUI comes with every
+controller providing the controller was not created with the `--no-gui` option.
+It is installed via a charm but will not show up as a normally deployed 
+application.
 
 ## Using the GUI
 
-Juju GUI is now automatically included in every Juju controller after 
-bootstrapping, thus eliminating the need to additionally deploy the Juju GUI 
-charm. As it's part of the controller, it won't appear as a normally deployed 
-application.
-
-To view the URL and login credentials for Juju GUI, use the following command:
+To view the URL and login credentials for the GUI, use the following command:
 
 ```bash
 juju gui

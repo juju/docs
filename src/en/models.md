@@ -11,16 +11,16 @@ immediate use. Models can be added easily at any time.
 
 ## Model management
 
-Common model management tasks are summarised below, in alphabetical order.
+Common model management tasks are summarised below.
+
+The most important ones are [Adding a model][models-adding] and
+[Configuring models][models-config].
 
 
 ^# Add a model
   
-   Use the `add-model` command to add a model to a controller:
-   
-   `juju add-model [options] <model name> [key=[value] ...]`
-   
-   For command line help and syntax run `juju help add-model`.
+   Models can be quickly and easily added to a controller with the `add-model`
+   command.
    
    The [Adding a model][models-adding] page provides a full explanation and
    includes examples.
@@ -57,11 +57,8 @@ Common model management tasks are summarised below, in alphabetical order.
 
 ^# Compare a bundle to a model
 
-   Use the `diff-bundle` command to compare a model with a charm bundle:
-   
-   `juju diff-bundle [options] <bundle file or name>`
-   
-   For command line help and syntax run `juju help diff-bundle`.
+   A useful tool is the `diff-bundle` command. It allows the operator to
+   compare a model with a charm bundle.
    
    This topic is treated on the [Charm bundles][charms-bundles-diff] page.
 
@@ -72,7 +69,7 @@ Common model management tasks are summarised below, in alphabetical order.
    machines in the model. For instance, a logging level and API port can be
    stipulated.
 
-   This is a complex subject. See [Model configuration][models-config].
+   See the [Configuring models][models-config] page for explanations.
 
 
 ^# Cross model relations
@@ -96,11 +93,8 @@ Common model management tasks are summarised below, in alphabetical order.
 
 ^# Disable commands
 
-   Use the `disable-command` command to disable commands within a model:
-   
-   `juju disable-command [options] <command set> [message...]`
-   
-   For command line help and syntax run `juju help disable-command`.
+   It is possible to curtail command use for Juju users on a per-model basis
+   with the use of command `disable-command`.
    
    The [Disabling commands][juju-block] page gives more information.
 
@@ -184,26 +178,24 @@ Common model management tasks are summarised below, in alphabetical order.
    charms used in the model unless overridden. Constraints are used to select
    minimum requirements for any future machines Juju may create.
 
-   This is a complex subject. See
+   This subject is covered on page 
    [Setting constraints for a model][charms-constraints-models].
 
 
 ^# Upgrade a model
    
-   Juju software is upgraded at the model level. This affects the Juju agents
-   running on every machine Juju creates. This upgrade process does not pertain
-   to the Juju software package installed on a client system.
+   Juju software is upgraded at the model level with the `upgrade-model`
+   command. This affects the Juju agents running on every machine Juju creates.
+   This upgrade process does not pertain to the Juju software package installed
+   on a client system.
 
    See [Upgrading models][models-upgrade] for complete coverage.
 
 
 ^# View logs
    
-   Use the `debug-log` command to examine logs on a per-model basis:
-   
-   `juju debug-log [options]`
-
-   This allows inspection of activities occurring on multiple Juju machines
+   Use the `debug-log` command to examine logs on a per-model basis. This
+   allows inspection of activities occurring on multiple Juju machines
    simultaneously. Due to the expected large volume of data, advanced filtering
    is available.
 

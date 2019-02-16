@@ -250,8 +250,8 @@ synchronized across controllers. The user reads logging information with the
 
 <!-- LINKS -->
 
-[application-ha]: ./charms-ha.html
-[logs]: ./troubleshooting-logs.html
-[juju-backups]: ./controllers-backup.html
+[application-ha]: ./charms-ha.md
+[logs]: ./troubleshooting-logs.md
+[juju-backups]: ./controllers-backup.md
 [#removing-controllers]: #removing-machines-from-the-cluster
 [#adding-controllers]: #adding-machines-to-the-cluster
