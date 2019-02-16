@@ -16,8 +16,8 @@ well written, you can rest assured that IaaS downtime will not affect your
 application.
 
 !!! Note:
-    See [High Availability][controller-ha] for details on enabling high
-    availability for the controller.
+    See [Controller high availability][controllers-ha] for details on enabling
+    high availability for the controller.
 
 Commands you already use for scaling now ensure your applications are always
 available. e.g.
@@ -25,6 +25,7 @@ available. e.g.
 ```bash
 juju deploy -n 10 <application>
 ```
+
 The way this works depends on whether Juju uses 'availability zones' or
 'availability sets'. 
 
@@ -35,8 +36,8 @@ across a region. A new instance, for example, will be allocated the zone
 with the fewest members of its distribution group.
 
 Juju supports such zones on Google Compute Engine, VMware vSphere, Amazon's
-EC2, OpenStack-based clouds (Havana or newer) and [MAAS][maaszones]. See the
-[Clouds][jujuclouds] section of the documentation for more details on these and
+EC2, OpenStack-based clouds (Havana or newer) and [MAAS][maas-zones]. See the
+[Clouds][clouds] section of the documentation for more details on these and
 other cloud-specific settings.
 
 If you do not specify a zone explicitly, Juju will automatically and uniformly
@@ -87,8 +88,8 @@ not all units in the set will become unavailable at the same time.
 
 <!-- LINKS -->
 
-[controller-ha]: ./controllers-ha.md
-[maaszones]: https://docs.ubuntu.com/maas/en/manage-zones
-[jujuclouds]: ./clouds.md
+[controllers-ha]: ./controllers-ha.md
+[maas-zones]: https://docs.ubuntu.com/maas/en/manage-zones
+[clouds]: ./clouds.md
 [azure-sla]: https://azure.microsoft.com/en-gb/support/legal/sla/
 [clouds-azure]: ./clouds-azure.md

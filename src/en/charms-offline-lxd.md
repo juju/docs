@@ -50,5 +50,5 @@ localhost lxd
 
 <!-- LINKS -->
 
-[charms-offline]: ./charms-offline.html
-[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.html#no-proxy-and-the-localhost-cloud
+[charms-offline]: ./charms-offline.md
+[anchor__no-proxy-and-the-localhost-cloud]: ./charms-offline-strategies.md#no-proxy-and-the-localhost-cloud

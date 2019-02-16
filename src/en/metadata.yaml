@@ -5,7 +5,7 @@ navigation:
     children:
       - title: Home
         location: index.md
-      - title: Getting started with Juju
+      - title: Getting started
         location: getting-started.md
       - title: Install Juju
         location: reference-install.md
@@ -19,20 +19,14 @@ navigation:
         location: clouds.md
       - title: Credentials
         location: credentials.md
-      - title: Creating a controller
-        location: controllers-creating.md
-      - title: Deploying applications
-        location: charms-deploying.md
+      - title: Controllers
+        location: controllers.md
+      - title: Applications
+        location: applications.md
+      - title: Models
+        location: models.md
       - title: Using constraints
         location: charms-constraints.md
-      - title: Configuring models
-        location: models-config.md
-      - title: Configuring applications
-        location: charms-config.md
-      - title: Managing relations
-        location: charms-relations.md
-      - title: Scaling applications
-        location: charms-scaling.md
       - title: Removing things
         location: charms-destroy.md
 
@@ -87,20 +81,12 @@ navigation:
   - title: Miscellaneous
 
     children:
-      - title: The Juju GUI
+      - title: Juju GUI
         location: controllers-gui.md
-      - title: Disabling commands
-        location: juju-block.md
       - title: CentOS support
         location: juju-centos.md
       - title: Collecting Juju metrics
         location: howto-prometheus.md
-      - title: Application groups  
-        location: charms-service-groups.md
-      - title: Working with units
-        location: charms-working-with-units.md
-      - title: Application metrics
-        location: charms-metrics.md
 
   - title: Charm writing
     location: https://docs.jujucharms.com/2.4/en/developer-getting-started
