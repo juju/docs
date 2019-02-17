@@ -59,6 +59,11 @@ installed within it:
 
 To see what you can do with charms visit the [Charms][charms] page.
 
+## Container
+
+In Juju, a *container* is a generic term that is used to refer to either a
+LXD-based machine or a KVM-based machine.
+
 ## Bundle
 
 A Juju *bundle* is a collection of charms which have been carefully combined
@@ -197,13 +202,12 @@ cloud instances.
 
 ![machine][img__client-2]
 
-In the case of the localhost cloud (LXD), the cloud is housed within the same
-system as the Juju client:
+In the case of the localhost cloud (LXD), the cloud is a local LXD daemon
+housed within the same system as the Juju client:
 
 ![machine][img__client-3]
 
-Although LXD itself can operate over the network, Juju does not support this.
-The client *must* be local to the LXD containers.
+LXD itself can operate over the network and Juju does support this (`v.2.5.0`).
 
 See the [Client][client] page for how to backup and upgrade the Juju client.
 
