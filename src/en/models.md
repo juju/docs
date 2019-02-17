@@ -2,12 +2,11 @@ Title: Models
 
 # Models
 
-A *model* is an environment associated with a *controller* (see
-[Controllers][controllers]). When a controller is created two models are
-provisioned along with it. These initial models are named 'controller' and
-'default'. The 'controller' model is for internal Juju management and is not
-intended for general workloads. The 'default' model, however, is ready for
-immediate use. Models can be added easily at any time.
+A *model* is an environment associated with a controller. When a controller is
+created two models are provisioned along with it. These initial models are
+named 'controller' and 'default'. The 'controller' model is for internal Juju
+management and is not intended for general workloads. The 'default' model,
+however, is ready for immediate use. Models can be added easily at any time.
 
 ## Model management
 
@@ -19,8 +18,7 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# Add a model
   
-   Models can be quickly and easily added to a controller with the `add-model`
-   command.
+   Models can be easily added to a controller.
    
    The [Adding a model][models-adding] page provides a full explanation and
    includes examples.
@@ -30,12 +28,10 @@ The most important ones are [Adding a model][models-adding] and
    
    Use the `switch` command to change from one model to another:
    
-   `juju switch [<controller or model>|<:model>|<controller>:<model>|<controller:>]`
-   
    Running the command with no arguments will return the currently active 
    controller and model:
      
-         juju switch
+   `juju switch`
    
    To change to a model:
    
@@ -57,10 +53,11 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# Compare a bundle to a model
 
-   A useful tool is the `diff-bundle` command. It allows the operator to
-   compare a model with a charm bundle.
+   An operator can compare a model with a charm bundle. This is useful for
+   determining what has changed since the bundle was deployed or just how a
+   model differs from a bundle that was not yet used.
    
-   This topic is treated on the [Charm bundles][charms-bundles-diff] page.
+   This topic is covered on the [Charm bundles][charms-bundles-diff] page.
 
 
 ^# Configure a model
@@ -84,48 +81,31 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# Destroy a model
 
-   Use the `destroy-model` command to remove a model from a controller:
-   
-   `juju destroy-model [options] <model name>`
+   Use the `destroy-model` command to remove a model from a controller.
    
    For command line help and syntax run `juju help destroy-model`.
 
 
 ^# Disable commands
 
-   It is possible to curtail command use for Juju users on a per-model basis
-   with the use of command `disable-command`.
+   It is possible to curtail command use for Juju users on a per-model basis.
    
    The [Disabling commands][juju-block] page gives more information.
 
 
 ^# Examine a model
 
-   Use the `show-model` command to examine a specific model:
-   
-   `juju show-model [options]`
+   Use the `show-model` command to examine a specific model.
    
    For command line help and syntax run `juju help show-model`.
 
 
 ^# List all models
 
-   Use the `models` command to list all models for a controller:
-   
-   `juju models [options]`
+   Use the `models` command to list all models for a controller.
    
    For command line help and syntax run `juju help models`.
 
-
-^# List SSH access keys
-   
-   Use the `ssh-keys` command to list SSH keys currently permitting access to
-   all machines, present and future, in a model:
-   
-   `juju ssh-keys [options]`
-   
-   For command line help and syntax run `juju help ssh-keys`.
-   
 
 ^# Manage user access
    
@@ -136,40 +116,17 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# Migrate models
 
-   Use the `migrate` command to migrate a model from one controller to another.
-
-   `juju migrate [options] <model name> <target controller name>`
-   
-   For command line help and syntax run `juju help migrate`.
+   Model can be migrated from one controller to another.
 
    For a complete explanation see the [Migrating models][models-migrate] page.
    
 
-^# Provide SSH access
+^# SSH access
    
-   Use the `add-ssh-key` and `import-ssh-key` commands to provide SSH access to
-   all machines, present and future, in a model:
-   
-   `juju add-ssh-key <ssh-key>`
-
-   OR
-
-   `juju import-ssh-key <lp|gh>:<user identity>`
-   
-   For command line help and syntax run `juju help add-ssh-key` or
-   `juju help import-ssh-key`.
+   SSH access can be provided to all machines, present and future, on a
+   per-model basis.
    
    For in-depth coverage see page [Machine authentication][machine-auth].
-
-
-^# Remove SSH access
-   
-   Use the `remove-ssh-key` command to remove SSH access to all machines,
-   present and future, from a model:
-   
-   `juju remove-ssh-key <ssh-key-id> ...`
-   
-   For command line help and syntax run `juju help remove-ssh-key`.
 
 
 ^# Set constraints for a model
@@ -186,8 +143,8 @@ The most important ones are [Adding a model][models-adding] and
    
    Juju software is upgraded at the model level with the `upgrade-model`
    command. This affects the Juju agents running on every machine Juju creates.
-   This upgrade process does not pertain to the Juju software package installed
-   on a client system.
+   This does not pertain to the Juju software package installed on a client
+   system.
 
    See [Upgrading models][models-upgrade] for complete coverage.
 
@@ -204,16 +161,13 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# View model status
    
-   Use the `status` command to view the status of a model:
+   Use the `status` command to view the status of a model.
 
-   `juju status [options] [filter pattern ...]`
-   
    For command line help and syntax run `juju help status`.
 
 
 <!-- LINKS -->
 
-[controllers]: ./controllers.md
 [models-cmr]: ./models-cmr.md
 [models-adding]: ./models-adding.md
 [models-config]: ./models-config.md
