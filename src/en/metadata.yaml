@@ -21,11 +21,13 @@ navigation:
         location: credentials.md
       - title: Controllers
         location: controllers.md
-      - title: Applications
-        location: applications.md
       - title: Models
         location: models.md
-      - title: Using constraints
+      - title: Applications
+        location: applications.md
+      - title: Relations
+        location: charms-relations.md
+      - title: Constraints
         location: charms-constraints.md
       - title: Removing things
         location: charms-destroy.md

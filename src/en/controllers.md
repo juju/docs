@@ -13,14 +13,6 @@ model and the 'default' model. The primary purpose of the 'controller' model is
 to run and manage the API server and the underlying database. Additional models
 may be created by the user (see [Models][models]).
 
-Since a controller can host multiple models, the destruction of a controller
-must be done with ample consideration since all its models will be destroyed
-along with it.
-
-In some circumstances you may wish to share a controller or one of its
-associated models. See page [Working with multiple users][multiuser] for
-guidance.
-
 The minimum resources required for a controller are 3.5 GiB of memory and 1
 vCPU.
 
@@ -86,10 +78,10 @@ The most important one is [Creating a controller][controllers-creating].
    For command line help and syntax run `juju help controllers`.
 
 
-^# Remove a controller
+^# Destroy a controller
 
-   When a controller is removed all associated models and applications are also
-   removed. It is a very destructive process.
+   When a controller is destroyed all associated models and applications are
+   also removed. It is a very destructive process.
 
    See the [Removing things][charms-destroy] for a full explanation.
 
@@ -117,7 +109,6 @@ The most important one is [Creating a controller][controllers-creating].
 <!-- LINKS -->
 
 [models]: ./models.md
-[multiuser]: ./multiuser.md
 [juju-block]: ./juju-block.md
 [charms-destroy]: ./charms-destroy.md
 [controllers-backup]: ./controllers-backup.md

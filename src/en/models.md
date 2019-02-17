@@ -81,9 +81,8 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# Destroy a model
 
-   Use the `destroy-model` command to remove a model from a controller.
-   
-   For command line help and syntax run `juju help destroy-model`.
+   When a model is destroyed all associated applications and machines are
+   also destroyed. It is a very destructive process.
 
 
 ^# Disable commands
@@ -116,7 +115,8 @@ The most important ones are [Adding a model][models-adding] and
 
 ^# Migrate models
 
-   Model can be migrated from one controller to another.
+   Model can be migrated from one controller to another. Model migration is
+   useful when upgrading a controller and for load balancing.
 
    For a complete explanation see the [Migrating models][models-migrate] page.
    
