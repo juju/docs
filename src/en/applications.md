@@ -2,8 +2,8 @@ Title: Applications
 
 # Applications
 
-An *application* is a piece of software that is installed via a *charm*. These
-two terms are often used interchangeably.
+An *application* in Juju is a collection of identical application *units* that
+are installed via a *charm*.
 
 ## Application management
 
@@ -15,23 +15,36 @@ The most important ones are [Deploying applications][charms-deploying] and
 
 ^# Application groups
    
-   See the [Application groups][charms-groups] page for full information.
+   Application groups allow an operator to manage groups of the same
+   application by providing custom application names during deployment.
+   
+   See the [Application groups][charms-groups] page for details.
 
 
 ^# Application high availability
    
-   See the [Application high availability][charms-ha] page for full information.
+   Application high availability pertains to the distribution of units over
+   availability zones.
+   
+   See the [Application high availability][charms-ha] page for full
+   information.
 
 
 ^# Application metrics
+
+   Metrics for applications can be collected for the purposes of model-level
+   assessment of application utilisation and capacity planning.
    
-   See the [Application metrics][charms-metrics] page for full information.
+   See the [Application metrics][charms-metrics] page to learn more.
 
 
 ^# Configure applications
    
-   See the [Configuring applications][charms-config] page for full
-   information.
+   Applications can have their configuration options set during, or after,
+   deployment.
+
+   The [Configuring applications][charms-config] page explains how this is
+   done.
 
 
 ^# Deploy applications
@@ -45,26 +58,34 @@ The most important ones are [Deploying applications][charms-deploying] and
    See the [Deploying charms offline][charms-offline-deploying] page for
    guidance when deploying in a network-restricted environment.
 
-   Applications can be deployed and configured as a collection of charms. The
-   [Charm bundles][charms-bundles] page shows how this is done.
+   Applications can be deployed and configured as a collection of charms. This
+   subject is treated on the [Charm bundles][charms-bundles] page.
  
 
 ^# Relate applications
   
-   The [Managing relations][charms-relations] page provides a full
-   explanation and includes examples.
+   When an application requires another application in order to fulfil its
+   purpose they need to be logically linked together. In Juju, such a link
+   is called a *relation*.
+   
+   The [Managing relations][charms-relations] page explains this important
+   concept.
   
 
 ^# Upgrade an application
    
-   See the [Upgrading applications][charms-upgrading] page for full
-   information.
+   Upgrading an application in Juju means to upgrade the application's charm.
+
+   See the [Upgrading applications][charms-upgrading] page for in-depth
+   coverage.
 
 
 ^# Scale applications
    
-   See the [Scaling applications][charms-scaling] page for full
-   information.
+   Juju horizontally scales applications up and down by adding and removing
+   application units.
+   
+   The [Scaling applications][charms-scaling] page for details.
 
 
 <!-- LINKS -->
