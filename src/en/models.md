@@ -2,25 +2,23 @@ Title: Models
 
 # Models
 
-A *model* is an environment associated with a *controller* (see
-[Controllers][controllers]). When a controller is created two models are
-provisioned along with it. These initial models are named 'controller' and
-'default'. The 'controller' model is for internal Juju management and is not
-intended for general workloads. The 'default' model, however, is ready for
-immediate use. Models can be added easily at any time.
+A *model* is an environment associated with a controller. When a controller is
+created two models are provisioned along with it. These initial models are
+named 'controller' and 'default'. The 'controller' model is for internal Juju
+management and is not intended for general workloads. The 'default' model,
+however, is ready for immediate use. Models can be added easily at any time.
 
 ## Model management
 
-Common model management tasks are summarised below, in alphabetical order.
+Common model management tasks are summarised below.
+
+The most important ones are [Adding a model][models-adding] and
+[Configuring models][models-config].
 
 
 ^# Add a model
   
-   Use the `add-model` command to add a model to a controller:
-   
-   `juju add-model [options] <model name> [key=[value] ...]`
-   
-   For command line help and syntax run `juju help add-model`.
+   Models can be easily added to a controller.
    
    The [Adding a model][models-adding] page provides a full explanation and
    includes examples.
@@ -30,12 +28,10 @@ Common model management tasks are summarised below, in alphabetical order.
    
    Use the `switch` command to change from one model to another:
    
-   `juju switch [<controller or model>|<:model>|<controller>:<model>|<controller:>]`
-   
    Running the command with no arguments will return the currently active 
    controller and model:
      
-         juju switch
+   `juju switch`
    
    To change to a model:
    
@@ -57,13 +53,11 @@ Common model management tasks are summarised below, in alphabetical order.
 
 ^# Compare a bundle to a model
 
-   Use the `diff-bundle` command to compare a model with a charm bundle:
+   An operator can compare a model with a charm bundle. This is useful for
+   determining what has changed since the bundle was deployed or just how a
+   model differs from a bundle that was not yet used.
    
-   `juju diff-bundle [options] <bundle file or name>`
-   
-   For command line help and syntax run `juju help diff-bundle`.
-   
-   This topic is treated on the [Charm bundles][charms-bundles-diff] page.
+   This topic is covered on the [Charm bundles][charms-bundles-diff] page.
 
 
 ^# Configure a model
@@ -72,7 +66,7 @@ Common model management tasks are summarised below, in alphabetical order.
    machines in the model. For instance, a logging level and API port can be
    stipulated.
 
-   This is a complex subject. See [Model configuration][models-config].
+   See the [Configuring models][models-config] page for explanations.
 
 
 ^# Cross model relations
@@ -87,51 +81,30 @@ Common model management tasks are summarised below, in alphabetical order.
 
 ^# Destroy a model
 
-   Use the `destroy-model` command to remove a model from a controller:
-   
-   `juju destroy-model [options] <model name>`
-   
-   For command line help and syntax run `juju help destroy-model`.
+   When a model is destroyed all associated applications and machines are
+   also destroyed. It is a very destructive process.
 
 
 ^# Disable commands
 
-   Use the `disable-command` command to disable commands within a model:
-   
-   `juju disable-command [options] <command set> [message...]`
-   
-   For command line help and syntax run `juju help disable-command`.
+   It is possible to curtail command use for Juju users on a per-model basis.
    
    The [Disabling commands][juju-block] page gives more information.
 
 
 ^# Examine a model
 
-   Use the `show-model` command to examine a specific model:
-   
-   `juju show-model [options]`
+   Use the `show-model` command to examine a specific model.
    
    For command line help and syntax run `juju help show-model`.
 
 
 ^# List all models
 
-   Use the `models` command to list all models for a controller:
-   
-   `juju models [options]`
+   Use the `models` command to list all models for a controller.
    
    For command line help and syntax run `juju help models`.
 
-
-^# List SSH access keys
-   
-   Use the `ssh-keys` command to list SSH keys currently permitting access to
-   all machines, present and future, in a model:
-   
-   `juju ssh-keys [options]`
-   
-   For command line help and syntax run `juju help ssh-keys`.
-   
 
 ^# Manage user access
    
@@ -142,40 +115,18 @@ Common model management tasks are summarised below, in alphabetical order.
 
 ^# Migrate models
 
-   Use the `migrate` command to migrate a model from one controller to another.
-
-   `juju migrate [options] <model name> <target controller name>`
-   
-   For command line help and syntax run `juju help migrate`.
+   Model can be migrated from one controller to another. Model migration is
+   useful when upgrading a controller and for load balancing.
 
    For a complete explanation see the [Migrating models][models-migrate] page.
    
 
-^# Provide SSH access
+^# SSH access
    
-   Use the `add-ssh-key` and `import-ssh-key` commands to provide SSH access to
-   all machines, present and future, in a model:
-   
-   `juju add-ssh-key <ssh-key>`
-
-   OR
-
-   `juju import-ssh-key <lp|gh>:<user identity>`
-   
-   For command line help and syntax run `juju help add-ssh-key` or
-   `juju help import-ssh-key`.
+   SSH access can be provided to all machines, present and future, on a
+   per-model basis.
    
    For in-depth coverage see page [Machine authentication][machine-auth].
-
-
-^# Remove SSH access
-   
-   Use the `remove-ssh-key` command to remove SSH access to all machines,
-   present and future, from a model:
-   
-   `juju remove-ssh-key <ssh-key-id> ...`
-   
-   For command line help and syntax run `juju help remove-ssh-key`.
 
 
 ^# Set constraints for a model
@@ -184,26 +135,24 @@ Common model management tasks are summarised below, in alphabetical order.
    charms used in the model unless overridden. Constraints are used to select
    minimum requirements for any future machines Juju may create.
 
-   This is a complex subject. See
+   This subject is covered on page 
    [Setting constraints for a model][charms-constraints-models].
 
 
 ^# Upgrade a model
    
-   Juju software is upgraded at the model level. This affects the Juju agents
-   running on every machine Juju creates. This upgrade process does not pertain
-   to the Juju software package installed on a client system.
+   Juju software is upgraded at the model level with the `upgrade-model`
+   command. This affects the Juju agents running on every machine Juju creates.
+   This does not pertain to the Juju software package installed on a client
+   system.
 
    See [Upgrading models][models-upgrade] for complete coverage.
 
 
 ^# View logs
    
-   Use the `debug-log` command to examine logs on a per-model basis:
-   
-   `juju debug-log [options]`
-
-   This allows inspection of activities occurring on multiple Juju machines
+   Use the `debug-log` command to examine logs on a per-model basis. This
+   allows inspection of activities occurring on multiple Juju machines
    simultaneously. Due to the expected large volume of data, advanced filtering
    is available.
 
@@ -212,16 +161,13 @@ Common model management tasks are summarised below, in alphabetical order.
 
 ^# View model status
    
-   Use the `status` command to view the status of a model:
+   Use the `status` command to view the status of a model.
 
-   `juju status [options] [filter pattern ...]`
-   
    For command line help and syntax run `juju help status`.
 
 
 <!-- LINKS -->
 
-[controllers]: ./controllers.md
 [models-cmr]: ./models-cmr.md
 [models-adding]: ./models-adding.md
 [models-config]: ./models-config.md

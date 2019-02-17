@@ -6,30 +6,28 @@ When deploying an application, the charm you use will often support or even
 require specific configuration options to be set.
 
 Juju provides tools to help manage these options and respond to changes over
-the lifetime of the application deployment. These options apply to the entire
-application, as opposed to only a specific unit or relation. The configuration
-can be modified by an administrator at deployment time or after the applications
-are operational.
+the lifetime of the application. These options apply to the entire application,
+as opposed to only a specific unit or relation. The configuration can be
+done at deployment time or post-deployment.
 
 ## Discovering application configuration options
 
 Each charm will have its own set of options and possible values. You can
 discover these in several ways:
 
- - By running the `config` command.
- - By viewing the charm in the [Charm Store][charm-store].
- - By examining the `config.yaml` file in the charm itself.
+ - by running the `config` command
+ - by viewing the charm in the [Charm Store][charm-store]
+ - by examining the `config.yaml` file in the charm itself
 
 ## Configuring an application at deployment time
 
-Configuration values for an application can be set during deployment in several
-ways:
+Configuration values can be set at deployment time using the following methods:
 
  - by using a [yaml-formatted][yaml] file
  - by passing options/values directly on the command line
  - a combination of the above
  
-All these methods use the `--config=` switch.
+All these methods use the `--config` option.
 
 For example, upon investigation we discover that the Mediawiki charm allows us
 to set values for the 'name' of the wiki and the 'skin' to use. We can put
@@ -67,13 +65,13 @@ value gets used. For instance, below, the wiki will be assigned the name of
 juju deploy --config name='Juju Wookie' --config myconfig.yaml
 ```
 
-## Configuring an application which is already deployed
+## Configuring an application post deployment
 
-It is possible to set or change configuration of an application which is
+It is possible to set or change the configuration of an application which is
 already deployed.
 
 Before you set any of these options, you may want to check what current options
-are already set, using the `juju config <application>` command. For example:
+are already set. For example:
 
 ```bash
 juju config mediawiki
@@ -122,22 +120,22 @@ settings:
     value: true
 ```
 
-You can set the options using `juju config <application>`, specifying
-multiple space-separated key=value pairs if necessary:
+You can set the options in a very similar way. Simply add space-separated
+key=value pairs as arguments:
 
 ```bash
 juju config mediawiki skin=monoblock name='Juju Wiki'
 ```
-It is also possible to set the configuration options from a YAML file after
-the application has been deployed:
+
+It is also possible to set options from a YAML file:
 
 ```bash
 juju config mediawiki --file path/to/myconfig.yaml
 ```
 
-Setting an option back to its default value is achieved by using the same
-command, with the `--reset` switch, followed by a comma-separated list of the
-values to return to the default setting:
+Setting an option back to its default value is achieved with the `--reset`
+option. Here, the argument is a comma-separated list of the option names in
+question:
 
 ```bash
 juju config mediawiki --reset admins,name
@@ -146,5 +144,5 @@ juju config mediawiki --reset admins,name
 
 <!-- LINKS -->
 
-[yaml]: http://yaml.org/spec/1.1/current.html "YAML spec page"
+[yaml]: http://yaml.org/spec/1.1/current.html
 [charm-store]: https://jujucharms.com/q/?type=bundle

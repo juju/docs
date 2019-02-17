@@ -1,12 +1,12 @@
-Title: Cross Model Relations
+Title: Cross model relations
 TODO:  Add scenario #3: different cloud types
        Add commands to a scenario: grant|revoke, suspend|resume, remove-offer, consume|remove-saas
        Bug tracking: https://pad.lv/1726945
        'Managing offers' section could use a rework
-       (e.g. summarize management abilities first)
+       (e.g. summarise management abilities first)
        (e.g. moving some detail to a new scenario)
 
-# Cross Model Relations
+# Cross model relations
 
 Cross Model Relations (CMR) allow applications in different models to be
 related. Recall that traditional relations must abide within the same model.
@@ -265,19 +265,19 @@ The following CMR scenarios will be examined:
 
 <!-- LINKS -->
 
-[models]: ./models.html
-[charms-relations]: ./charms-relations.html
-[scenario-1]: ./models-cmr-scene-1.html
-[scenario-2]: ./models-cmr-scene-2.html
+[models]: ./models.md
+[charms-relations]: ./charms-relations.md
+[scenario-1]: ./models-cmr-scene-1.md
+[scenario-2]: ./models-cmr-scene-2.md
 
-[commands-consume]: ./commands.html#consume
-[commands-find-offers]: ./commands.html#find-offers
-[commands-list-firewall-rules]: ./commands.html#list-firewall-rules
-[commands-offers]: ./commands.html#offers
-[commands-offer]: ./commands.html#offer
-[commands-remove-offer]: ./commands.html#remove-offer
-[commands-remove-saas]: ./commands.html#remove-saas
-[commands-resume-relation]: ./commands.html#resume-relation
-[commands-set-firewall-rule]: ./commands.html#set-firewall-rule
-[commands-show-offer]: ./commands.html#show-offer
-[commands-suspend-relation]: ./commands.html#suspend-relation
+[commands-consume]: ./commands.md#consume
+[commands-find-offers]: ./commands.md#find-offers
+[commands-list-firewall-rules]: ./commands.md#list-firewall-rules
+[commands-offers]: ./commands.md#offers
+[commands-offer]: ./commands.md#offer
+[commands-remove-offer]: ./commands.md#remove-offer
+[commands-remove-saas]: ./commands.md#remove-saas
+[commands-resume-relation]: ./commands.md#resume-relation
+[commands-set-firewall-rule]: ./commands.md#set-firewall-rule
+[commands-show-offer]: ./commands.md#show-offer
+[commands-suspend-relation]: ./commands.md#suspend-relation

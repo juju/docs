@@ -325,8 +325,8 @@ juju enable-ha -m aws-ha3-2:controller -n 3
 
 <!-- LINKS -->
 
-[controllers-ha]: ./controllers-ha.html
-[client-backups]: ./client.html#backups
-[reference-constraints]: ./reference-constraints.html
-[recovering-ha-failure]: ./controllers-ha.html#recovering-from-controller-failure
+[controllers-ha]: ./controllers-ha.md
+[client-backups]: ./client.md#backups
+[reference-constraints]: ./reference-constraints.md
+[recovering-ha-failure]: ./controllers-ha.md#recovering-from-controller-failure
 [controllers-ha]: ./controllers-ha.md
