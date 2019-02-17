@@ -3,16 +3,12 @@ TODO: How are subnet and end point bindings handled?
       Check and add migration resources for different controllers
       Review and testing required
 
-
 # Migrating models
 
 Model migration allows you to easily move a live model from one controller to
 another. The same configuration of machines, units and their relationships will
 be replicated on a secondary controller, while your applications continue
 uninterrupted. 
-
-Migration is useful when upgrading a controller, for load balancing, and for
-providing additional flexibility.
 
 When upgrading a controller, you can bootstrap a new controller running a newer
 version of Juju and then migrate each model across one at a time. This is
@@ -24,13 +20,13 @@ controller, reducing load without affecting your applications.
 
 For migration to work:
 
-  - The source and destination controllers need to be in the same cloud environment. 
-  - The destination controller needs to be running on the same cloud substrate
-    as the source controller.
-  - Destination controllers on different regions or VPCs need direct
-    connectivity to the source controller.
-  - The version of Juju running on the destination controller needs to be the
-    same or newer than the version on the source controller.
+ - The source and destination controllers need to be in the same cloud environment. 
+ - The destination controller needs to be running on the same cloud substrate
+   as the source controller.
+ - Destination controllers on different regions or VPCs need direct
+   connectivity to the source controller.
+ - The version of Juju running on the destination controller needs to be the
+   same or newer than the version on the source controller.
 
 !!! Note: 
     A controller model can not be migrated.
@@ -38,8 +34,8 @@ For migration to work:
 ## Usage
 
 To start a migration, the target controller must be in the Juju client's local
-configuration cache. See the '[clouds][clouds]' documentation for details on
-how to do this.
+configuration cache. See the [Clouds][clouds] page for details on how to do
+this.
 
 While the migration process itself is robust, thanks to extensive checks before
 and during the process, we still recommend creating a backup of your source
@@ -52,7 +48,8 @@ locally, type the following:
 juju switch controller
 juju create-backup
 ```
-See '[Backing Up and Restoring Juju][backup]' if you need further details.
+
+See [Controller backups][controllers-backup] for further details.
 
 To migrate a model on the current controller to a model on another controller,
 you simply name the model as the first argument followed by the target
@@ -119,5 +116,8 @@ juju switch <target controller>:<model>
 juju status
 ```
 
-[clouds]: ./clouds.html
-[backup]: ./controllers-backup.html
+
+<!-- LINKS -->
+
+[clouds]: ./clouds.md
+[controllers-backup]: ./controllers-backup.md

@@ -6,8 +6,8 @@ Title: Deploying Charms Offline
 [Working offline][charms-offline] page for background information.*
 
 Clouds that do not enjoy a connection to the internet can nonetheless make use
-of Juju charms provided that the **client** prepares in advance local copies of
-the charms. The client has the ability to point to a local charm during
+of charms provided that the **client** prepares local copies of them in
+advance. The client has the ability to point to a local charm during
 deployment. This passes the charm on to the controller. Recall that, by
 default, the **controller** manages the access and distribution of charms.
 
@@ -18,7 +18,6 @@ Juju charms. In particular, they do not take into account:
    context. For instance, some charms download files from internet-based
    sources (e.g. GitHub). In such cases, the charm must be appropriately
    modified prior to usage.
-
  - other required cloud ingredients such as operating system (or container)
    images.
 
@@ -109,9 +108,9 @@ postgresql  9.5.10   active      1  postgresql  jujucharms  164  ubuntu
 
 <!-- LINKS -->
 
-[charms-offline]: ./charms-offline.html
+[charms-offline]: ./charms-offline.md
 [charm-store]: https://jujucharms.com
-[charm-tools]: ./tools-charm-tools.html
-[charms-deploying]: ./charms-deploying.html
-[models-config]: ./models-config.html
-[controllers]: ./controllers.html
+[charm-tools]: ./tools-charm-tools.md
+[charms-deploying]: ./charms-deploying.md
+[models-config]: ./models-config.md
+[controllers]: ./controllers.md

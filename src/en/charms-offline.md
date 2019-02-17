@@ -63,9 +63,9 @@ of the localhost cloud (LXD). Go to
 
 <!-- LINKS -->
 
-[charms-offline-deploying]: ./charms-offline-deploying.html
-[tools-charm-tools]: ./tools-charm-tools.html
-[snaps-offline-installing]: ./snaps-offline-installing.html
-[charms-offline-strategies]: ./charms-offline-strategies.html
-[charms-offline-config]: ./charms-offline-config.html
-[charms-offline-lxd]: ./charms-offline-lxd.html
+[charms-offline-deploying]: ./charms-offline-deploying.md
+[tools-charm-tools]: ./tools-charm-tools.md
+[snaps-offline-installing]: ./snaps-offline-installing.md
+[charms-offline-strategies]: ./charms-offline-strategies.md
+[charms-offline-config]: ./charms-offline-config.md
+[charms-offline-lxd]: ./charms-offline-lxd.md

@@ -2,31 +2,16 @@ Title: Application groups
 
 # Application groups
 
-Juju deploys units of an application from a charm. The simplest way to do this 
-is
-
-```bash
-juju deploy mysql
-```
-
-which will take the latest version of the MySQL charm straight from the store
-and create a single application unit.
-
-By default, Juju creates a unit of an application named after the charm; `mysql` 
-in the above example.
-
-You can specify the name for the application when deploying:
+By default, an application is named after the deployed charm. However, you can
+specify a custom name by adding an extra argument to the `deploy` command:
 
 ```bash
 juju deploy mysql wikidb
 ```
 
-which will create a unit of the `wikidb` application. It creates the unit 
-exactly as before, except instead of `mysql`, the application is called 
-`wikidb`.
+This will create a unit of the `wikidb` application.
 
-Why specify names for applications? The simplest reason is organizational. It 
-lets you stay organized as your infrastructure gets more complex:
+This can lend to greater organisation as your infrastructure gets more complex:
 
 ```bash
 juju deploy mysql website-db
@@ -34,10 +19,9 @@ juju deploy mysql app-master-db
 juju deploy mysql app-slave-db -n2
 ```
 
-But there are other reasons to do this: application groups, which are nothing 
-other than named applications. They are called out as a separate feature because 
-they're quite useful in a few different ways.
-
+But there are other reasons to do this: *application groups*, which are nothing
+other than named applications. They are called out as a separate feature
+because they're quite useful in a few different ways.
 
 ## Roles
 
