@@ -88,25 +88,10 @@ The most important one is [Creating a controller][controllers-creating].
 
 ^# Remove a controller
 
-   Use the `destroy-controller` command to remove a controller.
+   When a controller is removed all associated models and applications are also
+   removed. It is a very destructive process.
 
-   `juju destroy-controller [options]`
-
-   For command line help and syntax run `juju help destroy-controller`.
-
-   Use the `kill-controller` command as a last resort if the controller is not
-   accessible for some reason.
-
-   The controller will be removed by communicating directly with the cloud
-   provider. Any other Juju machines residing within any of the controller's
-   models will not be destroyed and will need to be removed manually using
-   provider tools/console. This command will first attempt to mimic the
-   behaviour of the `juju destroy-controller` command and failover to the more
-   drastic behaviour if that attempt fails.
-
-   `juju kill-controller [options]`
-
-   For command line help and syntax run `juju help kill-controller`.
+   See the [Removing things][charms-destroy] for a full explanation.
 
 
 ^# Show controller details
@@ -134,6 +119,7 @@ The most important one is [Creating a controller][controllers-creating].
 [models]: ./models.md
 [multiuser]: ./multiuser.md
 [juju-block]: ./juju-block.md
+[charms-destroy]: ./charms-destroy.md
 [controllers-backup]: ./controllers-backup.md
 [controllers-config]: ./controllers-config.md
 [controllers-creating]: ./controllers-creating.md

@@ -4,16 +4,17 @@ TODO:  remove-application|unit should mention in what circumstances the associat
 
 # Removing things
 
-This section looks at how to remove the various objects you will encounter as
-you work with Juju. These are:
+This page shows how to remove Juju objects.
 
- - applications
- - units
- - machines
- - relations
+ - [Removing applications][#removing-applications]
+ - [Removing controllers][#removing-controllers]
+ - [Removing machines][#removing-machines]
+ - [Removing models][#removing-models]
+ - [Removing relations][#removing-relations]
+ - [Removing units][#removing-units]
+ - [Removing users][#removing-users]
  
-To remove a model or a controller see the [Models][models] and
-[Controllers][controllers] pages respectively.
+Also covered are the meanings of certain removal terms.
 
 For guidance on what to do when a removal does not apply cleanly consult the
 [Troubleshooting removals][troubleshooting-removals] page.
@@ -38,23 +39,21 @@ ordered such that their meaning or effect increases in extent or severity.
    avoid accidentally destroying models that are in use, but this is inherently
    a destructive process.
  - *Kill* means to forcibly tear down an entire controller, along with
-   everything in it. This is obviously a very destructive process and is
-   reserved for cleaning up resources used by broken or otherwise unresponsive
-   controllers. It is also recommended to manually check the underlying cloud
-   to ensure that all resources were found and cleaned up.
+   everything in it. This is a very destructive process and is reserved for
+   cleaning up resources used by broken or otherwise unresponsive controllers.
+   It is also recommended to manually check the backing cloud to ensure that
+   all resources were found and cleaned up.
 
 ## Removing applications
 
 An application can be removed with:
 
-```bash
-juju remove-application <application-name>
-```
+`juju remove-application <application-name>`
 
 If dynamic storage is in use, the storage will, by default, be detached and
 left alive in the model. However, the `--destroy-storage` option can be used to
 instruct Juju to destroy the storage once detached. See
-[Using Juju Storage][charms-storage] for details on dynamic storage.
+[Using Juju storage][charms-storage] for details on dynamic storage.
 
 !!! Note: 
     Removing an application which has active relations with another running
@@ -63,10 +62,55 @@ instruct Juju to destroy the storage once detached. See
     expected. To remove relations between deployed applications, see the
     section below.
 
+## Removing controllers
+
+A controller is removed with:
+
+`juju destroy-controller <controller-name>`
+
+Use the `kill-controller` command as a last resort if the controller is not
+accessible for some reason:
+
+`juju kill-controller <controller-name>`
+
+In this case, the controller will be removed by communicating directly with the
+cloud provider. Any other Juju machines residing within any of the controller's
+models will not be destroyed and will need to be removed manually using
+provider tools/console. This command will first attempt to mimic the behaviour
+of the `destroy-controller` command and failover to the more drastic behaviour
+if that attempt fails.
+
+## Removing machines
+
+A machine can be removed with:
+
+`juju remove-machine <machine ID>`
+
+However, it is not possible to remove a machine which is currently allocated
+to a unit. If attempted, this message will be emitted:
+
+```no-highlight
+error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
+```
+
+By default, when a machine is removed, the backing system, typically a cloud
+instance, is also destroyed. The `--keep-instance` option overrides this; it
+allows the instance to be left running.
+
+## Removing models
+
+A model is removed with:
+
+`juju destroy-model <model-name>`
+
 ## Removing units
 
 It is possible to remove individual units instead of the entire application
 (i.e. all the units):
+
+`juju remove-unit <unit>`
+
+For example:
 
 ```bash
 juju remove-unit postgresql/2
@@ -89,28 +133,13 @@ juju remove-unit mediawiki/1 mediawiki/3 mediawiki/5 mysql/2
 The `--destroy-storage` option is available for this command as it is for the
 `remove-application` command above.
 
-## Removing machines
-
-Juju machines can be removed like this:
-
-```bash
-juju remove-machine <number>
-```
-
-However, it is not possible to remove a machine which is currently allocated
-to a unit. If attempted, this message will be emitted:
-
-```no-highlight
-error: no machines were destroyed: machine 3 has unit "mysql/0" assigned
-```
-
-By default, when a Juju machine is removed, the backing system, typically a
-cloud instance, is also destroyed. The `--keep-instance` option overrides this;
-it allows the instance to be left running.
-
 ## Removing relations
 
-A relation can be removed easily enough:
+A relation is removed by calling out both (application) sides of the relation:
+
+`juju remove-relation <application-name> <application-name>`
+
+For example:
 
 ```bash
 juju remove-relation mediawiki mysql
@@ -123,10 +152,22 @@ is necessary to specify the interface at least once:
 juju remove-relation mediawiki mysql:db
 ```
 
+## Removing users
+
+A user can be removed from a controller with:
+
+`juju remove-user <user-name>`
+
 
 <!-- LINKS-->
 
-[controllers]: ./controllers.html
-[models]: ./models.html
-[charms-storage]: ./charms-storage.html
-[troubleshooting-removals]: ./troubleshooting-removals.html
+[charms-storage]: ./charms-storage.md
+[troubleshooting-removals]: ./troubleshooting-removals.md
+
+[#removing-applications]: #removing-applications
+[#removing-controllers]: #removing-controllers
+[#removing-machines]: #removing-machines
+[#removing-models]: #removing-models
+[#removing-relations]: #removing-relations
+[#removing-units]: #removing-units
+[#removing-users]: #removing-users

@@ -2,8 +2,8 @@ Title: Upgrading applications
 
 # Upgrading applications
 
-An application is upgraded with the `upgrade-charm` command, where the upgrade
-candidate is known as the *revision*. The default channel is naturally the
+An application's charm is upgraded with the `upgrade-charm` command, where the
+upgrade candidate is known as the *revision*. The default channel is the
 channel of the currently deployed charm.
 
 !!! Note:
@@ -49,10 +49,10 @@ This is considered a dangerous operation since Juju has only limited
 information with which to determine compatibility. The operation will succeed
 so long as the following conditions are met:
 
-- The new charm must support all relations that the application is currently
-  participating in.
-- Each configuration setting shared by the original and new charm must be of
-  the same type.
+ - The new charm must support all relations that the application is currently
+   participating in.
+ - Each configuration setting shared by the original and new charm must be of
+   the same type.
 
 The new charm may add new relations and configuration settings.
 

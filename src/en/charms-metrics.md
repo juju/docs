@@ -2,33 +2,21 @@ Title: Application metrics
 
 # Application metrics
 
-Knowing an application's configuration isn’t enough to effectively operate and
-manage it. Consider that a well-designed application will have as few
-configurable parameters as possible. As an operator, you may find yourself
-wanting to know more about the resources that an application in your model
-consumes and provides -- resources such as:
+As an operator, you may find yourself wanting to know more about the resources
+that an application in your model consumes and provides, such as:
 
-- Storage GiB used
-- Number of user accounts
-- Number of recently active users
-- Active database connections
+ - Storage GiB used
+ - Number of user accounts
+ - Number of recently active users
+ - Active database connections
 
-Juju Metrics complete the operational picture with application observability;
-by modeling, sampling and collecting measurements of resources such as these.
 Juju collects application metrics at a cadence appropriate for taking a
-model-level assessment of application utilization and capacity planning.
-
-There are many instrumentation and time-series data collection solutions
-supporting devops. Juju’s metrics complement these fine-grained, lower-level
-data sources with a model-level overview -- a starting point for deeper
-analysis.
+model-level assessment of application utilisation and capacity planning.
 
 ## Using metrics
 
 View the most recent measurements from workloads that collect them with the
-`juju metrics` command.
-
-View measurements for an entire model with:
+`metrics` command. View measurements for at the model level with:
 
 ```bash
 juju metrics --all
@@ -36,7 +24,7 @@ juju metrics --all
 
 Measurements from all metered workloads in the model are displayed:
 
-```bash
+```no-highlight
 UNIT				TIMESTAMP				METRIC		VALUE
 webapp/0			2016-09-19T22:17:57Z	requests	11903
 webapp/1			2016-09-19T22:17:52Z	requests	13719
@@ -45,7 +33,7 @@ auth-sso/0			2016-09-19T22:14:29Z	users		28
 auth-sso/0			2016-09-19T22:14:31Z	tokens		6
 ```
 
-View measurements for specific units:
+View measurements at the unit level:
 
 ```bash
 juju metrics webapp/0
@@ -53,12 +41,12 @@ juju metrics webapp/0
 
 Only `webapp/0` measurements are shown:
 
-```bash
+```no-highlight
 UNIT				TIMESTAMP				METRIC		VALUE
 webapp/0			2016-09-19T22:17:57Z	requests	13719
 ```
 
-View measurements for applications as well:
+View measurements at the application level:
 
 ```bash
 juju metrics sso-auth
@@ -66,7 +54,7 @@ juju metrics sso-auth
 
 Measurements from all matching units are shown:
 
-```bash
+```no-highlight
 auth-sso/0			2016-09-19T22:14:29Z	users		28
 auth-sso/0			2016-09-19T22:14:31Z	tokens		6
 ```
@@ -106,19 +94,19 @@ metrics:
 ```
 
 For a more detailed explanation of `metrics.yaml`, refer to the
-[Metric types](./developer-metrics.html#metric-types) section in the developer
-documentation.
+[Metric types][dev-metric-types] section in the developer documentation.
 
 ## What else are metrics used for?
 
 Measurements collected by Juju are also sent to Canonical, where they are
-aggregated across all deployments of the charm for analytics.
+aggregated across all deployments of the charm for analytics. This information
+may be used to improve Juju, and may be shared with the charm developer to
+better support and improve the charm. Canonical respects the privacy of its
+users and will not disclose the specific usage of individual users without
+prior consent. You may opt-out of anonymous analytics at any time by setting
+the model configuration parameter `transmit-vendor-metrics=false`.
 
-This information may be used to improve Juju, and may be shared with the charm
-developer to better support and improve the charm.
 
-Canonical respects the privacy of its users and will not disclose the specific
-usage of individual users without prior consent.
+<!-- LINKS -->
 
-You may opt-out of anonymous analytics at any time by setting the model
-configuration parameter `transmit-vendor-metrics=false`.
+[dev-metric-types]: ./developer-metrics.md#metric-types
