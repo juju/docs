@@ -5,8 +5,8 @@ Title: Charms
 A Juju *charm* contains all the instructions necessary for deploying and
 configuring application units. Charms are publicly available in the online
 [Charm Store][charm-store] and represent the distilled knowledge of experts.
-Charms make it easy to reliably and repeatedly deploy applications, then scale
-up (and down) as desired with minimal effort.
+Charms make it easy to reliably and repeatedly deploy applications, which can
+then be scaled up and down with minimal effort.
 
 Common charm-related tasks are listed below.
 

@@ -51,13 +51,18 @@ Charms make it easy to reliably and repeatedly deploy applications, then scale
 up (and down) as desired with minimal effort.
 
 The simplest scenario is when a charm is deployed (by the Juju client) with the
-`juju deploy` command without any options to qualify the request. By default, a
-new instance will be created in the backing cloud and the application will be
+`deploy` command without any options to qualify the request. By default, a new
+instance will be created in the backing cloud and the application will be
 installed within it:
 
 ![machine][img__charms]
 
-To see what you can do charms read the [Charms][charms] page!
+To see what you can do with charms visit the [Charms][charms] page.
+
+## Container
+
+In Juju, a *container* is a generic term that is used to refer to either a
+LXD-based machine or a KVM-based machine.
 
 ## Bundle
 
@@ -197,13 +202,12 @@ cloud instances.
 
 ![machine][img__client-2]
 
-In the case of the localhost cloud (LXD), the cloud is housed within the same
-system as the Juju client:
+In the case of the localhost cloud (LXD), the cloud is a local LXD daemon
+housed within the same system as the Juju client:
 
 ![machine][img__client-3]
 
-Although LXD itself can operate over the network, Juju does not support this.
-The client *must* be local to the LXD containers.
+LXD itself can operate over the network and Juju does support this (`v.2.5.0`).
 
 See the [Client][client] page for how to backup and upgrade the Juju client.
 
@@ -222,11 +226,10 @@ that creates the unit agent. The unit agents are responsible for all charm
 related tasks.
 
 In general, all agents track state changes, respond to those changes, and pass
-updated information back to the controller. A model's status (`juju status`
-command) is built up from the communication between a controller and all the
-agents running in that model. Agents are also responsible for all logging that
-goes on in Juju (see [Model logs][troubleshooting-logs#juju-agents] for
-details).
+updated information back to the controller. A model's status (`status` command)
+is built up from the communication between a controller and all the agents
+running in that model. Agents are also responsible for all logging that goes on
+in Juju (see [Model logs][troubleshooting-logs#juju-agents] for details).
 
 The agent's software version is generally consistent across a controller (and
 its models) and is thus determined at controller-creation time. By default the
@@ -237,7 +240,7 @@ tweaked if desired. See
 
 <!-- LINKS -->
 
-[maas]: https://maas.io "Metal as a Service"
+[maas]: https://maas.io
 [lxd]: https://linuxcontainers.org/lxd/
 [charm-store]: https://jujucharms.com/store
 [charms]: ./charms.md

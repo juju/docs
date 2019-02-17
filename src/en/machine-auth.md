@@ -92,6 +92,9 @@ The second option above, applied to the previous example, will look like this:
 juju ssh 0 -i ~/.ssh/my-private-key
 ```
 
+Use the `ssh-keys` command to list SSH keys currently permitting access to all
+machines, present and future, in a model.
+
 ## Direct SSH access
 
 When using a standard SSH client if one's public key has been installed into a
