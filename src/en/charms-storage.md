@@ -2,6 +2,7 @@ Title: Using Juju storage
 TODO:  bug tracking: https://pad.lv/1708212
        bug tracking: https://pad.lv/1709507
        bug tracking: https://pad.lv/1709508
+       Review required
 
 # Using Juju storage
 

@@ -11,6 +11,8 @@ navigation:
         location: reference-install.md
       - title: Concepts
         location: juju-concepts.md
+      - title: Tutorials
+        location: tutorials.md
 
   - title: Using Juju
 
