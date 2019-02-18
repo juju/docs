@@ -19,6 +19,8 @@ What series a charm will use can be influenced in several ways. Some of these
 are set within the bundle file while some are not. When using bundles, the
 series is determined using rules of precedence (most preferred to least):
 
+ - the series stated for a machine that an application unit has been assigned
+   to (see `series` under the `<machines>` element)
  - the series stated for an application (see `series` under the
    `<application name>` element)
  - the series given by the top level `series` element
