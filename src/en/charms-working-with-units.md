@@ -66,45 +66,52 @@ juju scp -m testing foo.txt apache2/1:
 
 !!! Note:
     Juju cannot transfer files between two remote units because it uses public
-    key authentication exclusively and the native (OpenSSH) `scp` command disables
-    agent forwarding by default. Either the destination or the source must be local
-    (Juju client).
+    key authentication exclusively and the native (OpenSSH) `scp` command
+    disables agent forwarding by default. Either the destination or the source
+    must be local (Juju client).
 
 For more information, run the `juju help scp` command.
 
 
-## The juju run command
+## ???
 
-The `juju run` command can be used by devops or scripts to inspect or do work
-on applications, units, or machines. Commands for applications or units are
-executed in a hook context. Charm authors can use the run command to develop 
-and debug scripts that run in hooks.
+The `run` command can be used to inspect or perform work on machines by
+targeting applications, units, or actual machines. The command operates on a
+per-model basis.
 
-For example, to run uname on every instance:
+!!! Note:
+    Only users with 'admin' model access can use the `run` command.
 
-```bash
-juju run "uname -a" --all
-```
+For example, consider the Linux `uname` command in the below scenarios.
 
-Or to run uptime on some instances:
+ - To target all machines in a model the `--all` option is used:
 
 ```bash
-juju run "uptime" --machine=2
-juju run "uptime" --application=mysql
+juju run 'uname' --all
 ```
 
-!!! Note: 
-    When using `juju run` with the `--application` option, keep in mind
-    that whichever command you pass will run on *every unit* of that application.
-    When using `juju run` with the `--machine` option, the command is run as the
-    `root` user on the remote machine.
-
-When used in combination with certain applications you can script certain tasks.
-For instance, in the 'hadoop' charm you can use `juju run` to initiate a
-terasort:
+ - To target all units of specific applications the `--application` option is
+   used:
 
 ```bash
-juju run --unit hadoop-master/0 "sudo -u hdfs /usr/lib/hadoop/terasort.sh"
+juju run 'uname' --application=mysql
 ```
 
-For more information see the `juju help run` command.
+ - To target a single unit of a specific application the `--unit` option is
+   used:
+
+```bash
+juju run 'uname' --unit=mysql/0,mysql/1
+```
+
+ - To target specific machines the `--machines` option is used (command is run
+   as the 'root' user on the target machines).
+
+```bash
+juju run 'uname' --machine=0,2
+```
+ 
+!!! Positive "Pro tip":
+    Commands for applications or units are executed in a hook context. Charm
+    authors can therefore use the `run` command to develop and debug scripts
+    that run in hooks.
