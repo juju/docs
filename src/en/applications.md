@@ -70,14 +70,6 @@ The most important ones are [Deploying applications][charms-deploying] and
    
    The [Managing relations][charms-relations] page explains this important
    concept.
-  
-
-^# Upgrade an application
-   
-   Upgrading an application in Juju means to upgrade the application's charm.
-
-   See the [Upgrading applications][charms-upgrading] page for in-depth
-   coverage.
 
 
 ^# Scale applications
@@ -86,6 +78,14 @@ The most important ones are [Deploying applications][charms-deploying] and
    application units.
    
    The [Scaling applications][charms-scaling] page for details.
+  
+
+^# Upgrade an application
+   
+   Upgrading an application in Juju means to upgrade the application's charm.
+
+   See the [Upgrading applications][charms-upgrading] page for in-depth
+   coverage.
 
 
 <!-- LINKS -->

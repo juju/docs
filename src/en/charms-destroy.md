@@ -2,72 +2,54 @@ Title: Removing things
 
 # Removing things
 
-This page shows how to remove Juju objects.
-
- - [Removing applications][#removing-applications]
- - [Destroying controllers][#destroying-controllers]
- - [Removing machines][#removing-machines]
- - [Destroying models][#destroying-models]
- - [Removing relations][#removing-relations]
- - [Removing units][#removing-units]
- - [Removing users][#removing-users]
- 
-Also covered are the meanings of certain removal terms.
+This page is devoted to the topic of removing objects in Juju. We first cover
+the meanings of certain removal terms and then provide information and steps
+for how different kinds of objects are removed.
 
 For guidance on what to do when a removal does not apply cleanly consult the
 [Troubleshooting removals][troubleshooting-removals] page.
 
-## Detach vs Remove vs Destroy vs Kill
+## Removal terms
 
-In Juju, there is a distinction between the similar sounding terms "detach",
-"remove", "destroy", and "kill". These terms are ordered such that their effect
-increases in severity:
+There is a distinction between the similar sounding terms "unregister",
+"detach", "remove", "destroy", and "kill". These terms are ordered such that
+their effect increases in severity:
+
+ - *Unregister* means to decouple a resource from a logical entity for the
+   client. The affect is local to the client only and does not affect the
+   logical entity in any way.
 
  - *Detach* means to decouple a resource from a logical entity (such as an
-   application). The resource will remain available in the model
-   and underlying cloud resources used by it also remain in place.
+   application). The resource will remain available and the underlying cloud
+   resources used by it also remain in place.
 
- - *Remove* means to cleanly remove a single logical entity from the model.
-   This is a destructive process, meaning the entity will no longer be
-   available via Juju, and any underlying cloud resources used by it will be
-   freed (however, this can often be overridden on a case-by-case basis to
-   leave the underlying cloud resources in place).
+ - *Remove* means to cleanly remove a single logical entity. This is a
+   destructive process, meaning the entity will no longer be available via
+   Juju, and any underlying cloud resources used by it will be freed (however,
+   this can often be overridden on a case-by-case basis to leave the underlying
+   cloud resources in place).
 
- - *Destroy* means to cleanly tear down a model or a controller, along with
-   everything within these entities. This is inherently a destructive process.
+ - *Destroy* means to cleanly tear down a logical entity, along with everything
+   within these entities. This is a vary destructive process.
 
- - *Kill* means to forcibly tear down an entire controller, along with
-   everything in it. This is a destructive process and is reserved for cleaning
-   up resources used by broken or otherwise unresponsive controllers.  It is
-   also recommended to manually check the backing cloud to ensure that all
-   resources were found and cleaned up.
+ - *Kill* means to forcibly tear down an unresponsive logical entity, along
+   with everything within it. This is a very destructive process that does not
+   guarantee associated resources are cleaned up.
 
-## Removing applications
+## Object removal list
 
-An application can be removed with:
+ - [Destroying controllers][#destroying-controllers]
+ - [Destroying models][#destroying-models]
+ - [Detaching storage][#detaching-storage]
+ - [Removing applications][#removing-applications]
+ - [Removing machines][#removing-machines]
+ - [Removing relations][#removing-relations]
+ - [Removing storage][#removing-storage]
+ - [Removing units][#removing-units]
+ - [Removing users][#removing-users]
+ - [Unregistering controllers][#unregistering-controllers]
 
-`juju remove-application <application-name>`
-
-For example:
-
-```bash
-juju remove-application apache2
-```
-
-This will remove all of the application's units. All associated machines will
-also be removed providing they are not hosting containers or another
-application's units.
-
-If persistent [storage][charms-storage] is in use by the application it will be
-detached and left in the model. However, the `--destroy-storage` option can be
-used to instruct Juju to destroy the storage once detached.
-
-Removing an application which has relations with another application will
-terminate that relation. This may adversely affect the other application. See
-section [Removing relations][#removing-relations] below for how to selectively
-remove relations.
-
-## Destroying controllers
+### Destroying controllers
 
 A controller is removed with:
 
@@ -103,7 +85,65 @@ provider tools/console. This command will first attempt to mimic the behaviour
 of the `destroy-controller` command and failover to the more drastic mode if
 that attempt fails.
 
-## Removing machines
+### Destroying models
+
+To destroy a model, along with any associated machines and applications:
+
+`juju destroy-model <model-name>`
+
+You will always be prompted to confirm this action. Use the `-y` option to
+override this.
+
+Additionally, if there is persistent [storage][charms-storage] in the model you
+will be prompted to either destroy or release the storage, using the
+`--destroy-storage` or `--release-storage` options respectively.
+
+For example:
+
+```bash
+juju destroy-model -y --destroy-storage beta
+```
+
+### Detaching storage
+
+To detach a storage instance:
+
+`juju detach-storage <storage-instance>`
+
+For example:
+
+```bash
+juju detach-storage osd-devices/2
+```
+
+Detaching storage does not destroy the storage.
+
+### Removing applications
+
+An application can be removed with:
+
+`juju remove-application <application-name>`
+
+For example:
+
+```bash
+juju remove-application apache2
+```
+
+This will remove all of the application's units. All associated machines will
+also be removed providing they are not hosting containers or another
+application's units.
+
+If persistent [storage][charms-storage] is in use by the application it will be
+detached and left in the model. However, the `--destroy-storage` option can be
+used to instruct Juju to destroy the storage once detached.
+
+Removing an application which has relations with another application will
+terminate that relation. This may adversely affect the other application. See
+section [Removing relations][#removing-relations] below for how to selectively
+remove relations.
+
+### Removing machines
 
 A machine can be removed with:
 
@@ -123,26 +163,45 @@ By default, when a machine is removed, the backing system, typically a cloud
 instance, is also destroyed. The `--keep-instance` option overrides this; it
 allows the instance to be left running.
 
-## Destroying models
+### Removing relations
 
-To destroy a model, along with any associated machines and applications:
+A relation is removed by calling out both (application) sides of the relation:
 
-`juju destroy-model <model-name>`
-
-You will always be prompted to confirm this action. Use the `-y` option to
-override this.
-
-Additionally, if there is persistent [storage][charms-storage] in the model you
-will be prompted to either destroy or release the storage, using the
-`--destroy-storage` or `--release-storage` options respectively.
+`juju remove-relation <application-name> <application-name>`
 
 For example:
 
 ```bash
-juju destroy-model -y --destroy-storage beta
+juju remove-relation mediawiki mysql
 ```
 
-## Removing units
+In cases where there is more than one relation between the two applications, it
+is necessary to specify the interface at least once:
+
+```bash
+juju remove-relation mediawiki mysql:db
+```
+
+### Removing storage
+
+To remove a storage instance from a model first detach it and then:
+
+`juju remove-storage <storage-instance>`
+
+For example:
+
+```bash
+juju detach-storage osd-devices/3
+juju remove-storage osd-devices/3
+```
+
+The `--force` option can be used to avoid having to first detach the storage.
+
+The removal of storage is, by default, a destructive process (destroyed on the
+cloud provider). To prevent this, the `--no-destroy` option is available. Note
+that, by using this option, the storage will no longer be visible to Juju.
+
+### Removing units
 
 To remove individual units instead of the entire application (i.e. all the
 units):
@@ -172,26 +231,7 @@ juju remove-unit mediawiki/1 mediawiki/3 mediawiki/5 mysql/2
 The `--destroy-storage` option is available for this command as it is for the
 `remove-application` command above.
 
-## Removing relations
-
-A relation is removed by calling out both (application) sides of the relation:
-
-`juju remove-relation <application-name> <application-name>`
-
-For example:
-
-```bash
-juju remove-relation mediawiki mysql
-```
-
-In cases where there is more than one relation between the two applications, it
-is necessary to specify the interface at least once:
-
-```bash
-juju remove-relation mediawiki mysql:db
-```
-
-## Removing users
+### Removing users
 
 A user can be removed from a controller with:
 
@@ -203,6 +243,21 @@ For example:
 juju remove-user teo
 ```
 
+### Unregistering controllers
+
+A controller can be removed from a client with:
+
+`juju unregister <controller-name>`
+
+For example:
+
+```bash
+juju unregister aws-controller
+```
+
+This removes local connection information from the local client. This command
+does not affect the controller itself in any way.
+
 
 <!-- LINKS-->
 
@@ -210,10 +265,13 @@ juju remove-user teo
 [troubleshooting-removals]: ./troubleshooting-removals.md
 [charms-storage]: ./charms-storage.md
 
-[#removing-applications]: #removing-applications
 [#destroying-controllers]: #destroying-controllers
-[#removing-machines]: #removing-machines
 [#destroying-models]: #destroying-models
+[#detaching-storage]: #detaching-storage
+[#removing-applications]: #removing-applications
+[#removing-machines]: #removing-machines
 [#removing-relations]: #removing-relations
+[#removing-storage]: #removing-storage
 [#removing-units]: #removing-units
 [#removing-users]: #removing-users
+[#unregistering-controllers]: #unregistering-controllers
