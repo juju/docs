@@ -11,36 +11,39 @@ This page shows how to remove Juju objects.
  - [Removing relations][#removing-relations]
  - [Removing units][#removing-units]
  - [Removing users][#removing-users]
+ - [Unregistering controllers][#unregistering-controllers]
  
-Also covered are the meanings of certain removal terms.
+We first cover the meanings of certain removal terms.
 
 For guidance on what to do when a removal does not apply cleanly consult the
 [Troubleshooting removals][troubleshooting-removals] page.
 
-## Detach vs Remove vs Destroy vs Kill
+## Removal terms
 
-In Juju, there is a distinction between the similar sounding terms "detach",
-"remove", "destroy", and "kill". These terms are ordered such that their effect
-increases in severity:
+There is a distinction between the similar sounding terms "unregister",
+"detach", "remove", "destroy", and "kill". These terms are ordered such that
+their effect increases in severity:
+
+ - *Unregister* means to decouple a resource from a logical entity for the
+   client. The affect is local to the client only and does not affect the
+   logical entity in any way.
 
  - *Detach* means to decouple a resource from a logical entity (such as an
-   application). The resource will remain available in the model
-   and underlying cloud resources used by it also remain in place.
+   application). The resource will remain available and the underlying cloud
+   resources used by it also remain in place.
 
- - *Remove* means to cleanly remove a single logical entity from the model.
-   This is a destructive process, meaning the entity will no longer be
-   available via Juju, and any underlying cloud resources used by it will be
-   freed (however, this can often be overridden on a case-by-case basis to
-   leave the underlying cloud resources in place).
+ - *Remove* means to cleanly remove a single logical entity. This is a
+   destructive process, meaning the entity will no longer be available via
+   Juju, and any underlying cloud resources used by it will be freed (however,
+   this can often be overridden on a case-by-case basis to leave the underlying
+   cloud resources in place).
 
- - *Destroy* means to cleanly tear down a model or a controller, along with
-   everything within these entities. This is inherently a destructive process.
+ - *Destroy* means to cleanly tear down a logical entity, along with everything
+   within these entities. This is a vary destructive process.
 
- - *Kill* means to forcibly tear down an entire controller, along with
-   everything in it. This is a destructive process and is reserved for cleaning
-   up resources used by broken or otherwise unresponsive controllers.  It is
-   also recommended to manually check the backing cloud to ensure that all
-   resources were found and cleaned up.
+ - *Kill* means to forcibly tear down an unresponsive logical entity, along
+   with everything within it. This is a very destructive process that does not
+   guarantee associated resources are cleaned up.
 
 ## Removing applications
 
@@ -202,6 +205,21 @@ For example:
 ```bash
 juju remove-user teo
 ```
+
+## Unregistering controllers
+
+A controller can be removed from a client with:
+
+`juju unregister <controller-name>`
+
+For example:
+
+```bash
+juju unregister aws-controller
+```
+
+This removes local connection information from the local client. This command
+does not affect the controller itself in any way.
 
 
 <!-- LINKS-->
