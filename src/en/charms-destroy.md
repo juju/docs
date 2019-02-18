@@ -4,10 +4,11 @@ Title: Removing things
 
 This page shows how to remove Juju objects.
 
- - [Removing applications][#removing-applications]
  - [Destroying controllers][#destroying-controllers]
- - [Removing machines][#removing-machines]
  - [Destroying models][#destroying-models]
+ - [Detaching storage][#detaching-storage]
+ - [Removing applications][#removing-applications]
+ - [Removing machines][#removing-machines]
  - [Removing relations][#removing-relations]
  - [Removing units][#removing-units]
  - [Removing users][#removing-users]
@@ -105,6 +106,20 @@ models will not be destroyed and will need to be removed manually using
 provider tools/console. This command will first attempt to mimic the behaviour
 of the `destroy-controller` command and failover to the more drastic mode if
 that attempt fails.
+
+## Detaching storage
+
+To detach a storage instance:
+
+`juju detach-storage <storage-instance>`
+
+For example:
+
+```bash
+juju detach-storage osd-devices/2
+```
+
+Detaching storage does not destroy the storage.
 
 ## Removing machines
 
