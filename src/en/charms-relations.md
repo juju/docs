@@ -4,15 +4,15 @@ Title: Managing relations
 
 Few applications are so simple that they can run independently - most rely on
 other applications. A certain charm knows that it requires, say, a database
-and, correspondingly, a database charm knows that is capable of accommodating
-the other charm's requirements. The act of joining such mutually-dependent
-charms causes code (*hooks*) to run in each charm in such a way that both
-charms can effectively talk to one another. When charms have joined logically
-in this manner they are said to have formed a *relation*.
+and, correspondingly, a database charm knows that is capable of satisfying
+another charm's requirements. The act of joining such mutually-dependent charms
+causes code (*hooks*) to run in each charm in such a way that both charms can
+effectively talk to one another. When charms have joined logically in this
+manner they are said to have formed a *relation*.
 
 !!! Note:
-    A criteria for forming a relation is that both applications are currently
-    *deployed*. See the [Deploying applications][charms-deploying] page for
+    A requirement for a relation is that both applications are currently
+    deployed. See the [Deploying applications][charms-deploying] page for
     guidance.
 
 ## Creating relations

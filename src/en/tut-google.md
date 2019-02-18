@@ -15,11 +15,6 @@ less than 10 minutes. But you could just as easily use Amazon AWS or Microsoft
 Azure, and just as easily deploy Kubernetes, Cassandra or even OpenStack. It's
 the magic of Juju that makes it happen.
 
-!!! Note:
-    If you already have a controller, such as the one created in the
-    [Using Juju locally (LXD)][tut-lxd] page, this new controller will be
-    seamlessly added alongside.
-
 ## Installation
 
 First, install Juju, if you have not done so already. See
@@ -30,23 +25,24 @@ First, install Juju, if you have not done so already. See
 Type `juju clouds` and you'll see output very similar to the following:
 
 ```bash
-Cloud        Regions  Default        Type        Description
-aws               15  us-east-1      ec2         Amazon Web Services
-aws-china          1  cn-north-1     ec2         Amazon China
-aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-azure             26  centralus      azure       Microsoft Azure
-azure-china        2  chinaeast      azure       Microsoft Azure China
-cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-google            13  us-east1       gce         Google Cloud Platform
-joyent             6  eu-ams-1       joyent      Joyent Cloud
-oracle             4  us-phoenix-1   oci         Oracle Cloud Infrastructure
-rackspace          6  dfw            rackspace   Rackspace Cloud
-localhost          1  localhost      lxd         LXD Container Hypervisor
+Cloud           Regions  Default          Type        Description
+aws                  15  us-east-1        ec2         Amazon Web Services
+aws-china             2  cn-north-1       ec2         Amazon China
+aws-gov               1  us-gov-west-1    ec2         Amazon (USA Government)
+azure                27  centralus        azure       Microsoft Azure
+azure-china           2  chinaeast        azure       Microsoft Azure China
+cloudsigma           12  dub              cloudsigma  CloudSigma Cloud
+google               18  us-east1         gce         Google Cloud Platform
+joyent                6  us-east-1        joyent      Joyent Cloud
+oracle                4  us-phoenix-1     oci         Oracle Cloud Infrastructure
+oracle-classic        5  uscom-central-1  oracle      Oracle Cloud Infrastructure Classic
+rackspace             6  dfw              rackspace   Rackspace Cloud
+localhost             1  localhost        lxd         LXD Container Hypervisor
 ```
 
 As mentioned, we're going with Google's Cloud Engine, which we'll
 configure over the next couple of steps. But you could just as easily use
-[Amazon AWS][helpaws] or [Microsoft Azure][helpazure], or any of the listed
+[Amazon AWS][clouds-aws] or [Microsoft Azure][clouds-azure], or any of the listed
 clouds you have credentials for.
 
 ## Download GCE credentials
@@ -159,7 +155,7 @@ juju gui --browser
 Then use the output username and password to connect to the GUI via your
 browser:
 
-![Juju GUI login](media/tut-gce-gui_login280.png)
+![Juju GUI login](https://assets.ubuntu.com/v1/72b6476b-tut-gce-gui_login280.png)
 
 After logging in, you'll see the Juju GUI overview for the current model. Not
 only does the web interface show you the current state of your applications and
@@ -175,7 +171,7 @@ current model.
 
 <!-- REMOVED DUE TO INCONSISTENT BEHAVIOUR WITH JUJU 2.2.2
 No app/model are visible in the GUI
-![Juju GUI model switching menu](media/tut-gce-gui_model21.png)
+![Juju GUI model switching menu](https://assets.ubuntu.com/v1/f83fac42-tut-gce-gui_model21.png)
  -->
 
 To create a new model from the GUI, click on 'Profile' from the drop-down model
@@ -207,7 +203,7 @@ application's colour changes from orange to grey, you're all set.
 Congratulations - you've just modelled and deployed your own scalable cloud
 application.
 
-![Juju GUI model of MediaWiki bundle](media/tut-gce-gui_mediawiki.png)
+![Juju GUI model of MediaWiki bundle](https://assets.ubuntu.com/v1/ace92999-tut-gce-gui_mediawiki.png)
 
 ## Next Steps
 
@@ -218,20 +214,19 @@ to want to share. Find out how easy it is to
 
 <!-- LINKS -->
 
-[tut-lxd]: ./tut-lxd.html
-[helpaws]: ./help-aws.html
-[helpazure]: ./help-azure.html
+[clouds-aws]: ./clouds-aws.md
+[clouds-azure]: ./clouds-azure.md
 [gcetrial]: https://console.cloud.google.com/freetrial
 [gcedashboard]: https://console.cloud.google.com
-[gcenewproject]: ./help-google.html#create-a-project
-[install]: ./reference-install.html
-[jujuterms]: ./juju-concepts.html
+[gcenewproject]: ./clouds-gce.md#create-a-project
+[install]: ./reference-install.md
+[jujuterms]: ./juju-concepts.md
 [charmhaproxy]: https://jujucharms.com/haproxy/37
 [charmpsql]: https://jujucharms.com/postgresql/105
 [bundleopenstack]: https://jujucharms.com/openstack-base/
 [bundlekubernetes]: https://jujucharms.com/canonical-kubernetes/
 [charmstore]: https://jujucharms.com/store
-[diycharm]: ./developer-getting-started.html
-[jujugui]: ./controllers-gui.html
-[tutuser]: ./tut-users.html
+[diycharm]: ./developer-getting-started.md
+[jujugui]: ./controllers-gui.md
+[tutuser]: ./tut-users.md
 [mediawiki]: https://www.mediawiki.org/wiki/MediaWiki

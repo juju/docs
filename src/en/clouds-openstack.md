@@ -4,9 +4,9 @@ TODO:  Review required (use style from the other cloud pages)
 
 # Using OpenStack with Juju
 
-Although Juju doesn't have baked-in knowledge of *your* OpenStack cloud, it
-does know how such clouds work in general. We just need to provide some
-information to add it to the list of known clouds.
+Although Juju doesn't have baked-in knowledge of your OpenStack cloud, it does
+know how such clouds work in general. We just need to provide some information
+to add it to the list of known clouds.
 
 ## Image metadata
 
@@ -71,8 +71,9 @@ Enter another region? (Y/n): n
 
 Successfully read CA Certificate from /home/ubuntu/test_certs/cacert.pem
 Cloud "myopenstack" successfully added
-You may need to `juju add-credential myopenstack' if your cloud needs additional credentials
-Then you can bootstrap with ‘juju bootstrap myopenstack’
+
+You will need to add credentials for this cloud (`juju add-credential myopenstack`)
+before creating a controller (`juju bootstrap myopenstack`).
 ```
 
 Note that it is possible to choose more than one authorisation method - just
@@ -128,7 +129,7 @@ account.
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 In order to access OpenStack, you will need to add credentials to Juju. This

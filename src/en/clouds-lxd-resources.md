@@ -1,5 +1,6 @@
 Title: Additional LXD resources
 TODO:  bug tracking: https://bugs.launchpad.net/juju/+bug/1793291
+       non-admin section should be moved to lxd-advanced
 table_of_contents: True
 
 # Additional LXD resources
@@ -10,6 +11,7 @@ up LXD with Juju see [Using LXD with Juju][clouds-lxd].
 The topics presented here are:
 
  - LXD and images
+ - LXD and group membership
  - Non-admin user credentials
  - Useful LXD client commands 
  - Using the LXD snap
@@ -39,12 +41,36 @@ subsequent requests will be satisfied by the LXD cache (`/var/lib/lxd/images`).
 
 Image cache expiration and image synchronization mechanisms are built-in.
 
+## LXD and group membership
+
+In order to use LXD, the system user who will act as the Juju operator must be
+an active member of the 'lxd' user group. Ensure that this is the case (below
+we assume this user is 'john'):
+
+```bash
+sudo adduser john lxd
+```
+
+The user will be in the 'lxd' group when they next log in. If the intended Juju
+operator is the current user all that's needed is a group membership refresh:
+
+```bash
+newgrp lxd
+```
+
+You can confirm the active group membership for the current user in this way:
+
+```bash
+groups
+```
+
 ## Non-admin user credentials
 
 To grant a regular user access to a LXD-based controller a certificate
 credential is required. This certificate is generated and shared with the user
-who will then use it as a credential. See [Creating users][users-creating] for
-details on adding users, registering them, and granting them permissions.
+who will then use it as a credential. See
+[Working with multiple users][multiuser] for details on adding users, granting
+them permissions, and registering controllers.
 
 On the LXD host generate the certificate with the `autoload-credentials`
 command. Use the below sample session as a guide:
@@ -77,8 +103,7 @@ on that user's system, the credential can be added:
 juju add-credential localhost -f localhost-credentials.yaml
 ```
 
-See [Cloud credentials][credentials] for more details on how credentials are
-used. 
+See [Credentials][credentials] for more details on how credentials are used. 
 
 ## Useful LXD client commands
 
@@ -138,9 +163,11 @@ under the current installation then simply remove the software:
 sudo apt purge liblxc1 lxcfs lxd lxd-client
 ```
 
+### Migrating containers
+
 If containers do exist under the old system the `lxd.migrate` utility should be
-used to migrate them to the new system. Once the migration is complete, you
-will be prompted to have the old software removed.
+used to migrate them so that they can be managed by the snap binaries. Once the
+migration is complete, you will be prompted to have the old software removed.
 
 Start the migration tool by running:
 
@@ -168,8 +195,9 @@ assistance with the daemon. See upstream documentation for
 
 <!-- LINKS -->
 
-[clouds-lxd]: ./clouds-LXD.md
+[clouds-lxd]: ./clouds-lxd.md
 [lxd-upstream]: https://lxd.readthedocs.io/en/latest/configuration/
 [logs]: ./troubleshooting-logs.md
 [credentials]: ./credentials.md
 [users-creating]: ./users-creating.md
+[multiuser]: ./multiuser.md

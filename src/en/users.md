@@ -45,7 +45,6 @@ Actions available to a system user and the corresponding Juju commands:
  - Add credentials (`add-credential` and `autoload-credentials`)
  - List credentials (`credentials`)
  - Create controllers (`bootstrap`)
- - Log in to a controller (`login`)
 
 Once a system user has created a controller they are provided automatically, at
 the Juju level, with an administrator of that controller and inherit all the
@@ -59,9 +58,9 @@ decision as to whether this should be allowed.
 ## Newly-created users
 
 A newly-created user is automatically granted login access to the controller.
-Once logged in, the user is allowed to perform the following additional
-actions:
+Once logged in, the user is allowed to perform additional actions:
 
+ - Log in to a controller (`login`)
  - List the user (`users`)
  - Show details for the user (`show-user`)
  - Log out of a controller (`logout`)
@@ -107,7 +106,26 @@ following major actions:
  - Deploy applications (`deploy`)
  - Scale out applications (`add-unit`)
 
+## External users
+
+External users are those users that exist on a remote authentication system.
+Currently, a controller can offload user authentication to
+`https://jujucharms.com` only. This is done by passing the 'identity-url' key
+at controller-creation time with a value of
+`https://api.jujucharms.com/identity`.
+
+!!! Note:
+    It is possible to have a controller use an authentication system other than
+    the one given above, but such a design is not supported at this time.
+
+The enabling of the external identity URL does not negate the standard local
+aspect of user authentication. That is, both local and remote users can log in.
+
+See tutorial [Multi-user external setup][tutorial-multiuser-external] for a
+quick walkthrough.
+   
 
 <!-- LINKS -->
 
 [multiuser]: ./multiuser.md
+[tutorial-multiuser-external]: ./tutorial-multiuser-external.md

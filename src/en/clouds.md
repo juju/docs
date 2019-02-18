@@ -16,18 +16,19 @@ the next step is to add your cloud credentials to Juju. The exception is for a
 local LXD cloud; credentials are added automatically.
 
 This rest of this page covers general cloud management and an overview of how
-clouds are added. You can still get started by selecting your cloud here:
+clouds are added. However, you can get started right away by selecting your
+cloud here:
 
  - [Amazon AWS][clouds-aws] *****
  - [Microsoft Azure][clouds-azure] *****
  - [Google GCE][clouds-google] *****
- - [Oracle OCI][clouds-oci] *****
+ - [Oracle][clouds-oci] *****
  - [Rackspace][clouds-rackspace] *****
  - [Joyent][clouds-joyent] *****
  - [LXD][clouds-lxd] (local) *****
  - [LXD][clouds-lxd] (remote)
  - [Kubernetes][clouds-k8s]
- - [VMware vSphere][clouds-vmware]
+ - [VMware vSphere][clouds-vsphere]
  - [OpenStack][clouds-openstack]
  - [MAAS][clouds-maas]
  - [Manual][clouds-manual]
@@ -46,18 +47,19 @@ juju clouds
 This will return a list very similar to:
 
 ```no-highlight
-Cloud        Regions  Default        Type        Description
-aws               15  us-east-1      ec2         Amazon Web Services
-aws-china          1  cn-north-1     ec2         Amazon China
-aws-gov            1  us-gov-west-1  ec2         Amazon (USA Government)
-azure             26  centralus      azure       Microsoft Azure
-azure-china        2  chinaeast      azure       Microsoft Azure China
-cloudsigma         5  hnl            cloudsigma  CloudSigma Cloud
-google            13  us-east1       gce         Google Cloud Platform
-joyent             6  eu-ams-1       joyent      Joyent Cloud
-oracle             4  us-phoenix-1   oci         Oracle Cloud Infrastructure
-rackspace          6  dfw            rackspace   Rackspace Cloud
-localhost          1  localhost      lxd         LXD Container Hypervisor
+Cloud           Regions  Default          Type        Description
+aws                  15  us-east-1        ec2         Amazon Web Services
+aws-china             2  cn-north-1       ec2         Amazon China
+aws-gov               1  us-gov-west-1    ec2         Amazon (USA Government)
+azure                27  centralus        azure       Microsoft Azure
+azure-china           2  chinaeast        azure       Microsoft Azure China
+cloudsigma           12  dub              cloudsigma  CloudSigma Cloud
+google               18  us-east1         gce         Google Cloud Platform
+joyent                6  us-east-1        joyent      Joyent Cloud
+oracle                4  us-phoenix-1     oci         Oracle Cloud Infrastructure
+oracle-classic        5  uscom-central-1  oracle      Oracle Cloud Infrastructure Classic
+rackspace             6  dfw              rackspace   Rackspace Cloud
+localhost             1  localhost        lxd         LXD Container Hypervisor
 ```
 
 Each line represents a cloud that Juju can interact with. It gives the cloud
@@ -206,15 +208,15 @@ Here are some examples of manually adding a cloud:
 
 <!-- LINKS -->
 
-[clouds-aws]: ./help-aws.md
-[clouds-azure]: ./help-azure.md
-[clouds-google]: ./help-google.md
+[clouds-aws]: ./clouds-aws.md
+[clouds-azure]: ./clouds-azure.md
+[clouds-google]: ./clouds-gce.md
 [clouds-oci]: ./clouds-oci.md
-[clouds-rackspace]: ./help-rackspace.md
-[clouds-joyent]: ./help-joyent.md
-[clouds-lxd]: ./clouds-LXD.md
-[clouds-vmware]: ./help-vmware.md
-[clouds-openstack]: ./help-openstack.md
+[clouds-rackspace]: ./clouds-rackspace.md
+[clouds-joyent]: ./clouds-joyent.md
+[clouds-lxd]: ./clouds-lxd.md
+[clouds-vsphere]: ./clouds-vsphere.md
+[clouds-openstack]: ./clouds-openstack.md
 [clouds-maas]: ./clouds-maas.md
 [clouds-manual]: ./clouds-manual.md
 [clouds-k8s]: ./clouds-k8s.md
@@ -224,5 +226,5 @@ Here are some examples of manually adding a cloud:
 [controllers-creating-include-config]: ./controllers-creating.md#passing-a-cloud-specific-setting
 
 [clouds-maas-manual]: ./clouds-maas.md#manually-adding-maas-clouds
-[clouds-openstack-manual]: ./help-openstack.md#manually-adding-an-openstack-cloud
-[clouds-vsphere-manual]: ./help-vmware.md#manually-adding-a-vsphere-cloud
+[clouds-openstack-manual]: ./clouds-openstack.md#manually-adding-an-openstack-cloud
+[clouds-vsphere-manual]: ./clouds-vsphere.md#manually-adding-a-vsphere-cloud

@@ -27,7 +27,7 @@ juju update-clouds
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 In order to authenticate itself to the Joyent cloud, Juju will need the 
@@ -42,7 +42,7 @@ following information:
 The first two values are easily obtained from the 'Account' section via the 
 Joyent Dashboard
 
-![Joyent Account](./media/getting_started-joyent-account-dropdown.png)
+![Joyent Account](https://assets.ubuntu.com/v1/779bc621-getting_started-joyent-account-dropdown.png)
 
 !!! Note: 
     The private key is currently uploaded to the cloud in order to

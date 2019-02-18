@@ -24,7 +24,7 @@ juju update-clouds
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
 Several steps are required to add Azure credentials to Juju:
@@ -39,6 +39,10 @@ Several steps are required to add Azure credentials to Juju:
     being used then you may need to update the credentials on the controller.
     See [Updating remote credentials][updating-remote-credentials] for
     guidance.
+
+Alternately, you can use your credentials with [Juju as a Service][jaas], where
+charms can be deployed within a graphical environment that comes equipped with
+a ready-made controller.
 
 ### Installing the CLI tool
 
@@ -162,7 +166,7 @@ provision an instance to run the controller on.
 This will result in the controller environment being visible in the
 [Azure portal][azureportal].
 
-![Juju environment in Azure portal](media/azure_portal-environment.png)
+![Juju environment in Azure portal](https://assets.ubuntu.com/v1/95d6cd3e-azure_portal-environment.png)
 
 For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
@@ -192,11 +196,12 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
+[jaas]: ./getting-started.md
 [updating-remote-credentials]: ./credentials.md#updating-remote-credentials
 [azureportal]: http://portal.azure.com
 [azurecli]: https://docs.microsoft.com/en-us/cli/azure/overview 
 [azuretwoinstall]: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
-[manually-adding-azure-credentials]: ./help-azure-advanced.md#manually-adding-azure-credentials
+[manually-adding-azure-credentials]: ./clouds-azure-advanced.md#manually-adding-azure-credentials
 [azure-availability-sets]: ./charms-ha.md#azure-availability-sets
 [controllers-creating]: ./controllers-creating.md
 [models]: ./models.md

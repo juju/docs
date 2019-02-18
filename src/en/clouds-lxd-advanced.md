@@ -80,11 +80,8 @@ Select cloud type: lxd
 Enter a name for your lxd cloud: lxd-remote
 
 Enter the API endpoint url for the remote LXD server: https://10.55.60.244:8443                                                                                                   
-
 Auth Types
   certificate
-
-Select one or more auth types separated by commas [certificate]: 
 
 Enter region [default]: 
 
@@ -94,8 +91,8 @@ Enter another region? (y/N): n
 
 Cloud "lxd-remote" successfully added
 
-You may need to `juju add-credential lxd-remote' if your cloud needs additional credentials
-Then you can bootstrap with 'juju bootstrap lxd-remote'
+You will need to add credentials for this cloud (`juju add-credential lxd-remote`)
+before creating a controller (`juju bootstrap lxd-remote`).
 ```
 
 !!! Important:
@@ -148,7 +145,7 @@ juju add-cloud lxd-remote-manual lxd-cloud.yaml
 ### Adding credentials
 
 As opposed to a local LXD cloud, in a remote context, credentials need to be
-added prior to creating a controller (see [Cloud credentials][credentials] for
+added prior to creating a controller (see [Credentials][credentials] for
 background information).
 
 Use the `add-credential` command to add credentials to the new cloud:
@@ -266,18 +263,19 @@ devices
             type: unix-char
 ```
 
-See the upstream documentation on [LXD profiles][lxd-upstream-profiles].
+See the LXD documentation to learn about the valid
+[profile configuration options][lxd-upstream-profile-options].
 
 
 <!-- LINKS -->
 
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
-[clouds-lxd]: ./clouds-LXD.md
+[clouds-lxd]: ./clouds-lxd.md
 [#clouds-lxd-remote-add-manual]: #manually-adding-a-remote-lxd-cloud
 [controllers-creating]: ./controllers-creating.md
 [clouds-adding-manually]: ./clouds.md#adding-clouds-manually
 [credentials]: ./credentials.md
-[clouds-lxd-creating-a-controller]: ./clouds-LXD.md#creating-a-controller
+[clouds-lxd-creating-a-controller]: ./clouds-lxd.md#creating-a-controller
 [lxd-upstream-clustering]: https://lxd.readthedocs.io/en/latest/clustering/
-[lxd-upstream-profiles]: https://lxd.readthedocs.io/en/latest/profiles/
+[lxd-upstream-profile-options]: https://lxd.readthedocs.io/en/latest/containers/
 [deploying-to-specific-machines]: ./charms-deploying-advanced.md#deploying-to-specific-machines

@@ -1,18 +1,18 @@
-~^/(|en/?)?$ /2.4/en/;
+~^/(|en/?)?$ /2.5/en/;
 #~^/devel/en/?$ /devel/en/;
 
-~^en/(?<path>.+)$ /2.4/en/${path};
+~^en/(?<path>.+)$ /2.5/en/${path};
 
 # Redirect /stable to correct version
-~^/stable/?$ /2.4/en/;
-~^/stable/en/?$ /2.4/en/;
-~^/stable/(?<path>.+)$ /2.4/${path};
+~^/stable/?$ /2.5/en/;
+~^/stable/en/?$ /2.5/en/;
+~^/stable/(?<path>.+)$ /2.5/${path};
 
 # Redirect pages which don't specify \en\ to the \en\ version
 "~^/(?<version>[0-9-\._]+|devel)/(?<path>(?!en/?).+)$" /${version}/en/${path};
 
 # Redirect pages without version or en to /en
-"~^/(?!([0-9-\._]+|devel|stable|master|en)/)(?<path>.+)$" /2.4/en/${path};
+"~^/(?!([0-9-\._]+|devel|stable|master|en)/)(?<path>.+)$" /2.5/en/${path};
 
 # Redirect 1.25 docs index to getting-started page
 "~^/1\.25(/|/index)?$" /1.25/en/getting-started;
@@ -23,3 +23,30 @@
 
 # Redirect help-google to clouds-gce
 "~^/(?<version>[0-9-\._]+|devel)/en/help-google/?$" /${version}/en/clouds-gce;
+
+# Redirect help-aws to clouds-aws
+"~^/(?<version>[0-9-\._]+|devel)/en/help-aws/?$" /${version}/en/clouds-aws;
+
+# Redirect help-joyent to clouds-joyent
+"~^/(?<version>[0-9-\._]+|devel)/en/help-joyent/?$" /${version}/en/clouds-joyent;
+
+# Redirect help-rackspace to clouds-rackspace
+"~^/(?<version>[0-9-\._]+|devel)/en/help-rackspace/?$" /${version}/en/clouds-rackspace;
+
+# Redirect help-vmware to clouds-vsphere
+"~^/(?<version>[0-9-\._]+|devel)/en/help-vmware/?$" /${version}/en/clouds-vsphere;
+
+# Redirect help-openstack to clouds-openstack
+"~^/(?<version>[0-9-\._]+|devel)/en/help-openstack/?$" /${version}/en/clouds-openstack;
+
+# Redirect help-azure to clouds-azure
+"~^/(?<version>[0-9-\._]+|devel)/en/help-azure/?$" /${version}/en/clouds-azure;
+
+# Redirect help-azure-advanced to clouds-azure-advanced 
+"~^/(?<version>[0-9-\._]+|devel)/en/help-azure-advanced/?$" /${version}/en/clouds-azure-advanced;
+
+# Redirect clouds-LXD to clouds-lxd
+"~^/(?<version>[0-9-\._]+|devel)/en/clouds-LXD/?$" /${version}/en/clouds-lxd;
+
+# Redirect tut-lxd to clouds-lxd
+"~^/(?<version>[0-9-\._]+|devel)/en/tut-lxd/?$" /${version}/en/clouds-lxd;

@@ -1,28 +1,17 @@
-Title: The Juju GUI
+Title: Juju GUI
 TODO: some screenshots show 'services' rather than 'applications'
 
-# The Juju GUI
+# Juju GUI
 
-Juju has a graphical user interface (GUI) available to help with the tasks of 
-managing and monitoring your Juju environment. From Juju 2.0 onwards, unless 
-you bootstrap your controller with the `--no-gui` option, the GUI is 
-automatically embedded within every Juju controller.
-
-The GUI is a JavaScript and HTML web application that is encapsulated in its 
-own charm. Once installed, the GUI will talk with Juju over a websocket to 
-provide a real-time interface with the applications installed, the units that 
-comprise them, and the machines available. Additionally, the GUI can talk with 
-the charm store in order to search, browse, and deploy charms to your
-environment.
+Juju has a graphical user interface (GUI) available to help with the tasks of
+managing and monitoring your Juju environment. The GUI comes with every
+controller providing the controller was not created with the `--no-gui` option.
+It is installed via a charm but will not show up as a normally deployed 
+application.
 
 ## Using the GUI
 
-Juju GUI is now automatically included in every Juju controller after 
-bootstrapping, thus eliminating the need to additionally deploy the Juju GUI 
-charm. As it's part of the controller, it won't appear as a normally deployed 
-application.
-
-To view the URL and login credentials for Juju GUI, use the following command:
+To view the URL and login credentials for the GUI, use the following command:
 
 ```bash
 juju gui
@@ -67,7 +56,7 @@ uses for the GUI is that of monitoring. The GUI provides not only an overview
 of the health of your environment and the applications comprising it, but also 
 details of the units and machines comprising those applications.
 
-![](./media/gui2_management-status.png)
+![](https://assets.ubuntu.com/v1/d8fcebae-gui2_management-status.png)
 
 The rings represent applications running on the current model and by selecting
 the application, you can also see a more in-depth list of units and their
@@ -76,7 +65,7 @@ whether they are exposed and other details. Using the drop-down menu to the
 right of your username at the top, you can also use the GUI to create and switch
 between your various models.
 
-![](./media/gui2_management-add-model.png)
+![](https://assets.ubuntu.com/v1/7066c1d2-gui2_management-add-model.png)
 
 The GUI can be used to offer insight into not only the status of your cloud
 deployment, but also the overall structure of your applications and how they are
@@ -99,7 +88,7 @@ any recent updates. From here, you can add the charm to your environment by
 clicking 'Add to canvas' which will then give you the option to configure and
 deploy a new application.
 
-![](./media/gui2_management-charmstore.png)
+![](https://assets.ubuntu.com/v1/44bd5101-gui2_management-charmstore.png)
 
 Once deployed, clicking on the application will allow you to not only view the 
 units and machines comprising it, but also to scale the application out or back, 
@@ -111,7 +100,7 @@ relationships, such as a master or slave database - by clicking the 'add
 relation' menu item on one application, and then clicking on the destination
 application.
 
-![](./media/gui2_management-relationship.png)
+![](https://assets.ubuntu.com/v1/481753b9-gui2_management-relationship.png)
 
 The GUI will attempt to position applications automatically so that they do not
 overlap. However, you may drag the applications around the canvas so that 

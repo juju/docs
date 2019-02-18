@@ -29,7 +29,7 @@ page](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)
 The file you download is not an installer, but a simple executable that can be
 run directly.  Do so and you should see a dialog that resembles:
 
-![](media/puttygen.png)
+![](https://assets.ubuntu.com/v1/dea1ad8d-puttygen.png)
 
 ## Generating your keys
 

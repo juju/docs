@@ -3,21 +3,22 @@ TODO: Critical: review required
 
 # Application high availability
 
+In the event of an outage affecting one's backing cloud, application high
+availability strives to ensure that not all units of an application will become
+unresponsive at the same time. This default behaviour in Juju thus maximises
+your application's availability. 
+
 ## Distribution groups
 
-Juju works with your cloud to ensure that, in the event of an IaaS
-outage, not all units of an application will go down at the same time,
-maximising your application's availability. 
-
-Each deployed application is considered a 'distribution group'. Every time a
+Each deployed application is considered a *distribution group*. Every time a
 unit is added to a distribution group, Juju will spread out units to best
 ensure high availability. As long as the charm and the charm's application are
 well written, you can rest assured that IaaS downtime will not affect your
 application.
 
 !!! Note:
-    See [High Availability][controller-ha] for details on enabling high
-    availability for the controller.
+    See [Controller high availability][controllers-ha] for details on enabling
+    high availability for the controller.
 
 Commands you already use for scaling now ensure your applications are always
 available. e.g.
@@ -25,19 +26,19 @@ available. e.g.
 ```bash
 juju deploy -n 10 <application>
 ```
-The way this works depends on whether Juju uses 'availability zones' or
-'availability sets'. 
 
-## Availability Zones
+The way this works depends on whether Juju uses availability zones or
+availability sets. 
+
+## Availability zones
 
 Availability zones allow for the automatic and uniform distribution of units
 across a region. A new instance, for example, will be allocated the zone
 with the fewest members of its distribution group.
 
 Juju supports such zones on Google Compute Engine, VMware vSphere, Amazon's
-EC2, OpenStack-based clouds (Havana or newer) and [MAAS][maaszones]. See the
-[Clouds][jujuclouds] section of the documentation for more details on these and
-other cloud-specific settings.
+EC2, OpenStack-based clouds, and [MAAS][maas-zones]. See the [Clouds][clouds]
+page for more details on these and other cloud-specific settings.
 
 If you do not specify a zone explicitly, Juju will automatically and uniformly
 distribute units across the available zones within the region. This can be
@@ -48,18 +49,18 @@ juju bootstrap --to zone=us-east-1b
 juju add-machine zone=us-east-1c
 ```
 
-## Azure Availability Sets
+## Azure availability sets
 
 Juju supports availability sets on Microsoft's Azure (see
 [Using Microsoft Azure with Juju][clouds-azure]. As long as at least two units
 are deployed, Azure guarantees 99.95% availability of the application overall.
 Exposed ports are automatically load-balanced across all units within the
 application. Using availability sets disables manual placement and the
-"add-machine" command.
+`add-machine` command.
 
 New Azure environments use availability sets by default. This behaviour can be
 disabled only when bootstrapping the cloud by adding
-'availability-sets-enabled=false' as a configuration option:
+`availability-sets-enabled=false` as a configuration option:
 
 ```bash
 juju bootstrap --config availability-sets-enabled=false azure mycloud
@@ -87,8 +88,8 @@ not all units in the set will become unavailable at the same time.
 
 <!-- LINKS -->
 
-[controller-ha]: ./controllers-ha.html
-[maaszones]: https://docs.ubuntu.com/maas/en/manage-zones
-[jujuclouds]: ./clouds.html
+[controllers-ha]: ./controllers-ha.md
+[maas-zones]: https://docs.ubuntu.com/maas/en/manage-zones
+[clouds]: ./clouds.md
 [azure-sla]: https://azure.microsoft.com/en-gb/support/legal/sla/
-[clouds-azure]: ./help-azure.html
+[clouds-azure]: ./clouds-azure.md

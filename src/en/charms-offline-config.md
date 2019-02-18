@@ -123,7 +123,7 @@ charm-specific resources                       |        |            | X
 [1]: Required for the localhost cloud only.
 
 [2]: Not needed if the `--no-gui` option is used with the `juju bootstrap`
-command. See [The Juju GUI][controllers-gui].
+command. See [Juju GUI][controllers-gui].
 
 [3]: May be needed, depending on provider and network design.
 

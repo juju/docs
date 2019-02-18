@@ -1,6 +1,8 @@
 Title: A multi-user cloud
 TODO:  change screenshot username from degville to newuser
        add link to a table showing permissions for each type of user
+       General reivew and abstract linking
+       Consider renaming file to tutorial-multiuser-cloud.md
 
 # A multi-user cloud
 
@@ -11,9 +13,9 @@ In one of many potential examples, we are going to create a new controller, add
 models and invite other users to view and control them, just as you might
 within a development and staging environment.
 
-For this example, we're going to use [Amazon AWS][helpaws], but you could just
-as easily use [Google GCE][helpgce], [Microsoft Azure][helpazure] or any one of
-Juju's supported [clouds][listclouds]. 
+For this example, we're going to use [Amazon AWS][clouds-aws], but you could
+just as easily use [Google GCE][clouds-gce], [Microsoft Azure][clouds-azure] or
+any one of Juju's supported [clouds][clouds]. 
 
 ## Bootstrap the cloud
 
@@ -129,7 +131,7 @@ gui` and using their username with the password defined when registering.
 
 The GUI will show the Canonical Kubernetes application we deployed as the admin.
 
-![Juju GUI model of Canonical Kubernetes](media/tut-users_gui.png)
+![Juju GUI model of Canonical Kubernetes](https://assets.ubuntu.com/v1/0b305364-tut-users_gui.png)
 
 It is useful for the new user to see this model, but at the moment they can't
 do anything with it apart from look at it. 
@@ -143,7 +145,7 @@ juju grant newuser write dev
 ```
 From the user's Juju GUI, the new model will appear beneath the model menu:
 
-![Juju GUI switching model](media/tut-users_guiswitch.png)
+![Juju GUI switching model](https://assets.ubuntu.com/v1/d0b750f0-tut-users_guiswitch.png)
 
 
 When the user switches to the ‘dev’ model, they’ll now be able to deploy
@@ -177,8 +179,11 @@ With access revoked, the admin can now safely remove the model:
 juju destroy-model dev
 ```
 
-[helpaws]: ./help-aws.html "Using Amazon AWS with Juju"
-[helpgce]: ./help-google.html "Using Google GCE with Juju"
-[helpazure]: ./help-azure.html "Using Microsoft Azure with Juju"
-[listclouds]: ./clouds.html "Configuring Juju Clouds"
+
+<!-- LINKS -->
+
+[clouds-aws]: ./clouds-aws.md
+[clouds-gce]: ./clouds-gce.md
+[clouds-azure]: ./clouds-azure.md
+[clouds]: ./clouds.md
 [cankub]: https://jujucharms.com/canonical-kubernetes/

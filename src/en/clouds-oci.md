@@ -21,6 +21,13 @@ running:
 juju update-clouds
 ```
 
+!!! Note:
+    The previous iteration of Oracle's public cloud is now known to Juju as
+    'oracle-classic'. It is supported (see
+    [2.3 documentation][clouds-oracle-classic]) but should be considered
+    deprecated. These instructions cover Oracle OCI only and is known to Juju
+    as cloud 'oracle'.
+
 ## Understanding and preparing your OCI account
 
 The instructions on this page refer to certain OCI concepts. Familiarise
@@ -134,10 +141,6 @@ management.
 In order to access Oracle OCI, you will need to add credentials to Juju. This
 can be done in one of two ways (as shown below).
 
-Alternately, you can use your credentials with [Juju as a Service][jaas], where
-charms can be deployed within a graphical environment that comes equipped with
-a ready-made controller.
-
 ### Using the interactive method
 
 Armed with the gathered information, credentials can be added interactively
@@ -216,6 +219,7 @@ See these pages for ideas on what to do next:
 
 <!-- LINKS -->
 
+[clouds-oracle-classic]: https://docs.jujucharms.com/2.3/en/help-oracle
 [yaml]: http://www.yaml.org/spec/1.2/spec.html
 [oracle-oci]: https://cloud.oracle.com/en_US/cloud-infrastructure
 [oracle-oci-concepts]: https://docs.cloud.oracle.com/iaas/Content/GSG/Concepts/concepts.htm
@@ -224,7 +228,6 @@ See these pages for ideas on what to do next:
 [oracle-oci-cli]: https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm
 [oracle-oci-console]: https://console.us-phoenix-1.oraclecloud.com/
 [credentials]: ./credentials.md
-[jaas]: ./getting-started.md
 [credentials-adding-from-file]: ./credentials.md#adding-credentials-from-a-file
 [clouds-general-cloud-management]: ./clouds.md#general-cloud-management
 [controllers-creating]: ./controllers-creating.md

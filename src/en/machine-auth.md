@@ -47,18 +47,19 @@ allocation").
 
 ### SSH keys and models
 
-When a model is created a passphraseless SSH keypair will be generated and
-placed under `~/.local/share/juju/ssh` and public key `juju_id_rsa.pub` will be
-placed in the model. Any key located at `~/.ssh/id_rsa.pub` will also be
-used.
+When a controller is either created or registered a passphraseless SSH keypair
+will be generated and placed under `~/.local/share/juju/ssh` The public key
+`juju_id_rsa.pub`, as well as a possibly existing `~/.ssh/id_rsa.pub`, will be
+placed within any newly-created model.
 
 This means that a model creator will always be able to connect to any machine
 within that model (with `juju ssh`) without having to add keys since the
 creator is also granted 'admin' model access by default (see
-[Adding a model][models-adding] for more information). Recall that the creation
-of a controller effectively produces two models: 'controller' and 'default'.
-This provides the initial controller administrator access to keys and models
-out of the box.
+[Adding a model][models-adding] for more information).
+
+Recall that the creation of a controller effectively produces two models:
+'controller' and 'default'. This provides the initial controller administrator
+access to keys and models out of the box.
 
 ### Providing access to non-initial controller admin Juju users
 
@@ -90,6 +91,9 @@ The second option above, applied to the previous example, will look like this:
 ```bash
 juju ssh 0 -i ~/.ssh/my-private-key
 ```
+
+Use the `ssh-keys` command to list SSH keys currently permitting access to all
+machines, present and future, in a model.
 
 ## Direct SSH access
 

@@ -7,13 +7,9 @@ In order to use a vSphere cloud you will need to have an existing vSphere
 installation which supports VMware's Hardware Version 8 or better. The vSphere
 installation will also need access to a DNS for Juju to function.
 
-Juju doesn't have baked-in knowledge of your specific vSphere cloud, but it
-does know how such clouds work. We just need to provide some information to add
-it to the list of known clouds.
-
 ## Adding a vSphere cloud
 
-Use the interactive `add-cloud` command to add your vSphere cloud to Juju's
+Use the `add-cloud` command to interactively add your vSphere cloud to Juju's
 list of clouds. You will need to supply a name you wish to call your cloud, the
 IP address of the vSphere server, and a region name.
 
@@ -49,7 +45,9 @@ Enter region name: dc1
 Enter another region? (Y/n): n
 
 Cloud "myvscloud" successfully added
-You may bootstrap with 'juju bootstrap myvscloud'
+
+You will need to add credentials for this cloud (`juju add-credential myvscloud`)
+before creating a controller (`juju bootstrap myvscloud`).
 ```
 
 The 'API endpoint url' in this case is the IP address of the vSphere server.
@@ -83,7 +81,7 @@ Datacenters' from the hierarchical menu on the left. The values you need are
 listed in the 'Name' column, such as the 'dc0' and 'dc1' data centres shown
 here:
 
-![vSphere web client showing data centres](./media/config-vsphere-datacenters.png)
+![vSphere web client showing data centres](https://assets.ubuntu.com/v1/386b31c4-config-vsphere-datacenters.png)
 
 The manual method necessitates the use of a [YAML-formatted][yaml]
 configuration file. Here is an example:
@@ -108,20 +106,19 @@ juju add-cloud myvscloud vsphere-cloud.yaml
 
 ## Adding credentials
 
-The [Cloud credentials][credentials] page offers a full treatment of credential
+The [Credentials][credentials] page offers a full treatment of credential
 management.
 
-Credentials can be added by typing `juju add-credential`, followed by the name
-of the cloud you wish to add credentials for. This would be `myvscloud` in the
-above example:
+Use the `add-credential` command to interactively add your credentials to the
+new cloud:
 
 ```bash
 juju add-credential myvscloud
 ```
 
-The process now becomes interactive. You will first be asked for an arbitrary
-name for this credential, which you choose for yourself, followed by the
-username and password for your VMware installation.
+You will first be asked for an arbitrary name for this credential, which you
+choose for yourself, followed by the username and password for your VMware
+installation.
 
 ## Creating a controller
 
@@ -132,8 +129,8 @@ juju bootstrap myvscloud myvscloud-controller
 ```
 
 Above, the name given to the new controller is 'myvscloud
-myvscloud-controller'. vSphere will provision an instance to run the
-controller on.
+myvscloud-controller'. vSphere will provision an instance to run the controller
+on.
 
 For a detailed explanation and examples of the `bootstrap` command see the
 [Creating a controller][controllers-creating] page.
@@ -161,25 +158,22 @@ juju bootstrap myvscloud myvscloud-controller \
 	--config datastore=NFSSTORE
 ```
 
-!!! Note:
-    When you specify these options in the bootstrap command, they will only
-    apply to the 'controller' and 'default' models. Use
-    [`model-defaults`](./models-config.html) if you want all new models to use
-    those options.
+When you specify the above options, they will only apply to the 'controller'
+and 'default' models. Use the `model-defaults` command if you want all new
+models to use those options.
 
 !!! Note:
-    When bootstrapping Juju with vSphere, Juju downloads a cloud image to
-    the Juju client machine and then uploads it to your cloud. If you're far
-    away from the cluster, this may take some time.
+    When creating a controller with vSphere, a cloud image is downloaded to the
+    client and then uploaded to the cloud.
 
 ## Troubleshooting
 
-When bootstrapping, Juju contemplates three levels of placement: Cloud, Region and
-Availability Zone. In vSphere, these are mapped in two different ways depending
-on your topology:
+When bootstrapping, Juju contemplates three levels of placement: Cloud, Region
+and Availability Zone. In vSphere, these are mapped in two different ways
+depending on your topology:
 
 - Cloud (vSphere endpoint), Region (data centre), Availability Zone (Host)
-- Cloud (vsphere endpoint), Region (data centre), Availability Zone (Cluster)
+- Cloud (vSphere endpoint), Region (data centre), Availability Zone (Cluster)
 
 If your topology has a cluster without a host, Juju will see this as an
 Availability Zone and may fail silently. To solve this, either make sure the
@@ -191,8 +185,9 @@ You can be specific about placement by using the following syntax:
 ```bash
 juju bootstrap vsphere/<datacenter> <controllername> --to zone=<cluster|host>
 ```
-To bootstrap our previous example using the second data centre (dc1), for instance,
-you would enter the following:
+
+To bootstrap our previous example using the second data centre (dc1), for
+instance, you would enter the following:
 
 ```bash
 juju bootstrap myvscloud/dc1 myvscontroller
@@ -200,9 +195,9 @@ juju bootstrap myvscloud/dc1 myvscontroller
 
 ## Next steps
 
-A controller is created with two models - the 'controller' model, which
-should be reserved for Juju's internal operations, and a model named
-'default', which can be used for deploying user workloads.
+A controller is created with two models - the 'controller' model, which should
+be reserved for Juju's internal operations, and a model named 'default', which
+can be used for deploying user workloads.
 
 See these pages for ideas on what to do next:
 
@@ -219,3 +214,4 @@ See these pages for ideas on what to do next:
 [models]: ./models.md
 [charms]: ./charms.md
 [credentials]: ./credentials.md
+[yaml]: http://www.yaml.org/spec/1.2/spec.html

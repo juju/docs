@@ -3,12 +3,12 @@ Title: What's new in 2.5
 # What's new in 2.5
 
 The major new features in this release are summarised below. See the
-[2.5 release notes][release-notes] for full details.
+[Release Notes][release-notes-2] for full details.
 
-## Kubernetes "cloud" support
+## Kubernetes workloads support
 
 Juju has been able to install a Kubernetes cluster for a while now. However,
-only until now is Juju able to take a pre-existing cluster and add it to its
+only until 2.5 is Juju able to take a pre-existing cluster and add it to its
 list of backing clouds. This renders the cluster available for charm
 deployment. Kubernetes-specific charms are naturally required.
 
@@ -31,8 +31,8 @@ See [Adding a remote LXD cloud][clouds-lxd-advanced-remote] and
 ## Oracle Cloud Infrastructure (OCI) support
  
 OCI is the new cloud framework from Oracle and Juju now supports it out of the
-box. Juju's cloud name for this cloud is 'oci' and it replaces the legacy
-Oracle cloud of 'oracle'.
+box. Juju's cloud name for this cloud is 'oci'. The legacy Oracle cloud of
+'oracle' has been renamed 'oracle-classic' and should be considered deprecated.
 
 See [Using Oracle OCI with Juju][clouds-oci].
 
@@ -49,7 +49,7 @@ procedure.
 
 See [Upgrading a machine series][upgrade-series].
 
-## Charm support for LXD profiles
+## Support for charms with LXD profiles
 
 Juju now supports charms that include a LXD profile. A profile is applied to a
 LXD container that the charm is deployed into. Some hardcoded security checks
@@ -100,7 +100,7 @@ See [Use a custom charm store][controllers-creating-charmstore-url].
 
 <!-- LINKS -->
 
-[release-notes]: ./reference-release-notes.md#juju_2.5.0
+[release-notes-2]: ./reference-release-notes.md
 [clouds-k8s]: ./clouds-k8s.md
 [clouds-lxd-advanced-remote]: ./clouds-lxd-advanced.md#adding-a-remote-lxd-cloud
 [clouds-lxd-advanced-clustering]: ./clouds-lxd-advanced.md#lxd-clustering
@@ -109,6 +109,6 @@ See [Use a custom charm store][controllers-creating-charmstore-url].
 [clouds-lxd-advanced-profiles]: ./clouds-lxd-advanced.md#charms-and-lxd-profiles
 [charms-bundles-export]: ./charms-bundles.md#saving-a-bundle
 [charms-bundles-diff]: ./charms-bundles.md#comparing-a-bundle-to-a-model
-[clouds-openstack-adding]: ./help-openstack.md#adding-an-openstack-cloud
+[clouds-openstack-adding]: ./clouds-openstack.md#adding-an-openstack-cloud
 [credentials-set-credential]: ./credentials.md#changing-a-remote-credential-for-a-model
 [controllers-creating-charmstore-url]: ./controllers-creating.md#use-a-custom-charm-store
