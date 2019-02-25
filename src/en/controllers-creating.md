@@ -1,6 +1,5 @@
 Title: Creating a controller
 TODO:  Hardcoded: Ubuntu code names
-       Update default controller release (to Bionic) and remove Note once 18.04.1 released (juju v2.4 only)
 
 # Creating a controller
 
@@ -70,22 +69,22 @@ given via `--bootstrap-constraints` will be used.
 
 ### Create a controller of a specific series
 
-The controller will be deployed upon Ubuntu 16.04 LTS (Xenial) by default.
+The controller will be deployed upon Ubuntu 18.04 LTS (Bionic) by default.
     
-For our example, we name the resulting LXD controller 'lxd-xenial' to reflect
+For our example, we name the resulting LXD controller 'lxd-bionic' to reflect
 that:
 
 ```bash
-juju bootstrap localhost lxd-xenial
+juju bootstrap localhost lxd-bionic
 ```
 
 To select a different series the `--bootstrap-series` option is used.
 
-Below, a google (GCE) controller based on Ubuntu 18.04 LTS (Bionic) is
-requested explicitly (and is given the name 'gce-bionic'):
+Below, a google (GCE) controller based on Ubuntu 16.04 LTS (Xenial) is
+requested explicitly (and is given the name 'gce-xenial'):
 
 ```bash
-juju bootstrap --bootstrap-series=bionic google gce-bionic
+juju bootstrap --bootstrap-series=xenial google gce-xenial
 ```
 
 ### Create a controller using configuration values
@@ -232,7 +231,7 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 [charms-constraints]: ./charms-constraints.md
 [controllers-config]: ./controllers-config.md
 [models-config]: ./models-config.md
-[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.md
+[troubleshooting-logs-remote]: ./troubleshooting-logs.md#remote-logging
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
 
 [#create-a-controller-interactively]: #create-a-controller-interactively
