@@ -231,7 +231,7 @@ juju boootstrap --config vpc-id=vpc-86f7bbe1 aws
 [charms-constraints]: ./charms-constraints.md
 [controllers-config]: ./controllers-config.md
 [models-config]: ./models-config.md
-[troubleshooting-logs-remote]: ./troubleshooting-logs-remote.md
+[troubleshooting-logs-remote]: ./troubleshooting-logs.md#remote-logging
 [agent-versions-and-streams]: ./models-config.md#agent-versions-and-streams
 
 [#create-a-controller-interactively]: #create-a-controller-interactively
