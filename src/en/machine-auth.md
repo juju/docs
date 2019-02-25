@@ -41,6 +41,12 @@ For example, to connect to a machine with an id of '0':
 juju ssh 0
 ```
 
+You can also connect to a machine by specifying a unit:
+
+```bash
+juju ssh nginx/3
+```
+
 An interactive pseudo-terminal (pty) is enabled by default. For the OpenSSH
 client, this corresponds to the `-t` option ("force pseudo-terminal
 allocation").
