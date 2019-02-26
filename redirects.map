@@ -11,12 +11,14 @@
 
 # Redirect /1.25 to current stable version
 "~^/1\.25/?$" /2.5/en/;
+"~^/1\.25/en/?$" /2.5/en/;
+"~^/1\.25/(?<path>.+)$" /2.5/en:
+
+# Redirect anything without version or en to current stable version
+"~^/(?!([0-9-\._]+|devel|stable|en)/)(?<path>.+)$" /2.5/en/${path};
 
 # Redirect pages which don't specify \en\ to the \en\ version
 "~^/(?<version>[0-9-\._]+|devel)/(?<path>(?!en/?).+)$" /${version}/en/${path};
-
-# Redirect pages without version or en to current stable version
-"~^/(?!([0-9-\._]+|devel|stable|en)/)(?<path>.+)$" /2.5/en/${path};
 
 # Redirect 1.25 docs index to getting-started page
 #"~^/1\.25(/|/index)?$" /1.25/en/getting-started;
