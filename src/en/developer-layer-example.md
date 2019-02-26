@@ -1,6 +1,6 @@
-Title: Writing layer example
+Title: Writing a layer
 
-# Writing a layer by example
+# Writing a layer
 
 In this document, we will be writing a charm layer that installs and
 configures the [Vanilla forum software][].

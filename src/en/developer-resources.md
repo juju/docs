@@ -1,6 +1,6 @@
-Title: Using resources | Developer guide
+Title: Charm resources
 
-# Using resources
+# Charm resources
 
 Many applications require binary resources to complete the install process.
 While it is possible for a charm to download this software from package
