@@ -1,6 +1,6 @@
-Title: Writing charms using storage  
+Title: Implementing storage
 
-# Writing charms that use storage
+# Implementing storage
 
 The storage feature can be implemented in any charm running on Juju version
 1.25 or later. For applications that can take advantage of block storage or

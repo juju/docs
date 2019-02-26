@@ -1,6 +1,6 @@
-Title: The Juju charm store
+Title: Working with the Charm Store
 
-# The Juju Charm Store
+# Working with the Charm Store
 
 Juju includes a charm store where charms and bundles can be uploaded,
 released (published), and optionally shared with other users.
