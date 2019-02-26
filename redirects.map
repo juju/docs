@@ -1,22 +1,26 @@
+# Redirect $DOMAIN or /en without version and path to current stable version
 ~^/(|en/?)?$ /2.5/en/;
-#~^/devel/en/?$ /devel/en/;
 
-~^en/(?<path>.+)$ /2.5/en/${path};
+# Redirect /en without version to current stable version
+~^/en/(?<path>.+)$ /2.5/en/${path};
 
-# Redirect /stable to correct version
+# Redirect /stable to current stable version
 ~^/stable/?$ /2.5/en/;
 ~^/stable/en/?$ /2.5/en/;
 ~^/stable/(?<path>.+)$ /2.5/${path};
 
+# Redirect /1.25 to current stable version
+"~^/1\.25/?$" /2.5/en/;
+
 # Redirect pages which don't specify \en\ to the \en\ version
 "~^/(?<version>[0-9-\._]+|devel)/(?<path>(?!en/?).+)$" /${version}/en/${path};
 
-# Redirect pages without version or en to /en
-"~^/(?!([0-9-\._]+|devel|stable|master|en)/)(?<path>.+)$" /2.5/en/${path};
+# Redirect pages without version or en to current stable version
+"~^/(?!([0-9-\._]+|devel|stable|en)/)(?<path>.+)$" /2.5/en/${path};
 
 # Redirect 1.25 docs index to getting-started page
-"~^/1\.25(/|/index)?$" /1.25/en/getting-started;
-"~^/1\.25/(?<language>[a-zA-Z]{2})(/|/index)?$" /1.25/${language}/getting-started;
+#"~^/1\.25(/|/index)?$" /1.25/en/getting-started;
+#"~^/1\.25/(?<language>[a-zA-Z]{2})(/|/index)?$" /1.25/${language}/getting-started;
 
 # Redirect old media paths
 "~^/(?<version>[0-9-\._]+|devel)/en/media/(?<filename>.+)$" /en/media/${filename};
