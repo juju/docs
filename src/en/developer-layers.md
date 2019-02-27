@@ -1,6 +1,6 @@
-Title: Layers for charm authoring  
+Title: Charm layers
 
-# Why build from layers
+# Charm layers
 
 When creating a charm, you always have the option of doing it the traditional
 way by creating each hook, implementing each side of the interface you need for
