@@ -92,7 +92,7 @@ navigation:
       - title: Collecting Juju metrics
         location: howto-prometheus.md
 
-  - title: Charm writing
+  - title: Charm writing guide
     location: charm-writing.md
 
   - title: Reference documents
