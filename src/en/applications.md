@@ -52,8 +52,8 @@ The most important ones are [Deploying applications][charms-deploying] and
    The [Deploying applications][charms-deploying] page covers an array of
    methods for getting your applications deployed.
   
-   The [Deploying applications - advanced][charms-deploying] page contains more
-   advanced use cases.
+   The [Deploying applications - advanced][charms-deploying-advanced] page
+   contains more advanced use cases.
   
    See the [Deploying charms offline][charms-offline-deploying] page for
    guidance when deploying in a network-restricted environment.

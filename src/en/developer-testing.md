@@ -1,6 +1,6 @@
 Title: Writing charm tests
 
-# Writing Charm Tests
+# Writing charm tests
 
 Charm authors will have the best insight into whether or not a charm is working
 properly. It is up to the author to create tests that ensure quality and

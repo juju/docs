@@ -1,12 +1,12 @@
-Title: Using Docker in charms
+Title: Using Docker
 
-# Charming with Docker
+# Using Docker
 
 You have a Docker container and you heard about Juju. Juju can deploy your
 Docker container to any cloud. This document will outline the best practices
 for using Juju to deploy Docker images.
 
-### First things first
+## First things first
 
 This document assumes you already know about [Docker](http://docker.com) and
 how to create, pull and use application containers.
@@ -17,9 +17,9 @@ with the technology, there is more information on
 of Juju software on <https://jujucharms.com>. This document will detail some of
 the higher level [concepts of Juju][concepts].
 
-### Reactive and layered charms
+## Reactive and layered charms
 
-#### Reactive
+### Reactive
 
 Another software paradigm is
 [reactive programming](https://en.wikipedia.org/wiki/Reactive_programming). Do
@@ -30,30 +30,30 @@ execution is controlled by boolean logic. You can define when the conditions
 are right, run this code, or when something is not set, run different code or
 do nothing at all.
 
-#### Layers
+### Layers
 
 The idea of charm layers is to combine objects or data into more complex objects
 or data. When applied to Charms, layers allow you to extend or build off
 other charms to make more complex or useful charms. The `layer.yaml` file in
 the root directory of the charm controls what layer(s) will be imported.
 
-#### Reactive Charms
+### Reactive charms
 
 The docker charm makes use of the
 [charms.reactive](https://charmsreactive.readthedocs.io/) python framework.
 The code for the docker layer can be found in the `reactive/` folder in the
 root charm directory.
 
-#### Building Charms
+### Building charms
 
 The docker layer makes use of the
 [Charm Layers](developer-layers.html)
 concept building off the base charm and creating its own layer of added
 functionality.
 
-### Start with Docker, and build your own
+## Start with Docker, and build your own
 
-#### layer-docker charm
+### layer-docker charm
 
 The layer-docker charm can be found on github.com at:
 <https://github.com/juju-solutions/layer-docker>. This charm encapsulates
@@ -73,10 +73,10 @@ to install and upgrade docker. Freeing you to focus on delivering your applicati
 layer and focus on how to do that.
 
 ## A guided example
+
 In the first section we illustrated the workflow. The resulting charm will
 be a simple method to serve static content with NGinx, including a relation to
 a load balancer charm.
-
 
 # Charm authoring using reactive paradigm
 

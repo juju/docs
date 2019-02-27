@@ -1,4 +1,4 @@
-Title: Implementing Leadership
+Title: Implementing leadership
 
 # Implementing leadership
 
