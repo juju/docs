@@ -92,8 +92,8 @@ navigation:
       - title: Collecting Juju metrics
         location: howto-prometheus.md
 
-  - title: Charm writing
-    location: https://docs.jujucharms.com/2.4/en/developer-getting-started
+  - title: Charm writing guide
+    location: charm-writing.md
 
   - title: Reference documents
     location: reference-documents.md

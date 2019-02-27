@@ -1,6 +1,6 @@
-Title: Event Cycle
+Title: Event cycle and reactive states
 
-# Event Cycle
+# Event cycle and reactive states
 
 When charming with the reactive framework, it’s possible to use
 developer-created states and boolean logic to run code when the states represent
@@ -8,8 +8,6 @@ something meaningful to your deployment, such as when a database is connected,
 and when it is available, or when the primary workload becomes available for
 use. These are additional “events” that are abstracted from the hook event cycle
 outlined later in this page.
-
-## Handling reactive states
 
 Many states can be performed during a single hook execution, as these abstracted
 states are run through a dispatcher, and ordering is not guaranteed. All state
