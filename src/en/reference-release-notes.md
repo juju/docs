@@ -4,6 +4,7 @@ Title: Release Notes
 
 This page maintains the Release Notes for the 2.4 and 2.5 series of Juju.
 
+ - [2.5.2](release-notes-2.5.2.md)
  - [2.5.1](release-notes-2.5.1.md)
  - [2.5.0](release-notes-2.5.0.md)
  - [2.4.7](release-notes-2.4.7.md)

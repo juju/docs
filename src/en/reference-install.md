@@ -6,9 +6,9 @@ Stable versions of Juju are available on Ubuntu, various other Linux
 distributions, macOS, and Windows. Development releases are also available for
 testing.
 
-## Version 2.5.1
+## Version 2.5.2
 
-The most recent stable version of Juju is 2.5.1. This is the version we
+The most recent stable version of Juju is 2.5.2. This is the version we
 recommend for production use. See the [Release Notes][release-notes-2].
 
 ### Ubuntu
@@ -76,7 +76,7 @@ sudo snap install juju --classic
     In the advent that option `--classic` is not supported on your chosen
     distro, use the `--devmode` option.
 
-For CentOS, download Juju and install it manually: [**juju-2.5.1-centos7.tar.gz**][juju-centos] ([md5][juju-centos-md5])
+For CentOS, download Juju and install it manually: [**juju-2.5.2-centos7.tar.gz**][juju-centos] ([md5][juju-centos-md5])
 
 ### macOS
 
@@ -95,7 +95,7 @@ brew upgrade juju
 
 ### Windows
 
-For Windows, an installer is available: [**juju-setup-2.5.1-signed.exe**][juju-win-signed] ([md5][juju-win-signed-md5])
+For Windows, an installer is available: [**juju-setup-2.5.2-signed.exe**][juju-win-signed] ([md5][juju-win-signed-md5])
 
 ## Development releases
 
@@ -173,10 +173,10 @@ instructions on how to build Juju from source.
 [snapcraft-docs]: https://docs.snapcraft.io
 [snapd-install]: https://snapcraft.io/docs/core/install
 [juju-new-bug]: https://bugs.launchpad.net/juju/+filebug
-[juju-win-signed]: https://launchpad.net/juju/2.5/2.5.1/+download/juju-setup-2.5.1-signed.exe
-[juju-win-signed-md5]: https://launchpad.net/juju/2.5/2.5.1/+download/juju-setup-2.5.1-signed.exe/+md5
-[juju-centos]: https://launchpad.net/juju/2.5/2.5.1/+download/juju-2.5.1-centos7.tar.gz
-[juju-centos-md5]: https://launchpad.net/juju/2.5/2.5.1/+download/juju-2.5.1-centos7.tar.gz/+md5
+[juju-win-signed]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-setup-2.5.2-signed.exe
+[juju-win-signed-md5]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-setup-2.5.2-signed.exe/+md5
+[juju-centos]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-2.5.2-centos7.tar.gz
+[juju-centos-md5]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-2.5.2-centos7.tar.gz/+md5
 [juju-plugins]: ./juju-plugins.md
 [juju-coexist]: ./juju-coexist.md
 [juju-launchpad-binaries]: https://launchpad.net/juju/+series
