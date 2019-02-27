@@ -1,38 +1,26 @@
-Title: Charm writing
+Title: Charm writing guide
 
-# Charm writing
+# Charm writing guide
 
-[Getting started](developer-getting-started.md)
+## Writing charms
 
-[Event cycle and reactive states](developer-event-cycle.md)
+ - [Getting started](developer-getting-started.md)
+ - [Event cycle and reactive states](developer-event-cycle.md)
+ - [Charm layers and states](developer-layers.md)
+ - [Writing a charm layer](developer-layer-example.md)
+ - [Interface layers](developer-layers-interfaces.md)
+ - [Upgrading a charm](developer-upgrade-charm.md)
+ - [Juju terms](developer-terms.md)
+ - [Juju metrics](developer-metrics.md)
+ - [Charm resources](developer-resources.md)
+ - [Network primitives](developer-network-primitives.md)
+ - [Implementing leadership](developer-leadership.md)
+ - [Implementing actions](developer-actions.md)
+ - [Implementing storage](developer-storage.md)
+ - [Writing charm tests](developer-testing.md)
+ - [Using Docker](howto-charm-with-docker.md)
 
-[Charm layers and states](developer-layers.md)
-
-[Writing a charm layer](developer-layer-example.md)
-
-[Interface layers](developer-layers-interfaces.md)
-
-[Upgrading a charm](developer-upgrade-charm.md)
-
-[Juju terms](developer-terms.md)
-
-[Juju metrics](location: developer-metrics.md)
-
-[Charm resources](developer-resources.md)
-
-[Network primitives](developer-network-primitives.md)
-
-[Implementing leadership](developer-leadership.md)
-
-[Implementing actions](developer-actions.md)
-
-[Implementing storage](developer-storage.md)
-
-[Writing charm tests](developer-testing.md)
-
-[Using Docker](howto-charm-with-docker.md)
-
-## Debugging
+## Debugging charms
 
  - [Debugging charm hooks](developer-debugging.md)
  - [Debugging layers](developer-debug-layers.md)
@@ -41,7 +29,7 @@ Title: Charm writing
 ## Charm authors
 
  - [Becoming a charm author](authors-intro.md)
- - [How hooks are run (Hook API)](location: authors-hook-environment.md)
+ - [How hooks are run (Hook API)](authors-hook-environment.md)
  - [Relations lifecycle](authors-relations-in-depth.md)
  - [Implementing relations](authors-relations.md)
  - [Charm leadership](authors-charm-leadership.md)
