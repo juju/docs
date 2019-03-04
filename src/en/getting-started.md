@@ -58,12 +58,12 @@ table.logos th, table.logos td{
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-login-1-2.png" alt="Logged in to JAAS" />
+<img src="https://assets.ubuntu.com/v1/f0c4a946-jaas-login-1-2.png" alt="Logged in to JAAS" />
 Press the "Start a new model" button.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-login-2-2.png" alt="New empty model" />
+<img src="https://assets.ubuntu.com/v1/5db000cf-jaas-login-2-2.png" alt="New empty model" />
 This new model is currently empty.
 </td>
 
@@ -90,12 +90,12 @@ model" button.
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-store-1.png" alt="Search the Charm Store" />
+<img src="https://assets.ubuntu.com/v1/63c56555-jaas-store-1.png" alt="Search the Charm Store" />
 Search the Charm Store.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-store-2.png" alt="Add to model" />
+<img src="https://assets.ubuntu.com/v1/ee925c0b-jaas-store-2.png" alt="Add to model" />
 Add a charm/bundle by pressing "Add to model".
 </td>
 
@@ -116,12 +116,12 @@ and select the cloud you want to use. Here we've called the model 'k8s-core'.
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-bundle-selected.png" alt="Add a bundle" />
+<img src="https://assets.ubuntu.com/v1/308ff71a-jaas-bundle-selected.png" alt="Add a bundle" />
 This bundle has been added to the model.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-select-cloud.png" alt="Name model and select cloud" />
+<img src="https://assets.ubuntu.com/v1/9cb3c7f0-jaas-select-cloud.png" alt="Name model and select cloud" />
 This model has been named. A cloud is not yet selected.
 </td>
 
@@ -160,12 +160,12 @@ default configuration is being applied.
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-ssh-keys.png" alt="Specify SSH keys" />
+<img src="https://assets.ubuntu.com/v1/2ba0afcf-jaas-ssh-keys.png" alt="Specify SSH keys" />
 SSH keys have been added and the model is ready to deploy.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-1-2.png" alt="Deployment initiated" />
+<img src="https://assets.ubuntu.com/v1/fc6878c7-jaas-deploy-1-2.png" alt="Deployment initiated" />
 This bundle's deployment has just been initiated.
 </td>
 
@@ -181,12 +181,12 @@ successful deployment should show grey everywhere.
 <tr>
 
 <td align="center" valign="center" border-width="0px" >
-<img src="./media/jaas-deploy-2-2.png" alt="Bundle is still deploying" />
+<img src="https://assets.ubuntu.com/v1/2d46b059-jaas-deploy-2-2.png" alt="Bundle is still deploying" />
 This bundles is still deploying.
 </td>
 
 <td align="center" valign="center" border-width="0px">
-<img src="./media/jaas-deploy-3.png" alt="Bundle is deployed" />
+<img src="https://assets.ubuntu.com/v1/dff7fc5f-jaas-deploy-3.png" alt="Bundle is deployed" />
 This bundle is now deployed.
 </td>
 
