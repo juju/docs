@@ -29,7 +29,7 @@
 #"~^/1\.25/(?<language>[a-zA-Z]{2})(/|/index)?$" /1.25/${language}/getting-started;
 
 # Redirect old media paths
-"~^/(?<version>[0-9-\._]+|devel)/en/media/(?<filename>.+)$" /${version}/en/media/${filename};
+#"~^/(?<version>[0-9-\._]+|devel)/en/media/(?<filename>.+)$" /${version}/en/media/${filename};
 
 # Redirect help-google to clouds-gce
 "~^/(?<version>[0-9-\._]+|devel)/en/help-google/?$" /${version}/en/clouds-gce;
