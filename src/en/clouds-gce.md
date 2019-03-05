@@ -202,6 +202,14 @@ minutes to complete):
 gcloud services enable compute.googleapis.com --project juju-gce-1
 ```
 
+For some integrated Juju services (e.g. the 
+[Charmed Distribution of Kubernetes][cdk-home]) it is useful to also enable the
+IAM management API:
+
+```bash
+gcloud services enable iam.googleapis.com --project juju-gce-1
+```
+
 Verify by listing all currently enabled services/APIs:
 
 ```bash
@@ -336,3 +344,4 @@ See these pages for ideas on what to do next:
 [gce-iam]: https://cloud.google.com/iam/docs/overview
 [gce-iam-roles]: https://cloud.google.com/compute/docs/access/iam
 [google-cpc]: https://console.cloud.google.com/
+[cdk-home]: https://www.ubuntu.com/kubernetes
