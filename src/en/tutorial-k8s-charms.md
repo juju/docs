@@ -4,7 +4,7 @@ Title: Understanding Kubernetes charms - tutorial
 
 The goal of this tutorial is to expose the innards of Kubernetes charms and to
 explain the mechanisms of how such charms are built. It does so by making
-reference to existing charms. Further reading suggestions are included at the
+reference to an existing charm. Further reading suggestions are included at the
 end.
 
 ## Prerequisites
@@ -24,7 +24,7 @@ example username used in this guide is 'jlarin'.
 ## Install supporting software
 
 Besides Juju and Charm Tools, some supporting software will be necessary. There
-are kubectl and Docker. Install them in this way:
+are `kubectl` and `Docker`. Install them in this way:
 
 ```bash
 sudo snap install kubectl --classic
@@ -61,7 +61,7 @@ charm create mariadb-k8s-test
 cd mariadb-k8s-test
 ```
 
-This provides us with the needed files and directories for building the charm.
+This provides us with the needed files and directories for building the charm:
 
 ```no-highlight
 |
@@ -134,6 +134,8 @@ All layers are listed and described in the
 [Juju Charm Layers Index][github-layer-index]. For Kubernetes charms, the
 fundamental layers are 'caas-base' and 'docker-resource'.
 
+File `config.yaml` is where application configuration settings are placed.
+
 File `spec_template.yaml` is vital for getting pods created for Juju units.
 This is explained in detail later on.
 
@@ -146,7 +148,6 @@ Notes:
 
  - A Kubernetes charm can implement the same hooks that traditional charms can,
    and each hook, in turn, has at its disposal all traditional hook tools.
-
  - Charms, whether Kubernetes or traditional, are written using the
    [Reactive Framework][charms-reactive].
 
@@ -321,7 +322,7 @@ containers:
 The `pod_spec_set()` function sends the pod configuration to Juju. This is
 located within `mariadb-k8s-test/reactive/mariadb-k8s-test.py`:
 
-```pythin
+```python
 def config_mariadb():
     status_set('maintenance', 'Configuring mysql container')
 
