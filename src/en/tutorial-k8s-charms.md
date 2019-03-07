@@ -142,12 +142,13 @@ Edit information file `README.ex` to provide guidance to users of the charm.
 File `icon.svg` will be displayed in the Charm Store once the charm is put
 there.
 
-Note that a Kubernetes charm can implement the same hooks that traditional
-charms can, and each hook, in turn, has at its disposal all traditional hook
-tools.
+Notes:
 
-Charms, whether Kubernetes or traditional, are written using the
-[Reactive Framework][charms-reactive].
+ - A Kubernetes charm can implement the same hooks that traditional charms can,
+   and each hook, in turn, has at its disposal all traditional hook tools.
+
+ - Charms, whether Kubernetes or traditional, are written using the
+   [Reactive Framework][charms-reactive].
 
 ### Container images
 
@@ -318,7 +319,7 @@ containers:
 ```
 
 The `pod_spec_set()` function sends the pod configuration to Juju. This is
-located within `mariadb-k8s-test/reactive/mysql.py`:
+located within `mariadb-k8s-test/reactive/mariadb-k8s-test.py`:
 
 ```pythin
 def config_mariadb():
