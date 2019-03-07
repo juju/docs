@@ -50,7 +50,7 @@ The `scale-application` command is used to scale a Kubernetes cluster. The
 
 Charms need to be written specifically for a Juju:Kubernetes context.
 
-## Using Kubernetes with Juju
+## Running Kubernetes workloads
 
 First off, a Kubernetes cluster will be required. Essentially, you will use it
 as you would any other cloud that Juju interacts with: the cluster becomes the
