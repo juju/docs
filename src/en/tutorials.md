@@ -11,6 +11,7 @@ be added regularly and this page will be updated accordingly.
  - [Using Juju with MicroK8s][tutorial-microk8s]
  - [Using the aws-integrator charm][tutorial-k8s-aws]
  - [Setting up static Kubernetes storage][tutorial-k8s-static-pv]
+ - [Understanding Kubernetes charms][tutorial-k8s-charms]
 
 
 <!-- LINKS -->
@@ -21,3 +22,4 @@ be added regularly and this page will be updated accordingly.
 [tutorial-microk8s]: ./tutorial-microk8s.md
 [tutorial-k8s-aws]: ./tutorial-k8s-aws.md
 [tutorial-k8s-static-pv]: ./tutorial-k8s-static-pv.md
+[tutorial-k8s-charms]: ./tutorial-k8s-charms.md
