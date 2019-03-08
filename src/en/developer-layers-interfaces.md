@@ -129,10 +129,10 @@ interface-layers you may wish to write, and the
 
 ```bash
 export JUJU_REPOSITORY=$HOME/charms
-export LAYER_PATH=$JUJU_REPOSITORY/layers
-export INTERFACE_PATH=$JUJU_REPOSITORY/interfaces
+export CHARM_LAYERS_DIR=$JUJU_REPOSITORY/layers
+export CHARM_INTERFACES_DIR=$JUJU_REPOSITORY/interfaces
 
-mkdir -p $LAYER_PATH $INTERFACE_PATH
+mkdir -p $CHARM_LAYERS_DIR $CHARM_INTERFACES_DIR
 ```
 
 !!! Note:
@@ -141,7 +141,7 @@ mkdir -p $LAYER_PATH $INTERFACE_PATH
     add the same export statements to a resource file that are evaluated when you
     create a new console such as `~/.bashrc` depending on your shell.
 
-The export of `INTERFACE_PATH` is an environment variable which tells the
+The export of `CHARM_INTERFACES_DIR` is an environment variable which tells the
 `charm build` process where to scan for local interfaces not found in the
 [layer registry](https://github.com/juju/layer-index/).
 
@@ -150,7 +150,7 @@ With our interface repository created, we can now create our new interface.
 Next, create the directory to warehouse your interface.
 
 ```Bash
-mkdir -p $INTERFACE_PATH/http
+mkdir -p $CHARM_INTERFACES_DIR/http
 ```
 
 And declare the interface's metadata in `interface.yaml`.
