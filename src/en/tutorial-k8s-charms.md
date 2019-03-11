@@ -337,6 +337,33 @@ def config_mariadb():
 Using this final configuration, Juju creates a Kubernetes pod for each
 application unit.
 
+#### Unit pod ConfigMaps
+
+A Kubernetes [ConfigMap][upstream-kubernetes-configmap] "allows you to decouple
+configuration artifacts from image content to keep containerized applications
+portable".
+
+A ConfigMap is set up within the final pod configuration file by specifying a
+file set that is mounted within the Docker image. Juju internally creates a
+"config-map" volume source to do that. Its name is based on the charm name, the
+fileset name, and the string '-config': `<appname>-<filesetname>-config`
+
+For instance, the 'myapp' charm may produce a pod configuration file
+containing:
+
+```yaml
+    files:
+      - name: foocfg
+        mountPath: /var/lib/foo
+        files:
+          file1: |
+            [config]
+            foo: bar
+```
+
+This would yield a config map called `myapp-foocfg-config` created to back the
+volume mounted into the pod.
+
 ## Charm Store
 
 Push the built charm to the Charm Store:
@@ -447,3 +474,4 @@ Also consider the following tutorials:
 [github-wallyworld-mariadb]: https://github.com/wallyworld/caas/tree/master/charms/mariadb
 [github-layer-index]: https://github.com/juju/layer-index
 [charms-reactive]: https://charmsreactive.readthedocs.io/en/latest/index.html
+[upstream-kubernetes-configmap]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/
