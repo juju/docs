@@ -4,12 +4,11 @@ Title: Installing Juju
 
 Stable versions of Juju are available on Ubuntu, various other Linux
 distributions, macOS, and Windows. Development releases are also available for
-testing. Read on for how to install a stable or development version of Juju on
-your chosen platform.
+testing.
 
-## Version 2.4.7
+## Version 2.5.2
 
-The most recent stable version of Juju is 2.4.7. This is the version we
+The most recent stable version of Juju is 2.5.2. This is the version we
 recommend for production use. See the [Release Notes][release-notes-2].
 
 ### Ubuntu
@@ -49,7 +48,8 @@ And can be updated with:
 sudo snap refresh juju
 ```
 
-See the [Snapcraft documentation][snapcraft] for more information on snaps. 
+See the [Snapcraft documentation][snapcraft-docs] for more information on
+snaps. 
 
 #### Using a PPA
 
@@ -73,13 +73,10 @@ sudo snap install juju --classic
 ```
 
 !!! Note:
-    The `--classic` flag is not supported on all distros. In that case, you'll
-    need to use `--devmode` instead.
+    In the advent that option `--classic` is not supported on your chosen
+    distro, use the `--devmode` option.
 
-For CentOS, you can download Juju from the following archive and install it
-manually:
-
-[**juju-2.4.7-centos7.tar.gz**][juju-centos] ([md5][juju-centos-md5])
+For CentOS, download Juju and install it manually: [**juju-2.5.2-centos7.tar.gz**][juju-centos] ([md5][juju-centos-md5])
 
 ### macOS
 
@@ -98,9 +95,7 @@ brew upgrade juju
 
 ### Windows
 
-A Windows installer is available for Juju and can be found here:
-
-[**juju-setup-2.4.7-signed.exe**][juju-win-signed] ([md5][juju-win-signed-md5])
+For Windows, an installer is available: [**juju-setup-2.5.2-signed.exe**][juju-win-signed] ([md5][juju-win-signed-md5])
 
 ## Development releases
 
@@ -147,11 +142,22 @@ sudo apt install juju
 !!! Note:
     The alpha builds are only available with snaps (via the 'edge' channel).
 
+### Installing multiple Juju series
+
+Some environments may see the need to run both the 1.x and the 2.x series
+of Juju concurrently. See page
+[Running multiple versions of Juju][juju-coexist] for guidance.
+
 ### Other platforms
 
 All development release binaries are published on
 [Launchpad][juju-launchpad-binaries]. Note that leading edge builds are only
 available with snaps (via the 'edge' channel).
+
+## Juju plugins
+
+Juju functionality can be extended through the use of plugins. See the 
+[Juju plugins][juju-plugins] page for information.
 
 ## Building from source
 
@@ -164,12 +170,14 @@ instructions on how to build Juju from source.
 [release-notes-2]: ./reference-release-notes.md
 [homebrew]: https://brew.sh/
 [contributing]: https://github.com/juju/juju/blob/develop/CONTRIBUTING.md
-[snapcraft]: https://snapcraft.io
+[snapcraft-docs]: https://docs.snapcraft.io
 [snapd-install]: https://snapcraft.io/docs/core/install
 [juju-new-bug]: https://bugs.launchpad.net/juju/+filebug
-[juju-win-signed]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-setup-2.4.7-signed.exe
-[juju-win-signed-md5]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-setup-2.4.7-signed.exe/+md5
-[juju-centos]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-2.4.7-centos7.tar.gz
-[juju-centos-md5]: https://launchpad.net/juju/2.4/2.4.7/+download/juju-2.4.7-centos7.tar.gz/+md5
+[juju-win-signed]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-setup-2.5.2-signed.exe
+[juju-win-signed-md5]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-setup-2.5.2-signed.exe/+md5
+[juju-centos]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-2.5.2-centos7.tar.gz
+[juju-centos-md5]: https://launchpad.net/juju/2.5/2.5.2/+download/juju-2.5.2-centos7.tar.gz/+md5
+[juju-plugins]: ./juju-plugins.md
+[juju-coexist]: ./juju-coexist.md
 [juju-launchpad-binaries]: https://launchpad.net/juju/+series
 [centos-and-other-linuxes]: #centos-and-other-linuxes
