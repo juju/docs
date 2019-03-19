@@ -17,7 +17,7 @@ To view the URL and login credentials for the GUI, use the following command:
 juju gui
 ```
 
-This will produce output similar to the following:
+This should produce output similar to the following:
 
 ```no-highlight
 GUI 2.3.0 for model "admin/default" is enabled at:
@@ -26,6 +26,14 @@ Your login credential is:
   username: admin
   password: 1d191f0ef257a3fc3af6be0814f6f1b0
 ```
+
+From Juju 2.0 onwards, the GUI *should* be installed by default.
+However if you see the error `ERROR Juju GUI is not available: Juju GUI not found`, then:
+
+   * Download the [latest release](https://github.com/juju/juju-gui/releases/) (`.tar.bz2` file)
+   * `juju upgrade-gui path/to/release.tar.bz2`
+   * Wait a few seconds while Juju decompresses that file and runs it
+   * Run `juju gui` again
 
 If you don't want to copy and paste the URL manually, typing `juju gui
 --browser` will open the link in your default browser automatically.
