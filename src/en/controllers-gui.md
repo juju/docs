@@ -27,8 +27,7 @@ Your login credential is:
   password: 1d191f0ef257a3fc3af6be0814f6f1b0
 ```
 
-From Juju 2.0 onwards, the GUI *should* be installed by default.
-However if you see the error `ERROR Juju GUI is not available: Juju GUI not found`, then:
+If you see the error `ERROR Juju GUI is not available: Juju GUI not found`, then:
 
    * Download the [latest release](https://github.com/juju/juju-gui/releases/) (`.tar.bz2` file)
    * `juju upgrade-gui path/to/release.tar.bz2`
