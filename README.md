@@ -1,10 +1,12 @@
 # Documentation for Juju
 
-JUJU DOCUMENTATION WILL SOON BE MOVING TO DISCOURSE:
+JUJU DOCUMENTATION MOVE TO DISCOURSE:
 
-https://discourse.jujucharms.com
+https://discourse.jujucharms.com/t/documentation-migrated-to-discourse/1274
 
-RENDERING THESE INSTRUCTIONS OBSOLETE.
+THESE INSTRUCTIONS ARE OBSOLETE.
+
+The bug tracker on GitHub is still active but as of March 18 2019 pull requests are no longer being processed.
 
 -----
 
