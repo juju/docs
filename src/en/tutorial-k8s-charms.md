@@ -115,9 +115,7 @@ resources:
 storage:
   database:
     type: filesystem
-    location: /var/lib/mysql  mysql_image:
-    type: oci-image
-    description: Image used for mariadb pod.
+    location: /var/lib/mysql
 ```
 
 File `layer.yaml` is where we import functionality via *layers*. Our file
