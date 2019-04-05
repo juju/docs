@@ -1,6 +1,6 @@
-Title: Contributing
+Title: Contributing to documentation
 
-# Contributing
+# Contributing to documentation
 
 The [Juju documentation][juju-docs] web site has now ceased to use
 [GitHub][github-juju-docs]. Its holding and editing place is now in a
