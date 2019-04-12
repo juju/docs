@@ -8,14 +8,14 @@ WORKDIR /srv
 RUN apt-get update && apt-get install --yes nginx
 
 # Set git commit ID
-ARG TALISKER_REVISION_ID
-RUN test -n "${TALISKER_REVISION_ID}"
+ARG REVISION_ID
+RUN test -n "${REVISION_ID}"
 
 # Copy over files
 ADD build .
 ADD nginx.conf /etc/nginx/sites-enabled/default
 ADD redirects.map /etc/nginx/redirects.map
-RUN sed -i "s/~TALISKER_REVISION_ID~/${TALISKER_REVISION_ID}/" /etc/nginx/sites-enabled/default
+RUN sed -i "s/~REVISION_ID~/${REVISION_ID}/" /etc/nginx/sites-enabled/default
 RUN sed -i "s/8205/80/" /etc/nginx/sites-enabled/default
 
 STOPSIGNAL SIGTERM
