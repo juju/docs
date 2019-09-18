@@ -1,0 +1,81 @@
+By default, an application is named after the deployed charm. However, you can specify a custom name by adding an extra argument to the `deploy` command:
+
+``` text
+juju deploy mysql wikidb
+```
+
+This will create a unit of the `wikidb` application.
+
+This can lend to greater organisation as your infrastructure gets more complex:
+
+``` text
+juju deploy mysql website-db
+juju deploy mysql app-master-db
+juju deploy mysql app-slave-db -n2
+```
+
+But there are other reasons to do this: *application groups*, which are nothing other than named applications. They are called out as a separate feature because they're quite useful in a few different ways.
+
+<h2 id="heading--roles">Roles</h2>
+
+Some applications acquire a role at runtime based on the relations that are joined.
+
+A great example of this is the hadoop charm. It can instantiate applications
+
+``` text
+juju deploy hadoop namenode
+juju deploy hadoop datacluster -n40
+```
+
+which are identical at this point except for the application name that Juju's using for the various units.
+
+These applications acquire roles at relation-time via
+
+``` text
+juju add-relation namenode:namenode datacluster:datanode
+juju add-relation namenode:jobtracker datacluster:tasktracker
+```
+
+The relations determine the application role.
+
+Another example of this is mysql replication.
+
+``` text
+juju deploy mysql masterdb
+juju deploy mysql slavedb -n2
+```
+
+where the different applications are related to each other
+
+``` text
+juju add-relation masterdb:master slavedb:slave
+```
+
+and to other applications via
+
+``` text
+juju deploy mediawiki mywiki
+juju add-relation mywiki:db masterdb:db
+juju add-relation mywiki:slave slavedb:db
+```
+
+<h2 id="heading--upgrade-groups-andor-config-groups">Upgrade Groups and/or Config Groups</h2>
+
+There are also interesting use-cases for breaking large applications down into separate groups of units. Instead of a single 5000-node hadoop application named *hadoop-slave*, you might build that cluster from multiple smaller application groups.
+
+``` text
+juju deploy hadoop hadoop-master
+juju deploy hadoop hadoop-slave-A -n2500
+juju deploy hadoop hadoop-slave-B -n2500
+juju add-relation hadoop-master:namenode hadoop-slave-A:datanode
+juju add-relation hadoop-master:namenode hadoop-slave-B:datanode
+...
+```
+
+These application groups can be managed independently by Juju for upgrades and configuration
+
+``` text
+juju config hadoop-slave-B some_param=new_value
+```
+
+This technique can potentially be a way for Juju to manage rolling upgrades for an application. Of course, this depends heavily on the applications in question and how well they support version management, schema changes, etc.

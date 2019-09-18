@@ -1,0 +1,164 @@
+Reviewing a Juju Charm is a process that can easily be broken down into the following parts:
+
+1.  Identifying what to review
+2.  Setting up a branch of the charm
+3.  Charm Information Review
+4.  Charm Deployment, Configuration and Testing
+5.  Gathering / Submitting Your Results
+
+<h2 id="heading--identifying-what-to-review">Identifying what to review</h2>
+
+When determining what charm (or merge request for a charm) you should review, prioritize whichever you think best achieves the goal of helping people enjoy getting things done in Juju. That might be the newest ones, neglected patches, easy patches, or those from new contributors.
+
+<h2 id="heading--setting-up-a-branch-of-the-charm">Setting up a branch of the charm</h2>
+
+Let's get started with setting up a branch of the charm. The process below highlights how you would branch a charm that is for Ubuntu 12.04 (Precise), but the branching process is essentially the same for other series such as Ubuntu 14.04 (Trusty).
+
+``` text
+mkdir /tmp/precise
+cd /tmp/precise
+```
+
+Above we created a temporary directory for Precise. If you are reviewing a charm for Ubuntu 14.04, you'd replace `precise` with `trusty`.
+
+If the charm is already available in the Juju Charm Store, do the following command to get the charm:
+
+``` text
+charm get charm-name
+```
+
+If you are reviewing a merge request for an existing charm, in order to get the merge proposal applied to the current charm store version, do:
+
+``` text
+bzr merge lp:~the-username/charms/precise/charm-name/trunk
+```
+
+If the charm is not already available in the Juju Charm Store, do the following command to get the charm:
+
+``` text
+bzr branch lp:~the-username/charms/precise/charm-name/trunk charm-name
+```
+
+Like when creating the temporary directory, the `precise` part can be replaced with the series relating to the charm that is being reviewed.
+
+``` text
+cd charm-name
+```
+
+<h2 id="heading--charm-information-review">Charm Information Review</h2>
+
+<h3 id="heading--charm-proofing">Charm Proofing</h3>
+
+Now that we have set up / branched the charm and are in the charm's directory, we need to run the following command:
+
+``` text
+charm proof
+```
+
+The [proof](/t/charm-tools/1180#proof) command validates that charm conforms with the [Charm Store Policy](/t/charm-store-policy/1044). It programmatically ensures that the charm structure, layout and files conform to policy. The tool will output particular information with a level of severity.
+
+If you come across errors or warnings (starting with `E` and `W` respectively), these are typically major issues and will result in a broken charm as well as breaking [Charm Store Policy](/t/charm-store-policy/1044). We also recommend you check for the presence of copyright information as well as the charm's icon and ensure it [follows icon specification](/t/creating-icons-for-charms/1041).
+
+If the charm proof results in errors or warnings and you still feel that this charm is likely to be deployable, continue on with the review. Just be sure to note that the charm, as it stands, breaks Charm Store Policy and will not be accepted in its current form.
+
+<h3 id="heading--reading-the-readme">Reading The README</h3>
+
+Understanding the purpose of the charm is crucial for both those that are reviewing as well as for those that may want to deploy the charm. We recommend the charm's README have the following information:
+
+1.  What is the application the charm provides?
+2.  What configuration options does the charm provide? As well as suggested usage of configuration noting defaults.
+3.  What files does the charm retrieve from the Internet?
+4.  Instructions on how to deploy the charm and scale it out.
+5.  How the charm should be related to other charms.
+6.  Caveats or known limitations of the charm.
+7.  Support including contact and upstream project information.
+
+Make note of sections of the README that need improvement or are missing.
+
+<h3 id="heading--charm-configuration">Charm Configuration</h3>
+
+Take a look at the charm's config.yaml file, using the [Charm Configuration](/t/creating-config-yaml-and-configuring-charms/1039) document for reference. We also recommend you cross-reference it with the README to make sure the options in the README are defined in the config.yaml and vise-versa.
+
+<h3 id="heading--charm-metadata">Charm metadata</h3>
+
+Inspect the charm's metadata.yaml file and use the [Charm metadata](/t/charm-metadata/1043) document as reference.
+
+<h2 id="heading--charm-code-review">Charm Code Review</h2>
+
+Reviewing a charm's code is an **optional** step for community reviewers. If you feel comfortable reviewing the charm's code, here are some things to watch out for in the charms code:
+
+1.  Not allowing users to set any applicable passwords with config-set.
+2.  When downloading files from the Internet, not cross-referencing with hashes (ex: md5). Note this isn't necessary if the charm is using a version control system like *git*, since they typically have built-in file verification.
+3.  Not using `set -e` or `set -eux` in Bash scripts, which helps detect failed execution, thereby allowing Juju to more accurately detect a failed hook.
+
+<h2 id="heading--charm-deployment-configuration-and-testing">Charm Deployment, Configuration, and Testing</h2>
+
+In an effort to improve quality charms should have tests, that can be run by an automated testing process (no manual intervention needed). Check for a "tests" directory. Run these tests by issuing the following command in the charm directory:
+
+``` text
+juju test -v --set-e
+```
+
+Go to the [testing page](/t/writing-charm-tests/1130) for more information about how to run the testing tools.
+
+If a charm does not have tests, note it in the review and deploy the charm manually following the README document.
+
+<h3 id="heading--deployment">Deployment</h3>
+
+We are going to cover some basic elements to deploying the charm you are reviewing. For a more in-depth look at deploying charms, go to the [Charms Deploying](/t/deploying-applications/1062) page.
+
+While using the README as a reference, deploy the charm using the command below on your local model.
+
+``` text
+export JUJU_REPOSITORY=/tmp
+juju deploy $JUJU_REPOSITORY/charm-name
+```
+
+If the local deployment is successful, continue to the configuration section.
+
+[note]
+If you have access to other cloud providers (like EC2), we appreciate testing the deployment on those models as well.
+[/note]
+
+<h3 id="heading--configuration-and-relations">Configuration and Relations</h3>
+
+Reference the config.yaml as well as the README to determine what configuration options are available for the charm. Test out changing the charm configuration by doing something like the following:
+
+``` text
+juju set charm-name key=value
+```
+
+If the configuration of the charm successfully changes and the charm's README makes note of possible relations with other charms, test adding and removing the relations **multiple** times. Doing so will test for idempotency, ensuring a hook can be called repeatedly and making sure the departed and broken hooks are fired correctly.
+
+``` text
+juju add-relation charm-name other-charm-name
+juju remove-relation charm-name other-charm-name
+```
+
+<h3 id="heading--verifying">Verifying</h3>
+
+Let's quickly verify that the charm is correctly running by using SSH to jump into the machine the charm is running on.
+
+``` text
+juju ssh charm-name/0
+```
+
+Use `top` or `ps` to show if the charm's process is running. Some service's status would also be available with `sudo service name status` (example: `sudo service apache2 status`).
+
+[note]
+If the charm itself is not a process, but relies on another process/application (eg. nginx or apache2), be sure to check those processes are running. A good example of this would be Wordpress needing apache2 or nginx).
+[/note]
+
+If the charm's configuration options are written to the application's configuration files, check that file for the values you set earlier. Check the hooks to see which ones are written to configuration files (if applicable at all).
+
+<h2 id="heading--gathering--submitting-your-results">Gathering / Submitting Your Results</h2>
+
+Gather the information that you have obtained from the charm review, such as whether the charm proof passes or has issues, if the README is understandable and thorough, if it successfully deploys, configuration and relations work, etc.
+
+Post that information to the bug report or merge request, starting off with a "Thanks" no matter the outcome of the review. If you are a community member and/or contributor, you can leave your general approval or disapproval based on your findings. Normally people use "+1 LGTM" to indicate approval. Of course, in moments of disapproval, we suggest posting information as to why you disapprove.
+
+<h3 id="heading--not-part-of-the-charmers-group">Not part of the ~charmers group?</h3>
+
+First off, thank you for your review of the charm. Your review helps improve the Juju community as a whole and we appreciate your time and effort. If you've found that you are ready to be part of the ~charmers group and want the responsibilities of a member of the ~charmers team, we recommend you seek out how to [apply for membership](https://jujucharms.com/community/charmers/) to the team via #juju on IRC (Freenode) and on the [Juju Discourse forum](https://discourse.jujucharms.com/).
+
+<!-- LINKS -->

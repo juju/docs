@@ -1,0 +1,199 @@
+<!--
+Todo:
+- Consider adding to a troubleshooting page: recovering
+- The concept of quorum should be broached.
+- In particular, what the consequences of losing quorum are. I couldn't find any, which is odd.
+- Note: juju status output includes beta version
+-->
+
+To ensure the high availability of deployed applications, the controller must itself be highly available. This necessitates the creation of additional controllers, all of which naturally reside within the 'controller' model. The initial controller becomes known as the *master* and automatic failover occurs should it lose connectivity with its cluster peers.
+
+See [Application high availability](/t/application-high-availability/1066) for the application side of things.
+
+<h2 id="heading--overview">Overview</h2>
+
+Controller HA is managed with the `juju enable-ha` command. It does this by ensuring that the cluster has the requisite number of controllers present. By default, this number is three but the `-n` switch can be used to change that. Therefore, this command is used to both enable HA as well as compensate for any missing controllers, as is the case if you enable HA and then remove one or more controllers.
+
+When a controller is provisioned, API server code is installed along with a MongoDB database.
+
+The number of controllers must be an odd number in order for a master to be "voted in" amongst its peers. A cluster with an even number of members will cause a random member to become inactive. This latter system will become a "hot standby" and automatically become active should some other member fail. Furthermore, due to limitations of the underlying database in an HA context, that number cannot exceed seven. All this means that a cluster can only have three, five, or seven **active** members.
+
+Juju clients and agents talk to any of the controllers in the cluster. This means that processing at the controller (API) level is distributed. However, there is only one primary database at any given time and all controllers write to it. The "master", therefore, actually refers to the underlying database.
+
+<h2 id="heading--enabling-controller-ha">Enabling controller HA</h2>
+
+To enable controller HA simply invoke the `enable-ha` command:
+
+``` text
+juju enable-ha
+```
+
+Since a specific number of cluster machines were not requested, the default of three is used. We would therefore expect two new controllers to appear. Indeed, the output to the above command reflects this:
+
+``` text
+maintaining machines: 0
+adding machines: 1, 2
+```
+
+We can also query for machines in the 'controller' model:
+
+``` text
+juju machines -m controller
+```
+
+The output should show two new machines being provisioned:
+
+``` text
+Machine  State    DNS            Inst id              Series  AZ          Message
+0        started  54.166.164.0   i-04790c2414e4c8e80  xenial  us-east-1a  running
+1        pending  54.145.192.13  i-071660e9ce3c3cee5  xenial  us-east-1c  running
+2        pending  54.80.176.66   i-0b36284d1ebb816cf  xenial  us-east-1a  running
+```
+
+Invoking `juju enable-ha` again would have no effect since three controllers are already present.
+
+Refreshing the list of controllers with `juju controllers --refresh` displays an HA level of 3:
+
+``` text
+Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
+aws-ha*     default  admin  superuser  aws/us-east-1             2         3     3  2.4-beta2
+```
+
+<h2 id="heading--removing-machines-from-the-cluster">Removing machines from the cluster</h2>
+
+It is possible to remove a machine from the cluster at any time. Typical reasons for doing this are:
+
+-   A controller is misbehaving and your intention is to replace it with another one.
+-   You've decided that your current level of HA is not necessary and you wish to decrease it.
+    -   If the removal of a controller will result in an **even** number of systems then one will act as a "hot standby".
+    -   If the removal of a controller will result in an **odd** number of systems then each one will actively participate in the cluster.
+
+A controller is removed from the cluster by removing its machine from the model (`juju remove-machine`).
+
+Using the example in the previous section, this is how we would remove machine '1':
+
+``` text
+juju remove-machine -m controller 1
+```
+
+The output to `juju controllers --refresh` now becomes:
+
+``` text
+Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
+aws-ha*     default  admin  superuser  aws/us-east-1             2         2   1/2  2.4-beta2
+```
+
+There is now only a single active controller (and one standby) in this cluster (i.e. one out of two are active). Note that this situation should be rectified as soon as possible.
+
+[note]
+The `enable-ha` command cannot be used to remove machines from the cluster.
+[/note]
+
+<h2 id="heading--adding-machines-to-the-cluster">Adding machines to the cluster</h2>
+
+Use the `enable-ha` command to achieve the desired number of controllers (i.e. HA level).
+
+In our ongoing example, our original 3-member cluster now has two machines. We can bring it back to three by issuing `juju enable-ha` again but we would do the following if we decided to make it a 5-member cluster instead:
+
+``` text
+juju enable-ha -n 5
+```
+
+This would cause three controllers (2 + 3 = 5) to be spawned.
+
+The output to `juju controllers --refresh` now becomes:
+
+``` text
+Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
+aws-ha*     default  admin  superuser  aws/us-east-1             2         5     5  2.4-beta2
+```
+
+<h2 id="heading--viewing-extended-controller-ha-information">Viewing extended controller HA information</h2>
+
+Extended information on controller HA can be obtained from the `show-controller` command:
+
+``` text
+juju show-controller
+```
+
+Partial output for our 5-member cluster is listed here:
+
+``` text
+ ...
+ ...
+ controller-machines:
+    "0":
+      instance-id: i-04790c2414e4c8e80
+      ha-status: ha-enabled
+    "2":
+      instance-id: i-0b36284d1ebb816cf
+      ha-status: ha-enabled
+    "3":
+      instance-id: i-09ff42ba5fb9429b0
+      ha-status: ha-enabled
+    "4":
+      instance-id: i-098222dad56cbe9a0
+      ha-status: ha-enabled
+    "5":
+      instance-id: i-0613fb1fa8346de8a
+      ha-status: ha-enabled
+  models:
+    controller:
+      uuid: e8c4d910-8818-4a8a-8839-25766a1875d3
+      machine-count: 5
+      core-count: 5
+  ...
+  ...
+```
+
+Here, `machine-count` is the total number of machines in model 'controller' and `core-count` is the number of controller machines. The key `ha-status` shows 'ha-enabled' if a member is active and 'ha-pending' if it is in hot standby mode.
+
+<h2 id="heading--recovering-from-controller-failure">Recovering from controller failure</h2>
+
+In the advent of failed controllers, new controllers are not automatically re-spawned nor are failed ones removed. However, as long as more than half of the original number of cluster members remain available manual recovery is straightforward:
+
+1.  Remove bad controllers (as described [above](#heading--removing-machines-from-the-cluster)).
+2.  Add new controllers (as described [above](#heading--adding-machines-to-the-cluster)).
+
+[note type="caution"]
+Controllers must be removed prior to the addition of new ones because the `enable-ha` command does not check for failure. It simply ensures the total number of members are present.
+[/note]
+
+You must restore from backups in the unfortunate case where there are an insufficient number of working controllers present. See [Backing up and restoring Juju](/t/controller-backups/1106) for how that works.
+
+A controller is considered failed if it enters the 'down' state. This can be monitored by applying the `status` command to the 'controller' model:
+
+``` text
+juju status -m controller
+```
+
+This output shows that the controller running on machine '3' has lost connectivity with the rest of the cluster:
+
+``` text
+Machine  State    DNS             Inst id              Series  AZ          Message
+0        started  54.166.164.0    i-04790c2414e4c8e80  xenial  us-east-1a  running
+2        started  54.80.176.66    i-0b36284d1ebb816cf  xenial  us-east-1a  running
+3        down     54.157.161.147  i-09ff42ba5fb9429b0  xenial  us-east-1e  running
+4        started  54.227.91.241   i-098222dad56cbe9a0  xenial  us-east-1d  running
+5        started  174.129.90.47   i-0613fb1fa8346de8a  xenial  us-east-1c  running
+```
+
+However, the 'HA' column in the output to `juju controllers --refresh` still says '5', as before:
+
+``` text
+Controller  Model    User   Access     Cloud/Region         Models  Machines    HA  Version
+aws-ha*     default  admin  superuser  aws/us-east-1             2         5     5  2.4-beta2
+```
+
+To recover from this degraded cluster you would do:
+
+``` text
+juju remove-machine -m controller 3
+juju enable-ha -n 5
+```
+
+<h2 id="heading--controller-ha-and-logging">Controller HA and logging</h2>
+
+All Juju machines send their logs to a controller in the HA cluster. Each controller, in turn, sends those logs to a MongoDB database which is synchronized across controllers. The user reads logging information with the `juju debug-log` command as normal. See [Juju logs](/t/juju-logs/1184).
+
+<!-- LINKS -->
