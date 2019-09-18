@@ -1,0 +1,1915 @@
+111:
+  filename: 111-about-the-docs-category.md
+  id: 338
+  slug: about-the-docs-category
+  updated_at: '2018-08-03T17:25:56.443Z'
+112:
+  filename: 112-logfile-var-log-juju-machine-lock-log.md
+  id: 339
+  slug: logfile-var-log-juju-machine-lock-log
+  updated_at: '2019-03-15T01:46:25.612Z'
+116:
+  filename: 116-agent-introspection-juju-machine-lock.md
+  id: 345
+  slug: agent-introspection-juju-machine-lock
+  updated_at: '2019-03-15T01:46:57.283Z'
+117:
+  filename: 117-agent-introspection.md
+  id: 346
+  slug: agent-introspection
+  updated_at: '2019-03-15T01:45:00.286Z'
+118:
+  filename: 118-agent-introspection-juju-goroutines.md
+  id: 347
+  slug: agent-introspection-juju-goroutines
+  updated_at: '2019-03-15T01:46:42.513Z'
+135:
+  filename: 135-about-juju-page.md
+  id: 378
+  slug: about-juju-page
+  updated_at: '2019-03-15T01:58:58.424Z'
+146:
+  filename: 146-agent-introspection-juju-engine-report.md
+  id: 398
+  slug: agent-introspection-juju-engine-report
+  updated_at: '2019-03-15T01:45:41.702Z'
+189:
+  filename: 189-using-lets-encrypt-for-https-juju-controllers.md
+  id: 509
+  slug: using-lets-encrypt-for-https-juju-controllers
+  updated_at: '2019-03-15T01:47:19.035Z'
+423:
+  filename: 423-welcome-text-to-juju.md
+  id: 1278
+  slug: welcome-text-to-juju
+  updated_at: '2019-03-15T01:43:02.078Z'
+426:
+  filename: 426-controller-feature-flags.md
+  id: 1299
+  slug: controller-feature-flags
+  updated_at: '2019-03-15T01:52:44.953Z'
+500:
+  filename: 500-about-the-docs-category.md
+  id: 1528
+  slug: about-the-docs-category
+  updated_at: '2019-01-15T18:59:12.021Z'
+512:
+  filename: 512-using-model-config-key-cloudinit-userdata.md
+  id: 1563
+  slug: using-model-config-key-cloudinit-userdata
+  updated_at: '2019-07-15T19:07:43.367Z'
+514:
+  filename: 514-using-model-config-key-container-inherit-properties.md
+  id: 1565
+  slug: using-model-config-key-container-inherit-properties
+  updated_at: '2019-01-22T14:13:51.023Z'
+1032:
+  filename: 1032-what-is-juju.md
+  id: 2336
+  slug: what-is-juju
+  updated_at: '2019-03-13T14:51:00.876Z'
+1033:
+  filename: 1033-working-with-actions.md
+  id: 2337
+  slug: working-with-actions
+  updated_at: '2019-06-01T03:13:24.921Z'
+1034:
+  filename: 1034-applications-and-charms.md
+  id: 2338
+  slug: applications-and-charms
+  updated_at: '2019-09-06T16:27:46.015Z'
+1036:
+  filename: 1036-benchmarking-juju-applications.md
+  id: 2340
+  slug: benchmarking-juju-applications
+  updated_at: '2019-05-16T20:31:22.144Z'
+1037:
+  filename: 1037-best-practice-for-charm-authors.md
+  id: 2341
+  slug: best-practice-for-charm-authors
+  updated_at: '2019-03-13T14:46:54.779Z'
+1038:
+  filename: 1038-components-of-a-charm.md
+  id: 2342
+  slug: components-of-a-charm
+  updated_at: '2019-05-31T20:54:53.599Z'
+1039:
+  filename: 1039-creating-config-yaml-and-configuring-charms.md
+  id: 2343
+  slug: creating-config-yaml-and-configuring-charms
+  updated_at: '2019-03-13T14:51:13.759Z'
+1040:
+  filename: 1040-charm-hooks.md
+  id: 2344
+  slug: charm-hooks
+  updated_at: '2019-05-31T21:04:41.553Z'
+1041:
+  filename: 1041-creating-icons-for-charms.md
+  id: 2345
+  slug: creating-icons-for-charms
+  updated_at: '2019-03-13T14:46:59.468Z'
+1043:
+  filename: 1043-charm-metadata.md
+  id: 2347
+  slug: charm-metadata
+  updated_at: '2019-03-13T14:51:22.925Z'
+1044:
+  filename: 1044-charm-store-policy.md
+  id: 2348
+  slug: charm-store-policy
+  updated_at: '2019-03-13T14:51:24.879Z'
+1045:
+  filename: 1045-the-juju-charm-store.md
+  id: 2349
+  slug: the-juju-charm-store
+  updated_at: '2019-05-03T00:25:15.241Z'
+1046:
+  filename: 1046-writing-your-first-juju-charm.md
+  id: 2350
+  slug: writing-your-first-juju-charm
+  updated_at: '2019-05-16T21:44:54.140Z'
+1047:
+  filename: 1047-the-hook-environment-hook-tools-and-how-hooks-are-run.md
+  id: 2351
+  slug: the-hook-environment-hook-tools-and-how-hooks-are-run
+  updated_at: '2019-03-13T14:51:34.983Z'
+1048:
+  filename: 1048-dealing-with-errors-encountered-by-charm-hooks.md
+  id: 2352
+  slug: dealing-with-errors-encountered-by-charm-hooks
+  updated_at: '2019-03-13T14:51:37.262Z'
+1049:
+  filename: 1049-how-to-become-a-juju-charm-author.md
+  id: 2353
+  slug: how-to-become-a-juju-charm-author
+  updated_at: '2019-05-15T22:42:07.716Z'
+1050:
+  filename: 1050-the-lifecycle-of-charm-relations.md
+  id: 2354
+  slug: the-lifecycle-of-charm-relations
+  updated_at: '2019-03-13T14:47:13.724Z'
+1051:
+  filename: 1051-implementing-relations.md
+  id: 2355
+  slug: implementing-relations
+  updated_at: '2019-05-29T19:45:06.108Z'
+1052:
+  filename: 1052-application-configuration.md
+  id: 2356
+  slug: application-configuration
+  updated_at: '2019-03-13T14:51:43.107Z'
+1053:
+  filename: 1053-subordinate-applications.md
+  id: 2357
+  slug: subordinate-applications
+  updated_at: '2019-03-13T14:51:44.870Z'
+1054:
+  filename: 1054-charm-promulgation.md
+  id: 2358
+  slug: charm-promulgation
+  updated_at: '2019-07-15T15:22:59.527Z'
+1055:
+  filename: 1055-charm-review-process.md
+  id: 2359
+  slug: charm-review-process
+  updated_at: '2019-05-29T20:35:00.320Z'
+1056:
+  filename: 1056-unmaintained-charms.md
+  id: 2360
+  slug: unmaintained-charms
+  updated_at: '2019-03-13T14:47:21.668Z'
+1057:
+  filename: 1057-using-bundles-with-the-gui.md
+  id: 2361
+  slug: using-bundles-with-the-gui
+  updated_at: '2019-03-13T14:47:23.457Z'
+1058:
+  filename: 1058-charm-bundles.md
+  id: 2362
+  slug: charm-bundles
+  updated_at: '2019-06-19T21:11:14.294Z'
+1059:
+  filename: 1059-configuring-applications.md
+  id: 2363
+  slug: configuring-applications
+  updated_at: '2019-03-13T14:47:27.351Z'
+1060:
+  filename: 1060-using-constraints.md
+  id: 2364
+  slug: using-constraints
+  updated_at: '2019-04-16T06:49:34.000Z'
+1061:
+  filename: 1061-deploying-applications-advanced.md
+  id: 2365
+  slug: deploying-applications-advanced
+  updated_at: '2019-08-02T16:37:18.871Z'
+1062:
+  filename: 1062-deploying-applications.md
+  id: 2367
+  slug: deploying-applications
+  updated_at: '2019-06-05T17:14:31.817Z'
+1063:
+  filename: 1063-removing-things.md
+  id: 2368
+  slug: removing-things
+  updated_at: '2019-06-03T22:35:30.388Z'
+1064:
+  filename: 1064-appendix-creating-an-aws-vpc.md
+  id: 2369
+  slug: appendix-creating-an-aws-vpc
+  updated_at: '2019-06-03T22:38:22.048Z'
+1065:
+  filename: 1065-fan-container-networking.md
+  id: 2370
+  slug: fan-container-networking
+  updated_at: '2019-06-03T22:11:34.821Z'
+1066:
+  filename: 1066-application-high-availability.md
+  id: 2371
+  slug: application-high-availability
+  updated_at: '2019-04-16T06:51:16.244Z'
+1067:
+  filename: 1067-application-metrics.md
+  id: 2372
+  slug: application-metrics
+  updated_at: '2019-03-13T14:52:14.231Z'
+1068:
+  filename: 1068-configuring-juju-for-offline-usage.md
+  id: 2373
+  slug: configuring-juju-for-offline-usage
+  updated_at: '2019-06-05T16:01:17.470Z'
+1069:
+  filename: 1069-deploying-charms-offline.md
+  id: 2374
+  slug: deploying-charms-offline
+  updated_at: '2019-04-11T02:02:59.521Z'
+1070:
+  filename: 1070-using-the-localhost-cloud-offline.md
+  id: 2375
+  slug: using-the-localhost-cloud-offline
+  updated_at: '2019-06-05T16:27:46.829Z'
+1071:
+  filename: 1071-offline-mode-strategies.md
+  id: 2376
+  slug: offline-mode-strategies
+  updated_at: '2019-06-05T15:48:14.081Z'
+1072:
+  filename: 1072-working-offline.md
+  id: 2377
+  slug: working-offline
+  updated_at: '2019-03-13T14:52:22.588Z'
+1073:
+  filename: 1073-managing-relations.md
+  id: 2378
+  slug: managing-relations
+  updated_at: '2019-07-30T18:27:17.989Z'
+1074:
+  filename: 1074-juju-resources.md
+  id: 2379
+  slug: juju-resources
+  updated_at: '2019-05-30T18:41:27.707Z'
+1075:
+  filename: 1075-scaling-applications.md
+  id: 2380
+  slug: scaling-applications
+  updated_at: '2019-05-31T14:35:08.942Z'
+1076:
+  filename: 1076-application-groups.md
+  id: 2381
+  slug: application-groups
+  updated_at: '2019-03-13T14:47:49.595Z'
+1077:
+  filename: 1077-appendix-installing-ceph.md
+  id: 2382
+  slug: appendix-installing-ceph
+  updated_at: '2019-06-03T22:47:53.935Z'
+1078:
+  filename: 1078-persistent-storage-and-kubernetes.md
+  id: 2383
+  slug: persistent-storage-and-kubernetes
+  updated_at: '2019-05-31T19:16:31.799Z'
+1079:
+  filename: 1079-using-juju-storage.md
+  id: 2384
+  slug: using-juju-storage
+  updated_at: '2019-06-03T22:43:11.987Z'
+1080:
+  filename: 1080-upgrading-applications.md
+  id: 2385
+  slug: upgrading-applications
+  updated_at: '2019-05-30T17:09:33.078Z'
+1083:
+  filename: 1083-client.md
+  id: 2388
+  slug: client
+  updated_at: '2019-03-13T14:52:38.847Z'
+1084:
+  filename: 1084-using-amazon-aws-with-juju.md
+  id: 2389
+  slug: using-amazon-aws-with-juju
+  updated_at: '2019-05-30T18:49:06.168Z'
+1085:
+  filename: 1085-using-microsoft-azure-with-juju-advanced.md
+  id: 2390
+  slug: using-microsoft-azure-with-juju-advanced
+  updated_at: '2019-05-22T02:38:10.021Z'
+1086:
+  filename: 1086-using-microsoft-azure-with-juju.md
+  id: 2391
+  slug: using-microsoft-azure-with-juju
+  updated_at: '2019-05-30T18:49:24.691Z'
+1087:
+  filename: 1087-juju-documentation.md
+  id: 2392
+  slug: juju-documentation
+  updated_at: '2019-09-12T23:58:37.956Z'
+1088:
+  filename: 1088-using-google-gce-with-juju.md
+  id: 2393
+  slug: using-google-gce-with-juju
+  updated_at: '2019-05-30T18:49:44.269Z'
+1089:
+  filename: 1089-using-joyent-with-juju.md
+  id: 2394
+  slug: using-joyent-with-juju
+  updated_at: '2019-05-30T18:50:31.838Z'
+1090:
+  filename: 1090-using-kubernetes-with-juju.md
+  id: 2395
+  slug: using-kubernetes-with-juju
+  updated_at: '2019-05-31T18:49:00.845Z'
+1091:
+  filename: 1091-using-lxd-with-juju-advanced.md
+  id: 2396
+  slug: using-lxd-with-juju-advanced
+  updated_at: '2019-04-19T21:21:22.062Z'
+1092:
+  filename: 1092-additional-lxd-resources.md
+  id: 2397
+  slug: additional-lxd-resources
+  updated_at: '2019-07-08T14:49:33.740Z'
+1093:
+  filename: 1093-using-lxd-with-juju.md
+  id: 2398
+  slug: using-lxd-with-juju
+  updated_at: '2019-08-22T22:08:02.306Z'
+1094:
+  filename: 1094-using-maas-with-juju.md
+  id: 2399
+  slug: using-maas-with-juju
+  updated_at: '2019-08-22T00:50:13.459Z'
+1095:
+  filename: 1095-using-the-manual-cloud-with-juju.md
+  id: 2400
+  slug: using-the-manual-cloud-with-juju
+  updated_at: '2019-05-30T18:52:11.279Z'
+1096:
+  filename: 1096-using-oracle-oci-with-juju.md
+  id: 2401
+  slug: using-oracle-oci-with-juju
+  updated_at: '2019-05-30T18:50:00.255Z'
+1097:
+  filename: 1097-using-openstack-with-juju.md
+  id: 2402
+  slug: using-openstack-with-juju
+  updated_at: '2019-06-19T03:37:49.230Z'
+1098:
+  filename: 1098-using-rackspace-with-juju.md
+  id: 2403
+  slug: using-rackspace-with-juju
+  updated_at: '2019-05-30T18:50:16.142Z'
+1099:
+  filename: 1099-using-vmware-vsphere-with-juju.md
+  id: 2404
+  slug: using-vmware-vsphere-with-juju
+  updated_at: '2019-07-14T23:01:11.042Z'
+1100:
+  filename: 1100-clouds.md
+  id: 2405
+  slug: clouds
+  updated_at: '2019-05-14T17:19:52.176Z'
+1101:
+  filename: 1101-command-changes-from-1-25-to-2-0.md
+  id: 2406
+  slug: command-changes-from-1-25-to-2-0
+  updated_at: '2019-02-20T12:31:17.117Z'
+1102:
+  filename: 1102-instance-naming-and-tagging-in-clouds.md
+  id: 2407
+  slug: instance-naming-and-tagging-in-clouds
+  updated_at: '2019-07-08T04:13:32.880Z'
+1103:
+  filename: 1103-contact-us.md
+  id: 2409
+  slug: contact-us
+  updated_at: '2019-03-15T20:03:14.537Z'
+1104:
+  filename: 1104-language-details-contributing-to-juju-docs.md
+  id: 2410
+  slug: language-details-contributing-to-juju-docs
+  updated_at: '2019-08-22T20:16:06.046Z'
+1106:
+  filename: 1106-controller-backups.md
+  id: 2412
+  slug: controller-backups
+  updated_at: '2019-04-16T06:50:24.795Z'
+1107:
+  filename: 1107-configuring-controllers.md
+  id: 2413
+  slug: configuring-controllers
+  updated_at: '2019-06-05T20:05:26.538Z'
+1108:
+  filename: 1108-creating-a-controller.md
+  id: 2414
+  slug: creating-a-controller
+  updated_at: '2019-09-04T20:25:27.504Z'
+1109:
+  filename: 1109-juju-gui.md
+  id: 2415
+  slug: juju-gui
+  updated_at: '2019-04-16T06:52:40.991Z'
+1110:
+  filename: 1110-controller-high-availability.md
+  id: 2416
+  slug: controller-high-availability
+  updated_at: '2019-04-16T06:50:52.817Z'
+1111:
+  filename: 1111-controllers.md
+  id: 2417
+  slug: controllers
+  updated_at: '2019-06-05T17:36:28.199Z'
+1112:
+  filename: 1112-credentials.md
+  id: 2418
+  slug: credentials
+  updated_at: '2019-05-23T14:33:07.050Z'
+1113:
+  filename: 1113-actions-for-the-charm-author.md
+  id: 2419
+  slug: actions-for-the-charm-author
+  updated_at: '2019-03-13T14:53:26.196Z'
+1114:
+  filename: 1114-dhx-a-customized-hook-debugging-environment-plugin.md
+  id: 2420
+  slug: dhx-a-customized-hook-debugging-environment-plugin
+  updated_at: '2019-03-13T14:53:28.005Z'
+1115:
+  filename: 1115-debugging-building-layers.md
+  id: 2421
+  slug: debugging-building-layers
+  updated_at: '2019-03-19T21:25:11.031Z'
+1116:
+  filename: 1116-debugging-charm-hooks.md
+  id: 2422
+  slug: debugging-charm-hooks
+  updated_at: '2019-03-13T14:53:31.876Z'
+1117:
+  filename: 1117-event-cycle.md
+  id: 2423
+  slug: event-cycle
+  updated_at: '2019-05-17T01:27:14.920Z'
+1118:
+  filename: 1118-getting-started-with-charm-development.md
+  id: 2424
+  slug: getting-started-with-charm-development
+  updated_at: '2019-05-31T21:21:13.045Z'
+1120:
+  filename: 1120-writing-a-layer-by-example.md
+  id: 2426
+  slug: writing-a-layer-by-example
+  updated_at: '2019-05-17T01:40:38.467Z'
+1121:
+  filename: 1121-interface-layers.md
+  id: 2427
+  slug: interface-layers
+  updated_at: '2019-05-16T19:08:44.101Z'
+1122:
+  filename: 1122-layers-for-charm-authoring.md
+  id: 2428
+  slug: layers-for-charm-authoring
+  updated_at: '2019-05-29T19:30:58.245Z'
+1123:
+  filename: 1123-leadership-howtos.md
+  id: 2429
+  slug: leadership-howtos
+  updated_at: '2019-03-13T14:53:45.849Z'
+1124:
+  filename: 1124-implementing-leadership.md
+  id: 2430
+  slug: implementing-leadership
+  updated_at: '2019-05-16T21:32:20.848Z'
+1125:
+  filename: 1125-metric-collecting-charms.md
+  id: 2431
+  slug: metric-collecting-charms
+  updated_at: '2019-05-31T21:04:06.860Z'
+1126:
+  filename: 1126-charm-network-primitives.md
+  id: 2432
+  slug: charm-network-primitives
+  updated_at: '2019-03-13T14:49:04.623Z'
+1127:
+  filename: 1127-using-resources-developer-guide.md
+  id: 2433
+  slug: using-resources-developer-guide
+  updated_at: '2019-03-13T14:53:50.715Z'
+1128:
+  filename: 1128-writing-charms-that-use-storage.md
+  id: 2434
+  slug: writing-charms-that-use-storage
+  updated_at: '2019-05-16T21:32:56.015Z'
+1129:
+  filename: 1129-writing-charms-that-use-terms.md
+  id: 2435
+  slug: writing-charms-that-use-terms
+  updated_at: '2019-03-13T14:53:53.613Z'
+1130:
+  filename: 1130-writing-charm-tests.md
+  id: 2436
+  slug: writing-charm-tests
+  updated_at: '2019-05-16T21:12:32.656Z'
+1131:
+  filename: 1131-upgrading-a-charm.md
+  id: 2437
+  slug: upgrading-a-charm
+  updated_at: '2019-05-16T21:29:35.899Z'
+1132:
+  filename: 1132-managed-solutions.md
+  id: 2438
+  slug: managed-solutions
+  updated_at: '2019-03-13T14:53:59.741Z'
+1133:
+  filename: 1133-creating-ssh-keypairs-on-windows.md
+  id: 2439
+  slug: creating-ssh-keypairs-on-windows
+  updated_at: '2019-03-13T14:49:13.939Z'
+1134:
+  filename: 1134-getting-started-with-juju-on-jaas.md
+  id: 2440
+  slug: getting-started-with-juju-on-jaas
+  updated_at: '2019-09-09T23:39:24.075Z'
+1135:
+  filename: 1135-deploy-your-docker-container-to-any-cloud-with-charms.md
+  id: 2441
+  slug: deploy-your-docker-container-to-any-cloud-with-charms
+  updated_at: '2019-09-06T01:05:29.082Z'
+1137:
+  filename: 1137-cloud-image-metadata.md
+  id: 2443
+  slug: cloud-image-metadata
+  updated_at: '2019-04-16T06:54:48.170Z'
+1138:
+  filename: 1138-collecting-juju-metrics.md
+  id: 2444
+  slug: collecting-juju-metrics
+  updated_at: '2019-03-13T14:54:09.097Z'
+1139:
+  filename: 1139-charms-and-mysql-interfaces.md
+  id: 2445
+  slug: charms-and-mysql-interfaces
+  updated_at: '2019-03-13T14:49:22.154Z'
+1140:
+  filename: 1140-introducing-juju-2-0.md
+  id: 2446
+  slug: introducing-juju-2-0
+  updated_at: '2019-03-13T14:54:11.030Z'
+1141:
+  filename: 1141-disabling-commands.md
+  id: 2447
+  slug: disabling-commands
+  updated_at: '2019-05-22T16:25:07.057Z'
+1142:
+  filename: 1142-juju-support-for-centos7.md
+  id: 2448
+  slug: juju-support-for-centos7
+  updated_at: '2019-03-15T20:09:35.349Z'
+1143:
+  filename: 1143-running-multiple-versions-of-juju.md
+  id: 2449
+  slug: running-multiple-versions-of-juju
+  updated_at: '2019-03-13T14:54:14.369Z'
+1144:
+  filename: 1144-concepts-and-terms.md
+  id: 2450
+  slug: concepts-and-terms
+  updated_at: '2019-06-03T13:14:07.354Z'
+1145:
+  filename: 1145-juju-plugins.md
+  id: 2451
+  slug: juju-plugins
+  updated_at: '2019-03-13T14:49:29.143Z'
+1146:
+  filename: 1146-machine-authentication.md
+  id: 2452
+  slug: machine-authentication
+  updated_at: '2019-08-26T13:53:15.140Z'
+1147:
+  filename: 1147-adding-a-model.md
+  id: 2453
+  slug: adding-a-model
+  updated_at: '2019-04-22T20:44:26.339Z'
+1148:
+  filename: 1148-cmr-scenario-1.md
+  id: 2454
+  slug: cmr-scenario-1
+  updated_at: '2019-07-30T19:02:49.979Z'
+1149:
+  filename: 1149-cmr-scenario-2.md
+  id: 2455
+  slug: cmr-scenario-2
+  updated_at: '2019-03-13T14:54:23.211Z'
+1150:
+  filename: 1150-cross-model-relations.md
+  id: 2456
+  slug: cross-model-relations
+  updated_at: '2019-07-30T18:36:36.447Z'
+1151:
+  filename: 1151-configuring-models.md
+  id: 2457
+  slug: configuring-models
+  updated_at: '2019-05-26T21:16:16.910Z'
+1152:
+  filename: 1152-migrating-models.md
+  id: 2458
+  slug: migrating-models
+  updated_at: '2019-05-04T16:55:04.518Z'
+1153:
+  filename: 1153-notes-on-upgrading-juju-software.md
+  id: 2459
+  slug: notes-on-upgrading-juju-software
+  updated_at: '2019-05-08T17:06:15.943Z'
+1154:
+  filename: 1154-upgrading-models.md
+  id: 2460
+  slug: upgrading-models
+  updated_at: '2019-05-08T17:24:12.526Z'
+1155:
+  filename: 1155-models.md
+  id: 2461
+  slug: models
+  updated_at: '2019-09-10T21:21:43.972Z'
+1156:
+  filename: 1156-working-with-multiple-users.md
+  id: 2462
+  slug: working-with-multiple-users
+  updated_at: '2019-05-31T21:11:17.097Z'
+1157:
+  filename: 1157-network-spaces.md
+  id: 2463
+  slug: network-spaces
+  updated_at: '2019-04-16T06:56:23.159Z'
+1158:
+  filename: 1158-bundle-reference.md
+  id: 2464
+  slug: bundle-reference
+  updated_at: '2019-07-19T21:53:09.181Z'
+1160:
+  filename: 1160-juju-constraints.md
+  id: 2466
+  slug: juju-constraints
+  updated_at: '2019-04-24T13:36:28.040Z'
+1161:
+  filename: 1161-reference-documents.md
+  id: 2467
+  slug: reference-documents
+  updated_at: '2019-05-16T16:46:27.394Z'
+1162:
+  filename: 1162-juju-environment-variables.md
+  id: 2468
+  slug: juju-environment-variables
+  updated_at: '2019-05-17T01:43:35.251Z'
+1163:
+  filename: 1163-hook-tools.md
+  id: 2469
+  slug: hook-tools
+  updated_at: '2019-05-31T21:30:36.566Z'
+1164:
+  filename: 1164-installing-juju.md
+  id: 2470
+  slug: installing-juju
+  updated_at: '2019-08-29T07:10:29.468Z'
+1165:
+  filename: 1165-charm-layer-yaml-reference.md
+  id: 2471
+  slug: charm-layer-yaml-reference
+  updated_at: '2019-03-13T14:49:59.565Z'
+1166:
+  filename: 1166-release-notes-index.md
+  id: 2472
+  slug: release-notes-index
+  updated_at: '2019-08-29T07:04:59.457Z'
+1168:
+  filename: 1168-charm-unit-status-and-their-meanings.md
+  id: 2474
+  slug: charm-unit-status-and-their-meanings
+  updated_at: '2019-02-20T12:33:56.215Z'
+1169:
+  filename: 1169-2-4-0-release-notes.md
+  id: 2475
+  slug: 2-4-0-release-notes
+  updated_at: '2019-03-13T14:50:03.544Z'
+1170:
+  filename: 1170-2-4-1-release-notes.md
+  id: 2476
+  slug: 2-4-1-release-notes
+  updated_at: '2019-03-13T14:54:56.384Z'
+1171:
+  filename: 1171-2-4-2-release-notes.md
+  id: 2477
+  slug: 2-4-2-release-notes
+  updated_at: '2019-03-13T14:54:57.584Z'
+1172:
+  filename: 1172-2-4-3-release-notes.md
+  id: 2478
+  slug: 2-4-3-release-notes
+  updated_at: '2019-03-13T14:54:58.577Z'
+1173:
+  filename: 1173-2-4-4-release-notes.md
+  id: 2479
+  slug: 2-4-4-release-notes
+  updated_at: '2019-03-13T14:54:59.672Z'
+1174:
+  filename: 1174-2-4-5-release-notes.md
+  id: 2480
+  slug: 2-4-5-release-notes
+  updated_at: '2019-03-13T14:55:01.138Z'
+1175:
+  filename: 1175-2-4-6-release-notes.md
+  id: 2481
+  slug: 2-4-6-release-notes
+  updated_at: '2019-03-13T14:55:02.249Z'
+1176:
+  filename: 1176-2-4-7-release-notes.md
+  id: 2482
+  slug: 2-4-7-release-notes
+  updated_at: '2019-03-13T14:55:03.342Z'
+1177:
+  filename: 1177-2-5-0-release-notes.md
+  id: 2483
+  slug: 2-5-0-release-notes
+  updated_at: '2019-03-13T14:55:05.111Z'
+1178:
+  filename: 1178-2-5-1-release-notes.md
+  id: 2484
+  slug: 2-5-1-release-notes
+  updated_at: '2019-03-13T14:55:06.290Z'
+1179:
+  filename: 1179-installing-snaps-offline.md
+  id: 2485
+  slug: installing-snaps-offline
+  updated_at: '2019-03-13T14:55:07.359Z'
+1180:
+  filename: 1180-charm-tools.md
+  id: 2486
+  slug: charm-tools
+  updated_at: '2019-05-15T22:35:30.954Z'
+1181:
+  filename: 1181-tools.md
+  id: 2487
+  slug: tools
+  updated_at: '2019-05-15T22:41:56.904Z'
+1182:
+  filename: 1182-troubleshooting-additions.md
+  id: 2488
+  slug: troubleshooting-additions
+  updated_at: '2019-03-13T14:50:22.454Z'
+1183:
+  filename: 1183-troubleshooting-clouds.md
+  id: 2489
+  slug: troubleshooting-clouds
+  updated_at: '2019-03-13T14:55:12.800Z'
+1184:
+  filename: 1184-juju-logs.md
+  id: 2490
+  slug: juju-logs
+  updated_at: '2019-04-16T06:52:16.727Z'
+1185:
+  filename: 1185-troubleshooting-removals.md
+  id: 2491
+  slug: troubleshooting-removals
+  updated_at: '2019-05-31T14:34:17.957Z'
+1186:
+  filename: 1186-troubleshooting-model-upgrades.md
+  id: 2492
+  slug: troubleshooting-model-upgrades
+  updated_at: '2019-03-13T14:55:17.160Z'
+1187:
+  filename: 1187-troubleshooting.md
+  id: 2493
+  slug: troubleshooting
+  updated_at: '2019-06-03T02:40:50.906Z'
+1188:
+  filename: 1188-introduction-to-juju-charms.md
+  id: 2494
+  slug: introduction-to-juju-charms
+  updated_at: '2019-03-13T14:55:20.641Z'
+1189:
+  filename: 1189-create-a-google-compute-engine-controller.md
+  id: 2495
+  slug: create-a-google-compute-engine-controller
+  updated_at: '2019-03-13T14:55:22.522Z'
+1190:
+  filename: 1190-a-multi-user-cloud.md
+  id: 2496
+  slug: a-multi-user-cloud
+  updated_at: '2019-03-13T14:55:24.300Z'
+1191:
+  filename: 1191-basic-client-usage-tutorial.md
+  id: 2497
+  slug: basic-client-usage-tutorial
+  updated_at: '2019-07-15T20:24:47.951Z'
+1192:
+  filename: 1192-using-the-aws-integrator-charm-tutorial.md
+  id: 2498
+  slug: using-the-aws-integrator-charm-tutorial
+  updated_at: '2019-05-31T19:20:03.897Z'
+1193:
+  filename: 1193-setting-up-static-kubernetes-storage-tutorial.md
+  id: 2499
+  slug: setting-up-static-kubernetes-storage-tutorial
+  updated_at: '2019-05-31T19:18:57.885Z'
+1194:
+  filename: 1194-using-juju-with-microk8s-tutorial.md
+  id: 2500
+  slug: using-juju-with-microk8s-tutorial
+  updated_at: '2019-09-12T04:29:03.980Z'
+1195:
+  filename: 1195-multi-user-basic-setup-tutorial.md
+  id: 2501
+  slug: multi-user-basic-setup-tutorial
+  updated_at: '2019-03-13T14:55:36.441Z'
+1196:
+  filename: 1196-multi-user-external-setup-tutorial.md
+  id: 2502
+  slug: multi-user-external-setup-tutorial
+  updated_at: '2019-03-13T14:55:37.583Z'
+1197:
+  filename: 1197-tutorials.md
+  id: 2503
+  slug: tutorials
+  updated_at: '2019-09-06T01:22:04.756Z'
+1198:
+  filename: 1198-upgrading-a-machine-series.md
+  id: 2504
+  slug: upgrading-a-machine-series
+  updated_at: '2019-03-13T14:55:40.195Z'
+1199:
+  filename: 1199-upgrading.md
+  id: 2505
+  slug: upgrading
+  updated_at: '2019-03-13T14:55:41.413Z'
+1200:
+  filename: 1200-sample-command-usage-and-output-interpretation.md
+  id: 2506
+  slug: sample-command-usage-and-output-interpretation
+  updated_at: '2019-02-20T12:35:04.323Z'
+1201:
+  filename: 1201-user-types-and-abilities.md
+  id: 2507
+  slug: user-types-and-abilities
+  updated_at: '2019-04-24T17:30:35.735Z'
+1202:
+  filename: 1202-whats-new-in-2-6.md
+  id: 2508
+  slug: whats-new-in-2-6
+  updated_at: '2019-07-04T09:43:38.584Z'
+1260:
+  filename: 1260-charm-writing.md
+  id: 2694
+  slug: charm-writing
+  updated_at: '2019-05-29T20:36:22.368Z'
+1263:
+  filename: 1263-understanding-kubernetes-charms-tutorial.md
+  id: 2697
+  slug: understanding-kubernetes-charms-tutorial
+  updated_at: '2019-09-11T10:54:18.251Z'
+1270:
+  filename: 1270-2-5-2-release-notes.md
+  id: 2712
+  slug: 2-5-2-release-notes
+  updated_at: '2019-03-13T14:55:46.236Z'
+1289:
+  filename: 1289-tutorial-managing-credentials.md
+  id: 2763
+  slug: tutorial-managing-credentials
+  updated_at: '2019-05-31T03:29:39.567Z'
+1376:
+  filename: 1376-tutorial-using-juju-on-charmed-kubernetes-on-vmware.md
+  id: 3037
+  slug: tutorial-using-juju-on-charmed-kubernetes-on-vmware
+  updated_at: '2019-04-23T14:40:53.324Z'
+1389:
+  filename: 1389-controller-logins.md
+  id: 3079
+  slug: controller-logins
+  updated_at: '2019-04-19T16:19:47.230Z'
+1448:
+  filename: 1448-appendix-installing-a-gke-cluster.md
+  id: 3233
+  slug: appendix-installing-a-gke-cluster
+  updated_at: '2019-05-09T22:38:50.248Z'
+1465:
+  filename: 1465-tutorial-multi-cloud-controller-with-gke-and-auto-configured-storage.md
+  id: 3316
+  slug: tutorial-multi-cloud-controller-with-gke-and-auto-configured-storage
+  updated_at: '2019-05-31T19:22:27.005Z'
+1469:
+  filename: 1469-tutorial-installing-kubernetes-with-cdk-and-using-auto-configured-storage.md
+  id: 3330
+  slug: tutorial-installing-kubernetes-with-cdk-and-using-auto-configured-storage
+  updated_at: '2019-06-20T17:24:38.466Z'
+1508:
+  filename: 1508-adding-google-cloud-platform-credentials-to-juju.md
+  id: 3462
+  slug: adding-google-cloud-platform-credentials-to-juju
+  updated_at: '2019-06-25T01:44:05.159Z'
+1554:
+  filename: 1554-installing-charmed-osm-with-microk8s.md
+  id: 3618
+  slug: installing-charmed-osm-with-microk8s
+  updated_at: '2019-09-12T07:40:41.723Z'
+1667:
+  filename: 1667-commands.md
+  id: 3941
+  slug: commands
+  updated_at: '2019-07-22T11:20:13.102Z'
+1668:
+  filename: 1668-command-actions.md
+  id: 3942
+  slug: command-actions
+  updated_at: '2019-07-18T09:26:50.342Z'
+1669:
+  filename: 1669-command-add-cloud.md
+  id: 3943
+  slug: command-add-cloud
+  updated_at: '2019-07-22T12:16:16.082Z'
+1670:
+  filename: 1670-command-add-credential.md
+  id: 3944
+  slug: command-add-credential
+  updated_at: '2019-07-22T12:18:08.138Z'
+1671:
+  filename: 1671-command-add-k8s.md
+  id: 3945
+  slug: command-add-k8s
+  updated_at: '2019-07-22T12:18:44.642Z'
+1672:
+  filename: 1672-command-add-machine.md
+  id: 3946
+  slug: command-add-machine
+  updated_at: '2019-07-22T12:19:07.800Z'
+1673:
+  filename: 1673-command-add-model.md
+  id: 3947
+  slug: command-add-model
+  updated_at: '2019-07-18T09:14:08.097Z'
+1674:
+  filename: 1674-command-add-relation.md
+  id: 3948
+  slug: command-add-relation
+  updated_at: '2019-07-18T09:21:14.920Z'
+1675:
+  filename: 1675-command-add-space.md
+  id: 3949
+  slug: command-add-space
+  updated_at: '2019-07-18T09:20:08.119Z'
+1676:
+  filename: 1676-command-add-ssh-key.md
+  id: 3950
+  slug: command-add-ssh-key
+  updated_at: '2019-07-22T12:20:58.417Z'
+1677:
+  filename: 1677-command-add-storage.md
+  id: 3951
+  slug: command-add-storage
+  updated_at: '2019-07-18T09:31:47.202Z'
+1678:
+  filename: 1678-command-add-subnet.md
+  id: 3952
+  slug: command-add-subnet
+  updated_at: '2019-07-18T09:33:56.843Z'
+1679:
+  filename: 1679-command-add-unit.md
+  id: 3953
+  slug: command-add-unit
+  updated_at: '2019-07-22T12:22:20.670Z'
+1680:
+  filename: 1680-command-add-user.md
+  id: 3954
+  slug: command-add-user
+  updated_at: '2019-07-22T12:24:51.173Z'
+1681:
+  filename: 1681-command-agree.md
+  id: 3955
+  slug: command-agree
+  updated_at: '2019-07-18T09:42:53.312Z'
+1682:
+  filename: 1682-command-agreements.md
+  id: 3956
+  slug: command-agreements
+  updated_at: '2019-07-22T12:25:49.608Z'
+1683:
+  filename: 1683-command-attach.md
+  id: 3957
+  slug: command-attach
+  updated_at: '2019-07-18T09:45:38.975Z'
+1684:
+  filename: 1684-command-attach-resource.md
+  id: 3958
+  slug: command-attach-resource
+  updated_at: '2019-07-18T09:46:43.879Z'
+1685:
+  filename: 1685-command-attach-storage.md
+  id: 3959
+  slug: command-attach-storage
+  updated_at: '2019-07-18T09:47:51.862Z'
+1686:
+  filename: 1686-command-autoload-credentials.md
+  id: 3960
+  slug: command-autoload-credentials
+  updated_at: '2019-07-22T12:28:14.558Z'
+1687:
+  filename: 1687-command-backups.md
+  id: 3961
+  slug: command-backups
+  updated_at: '2019-07-18T09:54:23.105Z'
+1688:
+  filename: 1688-command-bootstrap.md
+  id: 3962
+  slug: command-bootstrap
+  updated_at: '2019-07-22T12:30:41.015Z'
+1689:
+  filename: 1689-command-budget.md
+  id: 3963
+  slug: command-budget
+  updated_at: '2019-07-18T10:13:51.362Z'
+1690:
+  filename: 1690-command-cached-images.md
+  id: 3964
+  slug: command-cached-images
+  updated_at: '2019-07-18T10:17:01.034Z'
+1691:
+  filename: 1691-command-cancel-action.md
+  id: 3965
+  slug: command-cancel-action
+  updated_at: '2019-07-18T10:19:08.909Z'
+1692:
+  filename: 1692-command-change-user-password.md
+  id: 3966
+  slug: command-change-user-password
+  updated_at: '2019-07-22T12:31:41.704Z'
+1693:
+  filename: 1693-command-charm.md
+  id: 3967
+  slug: command-charm
+  updated_at: '2019-07-18T10:22:51.137Z'
+1694:
+  filename: 1694-command-charm-resources.md
+  id: 3968
+  slug: command-charm-resources
+  updated_at: '2019-07-18T10:26:23.025Z'
+1695:
+  filename: 1695-command-clouds.md
+  id: 3969
+  slug: command-clouds
+  updated_at: '2019-07-22T12:33:49.253Z'
+1696:
+  filename: 1696-command-collect-metrics.md
+  id: 3970
+  slug: command-collect-metrics
+  updated_at: '2019-07-18T11:17:01.690Z'
+1697:
+  filename: 1697-command-config.md
+  id: 3971
+  slug: command-config
+  updated_at: '2019-07-22T12:34:41.672Z'
+1698:
+  filename: 1698-command-consume.md
+  id: 3972
+  slug: command-consume
+  updated_at: '2019-07-22T12:35:32.859Z'
+1699:
+  filename: 1699-command-controller-config.md
+  id: 3973
+  slug: command-controller-config
+  updated_at: '2019-07-22T12:36:59.684Z'
+1700:
+  filename: 1700-command-controllers.md
+  id: 3974
+  slug: command-controllers
+  updated_at: '2019-07-22T12:39:32.950Z'
+1701:
+  filename: 1701-command-create-backup.md
+  id: 3975
+  slug: command-create-backup
+  updated_at: '2019-07-22T12:40:29.704Z'
+1702:
+  filename: 1702-command-create-storage-pool.md
+  id: 3976
+  slug: command-create-storage-pool
+  updated_at: '2019-07-18T12:23:04.902Z'
+1703:
+  filename: 1703-command-create-wallet.md
+  id: 3977
+  slug: command-create-wallet
+  updated_at: '2019-07-18T12:24:25.123Z'
+1704:
+  filename: 1704-command-credentials.md
+  id: 3978
+  slug: command-credentials
+  updated_at: '2019-07-22T12:42:23.370Z'
+1705:
+  filename: 1705-command-debug-hooks.md
+  id: 3979
+  slug: command-debug-hooks
+  updated_at: '2019-07-18T12:33:36.164Z'
+1706:
+  filename: 1706-command-debug-log.md
+  id: 3980
+  slug: command-debug-log
+  updated_at: '2019-07-22T12:43:10.264Z'
+1707:
+  filename: 1707-command-deploy.md
+  id: 3981
+  slug: command-deploy
+  updated_at: '2019-07-22T12:45:04.167Z'
+1708:
+  filename: 1708-command-destroy-controller.md
+  id: 3982
+  slug: command-destroy-controller
+  updated_at: '2019-07-22T12:46:32.061Z'
+1709:
+  filename: 1709-command-destroy-model.md
+  id: 3983
+  slug: command-destroy-model
+  updated_at: '2019-07-22T12:47:18.829Z'
+1710:
+  filename: 1710-command-detach-storage.md
+  id: 3984
+  slug: command-detach-storage
+  updated_at: '2019-07-18T13:10:54.444Z'
+1711:
+  filename: 1711-command-diff-bundle.md
+  id: 3985
+  slug: command-diff-bundle
+  updated_at: '2019-07-22T12:47:39.613Z'
+1712:
+  filename: 1712-command-disable-command.md
+  id: 3986
+  slug: command-disable-command
+  updated_at: '2019-07-22T12:48:54.538Z'
+1713:
+  filename: 1713-command-disable-user.md
+  id: 3987
+  slug: command-disable-user
+  updated_at: '2019-07-22T12:50:03.194Z'
+1714:
+  filename: 1714-command-disabled-commands.md
+  id: 3988
+  slug: command-disabled-commands
+  updated_at: '2019-07-22T12:50:47.299Z'
+1715:
+  filename: 1715-command-download-backup.md
+  id: 3989
+  slug: command-download-backup
+  updated_at: '2019-07-18T13:27:09.509Z'
+1716:
+  filename: 1716-command-enable-command.md
+  id: 3990
+  slug: command-enable-command
+  updated_at: '2019-07-22T12:52:35.331Z'
+1717:
+  filename: 1717-command-enable-destroy-controller.md
+  id: 3991
+  slug: command-enable-destroy-controller
+  updated_at: '2019-07-22T12:53:31.115Z'
+1718:
+  filename: 1718-command-enable-ha.md
+  id: 3992
+  slug: command-enable-ha
+  updated_at: '2019-07-18T13:34:07.177Z'
+1719:
+  filename: 1719-command-enable-user.md
+  id: 3993
+  slug: command-enable-user
+  updated_at: '2019-07-22T12:54:44.750Z'
+1720:
+  filename: 1720-command-export-bundle.md
+  id: 3994
+  slug: command-export-bundle
+  updated_at: '2019-07-18T13:39:20.573Z'
+1721:
+  filename: 1721-command-expose.md
+  id: 3995
+  slug: command-expose
+  updated_at: '2019-07-22T12:55:16.506Z'
+1722:
+  filename: 1722-command-find-offers.md
+  id: 3996
+  slug: command-find-offers
+  updated_at: '2019-07-22T12:57:18.499Z'
+1723:
+  filename: 1723-command-firewall-rules.md
+  id: 3997
+  slug: command-firewall-rules
+  updated_at: '2019-07-22T12:57:39.938Z'
+1724:
+  filename: 1724-command-get-constraints.md
+  id: 3998
+  slug: command-get-constraints
+  updated_at: '2019-07-22T12:58:43.436Z'
+1725:
+  filename: 1725-command-get-model-constraints.md
+  id: 3999
+  slug: command-get-model-constraints
+  updated_at: '2019-07-22T13:00:26.470Z'
+1726:
+  filename: 1726-command-grant.md
+  id: 4000
+  slug: command-grant
+  updated_at: '2019-07-22T13:01:16.334Z'
+1727:
+  filename: 1727-command-grant-cloud.md
+  id: 4001
+  slug: command-grant-cloud
+  updated_at: '2019-07-22T13:01:59.751Z'
+1728:
+  filename: 1728-command-gui.md
+  id: 4002
+  slug: command-gui
+  updated_at: '2019-07-18T14:02:00.700Z'
+1729:
+  filename: 1729-command-help.md
+  id: 4003
+  slug: command-help
+  updated_at: '2019-07-18T14:05:05.330Z'
+1730:
+  filename: 1730-command-help-tool.md
+  id: 4004
+  slug: command-help-tool
+  updated_at: '2019-07-18T14:06:35.737Z'
+1731:
+  filename: 1731-command-hook-tool.md
+  id: 4005
+  slug: command-hook-tool
+  updated_at: '2019-07-18T14:08:53.394Z'
+1732:
+  filename: 1732-command-import-filesystem.md
+  id: 4006
+  slug: command-import-filesystem
+  updated_at: '2019-07-18T14:11:21.324Z'
+1733:
+  filename: 1733-command-import-ssh-key.md
+  id: 4007
+  slug: command-import-ssh-key
+  updated_at: '2019-07-22T13:03:12.584Z'
+1734:
+  filename: 1734-command-kill-controller.md
+  id: 4008
+  slug: command-kill-controller
+  updated_at: '2019-07-22T13:03:52.984Z'
+1735:
+  filename: 1735-command-list-actions.md
+  id: 4009
+  slug: command-list-actions
+  updated_at: '2019-07-18T14:18:33.312Z'
+1736:
+  filename: 1736-command-list-agreements.md
+  id: 4010
+  slug: command-list-agreements
+  updated_at: '2019-07-22T13:05:02.687Z'
+1737:
+  filename: 1737-command-list-backups.md
+  id: 4011
+  slug: command-list-backups
+  updated_at: '2019-07-18T14:21:55.900Z'
+1738:
+  filename: 1738-command-list-cached-images.md
+  id: 4012
+  slug: command-list-cached-images
+  updated_at: '2019-07-18T14:25:00.612Z'
+1739:
+  filename: 1739-command-list-charm-resources.md
+  id: 4013
+  slug: command-list-charm-resources
+  updated_at: '2019-07-18T14:28:01.311Z'
+1740:
+  filename: 1740-command-list-clouds.md
+  id: 4014
+  slug: command-list-clouds
+  updated_at: '2019-07-22T13:06:19.770Z'
+1742:
+  filename: 1742-command-list-controllers.md
+  id: 4016
+  slug: command-list-controllers
+  updated_at: '2019-07-22T13:07:14.122Z'
+1743:
+  filename: 1743-command-list-credentials.md
+  id: 4017
+  slug: command-list-credentials
+  updated_at: '2019-07-22T13:09:17.599Z'
+1744:
+  filename: 1744-command-list-disabled-commands.md
+  id: 4018
+  slug: command-list-disabled-commands
+  updated_at: '2019-07-22T13:10:28.286Z'
+1745:
+  filename: 1745-command-list-firewall-rules.md
+  id: 4019
+  slug: command-list-firewall-rules
+  updated_at: '2019-07-22T13:10:54.464Z'
+1746:
+  filename: 1746-command-list-machines.md
+  id: 4020
+  slug: command-list-machines
+  updated_at: '2019-07-22T13:11:51.868Z'
+1747:
+  filename: 1747-command-list-models.md
+  id: 4021
+  slug: command-list-models
+  updated_at: '2019-07-22T13:18:51.121Z'
+1748:
+  filename: 1748-command-list-offers.md
+  id: 4022
+  slug: command-list-offers
+  updated_at: '2019-07-22T13:21:15.804Z'
+1749:
+  filename: 1749-command-list-payloads.md
+  id: 4023
+  slug: command-list-payloads
+  updated_at: '2019-07-18T14:54:43.452Z'
+1750:
+  filename: 1750-command-list-plans.md
+  id: 4024
+  slug: command-list-plans
+  updated_at: '2019-07-18T14:56:46.073Z'
+1751:
+  filename: 1751-command-list-regions.md
+  id: 4025
+  slug: command-list-regions
+  updated_at: '2019-07-22T13:22:52.896Z'
+1752:
+  filename: 1752-command-list-resources.md
+  id: 4026
+  slug: command-list-resources
+  updated_at: '2019-07-18T15:00:26.288Z'
+1753:
+  filename: 1753-command-list-spaces.md
+  id: 4027
+  slug: command-list-spaces
+  updated_at: '2019-07-18T15:02:11.934Z'
+1754:
+  filename: 1754-command-list-ssh-keys.md
+  id: 4028
+  slug: command-list-ssh-keys
+  updated_at: '2019-07-18T15:04:59.131Z'
+1755:
+  filename: 1755-command-list-storage.md
+  id: 4029
+  slug: command-list-storage
+  updated_at: '2019-07-18T15:07:25.656Z'
+1756:
+  filename: 1756-command-list-storage-pools.md
+  id: 4030
+  slug: command-list-storage-pools
+  updated_at: '2019-07-18T15:09:56.982Z'
+1757:
+  filename: 1757-command-list-subnets.md
+  id: 4031
+  slug: command-list-subnets
+  updated_at: '2019-07-18T15:11:44.569Z'
+1758:
+  filename: 1758-command-list-users.md
+  id: 4032
+  slug: command-list-users
+  updated_at: '2019-07-22T13:24:59.286Z'
+1759:
+  filename: 1759-command-list-wallets.md
+  id: 4033
+  slug: command-list-wallets
+  updated_at: '2019-07-18T15:16:33.715Z'
+1760:
+  filename: 1760-command-login.md
+  id: 4034
+  slug: command-login
+  updated_at: '2019-07-22T13:27:29.913Z'
+1761:
+  filename: 1761-command-logout.md
+  id: 4035
+  slug: command-logout
+  updated_at: '2019-07-22T13:28:15.176Z'
+1765:
+  filename: 1765-command-machines.md
+  id: 4042
+  slug: command-machines
+  updated_at: '2019-07-22T13:29:07.571Z'
+1766:
+  filename: 1766-command-metrics.md
+  id: 4043
+  slug: command-metrics
+  updated_at: '2019-07-19T07:46:14.143Z'
+1767:
+  filename: 1767-command-migrate.md
+  id: 4044
+  slug: command-migrate
+  updated_at: '2019-07-22T13:31:19.351Z'
+1768:
+  filename: 1768-command-model-config.md
+  id: 4045
+  slug: command-model-config
+  updated_at: '2019-07-22T13:32:58.108Z'
+1769:
+  filename: 1769-command-model-default.md
+  id: 4046
+  slug: command-model-default
+  updated_at: '2019-07-22T13:34:17.416Z'
+1770:
+  filename: 1770-command-model-defaults.md
+  id: 4047
+  slug: command-model-defaults
+  updated_at: '2019-07-22T13:34:47.899Z'
+1771:
+  filename: 1771-command-models.md
+  id: 4048
+  slug: command-models
+  updated_at: '2019-07-22T13:35:52.163Z'
+1772:
+  filename: 1772-command-offer.md
+  id: 4049
+  slug: command-offer
+  updated_at: '2019-07-22T13:38:18.286Z'
+1773:
+  filename: 1773-command-offers.md
+  id: 4050
+  slug: command-offers
+  updated_at: '2019-07-22T13:39:57.257Z'
+1774:
+  filename: 1774-command-payloads.md
+  id: 4055
+  slug: command-payloads
+  updated_at: '2019-07-19T08:21:07.015Z'
+1775:
+  filename: 1775-command-plans.md
+  id: 4056
+  slug: command-plans
+  updated_at: '2019-07-19T08:22:10.740Z'
+1776:
+  filename: 1776-command-regions.md
+  id: 4057
+  slug: command-regions
+  updated_at: '2019-07-22T13:42:10.388Z'
+1777:
+  filename: 1777-command-register.md
+  id: 4058
+  slug: command-register
+  updated_at: '2019-07-22T13:43:15.364Z'
+1778:
+  filename: 1778-command-relate.md
+  id: 4059
+  slug: command-relate
+  updated_at: '2019-07-19T08:28:52.616Z'
+1779:
+  filename: 1779-command-reload-spaces.md
+  id: 4060
+  slug: command-reload-spaces
+  updated_at: '2019-07-19T08:30:13.199Z'
+1780:
+  filename: 1780-command-remove-application.md
+  id: 4061
+  slug: command-remove-application
+  updated_at: '2019-07-19T08:32:05.284Z'
+1781:
+  filename: 1781-command-remove-backup.md
+  id: 4062
+  slug: command-remove-backup
+  updated_at: '2019-07-19T08:33:31.819Z'
+1782:
+  filename: 1782-command-remove-cached-images.md
+  id: 4063
+  slug: command-remove-cached-images
+  updated_at: '2019-07-19T08:35:22.610Z'
+1783:
+  filename: 1783-command-remove-cloud.md
+  id: 4064
+  slug: command-remove-cloud
+  updated_at: '2019-07-22T13:44:14.005Z'
+1784:
+  filename: 1784-command-remove-consumed-application.md
+  id: 4065
+  slug: command-remove-consumed-application
+  updated_at: '2019-07-19T08:38:55.813Z'
+1785:
+  filename: 1785-command-remove-credential.md
+  id: 4066
+  slug: command-remove-credential
+  updated_at: '2019-07-22T13:45:34.339Z'
+1786:
+  filename: 1786-command-remove-k8s.md
+  id: 4067
+  slug: command-remove-k8s
+  updated_at: '2019-07-22T13:46:03.756Z'
+1787:
+  filename: 1787-command-remove-machine.md
+  id: 4068
+  slug: command-remove-machine
+  updated_at: '2019-07-22T13:46:24.806Z'
+1788:
+  filename: 1788-command-remove-offer.md
+  id: 4069
+  slug: command-remove-offer
+  updated_at: '2019-07-22T13:47:05.760Z'
+1789:
+  filename: 1789-command-remove-relation.md
+  id: 4070
+  slug: command-remove-relation
+  updated_at: '2019-07-22T13:47:42.020Z'
+1790:
+  filename: 1790-command-remove-saas.md
+  id: 4071
+  slug: command-remove-saas
+  updated_at: '2019-07-19T10:22:28.108Z'
+1791:
+  filename: 1791-command-remove-ssh-key.md
+  id: 4072
+  slug: command-remove-ssh-key
+  updated_at: '2019-07-22T13:49:11.295Z'
+1792:
+  filename: 1792-command-remove-storage.md
+  id: 4073
+  slug: command-remove-storage
+  updated_at: '2019-07-19T10:26:02.098Z'
+1793:
+  filename: 1793-command-remove-unit.md
+  id: 4074
+  slug: command-remove-unit
+  updated_at: '2019-07-22T13:50:13.889Z'
+1794:
+  filename: 1794-command-remove-user.md
+  id: 4075
+  slug: command-remove-user
+  updated_at: '2019-07-22T13:54:12.105Z'
+1795:
+  filename: 1795-command-resolve.md
+  id: 4076
+  slug: command-resolve
+  updated_at: '2019-07-19T10:33:58.724Z'
+1796:
+  filename: 1796-command-resolved.md
+  id: 4077
+  slug: command-resolved
+  updated_at: '2019-07-19T10:34:51.488Z'
+1797:
+  filename: 1797-command-resources.md
+  id: 4078
+  slug: command-resources
+  updated_at: '2019-07-19T10:35:51.591Z'
+1798:
+  filename: 1798-command-restore-backup.md
+  id: 4079
+  slug: command-restore-backup
+  updated_at: '2019-07-19T10:37:00.286Z'
+1799:
+  filename: 1799-command-resume-relation.md
+  id: 4080
+  slug: command-resume-relation
+  updated_at: '2019-07-22T13:55:58.636Z'
+1800:
+  filename: 1800-command-retry-provisioning.md
+  id: 4081
+  slug: command-retry-provisioning
+  updated_at: '2019-07-19T10:39:07.625Z'
+1801:
+  filename: 1801-command-revoke.md
+  id: 4082
+  slug: command-revoke
+  updated_at: '2019-07-22T13:56:25.378Z'
+1802:
+  filename: 1802-command-revoke-cloud.md
+  id: 4083
+  slug: command-revoke-cloud
+  updated_at: '2019-07-22T13:56:52.529Z'
+1803:
+  filename: 1803-command-run.md
+  id: 4084
+  slug: command-run
+  updated_at: '2019-07-19T10:49:43.097Z'
+1804:
+  filename: 1804-command-run-action.md
+  id: 4085
+  slug: command-run-action
+  updated_at: '2019-07-19T10:53:01.024Z'
+1805:
+  filename: 1805-command-scale-application.md
+  id: 4086
+  slug: command-scale-application
+  updated_at: '2019-07-19T10:54:53.140Z'
+1806:
+  filename: 1806-command-scp.md
+  id: 4087
+  slug: command-scp
+  updated_at: '2019-07-22T13:58:27.725Z'
+1807:
+  filename: 1807-command-set-constraints.md
+  id: 4088
+  slug: command-set-constraints
+  updated_at: '2019-07-22T13:59:25.571Z'
+1808:
+  filename: 1808-command-set-credential.md
+  id: 4089
+  slug: command-set-credential
+  updated_at: '2019-07-22T14:01:05.757Z'
+1809:
+  filename: 1809-command-set-default-credential.md
+  id: 4090
+  slug: command-set-default-credential
+  updated_at: '2019-07-22T14:02:38.618Z'
+1810:
+  filename: 1810-command-set-default-region.md
+  id: 4091
+  slug: command-set-default-region
+  updated_at: '2019-07-22T14:03:00.927Z'
+1811:
+  filename: 1811-command-set-firewall-rule.md
+  id: 4092
+  slug: command-set-firewall-rule
+  updated_at: '2019-07-22T14:03:23.975Z'
+1812:
+  filename: 1812-command-set-meter-status.md
+  id: 4093
+  slug: command-set-meter-status
+  updated_at: '2019-07-19T11:08:27.052Z'
+1813:
+  filename: 1813-command-set-model-constraints.md
+  id: 4094
+  slug: command-set-model-constraints
+  updated_at: '2019-07-22T14:05:47.699Z'
+1814:
+  filename: 1814-command-set-plan.md
+  id: 4095
+  slug: command-set-plan
+  updated_at: '2019-07-19T11:11:26.228Z'
+1815:
+  filename: 1815-command-set-series.md
+  id: 4096
+  slug: command-set-series
+  updated_at: '2019-07-22T14:06:31.173Z'
+1816:
+  filename: 1816-command-set-wallet.md
+  id: 4097
+  slug: command-set-wallet
+  updated_at: '2019-07-19T11:13:33.702Z'
+1817:
+  filename: 1817-command-show-action-output.md
+  id: 4098
+  slug: command-show-action-output
+  updated_at: '2019-07-19T11:15:07.736Z'
+1818:
+  filename: 1818-command-show-action-status.md
+  id: 4099
+  slug: command-show-action-status
+  updated_at: '2019-07-19T11:16:55.900Z'
+1819:
+  filename: 1819-command-show-backup.md
+  id: 4100
+  slug: command-show-backup
+  updated_at: '2019-07-19T11:18:52.870Z'
+1820:
+  filename: 1820-command-show-cloud.md
+  id: 4101
+  slug: command-show-cloud
+  updated_at: '2019-07-22T14:07:33.937Z'
+1821:
+  filename: 1821-command-show-controller.md
+  id: 4102
+  slug: command-show-controller
+  updated_at: '2019-07-22T14:07:56.278Z'
+1822:
+  filename: 1822-command-show-credential.md
+  id: 4103
+  slug: command-show-credential
+  updated_at: '2019-07-22T14:08:18.660Z'
+1823:
+  filename: 1823-command-show-credentials.md
+  id: 4104
+  slug: command-show-credentials
+  updated_at: '2019-07-22T14:08:41.196Z'
+1824:
+  filename: 1824-command-show-machine.md
+  id: 4105
+  slug: command-show-machine
+  updated_at: '2019-07-19T11:26:25.488Z'
+1825:
+  filename: 1825-command-show-model.md
+  id: 4106
+  slug: command-show-model
+  updated_at: '2019-07-19T11:27:57.176Z'
+1826:
+  filename: 1826-command-show-offer.md
+  id: 4107
+  slug: command-show-offer
+  updated_at: '2019-07-22T14:09:06.324Z'
+1827:
+  filename: 1827-command-show-status.md
+  id: 4108
+  slug: command-show-status
+  updated_at: '2019-07-22T14:10:24.581Z'
+1828:
+  filename: 1828-command-show-status-log.md
+  id: 4109
+  slug: command-show-status-log
+  updated_at: '2019-07-19T11:42:18.434Z'
+1829:
+  filename: 1829-command-show-storage.md
+  id: 4110
+  slug: command-show-storage
+  updated_at: '2019-07-19T11:43:45.050Z'
+1830:
+  filename: 1830-command-show-user.md
+  id: 4111
+  slug: command-show-user
+  updated_at: '2019-07-22T14:11:38.095Z'
+1831:
+  filename: 1831-command-show-wallet.md
+  id: 4112
+  slug: command-show-wallet
+  updated_at: '2019-07-19T11:47:24.801Z'
+1832:
+  filename: 1832-command-sla.md
+  id: 4113
+  slug: command-sla
+  updated_at: '2019-07-19T11:49:15.987Z'
+1833:
+  filename: 1833-command-spaces.md
+  id: 4114
+  slug: command-spaces
+  updated_at: '2019-07-19T11:50:43.176Z'
+1834:
+  filename: 1834-command-ssh.md
+  id: 4115
+  slug: command-ssh
+  updated_at: '2019-07-22T14:12:48.367Z'
+1835:
+  filename: 1835-command-ssh-keys.md
+  id: 4116
+  slug: command-ssh-keys
+  updated_at: '2019-07-19T13:12:32.693Z'
+1836:
+  filename: 1836-command-status.md
+  id: 4117
+  slug: command-status
+  updated_at: '2019-07-22T14:14:23.532Z'
+1837:
+  filename: 1837-command-storage.md
+  id: 4118
+  slug: command-storage
+  updated_at: '2019-07-19T13:19:40.157Z'
+1838:
+  filename: 1838-command-storage-pools.md
+  id: 4119
+  slug: command-storage-pools
+  updated_at: '2019-07-19T13:22:55.162Z'
+1839:
+  filename: 1839-command-subnets.md
+  id: 4120
+  slug: command-subnets
+  updated_at: '2019-07-19T13:24:42.569Z'
+1840:
+  filename: 1840-command-suspend-relation.md
+  id: 4121
+  slug: command-suspend-relation
+  updated_at: '2019-07-22T14:15:42.225Z'
+1841:
+  filename: 1841-command-switch.md
+  id: 4122
+  slug: command-switch
+  updated_at: '2019-07-22T14:16:43.567Z'
+1842:
+  filename: 1842-command-sync-agent-binaries.md
+  id: 4123
+  slug: command-sync-agent-binaries
+  updated_at: '2019-07-22T14:17:12.181Z'
+1843:
+  filename: 1843-command-sync-tools.md
+  id: 4124
+  slug: command-sync-tools
+  updated_at: '2019-07-22T14:17:41.810Z'
+1844:
+  filename: 1844-command-trust.md
+  id: 4125
+  slug: command-trust
+  updated_at: '2019-07-22T14:18:25.575Z'
+1845:
+  filename: 1845-command-unexpose.md
+  id: 4126
+  slug: command-unexpose
+  updated_at: '2019-07-22T14:18:50.959Z'
+1846:
+  filename: 1846-command-unregister.md
+  id: 4127
+  slug: command-unregister
+  updated_at: '2019-07-22T14:19:40.800Z'
+1847:
+  filename: 1847-command-update-clouds.md
+  id: 4128
+  slug: command-update-clouds
+  updated_at: '2019-07-22T14:20:04.458Z'
+1848:
+  filename: 1848-command-update-credential.md
+  id: 4129
+  slug: command-update-credential
+  updated_at: '2019-07-22T14:21:08.584Z'
+1849:
+  filename: 1849-command-upgrade-charm.md
+  id: 4130
+  slug: command-upgrade-charm
+  updated_at: '2019-07-19T13:46:19.442Z'
+1850:
+  filename: 1850-command-upgrade-gui.md
+  id: 4131
+  slug: command-upgrade-gui
+  updated_at: '2019-07-19T13:49:26.623Z'
+1851:
+  filename: 1851-command-upgrade-juju.md
+  id: 4133
+  slug: command-upgrade-juju
+  updated_at: '2019-07-22T14:21:47.337Z'
+1852:
+  filename: 1852-command-upgrade-model.md
+  id: 4134
+  slug: command-upgrade-model
+  updated_at: '2019-07-22T14:22:10.175Z'
+1853:
+  filename: 1853-command-upgrade-series.md
+  id: 4135
+  slug: command-upgrade-series
+  updated_at: '2019-07-22T14:23:33.778Z'
+1854:
+  filename: 1854-command-upload-backup.md
+  id: 4136
+  slug: command-upload-backup
+  updated_at: '2019-07-19T14:00:55.657Z'
+1855:
+  filename: 1855-command-users.md
+  id: 4137
+  slug: command-users
+  updated_at: '2019-07-22T14:25:27.990Z'
+1856:
+  filename: 1856-command-version.md
+  id: 4138
+  slug: command-version
+  updated_at: '2019-07-19T14:03:28.024Z'
+1857:
+  filename: 1857-command-wallets.md
+  id: 4139
+  slug: command-wallets
+  updated_at: '2019-07-19T14:04:34.121Z'
+1858:
+  filename: 1858-command-whoami.md
+  id: 4140
+  slug: command-whoami
+  updated_at: '2019-07-22T14:26:56.681Z'
+1865:
+  filename: 1865-command-hook-tools.md
+  id: 4156
+  slug: command-hook-tools
+  updated_at: '2019-07-22T10:56:22.718Z'
+1896:
+  filename: 1896-charmed-osm-documentation.md
+  id: 4220
+  slug: charmed-osm-documentation
+  updated_at: '2019-08-13T19:37:43.372Z'
+1897:
+  filename: 1897-installing-microk8s-for-charmed-osm.md
+  id: 4222
+  slug: installing-microk8s-for-charmed-osm
+  updated_at: '2019-08-13T20:36:10.667Z'
+1920:
+  filename: 1920-configuring-lxd-for-charmed-osm.md
+  id: 4291
+  slug: configuring-lxd-for-charmed-osm
+  updated_at: '2019-08-13T19:33:20.986Z'
+1921:
+  filename: 1921-installing-microstack-as-a-vim-in-charmed-osm.md
+  id: 4292
+  slug: installing-microstack-as-a-vim-in-charmed-osm
+  updated_at: '2019-09-10T13:10:54.965Z'
+1922:
+  filename: 1922-troubleshooting-charmed-osm.md
+  id: 4293
+  slug: troubleshooting-charmed-osm
+  updated_at: '2019-08-23T16:38:06.306Z'
+1923:
+  filename: 1923-charmed-osm-requirements.md
+  id: 4294
+  slug: charmed-osm-requirements
+  updated_at: '2019-08-13T19:37:10.235Z'
+1949:
+  filename: 1949-glossary.md
+  id: 4380
+  slug: glossary
+  updated_at: '2019-08-23T04:54:02.146Z'
+1970:
+  filename: 1970-getting-started-with-juju.md
+  id: 4427
+  slug: getting-started-with-juju
+  updated_at: '2019-09-17T11:44:45.305Z'
