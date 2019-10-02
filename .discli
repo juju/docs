@@ -322,7 +322,7 @@
   filename: 1087-juju-documentation.md
   id: 2392
   slug: juju-documentation
-  updated_at: '2019-09-12T23:58:37.956Z'
+  updated_at: '2019-09-18T14:38:53.481Z'
 1088:
   filename: 1088-using-google-gce-with-juju.md
   id: 2393
@@ -337,12 +337,12 @@
   filename: 1090-using-kubernetes-with-juju.md
   id: 2395
   slug: using-kubernetes-with-juju
-  updated_at: '2019-05-31T18:49:00.845Z'
+  updated_at: '2019-10-02T01:34:34.416Z'
 1091:
   filename: 1091-using-lxd-with-juju-advanced.md
   id: 2396
   slug: using-lxd-with-juju-advanced
-  updated_at: '2019-04-19T21:21:22.062Z'
+  updated_at: '2019-09-23T15:00:15.736Z'
 1092:
   filename: 1092-additional-lxd-resources.md
   id: 2397
@@ -687,7 +687,7 @@
   filename: 1164-installing-juju.md
   id: 2470
   slug: installing-juju
-  updated_at: '2019-08-29T07:10:29.468Z'
+  updated_at: '2019-09-26T16:57:44.884Z'
 1165:
   filename: 1165-charm-layer-yaml-reference.md
   id: 2471
@@ -697,7 +697,7 @@
   filename: 1166-release-notes-index.md
   id: 2472
   slug: release-notes-index
-  updated_at: '2019-08-29T07:04:59.457Z'
+  updated_at: '2019-09-26T16:46:31.481Z'
 1168:
   filename: 1168-charm-unit-status-and-their-meanings.md
   id: 2474
@@ -847,7 +847,7 @@
   filename: 1197-tutorials.md
   id: 2503
   slug: tutorials
-  updated_at: '2019-09-06T01:22:04.756Z'
+  updated_at: '2019-09-18T14:14:35.244Z'
 1198:
   filename: 1198-upgrading-a-machine-series.md
   id: 2504
@@ -1912,4 +1912,11 @@
   filename: 1970-getting-started-with-juju.md
   id: 4427
   slug: getting-started-with-juju
-  updated_at: '2019-09-17T11:44:45.305Z'
+  updated_at: '2019-09-19T12:47:28.147Z'
+2094:
+  filename: 2094-openstack-novadocker-support.md
+  id: 4830
+  slug: openstack-novadocker-support
+  updated_at: '2019-09-26T09:47:47.969Z'
+_meta:
+  updated_at: '2019-10-02T03:43:30+00:00'

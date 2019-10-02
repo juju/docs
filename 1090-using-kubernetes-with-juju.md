@@ -7,9 +7,11 @@ Todo:
 - Write tutorial on building a cluster using AKS
 -->
 
-Kubernetes ("K8s") provides a flexible architecture for managing containerised applications at scale. See the [Kubernetes documentation](https://kubernetes.io/docs) for more information.
+Kubernetes ("K8s") provides a flexible architecture for managing containerised applications at scale. Juju can be used to create a Kubernetes cluster and to manage workloads on top of a live cluster.
 
-The objective of this page is to give an overview of how an existing Kubernetes cluster can be integrated with Juju and what the general workflow is once that's done. Links will be provided at the end to [theoretical and practical](#heading--storage-theory-and-practical-guides) material. Finally, although this page is not about showing how to install Kubernetes itself, we do give pointers on how to do so.
+This page gives an overview of how an existing Kubernetes cluster can be integrated with Juju. 
+
+Although this page is not about showing how to install Kubernetes itself, we do give pointers to a few approaches for doing so.
 
 <h2 id="heading--juju-kubernetes-specific-workflow">Juju Kubernetes-specific workflow</h2>
 
@@ -93,18 +95,18 @@ A Kubernetes-specific charm is deployed in standard fashion, with the `deploy` c
 
 The below table lists configuration keys supported by Kubernetes charms that are set at deploy time. The corresponding Kubernetes meaning can be obtained from the Kubernetes documentation for [Services](https://kubernetes.io/docs/concepts/services-networking/service/) and [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/).
 
-| Key                                            | Type    | Default          | Valid values | Comments |
-|:-----------------------------------------------|---------|------------------|--------------|:---------|
-| `kubernetes-service-type`                      | string  | ClusterIP        |              |          |
-| `kubernetes-service-external-ips`              | string  | []             |              |          |
-| `kubernetes-service-target-port`               | string  | <container port> |              |          |
-| `kubernetes-service-loadbalancer-ip`           | string  | ""               |              |          |
-| `kubernetes-service-loadbalancer-sourceranges` | string  | []             |              |          |
-| `kubernetes-service-externalname`              | string  | ""               |              |          |
-| `kubernetes-ingress-class`                     | string  | nginx            |              |          |
-| `kubernetes-ingress-ssl-redirect`              | boolean | false            |              |          |
-| `kubernetes-ingress-ssl-passthrough`           | boolean | false            |              |          |
-| `kubernetes-ingress-allow-http`                | boolean | false            |              |          |
+| Key                                                       | Type    | Default          |
+|:-----------------------------------------------|---------|------------------|
+| `kubernetes-service-type`                      | string  | ClusterIP        | 
+| `kubernetes-service-external-ips`              | string  | `[]`             |  
+| `kubernetes-service-target-port`               | string  | `<container port>` |         
+| `kubernetes-service-loadbalancer-ip`           | string  | `""`               |         
+| `kubernetes-service-loadbalancer-sourceranges` | string  | `"[]"`             |
+| `kubernetes-service-externalname`              | string  | `""`               |
+| `kubernetes-ingress-class`                     | string  | `nginx`            |
+| `kubernetes-ingress-ssl-redirect`              | boolean | `false`            |
+| `kubernetes-ingress-ssl-passthrough`           | boolean | `false`            ||
+| `kubernetes-ingress-allow-http`                | boolean | `false`            |
 
 For example:
 
@@ -114,16 +116,29 @@ juju deploy mariadb-k8s --config kubernetes-service-loadbalancer-ip=10.1.1.1
 
 There are two other keys that are not Kubernetes-specific:
 
+<!--
+TODO
+
+Add valid values and comments
+
 | Key                      | Type   | Default | Valid values | Comments |
 |:-------------------------|--------|---------|--------------|:---------|
 | `juju-external-hostname` | string | ""      |              |          |
 | `juju-application-path`  | string | "/"     |              |          |
+-->
+
+| Key                      | Type   | Default | 
+|:-------------------------|--------|---------|
+| `juju-external-hostname` | string | `""`      |
+| `juju-application-path`  | string | `"/"`     |
 
 Keys 'juju-external-hostname' and 'juju-application-path' control how the application is exposed externally using a Kubernetes Ingress Resource in conjunction with the configured ingress controller (default: nginx).
 
-<h2 id="heading--storage-theory-and-practical-guides">Storage theory and practical guides</h2>
+<h2 id="heading--storage-theory-and-practical-guides">Storage theory</h2>
 
-The [Persistent storage and Kubernetes](/t/persistent-storage-and-kubernetes/1078) page provides the theory on how Juju works with Kubernetes storage.
+Refer to the  [Persistent storage and Kubernetes](/t/persistent-storage-and-kubernetes/1078) page for the theory on how Juju works with Kubernetes storage.
+
+## Tutorials and in-depth guides 
 
 The following practical guides are available:
 

@@ -12,7 +12,7 @@ TODO
 [Getting started with JAAS](/t/getting-started-with-jaas/1134)
 -->
 
-* [Getting started locally](/t/getting-started-with-juju/1970)
+* [Getting started](/t/getting-started-with-juju/1970)
 * [Install Juju](/t/installing-juju/1164)
 * Learn the [concepts behind Juju](/t/concepts-and-terms/1144)
 

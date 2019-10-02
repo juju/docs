@@ -1,8 +1,8 @@
 Stable versions of Juju are available on Ubuntu, various other Linux distributions, macOS, and Windows. Development releases are also available for testing.
 
-## Version 2.6.8
+## Version 2.6.9
 
-The most recent stable version of Juju is 2.6.8. This is the version we recommend for production use. See the [Release Notes](/t/juju-2-6-8-release-notes/2000).
+The most recent stable version of Juju is 2.6.9. This is the version we recommend for production use. See the [Release Notes](https://discourse.jujucharms.com/t/juju-2-6-9-release-notes/2100).
 
 <h3 id="heading--ubuntu">Ubuntu</h3>
 
@@ -47,7 +47,7 @@ sudo snap install juju --classic
 In the advent that option `--classic` is not supported on your chosen distro, use the `--devmode` option.
 [/note]
 
-For CentOS, download Juju and install it manually: [**juju-2.6.8-centos7.tar.gz**](https://launchpad.net/juju/2.6/2.6.8/+download/juju-2.6.8-centos7.tar.gz) ([md5](https://launchpad.net/juju/2.6/2.6.8/+download/juju-2.6.8-centos7.tar.gz/+md5))
+For CentOS, download Juju and install it manually: [**juju-2.6.9-centos7.tar.gz**](https://launchpad.net/juju/2.6/2.6.9/+download/juju-2.6.9-centos7.tar.gz) ([md5](https://launchpad.net/juju/2.6/2.6.9/+download/juju-2.6.9-centos7.tar.gz/+md5))
 
 <h3 id="heading--macos">macOS</h3>
 
@@ -65,7 +65,7 @@ brew upgrade juju
 
 <h3 id="heading--windows">Windows</h3>
 
-For Windows, an installer is available: [**juju-setup-2.6.8-signed.exe**](https://launchpad.net/juju/2.6/2.6.8/+download/juju-setup-2.6.8-signed.exe) ([md5](https://launchpad.net/juju/2.6/2.6.8/+download/juju-setup-2.6.8-signed.exe/+md5))
+For Windows, an installer is available: [**juju-setup-2.6.9-signed.exe**](https://launchpad.net/juju/2.6/2.6.9/+download/juju-setup-2.6.9-signed.exe) ([md5](https://launchpad.net/juju/2.6/2.6.9/+download/juju-setup-2.6.9-signed.exe/+md5))
 
 <h2 id="heading--development-releases">Development releases</h2>
 

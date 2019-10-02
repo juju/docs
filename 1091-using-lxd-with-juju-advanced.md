@@ -164,13 +164,18 @@ Now that the cloud and credentials have been added the next step is to create a 
 
 <h2 id="heading--charms-and-lxd-profiles">Charms and LXD profiles</h2>
 
-Juju (`v.2.5.0`) allows charms to include a LXD profile. The profile will be applied to a LXD container that the charm is deployed into. The following functionality is built in:
+Juju (`v.2.5.0`) supports LXD profiles for charms. This is implemented by including file `lxd-profile.yaml` in a  charm's root directory. For example, here is a simple two-line file (this is taken from the [Openvswitch](https://jaas.ai/neutron-openvswitch) charm):
 
--   A validity check is performed on the profile(s) during the deployment of the charm. This is based on a hardcoded list of allowed items, everything else being denied. The `--force` option can be used to bypass this check but this is not recommended. The list is:
+```yaml
+config:
+  linux.kernel_modules: openvswitch,ip_tables,ip6_tables
+```
 
-<!-- -->
+The profile will be applied to a LXD container that the charm is deployed into. The following functionality is built in:
 
-``` text
+- A validity check is performed on the profile(s) during the deployment of the charm. This is based on a hardcoded list of allowed items, everything else being denied. The `--force` option can be used to bypass this check but this is not recommended. The list is:
+
+```text
 config
    -boot
    -limits
@@ -183,12 +188,10 @@ devices
    usb
 ```
 
--   Profiles are upgraded during the upgrade of the charm (`juju upgrade-charm`).
--   Profiles are displayed at the machine level by using either the `show-machine` command or the `status --format=yaml` command. Below is an example of the kind of information that can be obtained from either of these two commands:
+- Profiles are upgraded during the upgrade of the charm (`juju upgrade-charm`).
+- Profiles are displayed at the machine level by using either the `show-machine` command or the `status --format=yaml` command. Below is an example of the kind of information that can be obtained from either of these two commands:
 
-<!-- -->
-
-``` text
+```text
    lxd-profiles:
       juju-default-lxd-profile-0:
         config:
@@ -211,5 +214,3 @@ devices
 ```
 
 See the LXD documentation to learn about the valid [profile configuration options](https://lxd.readthedocs.io/en/latest/containers/).
-
-<!-- LINKS -->

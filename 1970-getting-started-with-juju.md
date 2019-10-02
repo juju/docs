@@ -4,7 +4,7 @@ This guide introduces you to Juju on MS Windows, macOS and Linux. You'll be depl
 
 Would you prefer to watch, rather than type? This recording goes through the entire tutorial:
 
-[![juju-getting-started|690x311](upload://qifyQD4CnmZdHsRQI0blAj8hy01.gif)](https://asciinema.org/a/267811?speed=2)
+[![juju-getting-started|690x311](upload://uX8fkjMp6ix1mP7jxmIhVfyEPfb.gif)](https://asciinema.org/a/267811)
 
 ## Juju concepts primer
 
@@ -196,9 +196,9 @@ It isn't necessary to understand much of that output at this stage. It reads as 
 -->
 
 ```plain
-$ juju deploy ~hello-juju
-Located charm "cs:hello-juju-2".
-Deploying charm "cs:hello-juju-2".
+$ juju deploy hello-juju
+Located charm "cs:hello-juju-4".
+Deploying charm "cs:hello-juju-4".
 ```
 The charm name `hello-juju` is resolved into an actual charm version by contacting the [Charm Store](https://jaas.ai/store). This charm is then downloaded by the controller and used as the source of the application that was created with the same name.
 

@@ -34,7 +34,7 @@ It can feel like there's a lot to learn before you can be productive with Juju.
 
 ### Juju and Kubernetes
 
-Juju provides first-class support for k8s! As well as being the preferred deployment tool of the Charmed Distribution of Kubernetes, you're also able to drive workloads within your k8s cluster of choice.
+Juju provides first-class support for k8s! As well as being the preferred deployment tool for Charmed Kubernetes, you're also able to drive workloads within your k8s cluster of choice.
 
 
 #### Deploying a k8s cluster
