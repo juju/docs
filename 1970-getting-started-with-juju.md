@@ -1,4 +1,4 @@
-This guide introduces you to Juju on MS Windows, macOS and Linux. You'll be deploying a simple web application. Later on, you'll be able to use those same commands to deploy the app into the cloud, whether private or public.  
+This guide introduces you to Juju on MS Windows, macOS and Linux. You'll be deploying a simple web application to your local machine. Later on, you'll be able to use those same commands to deploy the app into the cloud, whether private or public.
 
 ## Watch this guide
 
@@ -438,3 +438,8 @@ juju relate web-app pg
 multipass delete microcloud
 ```
 -->
+
+## Next steps
+
+- You can scale out to a [public cloud with JAAS](/t/getting-started-with-juju-on-jaas/1134), the hosted controller service
+- Learn about all of the [clouds](/t/clouds/1100) that Juju supports
