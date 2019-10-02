@@ -41,13 +41,18 @@ Common model management tasks are summarised below. The most important ones are 
 
 Models can be added easily to a controller. The [Adding a model](/t/adding-a-model/1147) page provides a full explanation and includes examples.
 
-    juju add-model <model-name> [[<cloud>/]<region>]
+```plain
+juju add-model <model-name> [[<cloud>/]<region>]
+```
 
 ### Change models
 
 Use the `switch` command to change from one model to another. Running the command with no arguments will return the currently active controller and model.
 
-    juju switch <controller>[:<model>]
+```plain
+juju switch <controller>[:<model>]
+```
+
 
 [Details="Examples for juju switch"]
 Here are different ways to change to a model:
@@ -69,7 +74,9 @@ Here are different ways to change to a model:
 
 An operator can compare a model with a charm bundle. This is useful for determining what has changed since the bundle was deployed or just how a model differs from a bundle that was not yet used. This topic is covered on the [Charm bundles](/t/charm-bundles/1058#heading--comparing-a-bundle-to-a-model) page.
 
-    juju diff-bundle <bundle>
+```plain
+juju diff-bundle <bundle>
+```
 
 ### Configure a model
 
@@ -79,7 +86,9 @@ Configuration can occur at the model level. This will affect all Juju machines i
 
 When a model is destroyed all associated applications and machines are also destroyed. It is a very destructive process. See page [Removing things](/t/removing-things/1063#heading--destroying-models) for details.
 
-    juju destroy-model <model>
+```plain
+juju destroy-model <model>
+```
 
 ### Disable commands
 
@@ -89,13 +98,17 @@ It is possible to curtail command use for Juju users on a per-model basis. The [
 
 Use the `show-model` command to examine a specific model.
 
-    juju show-model <model>
+```plain
+juju show-model <model>
+````
 
 ### List all models
 
 Use the `models` command to list all models for a controller.
 
-    juju models
+```plain
+juju models
+```
 
 ### Manage user access
 
@@ -128,7 +141,9 @@ Use the `debug-log` command to examine logs on a per-model basis. This allows in
 
 Use the `status` command to view the status of a model. Tutorial [Basic client usage](/t/basic-client-usage-tutorial/1191#heading--viewing-the-model-status) gives an overview of the various elements of this command's output.
 
-    juju status [--storage] [--relations]
+```plain
+juju status [--storage] [--relations]
+```
 
 ## Related concepts
 
