@@ -184,6 +184,14 @@ juju bootstrap <cloud> <controller name> --config network=<network_id> \
 
 For a detailed explanation and examples of the `bootstrap` command see the [Creating a controller](/t/creating-a-controller/1108) page.
 
+## OpenStack-specific features
+
+`v.2.6.4` provides a new constraint: ‘root-disk-source’. This allows operators to specify a Cinder block storage volume that will be used to create instances' root disks:
+
+```text
+juju deploy myapp --constraints root-disk-source=volume
+```
+
 <h2 id="heading--next-steps">Next steps</h2>
 
 A controller is created with two models - the 'controller' model, which should be reserved for Juju's internal operations, and a model named 'default', which can be used for deploying user workloads.
