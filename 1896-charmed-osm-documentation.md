@@ -12,6 +12,7 @@ Canonical's Charmed OSM delivers the upstream version of OSM, along with logging
 - Choose a Kubernetes
   - [MicroK8s](/t/installing-microk8s-for-charmed-osm/1897)
   - Charmed Kubernetes
+  - EKS
   - Other
 - Choose a VIM
   - [MicroStack](/t/installing-microstack-as-vim-in-charmed-osm/1921)

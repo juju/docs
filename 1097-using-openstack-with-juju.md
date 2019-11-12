@@ -186,7 +186,7 @@ For a detailed explanation and examples of the `bootstrap` command see the [Crea
 
 ## OpenStack-specific features
 
-`v.2.6.4` provides a new constraint: ‘root-disk-source’. This allows operators to specify a Cinder block storage volume that will be used to create instances' root disks:
+`v.2.6.4` provides a new constraint: ‘root-disk-source’. Specifying the string `volume` tells Juju to use Cinder block storage volumes that will be used to create instances' root disks:
 
 ```text
 juju deploy myapp --constraints root-disk-source=volume

@@ -11,7 +11,7 @@ This page collects together examples that show the various ways a controller can
 - [Set default model constraints](#heading--set-default-model-constraints)
 - [Set constraints for a controller](#heading--set-constraints-for-a-controller)
 - [Create a controller of a specific series](#heading--create-a-controller-of-a-specific-series)
-- [Set model configuration kyes](#heading--set-model-configuration-keys)
+- [Set model configuration keys](#heading--set-model-configuration-keys)
 - [Set model configuration keys both with a file and individually](#heading--set-model-configuration-keys-both-with-a-file-and-individually)
 - [Create a controller using a non-default region](#heading--create-a-controller-using-a-non-default-region)
 - [Create a controller using a different MongoDB profile](#heading--create-a-controller-using-a-different-mongodb-profile)

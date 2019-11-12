@@ -33,11 +33,6 @@
   id: 398
   slug: agent-introspection-juju-engine-report
   updated_at: '2019-03-15T01:45:41.702Z'
-189:
-  filename: 189-using-lets-encrypt-for-https-juju-controllers.md
-  id: 509
-  slug: using-lets-encrypt-for-https-juju-controllers
-  updated_at: '2019-03-15T01:47:19.035Z'
 423:
   filename: 423-welcome-text-to-juju.md
   id: 1278
@@ -57,7 +52,7 @@
   filename: 512-using-model-config-key-cloudinit-userdata.md
   id: 1563
   slug: using-model-config-key-cloudinit-userdata
-  updated_at: '2019-07-15T19:07:43.367Z'
+  updated_at: '2019-10-30T21:50:51.068Z'
 514:
   filename: 514-using-model-config-key-container-inherit-properties.md
   id: 1565
@@ -78,106 +73,11 @@
   id: 2338
   slug: applications-and-charms
   updated_at: '2019-09-06T16:27:46.015Z'
-1036:
-  filename: 1036-benchmarking-juju-applications.md
-  id: 2340
-  slug: benchmarking-juju-applications
-  updated_at: '2019-05-16T20:31:22.144Z'
-1037:
-  filename: 1037-best-practice-for-charm-authors.md
-  id: 2341
-  slug: best-practice-for-charm-authors
-  updated_at: '2019-03-13T14:46:54.779Z'
-1038:
-  filename: 1038-components-of-a-charm.md
-  id: 2342
-  slug: components-of-a-charm
-  updated_at: '2019-05-31T20:54:53.599Z'
-1039:
-  filename: 1039-creating-config-yaml-and-configuring-charms.md
-  id: 2343
-  slug: creating-config-yaml-and-configuring-charms
-  updated_at: '2019-03-13T14:51:13.759Z'
-1040:
-  filename: 1040-charm-hooks.md
-  id: 2344
-  slug: charm-hooks
-  updated_at: '2019-05-31T21:04:41.553Z'
-1041:
-  filename: 1041-creating-icons-for-charms.md
-  id: 2345
-  slug: creating-icons-for-charms
-  updated_at: '2019-03-13T14:46:59.468Z'
-1043:
-  filename: 1043-charm-metadata.md
-  id: 2347
-  slug: charm-metadata
-  updated_at: '2019-03-13T14:51:22.925Z'
-1044:
-  filename: 1044-charm-store-policy.md
-  id: 2348
-  slug: charm-store-policy
-  updated_at: '2019-03-13T14:51:24.879Z'
-1045:
-  filename: 1045-the-juju-charm-store.md
-  id: 2349
-  slug: the-juju-charm-store
-  updated_at: '2019-05-03T00:25:15.241Z'
-1046:
-  filename: 1046-writing-your-first-juju-charm.md
-  id: 2350
-  slug: writing-your-first-juju-charm
-  updated_at: '2019-05-16T21:44:54.140Z'
-1047:
-  filename: 1047-the-hook-environment-hook-tools-and-how-hooks-are-run.md
-  id: 2351
-  slug: the-hook-environment-hook-tools-and-how-hooks-are-run
-  updated_at: '2019-03-13T14:51:34.983Z'
-1048:
-  filename: 1048-dealing-with-errors-encountered-by-charm-hooks.md
-  id: 2352
-  slug: dealing-with-errors-encountered-by-charm-hooks
-  updated_at: '2019-03-13T14:51:37.262Z'
-1049:
-  filename: 1049-how-to-become-a-juju-charm-author.md
-  id: 2353
-  slug: how-to-become-a-juju-charm-author
-  updated_at: '2019-05-15T22:42:07.716Z'
-1050:
-  filename: 1050-the-lifecycle-of-charm-relations.md
-  id: 2354
-  slug: the-lifecycle-of-charm-relations
-  updated_at: '2019-03-13T14:47:13.724Z'
 1051:
   filename: 1051-implementing-relations.md
   id: 2355
   slug: implementing-relations
   updated_at: '2019-05-29T19:45:06.108Z'
-1052:
-  filename: 1052-application-configuration.md
-  id: 2356
-  slug: application-configuration
-  updated_at: '2019-03-13T14:51:43.107Z'
-1053:
-  filename: 1053-subordinate-applications.md
-  id: 2357
-  slug: subordinate-applications
-  updated_at: '2019-03-13T14:51:44.870Z'
-1054:
-  filename: 1054-charm-promulgation.md
-  id: 2358
-  slug: charm-promulgation
-  updated_at: '2019-07-15T15:22:59.527Z'
-1055:
-  filename: 1055-charm-review-process.md
-  id: 2359
-  slug: charm-review-process
-  updated_at: '2019-05-29T20:35:00.320Z'
-1056:
-  filename: 1056-unmaintained-charms.md
-  id: 2360
-  slug: unmaintained-charms
-  updated_at: '2019-03-13T14:47:21.668Z'
 1057:
   filename: 1057-using-bundles-with-the-gui.md
   id: 2361
@@ -312,7 +212,7 @@
   filename: 1085-using-microsoft-azure-with-juju-advanced.md
   id: 2390
   slug: using-microsoft-azure-with-juju-advanced
-  updated_at: '2019-05-22T02:38:10.021Z'
+  updated_at: '2019-10-23T19:26:10.463Z'
 1086:
   filename: 1086-using-microsoft-azure-with-juju.md
   id: 2391
@@ -322,7 +222,7 @@
   filename: 1087-juju-documentation.md
   id: 2392
   slug: juju-documentation
-  updated_at: '2019-09-18T14:38:53.481Z'
+  updated_at: '2019-10-02T23:50:14.265Z'
 1088:
   filename: 1088-using-google-gce-with-juju.md
   id: 2393
@@ -372,7 +272,7 @@
   filename: 1097-using-openstack-with-juju.md
   id: 2402
   slug: using-openstack-with-juju
-  updated_at: '2019-06-19T03:37:49.230Z'
+  updated_at: '2019-10-03T03:02:42.881Z'
 1098:
   filename: 1098-using-rackspace-with-juju.md
   id: 2403
@@ -382,7 +282,7 @@
   filename: 1099-using-vmware-vsphere-with-juju.md
   id: 2404
   slug: using-vmware-vsphere-with-juju
-  updated_at: '2019-07-14T23:01:11.042Z'
+  updated_at: '2019-11-06T21:57:56.030Z'
 1100:
   filename: 1100-clouds.md
   id: 2405
@@ -417,12 +317,12 @@
   filename: 1107-configuring-controllers.md
   id: 2413
   slug: configuring-controllers
-  updated_at: '2019-06-05T20:05:26.538Z'
+  updated_at: '2019-10-15T19:33:52.873Z'
 1108:
   filename: 1108-creating-a-controller.md
   id: 2414
   slug: creating-a-controller
-  updated_at: '2019-09-04T20:25:27.504Z'
+  updated_at: '2019-10-02T11:43:55.870Z'
 1109:
   filename: 1109-juju-gui.md
   id: 2415
@@ -443,51 +343,6 @@
   id: 2418
   slug: credentials
   updated_at: '2019-05-23T14:33:07.050Z'
-1113:
-  filename: 1113-actions-for-the-charm-author.md
-  id: 2419
-  slug: actions-for-the-charm-author
-  updated_at: '2019-03-13T14:53:26.196Z'
-1114:
-  filename: 1114-dhx-a-customized-hook-debugging-environment-plugin.md
-  id: 2420
-  slug: dhx-a-customized-hook-debugging-environment-plugin
-  updated_at: '2019-03-13T14:53:28.005Z'
-1115:
-  filename: 1115-debugging-building-layers.md
-  id: 2421
-  slug: debugging-building-layers
-  updated_at: '2019-03-19T21:25:11.031Z'
-1116:
-  filename: 1116-debugging-charm-hooks.md
-  id: 2422
-  slug: debugging-charm-hooks
-  updated_at: '2019-03-13T14:53:31.876Z'
-1117:
-  filename: 1117-event-cycle.md
-  id: 2423
-  slug: event-cycle
-  updated_at: '2019-05-17T01:27:14.920Z'
-1118:
-  filename: 1118-getting-started-with-charm-development.md
-  id: 2424
-  slug: getting-started-with-charm-development
-  updated_at: '2019-05-31T21:21:13.045Z'
-1120:
-  filename: 1120-writing-a-layer-by-example.md
-  id: 2426
-  slug: writing-a-layer-by-example
-  updated_at: '2019-05-17T01:40:38.467Z'
-1121:
-  filename: 1121-interface-layers.md
-  id: 2427
-  slug: interface-layers
-  updated_at: '2019-05-16T19:08:44.101Z'
-1122:
-  filename: 1122-layers-for-charm-authoring.md
-  id: 2428
-  slug: layers-for-charm-authoring
-  updated_at: '2019-05-29T19:30:58.245Z'
 1123:
   filename: 1123-leadership-howtos.md
   id: 2429
@@ -498,41 +353,11 @@
   id: 2430
   slug: implementing-leadership
   updated_at: '2019-05-16T21:32:20.848Z'
-1125:
-  filename: 1125-metric-collecting-charms.md
-  id: 2431
-  slug: metric-collecting-charms
-  updated_at: '2019-05-31T21:04:06.860Z'
 1126:
   filename: 1126-charm-network-primitives.md
   id: 2432
   slug: charm-network-primitives
   updated_at: '2019-03-13T14:49:04.623Z'
-1127:
-  filename: 1127-using-resources-developer-guide.md
-  id: 2433
-  slug: using-resources-developer-guide
-  updated_at: '2019-03-13T14:53:50.715Z'
-1128:
-  filename: 1128-writing-charms-that-use-storage.md
-  id: 2434
-  slug: writing-charms-that-use-storage
-  updated_at: '2019-05-16T21:32:56.015Z'
-1129:
-  filename: 1129-writing-charms-that-use-terms.md
-  id: 2435
-  slug: writing-charms-that-use-terms
-  updated_at: '2019-03-13T14:53:53.613Z'
-1130:
-  filename: 1130-writing-charm-tests.md
-  id: 2436
-  slug: writing-charm-tests
-  updated_at: '2019-05-16T21:12:32.656Z'
-1131:
-  filename: 1131-upgrading-a-charm.md
-  id: 2437
-  slug: upgrading-a-charm
-  updated_at: '2019-05-16T21:29:35.899Z'
 1132:
   filename: 1132-managed-solutions.md
   id: 2438
@@ -543,16 +368,6 @@
   id: 2439
   slug: creating-ssh-keypairs-on-windows
   updated_at: '2019-03-13T14:49:13.939Z'
-1134:
-  filename: 1134-getting-started-with-juju-on-jaas.md
-  id: 2440
-  slug: getting-started-with-juju-on-jaas
-  updated_at: '2019-09-09T23:39:24.075Z'
-1135:
-  filename: 1135-deploy-your-docker-container-to-any-cloud-with-charms.md
-  id: 2441
-  slug: deploy-your-docker-container-to-any-cloud-with-charms
-  updated_at: '2019-09-06T01:05:29.082Z'
 1137:
   filename: 1137-cloud-image-metadata.md
   id: 2443
@@ -563,11 +378,6 @@
   id: 2444
   slug: collecting-juju-metrics
   updated_at: '2019-03-13T14:54:09.097Z'
-1139:
-  filename: 1139-charms-and-mysql-interfaces.md
-  id: 2445
-  slug: charms-and-mysql-interfaces
-  updated_at: '2019-03-13T14:49:22.154Z'
 1140:
   filename: 1140-introducing-juju-2-0.md
   id: 2446
@@ -647,7 +457,7 @@
   filename: 1155-models.md
   id: 2461
   slug: models
-  updated_at: '2019-09-10T21:21:43.972Z'
+  updated_at: '2019-10-14T23:07:57.576Z'
 1156:
   filename: 1156-working-with-multiple-users.md
   id: 2462
@@ -657,7 +467,7 @@
   filename: 1157-network-spaces.md
   id: 2463
   slug: network-spaces
-  updated_at: '2019-04-16T06:56:23.159Z'
+  updated_at: '2019-11-07T14:22:00.274Z'
 1158:
   filename: 1158-bundle-reference.md
   id: 2464
@@ -667,7 +477,7 @@
   filename: 1160-juju-constraints.md
   id: 2466
   slug: juju-constraints
-  updated_at: '2019-04-24T13:36:28.040Z'
+  updated_at: '2019-10-03T03:05:17.113Z'
 1161:
   filename: 1161-reference-documents.md
   id: 2467
@@ -678,31 +488,16 @@
   id: 2468
   slug: juju-environment-variables
   updated_at: '2019-05-17T01:43:35.251Z'
-1163:
-  filename: 1163-hook-tools.md
-  id: 2469
-  slug: hook-tools
-  updated_at: '2019-05-31T21:30:36.566Z'
 1164:
   filename: 1164-installing-juju.md
   id: 2470
   slug: installing-juju
-  updated_at: '2019-09-26T16:57:44.884Z'
-1165:
-  filename: 1165-charm-layer-yaml-reference.md
-  id: 2471
-  slug: charm-layer-yaml-reference
-  updated_at: '2019-03-13T14:49:59.565Z'
+  updated_at: '2019-10-30T14:00:53.817Z'
 1166:
   filename: 1166-release-notes-index.md
   id: 2472
   slug: release-notes-index
-  updated_at: '2019-09-26T16:46:31.481Z'
-1168:
-  filename: 1168-charm-unit-status-and-their-meanings.md
-  id: 2474
-  slug: charm-unit-status-and-their-meanings
-  updated_at: '2019-02-20T12:33:56.215Z'
+  updated_at: '2019-10-30T13:57:27.401Z'
 1169:
   filename: 1169-2-4-0-release-notes.md
   id: 2475
@@ -758,16 +553,6 @@
   id: 2485
   slug: installing-snaps-offline
   updated_at: '2019-03-13T14:55:07.359Z'
-1180:
-  filename: 1180-charm-tools.md
-  id: 2486
-  slug: charm-tools
-  updated_at: '2019-05-15T22:35:30.954Z'
-1181:
-  filename: 1181-tools.md
-  id: 2487
-  slug: tools
-  updated_at: '2019-05-15T22:41:56.904Z'
 1182:
   filename: 1182-troubleshooting-additions.md
   id: 2488
@@ -798,11 +583,6 @@
   id: 2493
   slug: troubleshooting
   updated_at: '2019-06-03T02:40:50.906Z'
-1188:
-  filename: 1188-introduction-to-juju-charms.md
-  id: 2494
-  slug: introduction-to-juju-charms
-  updated_at: '2019-03-13T14:55:20.641Z'
 1189:
   filename: 1189-create-a-google-compute-engine-controller.md
   id: 2495
@@ -873,16 +653,11 @@
   id: 2508
   slug: whats-new-in-2-6
   updated_at: '2019-07-04T09:43:38.584Z'
-1260:
-  filename: 1260-charm-writing.md
-  id: 2694
-  slug: charm-writing
-  updated_at: '2019-05-29T20:36:22.368Z'
 1263:
   filename: 1263-understanding-kubernetes-charms-tutorial.md
   id: 2697
   slug: understanding-kubernetes-charms-tutorial
-  updated_at: '2019-09-11T10:54:18.251Z'
+  updated_at: '2019-10-15T02:57:22.739Z'
 1270:
   filename: 1270-2-5-2-release-notes.md
   id: 2712
@@ -1877,12 +1652,12 @@
   filename: 1896-charmed-osm-documentation.md
   id: 4220
   slug: charmed-osm-documentation
-  updated_at: '2019-08-13T19:37:43.372Z'
+  updated_at: '2019-10-22T09:36:07.856Z'
 1897:
   filename: 1897-installing-microk8s-for-charmed-osm.md
   id: 4222
   slug: installing-microk8s-for-charmed-osm
-  updated_at: '2019-08-13T20:36:10.667Z'
+  updated_at: '2019-10-22T09:36:39.114Z'
 1920:
   filename: 1920-configuring-lxd-for-charmed-osm.md
   id: 4291
@@ -1912,11 +1687,41 @@
   filename: 1970-getting-started-with-juju.md
   id: 4427
   slug: getting-started-with-juju
-  updated_at: '2019-10-02T22:48:48.589Z'
+  updated_at: '2019-10-09T19:24:21.629Z'
 2094:
   filename: 2094-openstack-novadocker-support.md
   id: 4830
   slug: openstack-novadocker-support
   updated_at: '2019-09-26T09:47:47.969Z'
+2155:
+  filename: 2155-draft-how-to-install-a-private-docker-registry-and-configure-it-for-ar-kubernetes-cluster.md
+  id: 5014
+  slug: draft-how-to-install-a-private-docker-registry-and-configure-it-for-ar-kubernetes-cluster
+  updated_at: '2019-10-22T21:38:42.357Z'
+2197:
+  filename: 2197-concepts-guide.md
+  id: 5138
+  slug: concepts-guide
+  updated_at: '2019-10-09T19:16:39.101Z'
+2234:
+  filename: 2234-create-a-processing-pipeline-that-bursts-out-to-the-public-cloud.md
+  id: 5259
+  slug: create-a-processing-pipeline-that-bursts-out-to-the-public-cloud
+  updated_at: '2019-10-17T01:33:20.960Z'
+2253:
+  filename: 2253-charming-documentation-index.md
+  id: 5325
+  slug: charming-documentation-index
+  updated_at: '2019-10-23T19:27:52.950Z'
+2259:
+  filename: 2259-deploy-databases-and-storage-middleware-to-metal-application-software-to-kubernetes.md
+  id: 5345
+  slug: deploy-databases-and-storage-middleware-to-metal-application-software-to-kubernetes
+  updated_at: '2019-10-29T19:52:49.992Z'
+2260:
+  filename: 2260-tutorial-stack-of-stacks-deploying-workloads-on-kubernetes-thats-deployed-on-bare-metal.md
+  id: 5346
+  slug: tutorial-stack-of-stacks-deploying-workloads-on-kubernetes-thats-deployed-on-bare-metal
+  updated_at: '2019-10-22T01:01:30.767Z'
 _meta:
-  updated_at: '2019-10-02T22:50:55+00:00'
+  updated_at: '2019-11-12T03:15:55+00:00'

@@ -18,7 +18,7 @@ Models provide access control. Juju enables you to create user accounts that hav
 
 Models provide repeatable infrastructure deployments. Once your model is in-place and functional, it becomes simple to export a model's definition as a bundle, then re-deploy that model in another host. 
 
-Models respect bureaucratic boundaries. Models enable you to partition compute resources according to your internal guidelines. You may wish to keep all database-related functions within the same 
+Models respect bureaucratic boundaries. Models enable you to partition compute resources according to your internal guidelines. You may wish to keep a central set of databases in the same model. Juju's access controls are model-specific, enabling you to know exactly who has permissions to peform direct database admininstration. Those databases could be made available to various consuming applications from other models via relations (which can span models). Other use cases for central models include secrets (using the [vault charm](https://jaas.ai/vault/)) and identity management (using the [keystone charm](https://jaas.ai/keystone)).
 
 
 <!--

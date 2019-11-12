@@ -6,52 +6,18 @@ Would you prefer to watch, rather than type? This recording goes through the ent
 
 [![juju-getting-started|690x311](upload://uX8fkjMp6ix1mP7jxmIhVfyEPfb.gif)](https://asciinema.org/a/267811)
 
-## Juju concepts primer
-
-Working with Juju productively involves understanding some of its terminology.
-
-**Hosting environment**
-
-Juju interacts with a cloud to provide your workload.
-
-- [Machines][] are compute resources, whether bare-metal servers, virtual machines or containers.
-
-- [Providers](/t/glossary/1949#provider), or cloud providers, are the businesses that provide clouds and APIs to access them. 
-
-- [Clouds](/t/glossary/1949#cloud) are targets that Juju can deploy to. Public clouds include AWS, Google Compute Engine and Microsoft Azure. 
-
-**Juju architecture**
-
-Juju uses an active agent architecture, the core of which is a controller. These terms describe how Juju gets its work done.
-
-- [Charms][] are software packages that are invoked during phases of an application's lifecycle by Juju. They implement installation, scaling and configuration negotiation.
-
-- [Client](/t/glossary/1949#client) is a term used for the tool that users use to interact with Juju, such as the `juju` executable.
-
-- [Controllers](/t/glossary/1949#controller) are software agents running in a cloud that manage models.
-
-- [Agents](/t/glossary/1949#relation) are running instances of Juju with responsibility to manage an application, a unit, machine or controller. They interact as a distributed system. Commands that you execute are sent to the controller, which then delegates the command to the responsible agent.
-
-**Software modelling**
-
-Within the Juju ecosystem, an "application" is an abstract entity. These terms describe how Juju enables you to define your software model, so that it can be implemented. 
-
--  [Applications][] are instances of a charm. Applications do not necessarily corespond to a software package running on a machine, but what the charm defines.
-
--  [Models][] are user-defined collections of applications. Models are wrappers for all of the components that support the applications running within them, such as relations, storage and network spaces.
-
--  [Units][] are instances of the software running within an applications. An application's units occupy machines.
-
-- [Relations](/t/glossary/1949#relation) are protocols facilitated by Juju that allow applications to auto-negotiate their configuration. An application's relations are defined by its _charm_.
-
-If you encounter any unfamiliar terms, the Juju project provides a full [glossary](/t/glossary/1949).
-
 ## Setting up
 
+You need to install [snap](https://snapcraft.io/), which will allow you to install other software used in this tutorial (and cleanly remove things later if desired).
+
+The instructions in this tutorial are based on an Ubuntu system. We've provided instructions for getting access to Ubuntu quickly for those readers that require it.
+
 [details="Instructions for MS Windows and macOS"]
+We recommend using an isolated environment for testing. 
+
 ### Install Multipass
 
-If you're not running Ubuntu, visit [multipass.run](https://multipass.run/). Multipass is a tool for quickly running virtual machines from any host operating system. This will allow you to create a fully-isolated test environment that won't impact your host system.
+If you're not running Ubuntu, visit [multipass.run](https://multipass.run/) to install Multipass. Multipass is a tool for quickly running virtual machines from any host operating system. This will allow you to create a fully-isolated test environment that won't impact your host system.
 
 > Multipass provides a command line interface to launch, manage and generally fiddle about with instances of Linux. The downloading of a minty-fresh image takes a matter of seconds, and within minutes a VM can be up and running.
 >&mdash; [The Register](https://www.theregister.co.uk/2019/01/22/multipass/)
@@ -305,7 +271,7 @@ $ juju relate postgresql:db hello-juju
 
 `hello-juju` includes support for the `pgsql` relation, which is provided by the `postgresql` charm and others that present the same interface, such as `pg_bouncer`. 
 
-Relations are protocols that enable applications to auto-configure. In the case of `pgsql`, the requiring charm (`hello-juju`) requests that a database be created on its behalf and the provider charm (`postgresql`) carries that step out and also creates the user account. `postgresql` then sends the 
+Relations are protocols that enable applications to auto-configure themselves. In the case of `pgsql`, the requiring charm (`hello-juju`) requests that a database be created on its behalf and the provider charm (`postgresql`) carries that step out and also creates the user account. The `postgresql` then sends the connection details back to `hello-juju`.  
 
 The data sent between charms is facilitated by the Juju controller. The Juju controller establishes a certificate authority and ensures that all data transported is fully encrypted. Relations prevent secrets from being stored insecurely because they're not needed by application developers.
 

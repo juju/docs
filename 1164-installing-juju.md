@@ -1,8 +1,8 @@
 Stable versions of Juju are available on Ubuntu, various other Linux distributions, macOS, and Windows. Development releases are also available for testing.
 
-## Version 2.6.9
+## Version 2.6.10
 
-The most recent stable version of Juju is 2.6.9. This is the version we recommend for production use. See the [Release Notes](https://discourse.jujucharms.com/t/juju-2-6-9-release-notes/2100).
+The most recent stable version of Juju is 2.6.10. This is the version we recommend for production use. See the [Release Notes](https://discourse.jujucharms.com/t/juju-2-6-10-release-notes/2285).
 
 <h3 id="heading--ubuntu">Ubuntu</h3>
 
@@ -13,7 +13,7 @@ The recommended way to install Juju is with a [snap](https://snapcraft.io). Neve
 Juju can be installed with the following command:
 
 ```text
-sudo snap install juju --classic
+sudo snap install juju --classic --channel 2.6/stable
 ```
 
 This will track the `stable` snap channel. Other channels are available, as described on [Juju's snapcraft page](http://snapcraft.io/juju).
@@ -40,7 +40,7 @@ Juju can be installed on various Linux distributions via snaps. On Ubuntu snapd 
 You can now install Juju with:
 
 ```text
-sudo snap install juju --classic
+sudo snap install juju --classic --channel 2.6/stable
 ```
 
 [note]
@@ -65,7 +65,7 @@ brew upgrade juju
 
 <h3 id="heading--windows">Windows</h3>
 
-For Windows, an installer is available: [**juju-setup-2.6.9-signed.exe**](https://launchpad.net/juju/2.6/2.6.9/+download/juju-setup-2.6.9-signed.exe) ([md5](https://launchpad.net/juju/2.6/2.6.9/+download/juju-setup-2.6.9-signed.exe/+md5))
+For Windows, an installer is available: [**juju-setup-2.6.10-signed.exe**](https://launchpad.net/juju/2.6/2.6.10/+download/juju-setup-2.6.10-signed.exe) ([md5](https://launchpad.net/juju/2.6/2.6.10/+download/juju-setup-2.6.10-signed.exe/+md5))
 
 <h2 id="heading--development-releases">Development releases</h2>
 

@@ -142,7 +142,7 @@ The primary network that VMs will be connected to. If this is not specified, the
 - `external-network`
 An external network that VMs will be connected to. The resulting IP address for a VM will be used as its public address. An external network provides the interface to the internet for virtual machines connected to external organization vDC networks.
 - `datastore`
-The datastore in which to create VMs. If this is not specified, the first accessible datastore will be used.
+The datastore in which to create VMs. If this is not specified, the process will abort unless there is only one datastore available.
 
 For example:
 

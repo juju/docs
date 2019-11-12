@@ -1,4 +1,4 @@
-The goal of this tutorial is to expose the innards of Kubernetes charms and to explain the mechanisms of how such charms are built. It does so by making reference to an existing charm. Further reading suggestions are included at the end.
+The goals of this tutorial are to expose the innards of Kubernetes charms, explain how they work and how to build them. Further reading suggestions are included at the end.
 
 <h2 id="heading--prerequisites">Prerequisites</h2>
 
@@ -6,8 +6,8 @@ The following prerequisites are assumed as a starting point for this tutorial:
 
 -   You have an [Ubuntu SSO account](https://login.ubuntu.com/).
 -   You're using Ubuntu 18.04 LTS (Bionic).
--   Juju (`v.2.5.1`) is installed. See the [Installing Juju](/t/installing-juju/1164) page.
--   Charm Tools (`v.2.5.2`) are installed. See the [Charm Tools](/t/charm-tools/1180) page.
+-   Juju (`v.2.5.1` or later) is installed. See the [Installing Juju](/t/installing-juju/1164) page.
+-   The Charm Tools (`v.2.5.2` or later) package is installed. See the [Charm Tools](/t/charm-tools/1180) page.
 -   The system user is 'ubuntu'.
 
 The SSO account is needed to interact with the [Charm Store](https://jujucharms.com). The example username used in this guide is 'jlarin'.

@@ -44,47 +44,49 @@ TODO
 - [Install Juju](/t/installing-juju/1164)
 - [Tutorials](/t/tutorials/1197)
 
-### Using Juju
-- Bootstrap
+
+### Creating a Controller
+
   - [Add a cloud](/t/clouds/1100)
   - [Add credentials](/t/credentials/1112)
   - [Create a controller](/t/creating-a-controller/1108)
-- Constructing the model
-  - [Add constraints](/t/using-constraints/1060)
-  - [Deploy applications](/t/deploying-applications/1062)
-  - [Increase scale and tailor deployment](/t/deploying-applications-advanced/1061)
-  - [Relate applications](/t/managing-relations/1073)
-  - [Remove things](/t/removing-things/1063)
-- Interacting with the model
-  - [Access individual machines](/t/machine-authentication/1146)
-  - [Run actions](/t/working-with-actions/1033)
-  - [Collect metrics](/t/collecting-juju-metrics/1138)
+
+### Supported Clouds 
+
+- Virtual Machines
+  - [Amazon AWS](/t/using-amazon-aws-with-juju/1084)
+  - [Microsoft Azure](/t/using-microsoft-azure-with-juju/1086)
+  - [Google GCE](/t/using-google-gce-with-juju/1088) 
+  - [Oracle](/t/using-oracle-oci-with-juju/1096)
+  - [Rackspace](/t/using-rackspace-with-juju/1098)
+  - [Joyent](/t/using-joyent-with-juju/1089)
+  - [VMware vSphere](/t/using-vmware-vsphere-with-juju/1099)
+  - [OpenStack](/t/using-openstack-with-juju/1097)
+- Containers
+  - [LXD](/t/using-lxd-with-juju/1093)
+  - [Kubernetes](/t/using-kubernetes-with-juju/1090)
+- Bare metal
+  - [MAAS](/t/using-maas-with-juju/1094)
+- Any SSH-accessible computer
+  - [Manual](/t/using-the-manual-cloud-with-juju/1095)
+
+### Deployment
+
+  - [Deploying applications](/t/deploying-applications/1062)
+  - [Defining constraints](/t/using-constraints/1060)
+  - [Tailoring the deployment](/t/deploying-applications-advanced/1061)
+  - [Relating applications](/t/managing-relations/1073)
+  - [Cleaning up](/t/removing-things/1063)
+
+### Operations
+
+  - [Accessing individual machines with SSH](/t/machine-authentication/1146)
+  - [Running actions](/t/working-with-actions/1033)
+  - [Collecting metrics](/t/collecting-juju-metrics/1138)
   - [Accessing Juju's web interface](/t/juju-gui/1109)
-- Networking
-  - [Fan container networking](/t/fan-container-networking/1065)
-  - [Network spaces](/t/network-spaces/1157)
-- Storage
-  - [Define and use persistent storage](/t/using-juju-storage/1079)
-- Troubleshooting
-  - [Advanced status output](/t/troubleshooting/1187)
-  - [Finding Juju logs](/t/juju-logs/1184)
+ - [Defining and using persistent storage](/t/using-juju-storage/1079)
 
-### Juju Concepts
-
-- Concepts I
-  - [Application](/t/applications-and-charms/1034)
-  - [Model](/t/models/1155)
-  - [Relation](/t/managing-relations/1073)
-- Concepts II
-  - [Clouds](/t/clouds/1100)
-  - [Credentials](/t/credentials/1112)
-  - [Controllers](/t/controllers/1111)
-  - [Constraints](/t/using-constraints/1060)
-  - [High availability](/t/application-high-availability/1066)
-  - [More terms](/t/concepts-and-terms/1144)
-
-
-### Administering Juju
+### System Administration
 
 - [Upgrading to a new release](/t/upgrading/1199)
 - [Backing up the controller](/t/controller-backups/1106)
@@ -102,6 +104,22 @@ TODO
 - [Charm writing guide](/t/charm-writing-guide/1260)
 - [Software tools for charm writers](/t/tools/1181)
 
+### Juju Concepts
+
+- Concepts I
+  - [Application](/t/applications-and-charms/1034)
+  - [Model](/t/models/1155)
+  - [Relation](/t/managing-relations/1073)
+- Concepts II
+  - [Clouds](/t/clouds/1100)
+  - [Credentials](/t/credentials/1112)
+  - [Controllers](/t/controllers/1111)
+  - [Constraints](/t/using-constraints/1060)
+  - [Fan container networking](/t/fan-container-networking/1065)
+  - [High availability](/t/application-high-availability/1066)
+  - [Network spaces](/t/network-spaces/1157)
+  - [More terms](/t/concepts-and-terms/1144)
+
 
 ### Reference
 
@@ -116,6 +134,12 @@ TODO
   -   [metadata.yaml specification](/t/charm-metadata/1043)
   -   [bundle.yaml specification](/t/bundle-reference/1158)
   -   [Internal API docs](http://godoc.org/github.com/juju/juju/api)
+
+
+### Troubleshooting
+
+  - [Advanced status output](/t/troubleshooting/1187)
+  - [Finding Juju logs](/t/juju-logs/1184)
 
 ### Seeking help
 

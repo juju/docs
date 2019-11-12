@@ -27,7 +27,7 @@ Consider a model divided into three segments with distinct security requirements
 HAProxy is deployed inside the "dmz" space, it is accessible from the internet and proxies HTTP requests to one or more Joomla units in the "cms" space. The backend MySQL for Joomla is running in the "db" space. All subnets within the "cms" and "db" spaces provide no access from outside the environment for security reasons.
 
 [note]
-Future development will implement isolation among spaces via firewall and/or access control rules. This measns that only network traffic required for the applications to function will be allowed between spaces.
+Future development will implement isolation among spaces via firewall and/or access control rules. This means that only network traffic required for the applications to function will be allowed between spaces.
 [/note]
 
 <h2 id="heading--adding-and-listing-spaces-and-subnets">Adding and listing spaces and subnets</h2>

@@ -13,8 +13,4 @@ juju bootstrap microk8s osm-on-k8s
 
 # Add a new model for OSM
 juju add-model osm
-
-# Create persistent storage volumes
-juju create-storage-pool osm-pv kubernetes storage-class=microk8s-hostpath
-juju create-storage-pool packages-pv kubernetes storage-class=microk8s-hostpath
 ```

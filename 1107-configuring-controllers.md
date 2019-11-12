@@ -97,7 +97,7 @@ This table lists all the controller keys. Those keys that can be assigned in rea
 <td>string</td>
 <td>ReadOnlyMethods</td>
 <td>[Some.Method,...]</td>
-<td align="left">What information to exclude from the audit log. Can be set for an existing controller. See <a href="#excluding-information-from-the-audit-log">additional info</a>.</td>
+<td align="left">What information to exclude from the audit log. Can be set for an existing controller. See <a href="#heading--excluding-information-from-the-audit-log">additional info</a>.</td>
 </tr>
 <tr class="even">
 <td align="left">audit-log-max-backups</td>
@@ -188,21 +188,21 @@ This table lists all the controller keys. Those keys that can be assigned in rea
 <td>string</td>
 <td></td>
 <td></td>
-<td align="left">An OpenStack external network UUID.</td>
+<td align="left">An OpenStack external network name or UUID.</td>
 </tr>
 <tr class="odd">
 <td align="left">juju-ha-space</td>
 <td>string</td>
 <td></td>
 <td></td>
-<td align="left">The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint. See <a href="#controller-related-spaces">additional info below</a>.</td>
+<td align="left">The name of a network space used used for MongoDB replica-set communication in a controller HA context. Effectively acts as a machine constraint. See <a href="#heading--controller-related-spaces">additional info below</a>.</td>
 </tr>
 <tr class="even">
 <td align="left">juju-mgmt-space</td>
 <td>string</td>
 <td></td>
 <td></td>
-<td align="left">The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint. See <a href="#controller-related-spaces">additional info below</a>.</td>
+<td align="left">The name of a network space used by Juju agents to communicate with controllers. Effectively acts as a machine constraint. See <a href="#heading--controller-related-spaces">additional info below</a>.</td>
 </tr>
 <tr class="odd">
 <td align="left">identity-public-key</td>
@@ -253,6 +253,13 @@ This table lists all the controller keys. Those keys that can be assigned in rea
 <td>100M, 1G, etc.</td>
 <td align="left">Sets the maximum size for the capped txn log collection, in human-readable memory format</td>
 </tr>
+<tr class="odd">
+<td align="left">metadata-source</td>
+<td>string</td>
+<td></td>
+<td>~/simplestreams</td>
+<td align="left">Controller filesystem path to agent and/or image metadata source</td>
+</tr>
 <tr class="even">
 <td align="left">mongo-memory-profile</td>
 <td>string</td>
@@ -265,7 +272,7 @@ This table lists all the controller keys. Those keys that can be assigned in rea
 <td>string</td>
 <td></td>
 <td></td>
-<td align="left">An OpenStack network UUID.</td>
+<td align="left">An OpenStack internal network name or UUID.</td>
 </tr>
 <tr class="even">
 <td align="left">prune-txn-query-count <strong>[RT]</strong></td>

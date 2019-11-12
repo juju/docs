@@ -38,7 +38,7 @@ Disk space on the root drive (MiB). An optional suffix of M/G/T/P is used as per
 - `root-disk-source` (`v.2.5.3`)
 Name of storage object which houses the root disk.
 
-  **Note:** Supported by the vSphere and OpenStack providers. For vSphere, specify a datastore. For OpenStack, specify a Cinder block device.
+  **Note:** Supported by the vSphere and OpenStack providers. For vSphere, specify a datastore. For OpenStack, use the string `volume` to use Cinder block storage volumes.
 
 - `tags`
 Comma-delimited tags assigned to the machine. Tags can be positive, denoting an attribute of the machine, or negative (prefixed with "^"), to denote something that the machine does not have.
