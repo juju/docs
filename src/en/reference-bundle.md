@@ -74,9 +74,9 @@ series: bionic
 #
 # tags:
 #
-# Sets descriptive tags. A tag is used for organisational purposes in the
-# Charm Store. See https://docs.jujucharms.com/authors-charm-metadata for the
-# list of valid tags.
+# Sets descriptive tags. A tag is user-defined. It is used for organisational
+# purposes in the Charm Store. See
+# https://docs.jujucharms.com/authors-charm-metadata for examples.
 #
 
 tags: [monitoring]

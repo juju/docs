@@ -57,7 +57,7 @@ fields:
   sequence format if there are multiple people.
 
   - `tags`: A list of descriptive tags used for organisation purposes in the
-    Charm Store. Choose from among the following:
+    Charm Store. Choose from among the following common words:
 
      - analytics
      - big_data

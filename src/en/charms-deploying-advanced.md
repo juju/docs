@@ -118,7 +118,7 @@ Assuming a LXD cluster cloud named 'lxd-cluster' exists and has a node called
 juju bootstrap lxd-cluster --to node3
 ```
 
-### deploy --to
+### `deploy --to` command
 
 To deploy the 'haproxy' application to machine '2' we would do this:
 
@@ -170,7 +170,7 @@ and added to the node. For example:
 juju deploy mariadb-k8s --to kubernetes.io/hostname=somehost
 ```
 
-### add-unit --to
+### `add-unit --to` command
 
 To add a unit of 'rabbitmq-server' to machine '1':
 
