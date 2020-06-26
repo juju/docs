@@ -4,10 +4,37 @@ Todo:
 - Remove gerunds from example listings (fix links from other pages)
 -->
 
-This page collects together examples that show the various ways a controller can be created. They also demonstrate configurations that can be applied to a cloud environment at controller-creation time.
+Creating a controller is known as the "bootstrap process". Controllers are created with the `bootstrap` command.
+
+The most common uses of the `bootstrap` command use the following syntax:
+
+```plain
+juju bootstrap [--credential <credential>] <cloud>[/<region>] <controller-name>
+```
+
+The `bootstrap` command takes many optional parameters. They are explained in the examples below. 
+
+[note]
+You may not need to create your own controller to get started. If you are intending to use a public cloud, you can access [JAAS](https://jaas.ai/getting-started), a hosted Juju controller service:
+
+```plain
+juju login jaas
+```
+
+You may also need to create an account with the [Ubuntu SSO service](https://login.ubuntu.com/).
+[/note]
+
+## Example Index
+
+This page includes examples that show the various ways a controller can be created. The examples demonstrate configurations that can be applied to a cloud environment.
+
+Basic Process
 
 - [Common invocation](#heading--common-invocation)
 - [Create a controller interactively](#heading--create-a-controller-interactively)
+
+Advanced Examples
+
 - [Set default model constraints](#heading--set-default-model-constraints)
 - [Set constraints for a controller](#heading--set-constraints-for-a-controller)
 - [Create a controller of a specific series](#heading--create-a-controller-of-a-specific-series)
@@ -24,17 +51,17 @@ This page collects together examples that show the various ways a controller can
 - [Passing a cloud-specific setting](#heading--passing-a-cloud-specific-setting)
 - [Include configuration options at the cloud level](#heading--include-configuration-options-at-the-cloud-level)
 
-[note]
-A requirement for creating a controller is that a cloud has been chosen and that credentials have been added for it. See the [Clouds](/t/clouds/1100) page for guidance.
-[/note]
+## Pre-requisites
 
-To learn more about configuration options available at bootstrap time, see these resources:
+To create a controller, you require:
 
-- [Configuring controllers](/t/configuring-controllers/1107)
-- [Configuring models](/t/configuring-models/1151)
-- [Using constraints](/t/using-constraints/1060)
+ -  a [cloud](/t/clouds/1100) to be defined, and
+ -  [credentials](/t/1112) for that cloud to be loaded
 
-A controller is created with the `bootstrap` command.
+If you are starting with Juju, they may not be available yet. Start by [adding a cloud](/t/clouds/1100), then [add credentials](/t/1112), and return to this page.
+
+
+## Basic Process
 
 <h3 id="heading--common-invocation">Common invocation</h3>
 
@@ -55,6 +82,20 @@ juju bootstrap
 ```
 
 You will be prompted for what cloud and region to use as well as the controller name. Do not use this method if you intend on specifying anything else.
+
+## Advanced
+
+### Configuring your cloud environment
+
+During the bootstrap process, you are able to define many configuration options to tailor your deployment. The examples on this page describe how to apply them.
+
+To learn more about configuration options available, see these resources:
+
+- [Configuring controllers](/t/configuring-controllers/1107)
+- [Configuring models](/t/configuring-models/1151)
+- [Using constraints](/t/using-constraints/1060)
+
+### Advanced Examples
 
 <h3 id="heading--set-default-model-constraints">Set default model constraints</h3>
 
