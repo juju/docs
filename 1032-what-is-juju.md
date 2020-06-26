@@ -88,8 +88,6 @@ If you want, you can also share your charm with the world and gain feedback and 
 
 Juju excels with scale-out workloads like big data, PAAS, cloud infrastructure such as OpenStack, or container management systems. Pick your favourite cloud and launch a Juju server. From the integrated GUI, you can drop one of the bundles from the charm store into the blank canvas.
 
-<style>.tableicon{width:100px;height:100px;float:right;margin: 5px 5px 40px
-20px;}</style>
 <table>
   <tr>
     <td width=400>

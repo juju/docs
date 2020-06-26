@@ -146,7 +146,7 @@ When applications are related, Juju decides which hooks to call within each char
 
 <h2 id="heading--authoring-charm-interfaces">Authoring charm interfaces</h2>
 
-Relations are basically a bidirectional channel of communication between applications. They're not actually talking directly, the agents communicate via the state server, but it helps to think of it as direct communication between the applications. Relation hooks can call tools such as `relation-get` and `relation- set` to pass information back and forth between the application endpoints.
+Relations are basically a bidirectional channel of communication between applications. They're not actually talking directly, the agents communicate via the state server, but it helps to think of it as direct communication between the applications. Relation hooks can call tools such as `relation-get` and `relation-set` to pass information back and forth between the application endpoints.
 
 <h3 id="heading--pseudo-relation-talk">Pseudo relation talk</h3>
 

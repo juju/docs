@@ -1,23 +1,50 @@
-*This is in connection to the topic of [Using Kubernetes with Juju](/t/using-kubernetes-with-juju/1090). See that page for background information.*
+<!--
+TODO
 
-Juju is compatible with the [MicroK8s](https://microk8s.io) project, which aims to provide "a full Kubernetes system in under 60 seconds". It is quite remarkable actually. It is composed of pure upstream binaries, runs all services natively (i.e. no virtual machines or containers), and is fully [CNCF certified](https://www.cncf.io/certification/software-conformance/). This option is perfect for testing Kubernetes on your personal workstation. Using it with Juju is icing on the cake!
+- explain difference between clouds stored on the client vs controller
 
-This tutorial was written using Juju `v.2.6.0` and MicroK8s `v1.14.1`.
+ -->
 
-<h2 id="heading--installing-the-software">Installing the software</h2>
 
-These instructions assume that you're using a fresh Ubuntu 18.04 LTS install, or at least one that is not already using Juju. This tutorial installs Juju and MicroK8s as snaps.
+Juju works well with [MicroK8s](https://microk8s.io) to provide a full  [CNCF-certified](https://www.cncf.io/certification/software-conformance/) Kubernetes system in under 60 seconds.
+
+<h2 id="heading--installing-the-software">Install and set up MicroK8s</h2>
+
+> For installation instructions for other platforms, including Windows 10, macOS, ARM devices such as Raspberry Pi and LXD, see the [MicroK8s documentation](https://microk8s.io/docs).
+
+
+The easiest way to install MicroK8s is via the snap:
 
 ``` text
-sudo snap install juju --classic
 sudo snap install microk8s --classic 
 ```
 
-We now need to add our account to the `microk8s` group, which grants the account elevated privileges to the cluster:
+### Join the `microk8s` group
+
+Add your account to the `microk8s` group. This grants the account elevated privileges to the cluster, meaning that sudo will not be required to interact with `microk8s`:
 
 ```text
 sudo usermod -a -G microk8s $USER
-``` 
+```
+
+This command requires you to log out and log back in before the changes are applied. 
+
+```text
+su - $USER
+```
+
+Alternatively, exit the shell by executing `exit` or by using <kbd>Ctrl</kbd> + <kbd>D</kbd> and restart your session.
+
+
+### Await installation
+
+MicroK8s will take a few minutes to install all of its components.
+
+```text
+microk8s status --wait-ready
+```
+
+### Verify installation
 
 Now let's inspect the cluster with the `microk8s.kubectl` command:
 
@@ -25,12 +52,27 @@ Now let's inspect the cluster with the `microk8s.kubectl` command:
 microk8s.kubectl get all --all-namespaces
 ```
 
-Do not proceed until you see output similar to:
+You should see output similar to:
 
 ```text
 NAMESPACE   NAME                 TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)   AGE
 default     service/kubernetes   ClusterIP   10.152.183.1   <none>        443/TCP   22s
 ```
+
+It's possible that you encounter an error message relating to permissions. If this happens, execute  `sudo usermod -a -G microk8s $USER` and restart. 
+
+```plain
+Insufficient permissions to access MicroK8s.
+You can either try again with sudo or add the user ubuntu to the 'microk8s' group:
+
+    sudo usermod -a -G microk8s $USER
+
+The new group will be available on the user's next login.
+```
+
+
+
+### Enable DNS and storage addons
 
 Now enable some MicroK8s addons that will provide DNS and storage class support:
 
@@ -38,7 +80,7 @@ Now enable some MicroK8s addons that will provide DNS and storage class support:
 microk8s.enable dns storage
 ```
 
-This will bring about changes to the cluster. Re-invoking the last command should eventually give you something like this:
+This will bring about changes to the cluster. Re-invoking the `microk8s.kubectl get all --all-namespaces` should eventually give you something like this:
 
 ```text
 NAMESPACE     NAME                                        READY   STATUS    RESTARTS   AGE
@@ -58,37 +100,92 @@ kube-system   replicaset.apps/hostpath-provisioner-6d744c4f7c   1         1     
 kube-system   replicaset.apps/kube-dns-6bfbdd666c               1         1         1       2m56s
 ```
 
-Later we'll see how this output will change once a charm is deployed.
+## Install Juju
+
+Juju, like MicroK8s, is easiest to install via the snap: 
+
+```plain
+sudo snap install juju --classic
+```
+
+For other installation methods, see the [Installing Juju](/t/installing-juju/1164) page.
 
 <h2 id="heading--creating-a-controller">Creating a controller</h2>
 
-Juju `v.2.6.0` recognises when MicroK8s is installed and automatically sets up a cloud called 'microk8s'. There is no need to manually add the cluster to Juju (verify this with `juju clouds --local`). A controller can then be created just like a normal cloud. Here we've called it 'mk8s':
+Juju recognises when MicroK8s is installed and automatically sets up a cloud called 'microk8s'. There is no need to manually add the cluster to Juju (verify this with `juju clouds --local`). A controller can then be created just like a normal cloud. Here we've called it 'micro':
 
 ```text
-juju bootstrap microk8s mk8s
+juju bootstrap microk8s micro
 ```
 
-Confirm the live cloud by running `juju clouds`.
+https://discourse.jujucharms.com/uploads/default/original/1X/ca1da0a2e668d808ea8d078fc78beef452e85013.mp4 
+
+[note type=important status="Important term - cloud"]
+Within the Juju community, the term cloud has a specific meaning. A cloud is a target that Juju knows how to manage workloads for. Kubernetes clusters, including MicroK8s, are often referred to as "k8s clouds".
+[/note]
+
+[note status="Using a version of Juju earlier than v2.6.0"]
+Earlier versions of Juju did not have built-in support for MicroK8s. You should upgrade your version of Juju to the current stable release. If that's not possible, you can use `juju add-k8s` to register your MicroK8s cluster with Juju.
+[/note]
+
+### Verify the bootstrap process
+
+Confirm the microk8s cloud is live by running `juju clouds`. It should be visible within the controller and client sections.
+
+```plain
+$ juju clouds
+Only clouds with registered credentials are shown.
+There are more clouds, use --all to see them.
+
+Clouds available on the controller:
+Cloud     Regions  Default    Type
+microk8s  1        localhost  k8s  
+
+Clouds available on the client:
+Cloud           Regions  Default            Type       Credentials  Source    Description
+[...]
+microk8s        1        localhost          k8s        1            built-in  A Kubernetes Cluster
+[...]
+```
+
+
+
+[note type=important status="Important concept - clouds"]
+A cloud, as a Juju term, means a deployment target. A cloud includes API endpoints and credential information.
+
+In Juju, you interact with the _client_ (the `juju` command on your local machine). It connects to a _controller_. The controller is hosted on a _cloud_ and controls _models_.
+
+A cloud can be registered on the controller, the client or both. Registering a cloud with the client allows the client to bootstrap a new controller onto it. Registering a cloud with a controller allows it to control models hosted on multiple providers.
+[/note]
 
 <h2 id="heading--adding-a-model">Adding a model</h2>
 
-In `v.2.6.0` a model can be added like you would for any other cloud:
+A model is a container for a set of related applications. That model represents resources needed for the applications within it, including compute, storage and network. 
 
 ```text
-juju add-model k8s-model
+juju add-model testing
 ```
+https://discourse.jujucharms.com/uploads/default/original/1X/88e808884b25f675bc59c067a6f0f4a842a831da.mp4 
 
-The output to `juju models` should now look very similar to:
+[note type=important status="Difference from traditional clouds"]
+There is no 'default' model provided on k8s clouds. Creating a model implies creating a Kubernetes namespace. Rather than pollute your cluster's namespaces, Juju favours an explicit approach.
+[/note]
+
+### Verifying that the model has been added 
+
+Use the `juju models` command to list models hosted on the cloud. It will look very similar to:
 
 ```text
-Controller: mk8s
+$ juju models
+Controller: micro
 
 Model       Cloud/Region        Type        Status     Access  Last connection
 controller  microk8s/localhost  kubernetes  available  admin   just now
-k8s-model*  microk8s            kubernetes  available  admin   never connected
+testing*    microk8s            kubernetes  available  admin   never connected
 ```
 
-Notice that there is no 'default' model.
+
+<!---
 
 <h2 id="heading--adding-storage">Adding storage</h2>
 
@@ -106,6 +203,21 @@ We can now deploy a Kubernetes charm. For example, here we deploy a charm by req
 ```text
 juju deploy cs:~juju/mariadb-k8s --storage database=mariadb-pv,10M
 ```
+
+--->
+
+<h2 id="heading--deploying-a-kubernetes-charm">Deploying a Kubernetes charm</h2>
+
+We can now deploy a Kubernetes charm. For example, here we deploy a charm by requesting the use of the 'mariadb-pv' workload storage pool we just set up:
+
+```text
+juju deploy cs:~juju/mariadb-k8s --storage database=10M
+```
+https://discourse.jujucharms.com/uploads/default/original/1X/5c9ee6d9a4c831a32657f2dfe0554b09c65dc1b9.mp4 
+
+
+
+### Verify deployment
 
 The output to `juju status` should soon look like the following:
 
@@ -139,7 +251,7 @@ kube-system       pod/kube-dns-6bfbdd666c-rxnp9               3/3     Running   
 NAMESPACE         NAME                         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)         AGE
 controller-mk8s   service/controller-service   ClusterIP   10.152.183.168   <none>        17070/TCP       6m7s
 default           service/kubernetes           ClusterIP   10.152.183.1     <none>        443/TCP         10m
-k8s-model         service/mariadb-k8s          ClusterIP   10.152.183.153   <none>        3306/TCP        76s
+testing           service/mariadb-k8s          ClusterIP   10.152.183.153   <none>        3306/TCP        76s
 kube-system       service/kube-dns             ClusterIP   10.152.183.10    <none>        53/UDP,53/TCP   9m45s
 
 NAMESPACE     NAME                                   READY   UP-TO-DATE   AVAILABLE   AGE
@@ -152,8 +264,8 @@ kube-system   replicaset.apps/kube-dns-6bfbdd666c               1         1     
 
 NAMESPACE         NAME                                    READY   AGE
 controller-mk8s   statefulset.apps/controller             1/1     6m6s
-k8s-model         statefulset.apps/mariadb-k8s            1/1     77s
-k8s-model         statefulset.apps/mariadb-k8s-operator   1/1     93s
+testing           statefulset.apps/mariadb-k8s            1/1     77s
+testing          statefulset.apps/mariadb-k8s-operator   1/1     93s
 ```
 
 You can easily identify the changes, as compared to the initial output, by scanning the left hand side for our model name 'k8s-model', which runs in a Kubernetes namespace of the same name. The operator/controller pod runs in a namespace whose name is based on our controller name ('mk8s'): 'controller-mk8s'.
@@ -161,14 +273,14 @@ You can easily identify the changes, as compared to the initial output, by scann
 To get information on pod 'mariadb-k8s-0' you need to refer to the namespace (since it's not the 'default' namespace) in this way:
 
 ```text
-microk8s.kubectl describe pods -n k8s-model mariadb-k8s-0
+microk8s.kubectl describe pods -n testing mariadb-k8s-0
 ```
 
 The output is too voluminous to include here. See the [upstream documentation](https://kubernetes.io/docs/reference/kubectl/cheatsheet/#viewing-finding-resources) on different ways of viewing cluster information.
 
 <h2 id="heading--removing-configuration-and-software">Removing configuration and software</h2>
 
-To remove all traces of what we've done in this tutorial use the following commands:
+To remove all traces of what we've done in this tutorial, use the following commands:
 
 ```text
 juju kill-controller -y -t 0 mk8s
@@ -181,9 +293,4 @@ That's the end of this tutorial!
 
 <h2 id="heading--next-steps">Next steps</h2>
 
-Consider the following tutorials:
-
--   [Using the aws-integrator charm](/t/using-the-aws-integrator-charm-tutorial/1192)
--   [Setting up static Kubernetes storage](/t/setting-up-static-kubernetes-storage-tutorial/1193)
-
-To gain experience with a standalone (non-Juju) MicroK8s installation check out Ubuntu tutorial [Install a local Kubernetes with MicroK8s](https://tutorials.ubuntu.com/tutorial/install-a-local-kubernetes-with-microk8s).
+- Learn more about [using Kubernetes with Juju](/t/using-kubernetes-with-juju/1090)

@@ -4,29 +4,31 @@ Todo:
 - Enhance interactive credentials section
 -->
 
-Although Juju doesn't have baked-in knowledge of your OpenStack cloud, it does know how such clouds work in general. We just need to provide some information to add it to the list of known clouds.
+Working with your OpenStack cloud is easy. 
+
+- Provide Juju with knowledge of your OpenStack cloud, such as its IP address.
+- Add your access credentials
+- Create a controller
+
+This page takes you those three steps. It also provides some extra information that's specific to enabling OpenStack to work well with Juju. For example, every OpenStack cloud defines its own instance types.
 
 <h2 id="heading--adding-an-openstack-cloud">Adding an OpenStack Cloud</h2>
 
+The `juju add-cloud` command defines a cloud for Juju. It's useful to have OpenStack environment variables defined running it. Assuming that you have a "novarc" file available to you, use `source` (or the equivalent command `call` on MS Windows ) to load the variables into your environment. 
+
+```plain
+source /path/to/novarc
+```
+
+### ...via an interactive prompt 
+
 Use the `add-cloud` command to interactively add your OpenStack cloud to Juju's list of clouds. You will need to supply a name you wish to call your cloud and the unique API endpoint, the authentication type(s), and region information.
-
-This command recognises the below variables. Any values found will show up as default values when the interactive mode is used. For clarity, the corresponding prompts are given in parentheses:
-
-- `OS_AUTH_URL` (cloud API endpoint URL)
-- `OS_CACERT` (path to the CA certificate file)
-- `OS_REGION_NAME` (region)
-
-These are typically defined in a file called `novarc`. Have your shell source it (e.g. `source novarc`) prior to invoking `add-cloud`.
-
-For the manual method of adding an OpenStack cloud, see below section [Manually adding an OpenStack cloud](#heading--manually-adding-an-openstack-cloud).
-
-To interactively add a cloud definition to the local client cache  (just `add-cloud` on versions prior to `v.2.6.1`):
 
 ```text
 juju add-cloud --local
 ```
 
-Example user session:
+Here is an example interactive session:
 
 ``` text
 Cloud Types
@@ -63,11 +65,15 @@ You will need to add credentials for this cloud (`juju add-credential myopenstac
 before creating a controller (`juju bootstrap myopenstack`).
 ```
 
-Note that it is possible to choose more than one authorisation method - just separate the values with commas.
+`juju add-cloud` command pre-populates the defaults with the following environment variables.
 
-Confirm the addition of the cloud with the `clouds --local` command (just `clouds` on versions prior to `v.2.6.1`).
+- `OS_AUTH_URL` becomes the default API endpoint URL
+- `OS_CACERT` becomes the default path to the CA certificate file
+- `OS_REGION_NAME` becomes the default refion name
 
-<h3 id="heading--manually-adding-an-openstack-cloud">Manually adding an OpenStack cloud</h3>
+It is possible to choose more than one authorisation method - just separate the values with commas.
+
+<h3 id="heading--manually-adding-an-openstack-cloud">..via a cloud definition file</h3>
 
 This section shows how to manually add an OpenStack cloud to Juju (see [Adding clouds manually](/t/clouds/1100#heading--adding-clouds-manually) for background information). It also demonstrates how multiple authentication types can be allowed.
 
@@ -148,38 +154,49 @@ On Linux systems, the file `$HOME/.novarc` may be used to define these variables
 
 For background information on this method read section [Adding credentials from environment variables](/t/credentials/1112#heading--adding-credentials-from-environment-variables).
 
-<h2 id="heading--images-and-private-clouds">Images and private clouds</h2>
-
-OpenStack requires access to images for its instances to use. If you have chosen to use a private OpenStack cloud you will need to ensure that images have been set up. This is covered on the [Cloud image metadata](/t/cloud-image-metadata/1137) page.
-
 <h2 id="heading--creating-a-controller">Creating a controller</h2>
 
-Once the image metadata has been gathered, either locally or via a registered and running Simplestream service, check your OpenStack networks. If there are multiple possible networks available to the cloud, it is also necessary to specify the network name or UUID for Juju to use to boot instances. Both the network name and UUID can be retrieved with the following command:
+For many Openstack installations, you should now be in a position to create the controller.  At a command line prompt, use the `juju bootstrap`. This provisions a instance on your OpenStack cloud and installs the Juju controller within it.
+
+```text
+juju bootstrap <cloud> <controller-name>
+```
+
+This operation may fail with some installations and require more configuration. Here are some tips for two scenarios that
+
+<h3 id="heading--images-and-private-clouds">Images and private clouds</h3>
+
+OpenStack requires access to images to provision instances. Configuring this correctly is covered on the [Cloud image metadata](/t/cloud-image-metadata/1137) page.
+
+If your image metadata is available locally, the `--metadata-source` option is available to you.
+
+``` text
+juju bootstrap <cloud> <controller name> \
+               --metadata-source /path/to/simplestream/images
+```
+
+<h3 id="multiple-networks">Working with multiple networks</h2>
+
+If there are multiple networks available, you will need to specify the intended network. Check your OpenStack networks with the `openstack` command:
 
 ``` text
 openstack network list
 ```
 
-Choose the network you want the instances to boot from. You can use either the network name or the UUID with the 'network' configuration option when bootstrapping a new controller.
-
-With the product-streams service running in your OpenStack Cloud, you are now ready to create a Juju controller:
+Providing the preferred network's name or Choose the network you want the instances to boot from. <!-- How? --> You can use either the network name or the UUID with the 'network' configuration option when bootstrapping a new controller.
 
 ``` text
-juju bootstrap <cloud> <controller name> --config network=<network_id>
+juju bootstrap <cloud> <controller-name> \
+               --model-default network=<network-id>
 ```
 
-or if the simplestream data is local:
+If there is an external network configured for instances that are only accessible via floating IP, add the `use-floating-up` configuration option:
 
 ``` text
-juju bootstrap <cloud> <controller name> --config network=<network_id> \
-    --metadata-source ~/simplestreams/images
-```
-
-or if there is an external network configured for instances that are only accessible via floating IP:
-
-``` text
-juju bootstrap <cloud> <controller name> --config network=<network_id> \
-    --config external-network=<external_network_id> --config use-floating-ip=true
+juju bootstrap <cloud> <controller-name> \
+               --model-default network=<network-id> \
+               --model-default external-network=<external-network-id> \
+               --model-default use-floating-ip=true
 ```
 
 For a detailed explanation and examples of the `bootstrap` command see the [Creating a controller](/t/creating-a-controller/1108) page.

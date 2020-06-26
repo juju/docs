@@ -2,14 +2,152 @@ This page is dedicated to more advanced topics related to using LXD with Juju. T
 
 The topics presented here are:
 
-- LXD clustering
-- Adding a remote LXD cloud
+- Add resilience to your models through LXD clustering
+- Registering a remote LXD server as a LXD cloud
 - Charms and LXD profiles
 
-<h2 id="heading--lxd-clustering">LXD clustering</h2>
+<h2 id="heading--lxd-clustering">Add resilience to your models through LXD clustering</h2>
 
-LXD clustering (lxd `v.3` and greater) allows for distributed computing to the extent that Juju units end up on different cluster nodes (LXD hosts) by default. It also offers high availability so that the cluster remains functional as long as more than half of the nodes are up. A downed node will lead to its hosted containers becoming unavailable.
+LXD clustering provides the ability for applications to be deployed in a high-availability manner. In a clustered LXD cloud, Juju will deploy units across its nodes.
 
+### Background
+
+LXD clustering provides increased resilience in two senses for teams using Juju:
+
+- first, the LXD cloud itself is not exposed to a single point of failure
+- secondly, your model can be distributed across each node within the cluster. This can add resilience to individual applications that are deployed with multiple units
+
+### Forming a LXD cluster
+
+The documentation provided by the LXD project explains the process of [forming a LXD cluster](https://lxd.readthedocs.io/en/latest/clustering/).
+
+A helpful tutorial video has also been provided by project lead [Stéphane Graber](https://www.youtube.com/channel/UCx1shw99U0qRyPKIiuOkjmA):
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/RnBu7t2wD4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+### Making use of a LXD cluster
+
+From Juju's point of view, a LXD cluster is a "remote LXD server". Follow the instructions in the next section to register the cluster with Juju. 
+
+## Registering a remote LXD server as a LXD cloud
+
+Two commands enable you to register your LXD server with Juju as a cloud:
+
+- `juju add-cloud` provides the connectivity details to enable Juju to connect to the LXD server 
+- `juju add-credential` provides the security credentials for Juju to use when connected
+
+#### Adding the cloud
+
+**Option 1: Interactively**
+
+To add the remote LXD information to Juju, run `juju add-cloud` without arguments and follow the prompts:
+
+``` text
+juju add-cloud
+```
+
+An example session:
+
+``` text
+Cloud Types
+
+  lxd
+  maas
+  manual
+  openstack
+  vsphere
+
+Select cloud type: lxd
+
+Enter a name for your lxd cloud: lxd-remote
+
+Enter the API endpoint url for the remote LXD server: https://10.10.0.1:8443
+Auth Types
+  certificate
+
+Enter region [default]: 
+
+Enter the API endpoint url for the region [use cloud api url]: 
+
+Enter another region? (y/N): n
+
+Cloud "lxd-remote" successfully added
+
+You will need to add credentials for this cloud (`juju add-credential lxd-remote`)
+before creating a controller (`juju bootstrap lxd-remote`).
+```
+
+**Option 2: Provide the cloud metadata via a file**
+
+Save the contents of the following YAML fragment to a file (`/tmp/clouds.yaml`), making the appropriate changes.
+
+```yaml
+# clouds.yaml
+
+clouds:
+  lxd-cluster: # replace lxd-remote with your preferred name
+    type: lxd
+    auth-types: [interactive, certificate]
+    endpoint: https://10.10.0.1:8443/  # replace with the actual endpoint
+```
+
+Run `juju add-cloud`, specifying the correct cloud name and path to your new clouds.yaml:  
+
+```bash
+juju add-cloud lxd-remote /tmp/clouds.yaml
+``` 
+
+#### Adding the security credential
+
+**Option 1: Interactively**
+
+To add the remote LXD information to Juju, run `juju add-cloud` without arguments and follow the prompts:
+
+``` text
+juju add-credential
+```
+
+An example session:
+
+``` text
+Enter credential name: lxd-remote-creds
+
+Auth Types
+  certificate
+  interactive
+
+Select auth type [interactive]: 
+
+Enter trust-password: *******
+
+Loaded client cert/key from "/home/ubuntu/.local/share/juju/lxd"
+Uploaded certificate to LXD server.
+
+Credential "lxd-remote-creds" added locally for cloud "lxd-remote".
+```
+
+
+**Option 2: Provide the credential via a file**
+
+Save the contents of the following YAML fragment to a file (`/tmp/credentials.yaml`), making the appropriate changes.
+
+```yaml
+# credentials.yaml
+
+credentials:
+    lxd-remote:  # this name must match the name in clouds.yaml
+        admin:
+            auth-type: interactive
+            trust-password: DL7UXEd8tsTF3Tc # replace with actual password
+```
+
+Run `juju add-credential`, specifying the correct cloud name and path to your new clouds.yaml:  
+
+```bash
+juju add-credential lxd-remote -f /tmp/clouds.yaml
+``` 
+
+<!--
 In terms of adding a LXD cloud, Juju is indifferent as to whether it is clustered or not. Juju connects to a single LXD host and, when prompted for connection information, you will need to decide which host that is. It should be noted that if this host becomes unavailable Juju will lose connection to the entire cluster.
 
 [note type="caution"]
@@ -25,6 +163,7 @@ The cluster-creation process will remove any existing containers. In a Juju cont
 [/note]
 
 See the upstream documentation on [Clustering](https://lxd.readthedocs.io/en/latest/clustering/).
+
 
 <h2 id="heading--adding-a-remote-lxd-cloud">Adding a remote LXD cloud</h2>
 
@@ -157,6 +296,8 @@ To add credentials for cloud 'lxd-remote', assuming the configuration file is `l
 ``` text
 juju add-credential lxd-remote -f lxd-cloud-creds.yaml
 ```
+
+-->
 
 <h3 id="heading--next-steps">Next steps</h3>
 

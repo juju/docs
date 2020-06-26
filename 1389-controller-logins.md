@@ -9,7 +9,7 @@ Terminology: A *known* controller is one that the local Juju client is aware of.
 
 ## Logging in during user initialisation
 
-This scenario covers the case where a Juju user has never logged in to a controller. Doing so for the first time initialises the user, which involves, in particular, the creation of a password on the part of the operator. There are two sub-cases:
+This scenario covers the case where a Juju user has never logged in to a controller. Doing so for the first time initialises the user, which involves, in particular, the creation of a password on the part of the Juju administrator. There are two sub-cases:
 
 - Using the initial user token
 - Using a re-generated user token
@@ -122,9 +122,9 @@ A few use cases for this feature:
 - A login is desired from multiple clients
 - A controller is migrated and Juju users need to reconnect
 
-The controller's CA certificate is used to identify the controller to the operator. A fingerprint of the certificate will be displayed and the operator will need to confirm that fingerprint before connecting.
+The controller's CA certificate is used to identify the controller to the Juju administrator. A fingerprint of the certificate will be displayed and the administrator will need to confirm that fingerprint before connecting.
 
-If the controller is already known to the client then the command will print output guiding the operator to use the non-API method, and then exit.
+If the controller is already known to the client then the command will print output guiding the administrator to use the non-API method, and then exit.
 
 [note type="caution" status="Note"]
 The endpoint method of logging in will only work if the controller itself is running `v.2.6.0`.

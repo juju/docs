@@ -220,14 +220,14 @@ On non-localhost clouds, the connection may be refused. This is normal. To confi
 
 ### Access a secure shell
 
-Juju provides some useful functionality for SREs and operators who need to interact with units and machines out of the box.
+Juju provides some useful functionality for SREs and operations teams who need to interact with units and machines out of the box.
 
 The `ssh` command accepts unit (and machine) names. They will be substituted for the relevant IP address. 
 
 Access the machine via the unit name: 
 
 ```plain
-$ juju ssh hello-unit/0
+$ juju ssh hello-juju/0
 ubuntu@juju-646ac9-0:~$
 ```
 Or via the machine ID:

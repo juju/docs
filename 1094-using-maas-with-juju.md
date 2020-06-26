@@ -1,10 +1,6 @@
 [MAAS](https://maas.io/) treats physical servers (or KVM guests) as a public cloud treats cloud instances. From the [website](https://maas.io/):
 
-> Self-service, remote installation of Windows, CentOS, ESXi and Ubuntu on real servers turns your data center into a bare-metal cloud.
-
-[note]
-The Juju 2.x series is compatible with both the 1.x and 2.x series of MAAS.
-[/note]
+> Self-service, remote installation of Windows, CentOS, ESXi and Ubuntu on real servers turns your data centre into a bare-metal cloud.
 
 <a id="steps-in-brief"></a>
 ## Steps in Brief
@@ -52,7 +48,7 @@ Using the `add-cloud` command without providing its name or an API endpoint will
 juju add-cloud --local
 ```
 
-Example user session specifing `maas-cloud` as the cloud name and `http://10.55.60.29:5240/MAAS` as its API endpoint :
+Example user session specifying `maas-cloud` as the cloud name and `http://10.55.60.29:5240/MAAS` as its API endpoint :
 
 ```text
 Cloud Types
@@ -156,12 +152,12 @@ Enter maas-oauth:
 Credentials added for cloud maas-cloud.
 ```
 
-We've called the new credential 'maas-cloud-creds'. When prompted for 'maas-oauth', you should paste your [MAAS API key](https://docs.ubuntu.com/maas/en/manage-account#api-key). It will not be echoed back to the screen.
+We've called the new credential 'maas-cloud-creds'. When prompted for 'maas-oauth', you should paste your [MAAS API key](https://maas.io/docs/user-accounts#heading--api-key). It will not be echoed back to the screen.
 
-The MAAS API key can be found on your user preferences page in the MAAS web UI, or by using the [MAAS CLI](https://docs.ubuntu.com/maas/en/manage-cli), providing you have sudo access:
+The MAAS API key can be found on your user preferences page in the MAAS web UI, or by using the [MAAS CLI](https://maas.io/docs/maas-cli), providing you have sudo access:
 
 ``` text
-sudo maas-region apikey --username=<username>
+sudo maas apikey --username=<username>
 ```
 [note]
 For more information about credentials, read through the [Credentials](/t/credentials/1112) page.

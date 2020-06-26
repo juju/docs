@@ -90,11 +90,6 @@ Constraints cannot be applied towards a backing cloud in an agnostic way. That i
 - Valid values: instance-type=[defined on the cloud]
 - Conflicting constraints: [instance-type] vs [arch, cpu-cores, cpu-power, mem]
 
-<h3 id="heading--joyent">Joyent:</h3>
-
-- Unsupported: [cpu-power, tags, virt-type, root-disk-source]
-- Valid values: instance-type=[defined on the cloud]
-
 <h3 id="heading--lxd">LXD:</h3>
 
 - Unsupported: [cpu-power, tags, virt-type, root-disk-source]

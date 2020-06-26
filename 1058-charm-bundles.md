@@ -3,40 +3,164 @@ Todo:
 - Give an example of setting up a subordinate
 -->
 
-Although charms can be deployed in isolation, they are typically used alongside other charms in order to implement more complex solutions, whether it be as simple as MediaWiki and a database, or as complex as an OpenStack cloud. A charm bundle, or just *bundle*, is an encapsulation of such a compound deployment and includes all the associated relations and configurations that the deployment requires. A huge plus is that a bundle is installed exactly like a charm is: with the `deploy` command or via the GUI (see [Adding bundles with the GUI](/t/using-bundles-with-the-gui/1057)).
+Bundles are collections of charms. They represent an entire model, rather than a single application. They're an example of the declarative devops approach.
 
-The [Bundle reference](/t/bundle-reference/1158) page provides the structure of a bundle file and defines all available properties.
+From a technical point of view, a bundle is a YAML file. 
+
+## Creating a bundle
+
+The [Bundle reference](/t/bundle-reference/1158) page provides the structure of a bundle file and defines all available properties. It's a handy reference if you need to create one from scratch or extend a bundle that you currently have.
+
+There are a few short cuts available to you.
+
+### Ask Juju to create one from an existing model
+
+When you have an existing model that you wish to replicate elsewhere, you can ask Juju to create a bundle for you:
+
+To start, make sure that the client is accssing the correct model with `juju switch`:
+
+```plain
+juju switch <model>
+```
+
+The `juju-export` bundle command creates the YAML file 
+
+```plain
+juju export-bundle --filename <model>-<date>.yaml
+```
+
+### From an example bundle
+
+The [charm store contains hundreds of bundles](https://jaas.ai/search?type=bundle). Consider downloading the contents of a bundle that is similiar to your own via each bundle's `bundle.yaml` file within the "Files" widget. Once it has been downloaded, you are free to add your own custom functionality.
+
+<!--
+## Deploying a bundle
+
+Users treat bundles the same way they treat charms. `juju deploy` will happily accept a bundle rather than a charm:
+
+```plain
+juju deploy <bundle>
+```
+-->
 
 <h2 id="heading--inside-a-bundle">Inside a bundle</h2>
 
-Here is a simple bundle file that features the MySQL and WordPress applications with a relation between the two:
+The [`kubernetes-core`](https://jaas.ai/kubernetes-core/) provides a good overview of a bundle file.
 
 ```yaml
-description: "A simple WordPress deployment."
-series: xenial
-applications:
-  wordpress:
-    charm: "cs:wordpress-5"
-    num_units: 1
-    annotations:
-      "gui-x": "339.5"
-      "gui-y": "-171"
-    to: 0
-  mysql:
-    charm: "cs:mysql-57"
-    num_units: 1
-    annotations:
-      "gui-x": "79.5"
-      "gui-y": "-142"
-    to: 1
-relations:
-  - - "wordpress:db"
-    - "mysql:db"
+description: A minimal two-machine Kubernetes cluster, appropriate for development.
+series: bionic
 machines:
-  "0":
-    constraints: cores=1 mem=1740 root-disk=8192
-  "1":
-    constraints: cores=2 mem=2048 root-disk=8192
+  '0':
+    constraints: cores=2 mem=4G root-disk=16G
+    series: bionic
+  '1':
+    constraints: cores=4 mem=4G root-disk=16G
+    series: bionic
+applications:
+  containerd:
+    annotations:
+      gui-x: '475'
+      gui-y: '800'
+    charm: cs:~containers/containerd-53
+    resources: {}
+  easyrsa:
+    annotations:
+      gui-x: '90'
+      gui-y: '420'
+    charm: cs:~containers/easyrsa-295
+    num_units: 1
+    resources:
+      easyrsa: 5
+    to:
+    - lxd:0
+  etcd:
+    annotations:
+      gui-x: '800'
+      gui-y: '420'
+    charm: cs:~containers/etcd-485
+    num_units: 1
+    options:
+      channel: 3.3/stable
+    resources:
+      core: 0
+      etcd: 3
+      snapshot: 0
+    to:
+    - '0'
+  flannel:
+    annotations:
+      gui-x: '475'
+      gui-y: '605'
+    charm: cs:~containers/flannel-466
+    resources:
+      flannel-amd64: 537
+      flannel-arm64: 534
+      flannel-s390x: 521
+  kubernetes-master:
+    annotations:
+      gui-x: '800'
+      gui-y: '850'
+    charm: cs:~containers/kubernetes-master-788
+    constraints: cores=2 mem=4G root-disk=16G
+    expose: true
+    num_units: 1
+    options:
+      channel: 1.17/stable
+    resources:
+      cdk-addons: 0
+      core: 0
+      kube-apiserver: 0
+      kube-controller-manager: 0
+      kube-proxy: 0
+      kube-scheduler: 0
+      kubectl: 0
+    to:
+    - '0'
+  kubernetes-worker:
+    annotations:
+      gui-x: '90'
+      gui-y: '850'
+    charm: cs:~containers/kubernetes-worker-623
+    constraints: cores=4 mem=4G root-disk=16G
+    expose: true
+    num_units: 1
+    options:
+      channel: 1.17/stable
+    resources:
+      cni-amd64: 538
+      cni-arm64: 529
+      cni-s390x: 541
+      core: 0
+      kube-proxy: 0
+      kubectl: 0
+      kubelet: 0
+    to:
+    - '1'
+relations:
+- - kubernetes-master:kube-api-endpoint
+  - kubernetes-worker:kube-api-endpoint
+- - kubernetes-master:kube-control
+  - kubernetes-worker:kube-control
+- - kubernetes-master:certificates
+  - easyrsa:client
+- - kubernetes-master:etcd
+  - etcd:db
+- - kubernetes-worker:certificates
+  - easyrsa:client
+- - etcd:certificates
+  - easyrsa:client
+- - flannel:etcd
+  - etcd:db
+- - flannel:cni
+  - kubernetes-master:cni
+- - flannel:cni
+  - kubernetes-worker:cni
+- - containerd:containerd
+  - kubernetes-worker:container-runtime
+- - containerd:containerd
+  - kubernetes-master:container-runtime
+
 ```
 
 <h3 id="heading--kubernetes-bundles">Kubernetes bundles</h3>
@@ -61,7 +185,7 @@ applications:
     options:
         dataset-size: 70%
     storage:
-      database: 20M,mariadb-pv
+      database: mariadb-pv,20M
   gitlab:
     charm: cs:~juju/gitlab-k8s
     placement: foo=bar
@@ -258,19 +382,39 @@ The bundle can then be deployed by using the file as the argument instead of a b
 juju deploy bundle.yaml
 ```
 
-<h3 id="heading--overlay-bundles">Overlay bundles</h3>
+<h3 id="heading--overlay-bundles">
+Overlay bundles
+</h3>
 
-The `--overlay` option can be used when you want to use a standard bundle but keep model-specific configuration in a separate file. The overlay files constitute bundles in their own right. The "overlay bundle" can specify new applications, change values, and also specify the removal of an application in the base bundle.
+Overlay bundles provide you with the ability to customise settings in an upstream bundle for your own needs. For example, you may wish to add extra applications, set custom machine constraints or modify the number of units being deployed. They are especially useful for keeping configuration local, while being able to make use of public bundles.
+
+To add an overlay bundle to a deployment, use the `--overlay` option with the `juju deploy` command:
+
+``` text
+juju deploy wiki-simple \
+  --overlay ~/custom-wiki.yaml
+``` 
+
+An overlay bundle is just a bundle. That is, it has the same YAML syntax as base bundles.
+
+#### Relative paths
+
+Relative paths are resolved relative to the path of the entity that describes them. That is, relative to the overlay bundle file itself. 
+
+[note type=important status="Change in behaviour"]
+Before Juju 2.7, relative paths within overlay bundles were resolved relative to the base bundle.
+[/note]
+
+
+#### Removing an application from a bundle
 
 An application is removed from the base bundle by defining the application name in the application section, but omitting any values. Removing an application also removes all the relations for that application.
 
+#### Replacing machines
+
 If a machines section is specified in an overlay bundle it replaces the corresponding section of the base bundle. No merging of machine information is attempted. Multiple overlay bundles can be specified and they are processed in the order they appear on the command line.
 
-For example:
-
-``` text
-juju deploy wiki-simple --overlay ~/model-a/wiki-simple.yaml
-```
+#### Further reading
 
 Tutorial [Using the aws-integrator charm](/t/using-the-aws-integrator-charm-tutorial/1192) provides an example of how an "overlay" is used.
 
@@ -434,6 +578,37 @@ applications:
 ```
 
 Local resources can be useful in network restricted environments where the controller is unable to contact the Charm Store.
+
+<h3 id="heading--bundles-and-charm-resources">Bundles and storage</h3>
+
+A bundle can specify the storage directives used to satisfy a charm storage declaration. Exactly the same argument as used with `juju deploy` with `--storage` are supported.
+
+For a charm with storage declaration in its `metadata.yaml` file:
+
+```yaml
+storage:
+  database:
+    type: filesystem
+    location:/var/lib/mysql
+  logs:
+    type: filesystem
+    location:/var/log/mysql
+  cache:
+    type: filesystem
+```
+
+A bundle might look like:
+
+``` yaml
+applications:
+  example-charm:
+   charm: "cs:example-charm"
+   storage:
+     database: ebs,10G
+     logs: rootfs,1G
+     cache: tmpfs
+```
+
 
 <h3 id="heading--setting-up-subordinate-charms">Setting up subordinate charms</h3>
 

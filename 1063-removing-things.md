@@ -30,7 +30,7 @@ Juju object removal commands do not succeed when there are errors in the multipl
 
 However, this policy can also be a source of frustration for users in certain situations (i.e. "I don't care, I just want my model gone!"). Because of this, several commands have a `--force` option.
 
-Secondly, even when utilising the `--force` option the process may take more time than an operator is willing to accept (i.e. "Just go away as quickly as possible!").  Because of this, several commands that support the `--force` option have, in addition, support for a `--no-wait` option.
+Secondly, even when utilising the `--force` option the process may take more time than an administrator is willing to accept (i.e. "Just go away as quickly as possible!").  Because of this, several commands that support the `--force` option have, in addition, support for a `--no-wait` option.
 
 [note type=caution status=Caution]
 The `--force` and `--no-wait` options should be regarded as tools to wield as a last resort. Using them introduces a chance of associated parts (e.g. relations) not being cleaned up, which can lead to future problems.

@@ -30,13 +30,13 @@ Image cache expiration and image synchronization mechanisms are built-in.
 
 <h2 id="heading--lxd-and-group-membership">LXD and group membership</h2>
 
-In order to use LXD, the system user who will act as the Juju operator must be an active member of the 'lxd' user group. Ensure that this is the case (below we assume this user is 'john'):
+In order to use LXD, the system user who will act as the Juju administrator must be an active member of the 'lxd' user group. Ensure that this is the case (below we assume this user is 'john'):
 
 ``` text
 sudo adduser john lxd
 ```
 
-The user will be in the 'lxd' group when they next log in. If the intended Juju operator is the current user all that's needed is a group membership refresh:
+The user will be in the 'lxd' group when they next log in. If the intended Juju administrator is the current user all that's needed is a group membership refresh:
 
 ``` text
 newgrp lxd

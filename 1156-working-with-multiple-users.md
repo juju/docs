@@ -29,7 +29,7 @@ In a Juju context, the term "credential" is related to the accessing of a chosen
 
 <h3 id="heading--creating-a-generic-user">Creating a generic user</h3>
 
-When the `add-user` command is used, a string of text is produced that encodes information about the user and the controller. This string is supplied to the intended operator who will use it to *register* the controller using their own Juju client.
+When the `add-user` command is used, a string of text is produced that encodes information about the user and the controller. This string is supplied to the intended Juju administrator who will use it to *register* the controller using their own Juju client.
 
 The user will be asked to enter an arbitrary (but hopefully meaningful) name to the controller as well as create a password for themselves. The controller name needs to be unique within the context of the client. The user's password is stored on the controller.
 
@@ -53,7 +53,7 @@ Please send this command to mat:
 "mat" has not been granted access to any models. You can use "juju grant" to grant access.
 ```
 
-An administrator provides the command (manually) to the intended operator, who will execute it:
+The Juju administrator provides the command (manually) to the intended administrator, who will execute it:
 
 ```text
 juju register ME0TA21hdDAWExQxMC4xNDkuMTMzLjIwOToxNzA3MAQg7D-RDR8cnioqd7ctEoCjyDzaprK4wXodvfMBBrgBUKETDGx4ZC1iaW9uaWMtMQAA
@@ -90,7 +90,7 @@ A user can log out at any time:
 juju logout
 ```
 
-To log in to a controller, the operator needs to specify both the user and the controller:
+To log in to a controller, the administrator needs to specify both the user and the controller:
 
 ```text
 juju login -u mat -c lxd-bionic-1

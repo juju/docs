@@ -1,6 +1,6 @@
-One professional support option available to you as a Juju operator is to enlist the help of a *Juju Expert*.
+One professional support option available to you as a team adopting Juju is to enlist the help of a *Juju Expert*.
 
-A Juju Expert is a Canonical Ltd. support partner, which deploys and supports infrastructure based on Juju. We call this type of arrangement a *managed solution*.
+A Juju Expert is a partner vetted by Canonical, which deploys and supports infrastructure based on Juju. We call this type of arrangement a *managed solution*.
 
 Any support requests beyond the build, workload, and operation of a particular solution can be escalated, by the Expert, to Canonical by means of their Ubuntu Advantage support framework. The escalated support case will be treated by Canonical at the same support level currently ascribed to the partner (Essential, Standard, or Advanced). See [Ubuntu Advantage for Servers](https://www.ubuntu.com/support/plans-and-pricing#server) for more information on Canonical support levels.
 
@@ -183,6 +183,9 @@ A 'Meter' value of **green** (displayed with a green colour in the terminal) ind
 
 Determining factors for actual metering costs (e.g. fixed per-hour rate, per-unit hour, etc.) are negotiated between the customer and the Expert.
 
+<!--
+REMOVING FOR NOW
+
 <h2 id="heading--escalating-a-support-case">Escalating a support case</h2>
 
 When it comes time to request help from Canonical you can file a support case here:
@@ -190,5 +193,7 @@ When it comes time to request help from Canonical you can file a support case he
 <https://jujucharms.com/support/create>
 
 You would also request an increase to the monthly credit limit via a support case.
+
+-->
 
 <!-- LINKS -->

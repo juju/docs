@@ -51,11 +51,21 @@ Where 'cs' denotes the Charm Store.
 A used charm gets cached on the controller's database to minimize network traffic for subsequent uses.
 [/note]
 
-A custom name, such as 'mysql1', can be assigned to the application by providing an extra argument:
+
+## Providing applications with a custom name
+
+A custom name, such as 'db', can be assigned to the application by providing an extra argument:
 
 ``` text
-juju deploy mysql mysql1
+juju deploy mysql db
 ```
+
+Custom application names must comply with a few syntax rules. They consist lower-case letters (a-z), numbers (0-9), and single hyphens (-). The name must begin with a letter and not have a group of all numbers follow a hyphen.
+
+  Valid:   `myappname`, `custom-app`, `app2`
+  Invalid: `myAppName`, `custom--app`, `app2-23`, `areacode-555-info`
+
+ 
 
 <h3 id="heading--channels">Channels</h3>
 

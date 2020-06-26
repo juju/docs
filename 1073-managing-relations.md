@@ -1,4 +1,8 @@
-Few applications are so simple that they can run independently - most rely on other applications. A certain charm knows that it requires, say, a database and, correspondingly, a database charm knows that is capable of satisfying another charm's requirements. The act of joining such mutually-dependent charms causes code (*hooks*) to run in each charm in such a way that both charms can effectively talk to one another. When charms have joined logically in this manner they are said to have formed a *relation*.
+Most applications rely on other applications to function correctly. For example, typically web apps require a database to connect to. Relations avoid the need for manual intervention when the charm's environment changes. The charm will be notified of new changes, re-configure and restart the application automatically.  
+
+Relations are a Juju abstraction that enables application to inter-operate. They are a communication channel between charms. 
+
+A certain charm knows that it requires, say, a database and, correspondingly, a database charm knows that is capable of satisfying another charm's requirements. The act of joining such mutually-dependent charms causes code (*hooks*) to run in each charm in such a way that both charms can effectively talk to one another. When charms have joined logically in this manner they are said to have formed a *relation*.
 
 [note]
 A requirement for a relation is that both applications are currently deployed. See the [Deploying applications](/t/deploying-applications/1062) page for guidance.
@@ -9,7 +13,7 @@ A requirement for a relation is that both applications are currently deployed. S
 Creating a relation is straightforward enough. The `add-relation` command is used to set up a relation between two applications:
 
 ``` text
-juju add-relation mysql wordpress
+juju relate mysql wordpress
 ```
 
 This will satisfy WordPress's database requirement where MySQL provides the appropriate structures (e.g. tables) needed for WordPress to run properly.
@@ -21,7 +25,7 @@ If the charms in question are versatile enough, Juju may need to be supplied wit
 To demonstrate, if we try instead to relate the 'mysql' charm to the 'mediawiki' charm:
 
 ``` text
-juju add-relation mysql mediawiki 
+juju relate mysql mediawiki 
 ```
 
 This is what will happen:
@@ -68,12 +72,23 @@ mysql:db           mediawiki:db   mysql      regular
 
 The final section of the status output shows all current established relations.
 
+<h2 id="heading--cross-model-relations">Cross model relations</h2>
+
+Relations can also work across models, even across multiple controllers and clouds.
+
+This functionality can enable your databases to be hosted on bare metal, where I/O performance is paramount, and your apps to live within Kubernetes, where scalability and application density are more important.
+
+See [Cross model relations](/t/cross-model-relations/1150) for more information.
+
 <h2 id="heading--removing-relations">Removing relations</h2>
 
 There are times when a relation just isn't working and it is time to move on. See the [Removing things](/t/removing-things/1063#heading--removing-relations) page for how to do this.
 
-<h2 id="heading--cross-model-relations">Cross model relations</h2>
+## Implementation details
 
-Relations can also work across models, even across multiple controllers. See [Cross model relations](/t/cross-model-relations/1150) for more information.
+Relations are not network connections. They're implemented on top of the connections that the unit agents establish with the controller at startup. 
+
+The Juju controller acts as a message broker within a virtual [star typology](https://en.wikipedia.org/wiki/Star_network). This allows units to send data via relations that might not have connectivity with each other.
+
 
 <!-- LINKS -->

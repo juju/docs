@@ -480,7 +480,7 @@ The `apt-mirror` option is often used to point to a local mirror. The [Working o
 
 When Juju provisions a machine, its default behaviour is to upgrade existing packages to their latest version. If your OS images are fresh and/or your deployed applications do not require the latest package versions, you can disable upgrades in order to provision machines faster.
 
-Two Boolean configuration options are available to disable APT updates and upgrades: `enable-os-refresh-update` (apt-get update) and `enable-os-upgrade` (apt-get upgrade), respectively.
+Two Boolean configuration options are available to disable APT updates and upgrades: `enable-os-refresh-update` (apt update) and `enable-os-upgrade` (apt upgrade), respectively.
 
 ``` yaml
 enable-os-refresh-update: false

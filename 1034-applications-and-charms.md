@@ -6,11 +6,11 @@ It's easiest to think of the term "application" in Juju in the same way you woul
 
 Juju takes care of ensuring that the compute node that they're being deployed to satisfies the size constraints that you specify, installing them, increasing their scale, setting up their networking and storage capacity rules. This, and other functionality, is provided within software packages called charms.
 
-Alongside your application, Juju executes charm code when triggered.  Triggers are typically requests from the operator, such as:
+Alongside your application, Juju executes charm code when triggered.  Triggers are typically requests from the administrator, such as:
 
 - "The configuration needs to change" via `juju config`. The [spark charm](https://jaas.ai/spark) provides the ability to dynamically change the memory available to the driver and executors:  `juju config spark executor_memory=2g`
 
-- "Please scale-up this application" via `juju add-unit`. The [postgresql charm](https://jaas.ai/postgresql) can detect when its scale is more than 1 and automatically switches itself into a high-availability cluster: `juju add -unit --num-units 2 postgresql`
+- "Please scale-up this application" via `juju add-unit`. The [postgresql charm](https://jaas.ai/postgresql) can detect when its scale is more than 1 and automatically switches itself into a high-availability cluster: `juju add-unit --num-units 2 postgresql`
 
 - "Allocate a 20GB storage volume to the application unit 0" via `juju add-storage`. The [etcd charm](https://jaas.ai/etcd) can provide an SSD-backed volume on AWS to the etcd application with:  `juju add-storage etcd/0 data=ebs-ssd,20G` 
 
@@ -135,7 +135,7 @@ Upgrading an application in Juju means to upgrade the application's charm. See t
 Actions are charm-specific bits of code which can be called at will from the command line. The [Working with actions](/t/working-with-actions/1033) page provides full coverage of the subject.
 
 #### Application groups
-Application groups allow an operator to manage groups of the same application by providing custom application names during deployment. See the [Application groups](/t/application-groups/1076) page for details.
+Application groups allow an administrator to manage groups of the same application by providing custom application names during deployment. See the [Application groups](/t/application-groups/1076) page for details.
 
 #### Application high availability
 

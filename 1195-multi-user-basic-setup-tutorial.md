@@ -1,6 +1,8 @@
 *This is a tutorial in connection with the multi-user framework of Juju. See [Working with multiple users](/t/working-with-multiple-users/1156) for background information.*
 
-This tutorial will give an overview of how Juju can be used with one person assuming the role of a traditional administrator and a second person acting as the Juju operator. The administrator creates the controller, creates users, and grants user permissions whereby the operator is responsible for creating models and installing software.
+This tutorial will give an overview of how Juju can be used with one person assuming the role of a system administrator and a second person acting as the Juju administrator. 
+
+The system administrator creates the controller, creates users, and grants user permissions whereby the operator is responsible for creating models and installing software.
 
 The following topics will be covered:
 
@@ -52,7 +54,7 @@ Let the administrator now create a regular user called 'tom':
 juju add-user tom
 ```
 
-The output includes a string (token) to give to the intended operator of the new user. This will enable the operator to add the controller to their own Juju client running on a separate host.
+The output of `juju add-user` includes a string (token) to send to the new user. This will enable that administrator to register the  controller to their own Juju client.
 
 Sample output:
 
@@ -117,22 +119,22 @@ juju change-user-password
 
 <h2 id="heading--user-model-creation">User model creation</h2>
 
-In order for the user to be able to add models the administrator must grant 'add-model' controller access:
+In order for users to be able to add models, the admin user must grant 'add-model' access to them:
 
 ``` text
 juju grant tom add-model
 ```
 
-Yet before the remote operator is able to create a model he will first need to add a credential to Juju. In a single-user setup this is done prior to controller creation, but in this context the operator is devoid of a credential.
+Yet before the grantee is able to create a model with the new permissions, a credential needs to be added to Juju. 
 
-On the (user) operator's host, add a credential and then add a model:
+On the user's host, add a credential and then `juju add-model` will succeed:
 
 ``` text
-juju add-credential google -f credentials-operator.yaml
+juju add-credential google -f credentials-tom.yaml
 juju add-model gce-model-1
 ```
 
-In the above the credentials file contains a single credential for the 'google' cloud, allowing it to become the default credential in the subsequent `add-model` command.
+In the above the credentials file (`credentials-tom.yaml`) contains a single credential for the 'google' cloud, allowing it to become the default credential in the subsequent `add-model` command.
 
 <h2 id="heading--user-model-ssh-access">User model SSH access</h2>
 

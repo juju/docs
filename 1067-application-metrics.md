@@ -1,4 +1,4 @@
-As an operator, you may find yourself wanting to know more about the resources that an application in your model consumes and provides, such as:
+As a Juju administrator, you may find yourself wanting to know more about the resources that an application in your model consumes and provides, such as:
 
 -   Storage GiB used
 -   Number of user accounts

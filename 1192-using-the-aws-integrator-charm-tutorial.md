@@ -43,7 +43,7 @@ juju trust aws-integrator
 The `trust` command grants 'aws-integrator' access to the credential used in the `bootstrap` command. This charm acts as a proxy for the Juju machines, acting as Kubernetes nodes, to create and attach dynamic storage volumes in the AWS backing cloud.
 
 [note type=caution]
-When a cluster is not built, but merely added, such as one originating from a public Kubernetes service like Azure's AKS or Google's GKE, then an integrator charm is not required. Ready-made clusters have storage built in.
+When using a managed Kubernetes service like Azure's AKS or Google's GKE, using an integrator charm is not required. These Kubernetes clusters have storage built in.
 [/note]
 
 It will take about ten minutes to arrive at a stable `status` command output:

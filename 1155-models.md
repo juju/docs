@@ -6,7 +6,7 @@ All Juju models are managed by a Juju controller. This enables clients to have a
 
 Juju provides simplicity, stability and security. Models reduce the cognitive gap between the whiteboard picture of your service and how it is implemented. An application model is a definition of which applications are providing a service and how they inter-relate.
 
-Technical details such as CPU core counts, disk write throughput, and IP addresses are secondary. They are accessible to operators, but an application model places the applications at the front.
+Technical details such as CPU core counts, disk write throughput, and IP addresses are secondary. They are accessible to administrators, but an application model places the applications at the front.
 
 ### What models offer
 
@@ -67,7 +67,7 @@ Here are different ways to change to a model:
 
 ### Compare a bundle to a model
 
-An operator can compare a model with a charm bundle. This is useful for determining what has changed since the bundle was deployed or just how a model differs from a bundle that was not yet used. This topic is covered on the [Charm bundles](/t/charm-bundles/1058#heading--comparing-a-bundle-to-a-model) page.
+A Juju administrator can compare a model with a charm bundle. This is useful for determining what has changed since the bundle was deployed or just how a model differs from a bundle that was not yet used. This topic is covered on the [Charm bundles](/t/charm-bundles/1058#heading--comparing-a-bundle-to-a-model) page.
 
     juju diff-bundle <bundle>
 
