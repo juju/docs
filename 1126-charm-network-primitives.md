@@ -1,7 +1,7 @@
 The `network-get` hook tool allows charms to discover important network related information. There are 2 key things a charm needs to know about its local units:
 
 1.  What address to bind to
-2.  What address to advertise for external access to the workload (ingress)
+2.  What address to use to connect to the workload of an external source (i.e. the ingress address of that external source)
 
 For remote units, a charm needs to know:
 
@@ -10,7 +10,7 @@ For remote units, a charm needs to know:
 
 Both ingress address and egress subnets may vary depending on the relation. This is because if the relation is cross model, the ingress address is the public / floating address of the unit to allow ingress from outside the model. And a given relation may see traffic originate from different egress subnets.
 
-The space bindings for a given endpoint also affect that address information is relevant. Juju will take this into account when populating the address information below.
+The space bindings for a given endpoint also affect that address information. Juju will take this into account when populating the address information below.
 
 <h2 id="heading--network-get">network-get</h2>
 

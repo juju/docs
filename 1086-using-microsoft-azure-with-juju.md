@@ -121,6 +121,11 @@ You then will be asked for your subscription id. In the example above, it is 'f7
 Credential "ubuntu" added locally for cloud "azure".
 ```
 
+[note]
+You may once again be asked to visit the https://microsoft.com/devicelogin site and enter a code. In this case it is important to verify that the credential process is complete **before** closing the authentication window.
+[/note]
+
+
 You can also verify that the credentials were successfully added by running `juju credentials`.
 
 <h2 id="heading--creating-a-controller">Creating a controller</h2>

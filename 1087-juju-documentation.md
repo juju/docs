@@ -29,7 +29,7 @@ TODO
 ## Community Links
 
 - [Join a charm sub-community](https://jaas.ai/community)
-- Engage a Juju expert to deliver a [managed solution](/docs/managed-solutions/1132)
+- Engage a Juju expert to deliver a [managed solution](/t/managed-solutions/1132)
 - Read our [blog posts](https://ubuntu.com/blog/tag/juju)
 
 ## Navigation
@@ -59,12 +59,12 @@ TODO
   - [Google GCE](/t/using-google-gce-with-juju/1088) 
   - [Oracle](/t/using-oracle-oci-with-juju/1096)
   - [Rackspace](/t/using-rackspace-with-juju/1098)
-  - [Joyent](/t/using-joyent-with-juju/1089)
   - [VMware vSphere](/t/using-vmware-vsphere-with-juju/1099)
   - [OpenStack](/t/using-openstack-with-juju/1097)
 - Containers
-  - [LXD](/t/using-lxd-with-juju/1093)
   - [Kubernetes](/t/using-kubernetes-with-juju/1090)
+  - [MicroK8s](/t/using-juju-with-microk8s-tutorial/1194)
+  - [LXD](/t/using-lxd-with-juju/1093)
 - Bare metal
   - [MAAS](/t/using-maas-with-juju/1094)
 - Any SSH-accessible computer
@@ -76,7 +76,7 @@ TODO
   - [Defining constraints](/t/using-constraints/1060)
   - [Tailoring the deployment](/t/deploying-applications-advanced/1061)
   - [Relating applications](/t/managing-relations/1073)
-  - [Cleaning up](/t/removing-things/1063)
+  - [Creating cross-model relations](/t/cross-model-relations/1150)
 
 ### Operations
 
@@ -84,7 +84,9 @@ TODO
   - [Running actions](/t/working-with-actions/1033)
   - [Collecting metrics](/t/collecting-juju-metrics/1138)
   - [Accessing Juju's web interface](/t/juju-gui/1109)
- - [Defining and using persistent storage](/t/using-juju-storage/1079)
+  - [Defining and using persistent storage](/t/using-juju-storage/1079)
+  - [Cleaning up](/t/removing-things/1063)
+
 
 ### System Administration
 
@@ -101,7 +103,7 @@ TODO
 
 - [Charm bundles](/t/charm-bundles/1058)
 - [Working with resources](/t/juju-resources/1074)
-- [Charm writing guide](/t/charm-writing-guide/1260)
+- [Charm writing guide](/t/charm-writing/1260)
 - [Software tools for charm writers](/t/tools/1181)
 
 ### Juju Concepts
@@ -124,11 +126,11 @@ TODO
 ### Reference
 
 - [Glossary](/t/glossary/1949)
-- For operators
+- For Juju administrators
   -   [Status values and their meanings](/t/charm-unit-status-and-their-meanings/1168)
   -   [Juju constraints](/t/juju-constraints/1160)
-  -   [Juju commands](t/commands/1667)
-  -   [Environment variables](t/juju-environment-variables/1162) 
+  -   [Juju commands](/t/commands/1667)
+  -   [Environment variables](/t/juju-environment-variables/1162) 
 - For charm writers and developers
   -   [Juju hook tools](/t/hook-tools/1163)
   -   [metadata.yaml specification](/t/charm-metadata/1043)
@@ -176,6 +178,8 @@ directly back to Discourse. I'm keeping them here for now.
 [details=Mapping table]
 | Topic | Path |
 | -- | -- |
+| https://discourse.jujucharms.com/t/commands/1667 | /docs/commands |
+| https://discourse.jujucharms.com/t/juju-environment-variables/1162 | /docs/environment-variables |
 | https://discourse.jujucharms.com/t/getting-started-with-juju-on-your-laptop/1970 | /docs/wip-getting-started |
 | https://discourse.jujucharms.com/t/glossary/1949 | /docs/glossary |
 | https://discourse.jujucharms.com/t/a-multi-user-cloud/1190 | /docs/multi-user-cloud |
@@ -336,6 +340,7 @@ directly back to Discourse. I'm keeping them here for now.
 | https://discourse.jujucharms.com/t/writing-charms-that-use-storage/1128 | /docs/writing-charms-that-use-storage |
 | https://discourse.jujucharms.com/t/writing-charms-that-use-terms/1129 | /docs/writing-charms-that-use-terms |
 | https://discourse.jujucharms.com/t/writing-your-first-juju-charm/1046 | /docs/writing-your-first-juju-charm |
+| https://discourse.jujucharms.com/t/tutorial-managing-credentials/1289 | /docs/tutorial-managing-credentials |
 [/details]
 
 ## Redirects
@@ -343,6 +348,9 @@ directly back to Discourse. I'm keeping them here for now.
 [details=Mapping table]
 | Path | Location |
 | -- | -- |
+| /docs/authors-charm-writing | /docs/charm-writing |
+| /stable/models-config | /docs/configuring-models |
+| /stable/controllers-config | /docs/configuring-controllers |
 | /getting-started | /docs/getting-started-with-juju |
 | /docs/getting-started | /docs/getting-started-with-juju |
 | /docs/getting-started-with-jaas | /docs/getting-started-with-juju-on-jaas |
@@ -392,4 +400,5 @@ directly back to Discourse. I'm keeping them here for now.
 | /docs/install | /docs/installing |
 | /docs/install-juju | /docs/installing |
 | /docs/installing-juju | /docs/installing |
+| /docs/amulet | /docs/tools#heading--amulet |
 [/details]

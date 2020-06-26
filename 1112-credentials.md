@@ -184,13 +184,6 @@ credentials:
       pass-phrase: "ChimayBlue"
       tenancy: ocid1.tenancy.oc1..aaaaaaaanoslu5x9e50gvq3mdilr5lzjz4imiwj3ale4s3qyivi5liw6hcia
       user: ocid1.user.oc1..aaaaaaaaizcm5ljvk624qa4ue1i8vx043brrs27656sztwqy5twrplckzghq
-  joyent:
-    peter:
-      auth-type: userpass
-      sdc-user: admingal
-      sdc-key-id: 2048 00:11:22:33:44:55:66:77:88:99:aa:bb:cc:dd:ee:ff
-      private-key: key (or private-key-path, like `~/.ssh/id_rsa.pub`)
-      algorithm: "rsa-sha256"
   vsphere:
     ashley:
       auth-type: userpass

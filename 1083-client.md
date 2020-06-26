@@ -1,4 +1,4 @@
-This page covers various operations that can be applied to the Juju client, the software that is used to manage Juju, whether as an administrator or as a regular user.
+This page covers various operations that can be applied to the Juju client, the software that is used to manage Juju, whether as an admin user or as a regular user.
 
 The following topics are covered:
 

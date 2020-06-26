@@ -1,8 +1,11 @@
 <a id="action"></a><a id="actions"></a>
 **Action**
 
-An _action_ is functionality defined by a charm for its applications. [Operators](#operator) can run actions via the [client](#client).
+An _action_ is functionality defined by a charm for its applications. [Administrators](#administrator) can run actions via the [client](#client).
 
+**Administrator**
+
+The administrator is the person interacting with the [client](#client). Administrators are typically the [admin user](#admin-user), but may be other users.
 
 <a id="admin"></a><a id="administrator"></a><a id="admin-user"></a>
 **Admin user**
@@ -179,7 +182,7 @@ Before Juju 2.0, models were known as environments.
 [/note]
 
 
-<a id="operator"></a>
+<a id="relation"></a>
 **Relation**
 
 A relation is a relationship between two [applications](#application). Relations are directed. One application is the _provider_ and the other is the _consumer_. 

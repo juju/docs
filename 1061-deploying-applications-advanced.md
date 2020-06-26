@@ -24,7 +24,7 @@ Charms can be created that support more than one release of a given operating sy
     categories:
        - databases
     series:
-       - trusty
+       - focal
        - xenial
     provides:
        db:
@@ -32,6 +32,7 @@ Charms can be created that support more than one release of a given operating sy
     requires:
        syslog:
          interface: syslog
+         optional: true
 
 The default series for the charm is the first one listed. So, in this example, to deploy `mycharm` on `trusty`, all you need is:
 
@@ -60,16 +61,30 @@ juju deploy mycharm --to 1 --series  bionic --force
 
 Multi-series charms may encounter upgrade difficulties if support for the installed series is dropped. See [Forced upgrades](/t/upgrading-applications/1080#heading--forced-upgrades) for details.
 
+The series resolution order for charms:
+
+ - the '--series' option provided with the `juju deploy` command
+ - the series stated in the charm URL, e.g. `bionic/postgresql`
+ - the 'default-series' model key
+ - the top-most series specified in the charm's metadata file
+
+<h2 id="bundles-and-series">Bundles and series</h2>
+
+The series resolution order for bundles:
+
+ - the '--series' option provided with the `juju deploy` command
+ - the series stated in each charm URL in the bundle file
+ - the series given at the top level in the bundle file
+ - the 'default-series' model key
+
 <h2 id="heading--deploying-to-specific-machines">Deploying to specific machines</h2>
 
-To deploy to specific machines the `--to` option is used. It is supported by commands `bootstrap`, `deploy`, and `add-unit`.
+To deploy to specific machines the `--to` option is used. It is supported by commands `bootstrap`, `deploy`, and `add-unit`. This option, along with an argument, is called a *placement directive*.
 
-The argument to the `--to` option is called a *placement directive*.
-
-When this option is used, unless the machine was created via `add-machine`, a charm has already been deployed to the machine. When multiple charms are deployed to the same machine there exists the chance of conflicting configuration files (on the machine's filesystem).
+When the `--to` option is used, unless the machine was created via `add-machine`, a charm has already been deployed to the machine. When multiple charms are deployed to the same machine there exists the chance of conflicting configuration files (on the machine's filesystem).
 
 [note]
-There is one type of placement directive that can also be used as a constraint: availability zones. If used together, the placement directive takes precedence. See [Using constraints][charms-constraints] for details.
+There is one type of placement directive that can also be used as a constraint: availability zones. If used together, the placement directive takes precedence. See [Using constraints](/t/using-constraints/1060) for details.
 [/note]
 
 To apply this option towards an existing Juju machine, the machine ID is used. This is an integer that is shown in the output to `juju status` (or `juju machines`). For example, this partial output shows a machine with an ID of '2':
@@ -190,7 +205,7 @@ When multiple (comma separated) values are used, the constraint is interpreted a
 
 <h2 id="heading--deploying-to-network-spaces">Deploying to network spaces</h2>
 
-Using spaces, the operator is able to create a more restricted network topology for applications at deployment time (see [Network spaces](/t/network-spaces/1157) for details on spaces). This is achieved with the use of the `--bind` option.
+Using spaces, administrators are able to create a more restricted network topology for applications at deployment time (see [Network spaces](/t/network-spaces/1157) for details on spaces). This is achieved with the use of the `--bind` option.
 
 The following will deploy the 'mysql' application to the 'db-space' space:
 
@@ -266,7 +281,7 @@ Once all the units are up, you will be able to get the public IP address of one 
 
 <h2 id="heading--trusting-an-application-with-a-credential">Trusting an application with a credential</h2>
 
-Some applications may require access to the backing cloud in order to fulfill their purpose (e.g. storage-related tasks). In such cases, the remote credential associated with the current model would need to be shared with the application. When the operator allows this to occur the application is said to be *trusted*. An application can be trusted during deployment or after deployment.
+Some applications may require access to the backing cloud in order to fulfill their purpose (e.g. storage-related tasks). In such cases, the remote credential associated with the current model would need to be shared with the application. When the Juju administrator allows this to occur the application is said to be *trusted*. An application can be trusted during deployment or after deployment.
 
 To trust the AWS integrator application during deployment:
 

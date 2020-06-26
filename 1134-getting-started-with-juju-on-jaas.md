@@ -105,7 +105,7 @@ You can either remove your work now, via the JAAS web UI, or do so later using t
 
 <h2 id="heading--using-the-command-line-client">Using the command line client</h2>
 
-Experienced Juju operators manage Juju from the command line client, and that includes the work done via JAAS. The client is obtained by installing Juju on your machine, where Windows, macOS, Ubuntu, and other Linux are supported. See the [install](/t/installing-juju/1164) page for guidance.
+Experienced Juju administrator manage Juju from the command line client, and that includes the work done via JAAS. The client is obtained by installing Juju on your machine, where Windows, macOS, Ubuntu, and other Linux are supported. See the [install](/t/installing-juju/1164) page for guidance.
 
 <h3 id="heading--log-in-to-jaas">Log in to JAAS</h3>
 

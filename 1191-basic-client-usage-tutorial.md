@@ -4,7 +4,7 @@ Todo:
 - Include links to planned tutorials (tutorial-bundles.md, tutorial-constraints.md)
 -->
 
-The goal of this tutorial is to give new Juju operators a solid introduction to the command line client. In so doing, several important concepts are introduced. It also discusses the use of command prefixes and aliases. Further reading suggestions are included at the end.
+The goal of this tutorial is to give new Juju administrators a solid introduction to the command line client. In so doing, several important concepts are introduced. It also discusses the use of command prefixes and aliases. Further reading suggestions are included at the end.
 
 <h2 id="heading--prerequisites">Prerequisites</h2>
 
@@ -34,7 +34,7 @@ The `show-` prefix is used to drill down into an object to reveal details. It is
 
 <h2 id="heading--fundamental-commands">Fundamental commands</h2>
 
-Juju makes available to the operator a wide variety of commands. In this section, we'll cover the basic ones.
+Juju has several dozen commands. In this section, we'll cover the basic ones.
 
 <h3 id="heading--listing-initial-information">Listing initial information</h3>
 

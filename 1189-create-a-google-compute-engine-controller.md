@@ -26,7 +26,6 @@ azure                27  centralus        azure       Microsoft Azure
 azure-china           2  chinaeast        azure       Microsoft Azure China
 cloudsigma           12  dub              cloudsigma  CloudSigma Cloud
 google               18  us-east1         gce         Google Cloud Platform
-joyent                6  us-east-1        joyent      Joyent Cloud
 oracle                4  us-phoenix-1     oci         Oracle Cloud Infrastructure
 oracle-classic        5  uscom-central-1  oracle      Oracle Cloud Infrastructure Classic
 rackspace             6  dfw              rackspace   Rackspace Cloud

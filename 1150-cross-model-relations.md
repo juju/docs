@@ -13,37 +13,37 @@ CMR addresses the case where one may wish to centralize services within one mode
 
 The commands related specifically to this subject are:
 
-[`consume`](./commands.md#consume)
+[`consume`](/t/command-consume/1698)
 :   Accepts an offer to a model but does not relate to it.
 
-[`find-offers`](./commands.md#find-offers)
+[`find-offers`](/t/command-find-offers/1722)
 :   Finds URLs and endpoints of available offers.
 
-[`list-firewall-rules`](./commands.md#list-firewall-rules)
+[`list-firewall-rules`](/t/command-list-firewall-rules/1745)
 :   Lists the firewall rules.
 
-[`offer`](./commands.md#offer)
+[`offer`](/t/command-offer/1772)
 :   Creates an offer.
 
-[`offers`](./commands.md#offers)
+[`offers`](/t/command-offers/1773)
 :   Lists connected (related to) offers.
 
-[`remove-offer`](./commands.md#remove-offer)
+[`remove-offer`](/t/command-remove-offer/1788)
 :   Removes an offer.
 
-[`remove-saas`](./commands.md#remove-saas)
+[`remove-saas`](/t/command-remove-saas/1790)
 :   Removes a SAAS object created with the `juju consume` command.
 
-[`resume-relation`](./commands.md#resume-relation)
+[`resume-relation`](/t/command-resume-relation/1799)
 :   Resumes a suspended relation to an offer.
 
-[`set-firewall-rule`](./commands.md#set-firewall-rule)
+[`set-firewall-rule`](/t/command-set-firewall-rule/1811)
 :   Sets a firewall rule.
 
-[`show-offer`](./commands.md#show-offer)
+[`show-offer`](/t/command-show-offer/1826)
 :   Shows details for a connected (related to) offer.
 
-[`suspend-relation`](./commands.md#suspend-relation)
+[`suspend-relation`](/t/command-suspend-relation/1840)
 :   Suspends a relation to an offer.
 
 See [Models](/t/models/1155) and [Managing relations](/t/managing-relations/1073) for beginner information on those topics.

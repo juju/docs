@@ -252,7 +252,7 @@ W: README.ex includes boilerplate: - Feel free to add things if it's useful for 
 
 <h3 id="heading--how-pod-configuration-works">How pod configuration works</h3>
 
-Juju sets up a single Kubernetes (operator) pod for the application as a whole and a pod per application unit.
+Juju sets up a single Kubernetes operator pod for the application as a whole and a pod per application unit.
 
 For the operator pod, Juju uses a static [Docker image](https://hub.docker.com/r/jujusolutions/caas-jujud-operator) that includes all the necessary reactive and charm helper libraries.
 

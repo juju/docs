@@ -1,5 +1,7 @@
-This guide will walk you through installing the Charmed Distribution of OSM.
+This guide will walk you through installing Charmed OSM.
 
+> Current version: OSM v7.0.1
+> [Upstream documentation](https://osm.etsi.org/docs/user-guide/)
 ## Requirements
 
 We suggest the following minimum requirements:
@@ -15,7 +17,7 @@ Install the basic prerequisites.
 
 ```bash
 sudo snap install juju --classic
-sudo snap install osmclient --edge
+sudo snap install osmclient
 ```
 
 ## Alias
@@ -30,10 +32,12 @@ Added:
 
 ## Connect Snap Interface
 
-By default, snaps need to be given permissions to read hidden resources in your home directory. This will allow the `osmclient` snap to access your Juju configuration.
+By default, snaps need to be given permissions to read hidden resources in your home directory. This will allow the `osmclient` snap to access your Juju configuration, your public SSH keys, and get some networking information.
 
 ```bash
 sudo snap connect osmclient:juju-client-observe
+sudo snap connect osmclient:ssh-public-keys
+sudo snap connect osmclient:network-control
 ```
 
 ## Bootstrap Juju on LXD
@@ -53,8 +57,8 @@ juju bootstrap localhost osm-lxd
 [MicroK8s](https://microk8s.io/) is a fast, lightweight, and certified distribution of Kubernetes that is made for developers. It's a great choice if you want Kubernetes within minutes. 
 
 ```bash
-sudo snap install microk8s --channel 1.14/stable --classic
-sudo usermod -a -G microk8s $USER
+sudo snap install microk8s --classic
+sudo usermod -a -G microk8s `whoami`
 newgrp microk8s
 microk8s.status --wait-ready
 microk8s.enable storage dns
@@ -63,7 +67,7 @@ microk8s.enable storage dns
 sudo snap alias microk8s.kubectl kubectl
 
 # Bootstrap the Kubernetes cloud
-juju bootstrap microk8s osm-on-k8s
+juju bootstrap microk8s osm-k8s
 
 # Add a new model for OSM
 juju add-model osm
@@ -76,7 +80,7 @@ Generate a bundle overlay containing the credentials of our OSM Juju controller 
 ```bash
 osmclient.overlay
 ```
-
+> NOTE: When executing this command, a vca-overlay.yaml file will be generated in your current directory, and also some commands will be printed out for you to execute. Those commands will enable full-charm support.
 ### Deployment
 
 Choose how you would like Charmed OSM to be deployed. 
@@ -106,7 +110,7 @@ $ watch -c juju status --color
 Every 2.0s: juju status --color                                                                                                                                                                                                             micro-osm: Fri Aug 23 17:03:25 2019
 
 Model  Controller  Cloud/Region        Version  SLA          Timestamp
-osm    osm-on-k8s  microk8s/localhost  2.6.6    unsupported  17:03:27Z
+osm       osm-k8s  microk8s/localhost  2.6.6    unsupported  17:03:27Z
 
 App             Version  Status  Scale  Charm           Store       Rev  OS          Address         Notes 
 grafana-k8s              active      1  grafana-k8s     jujucharms   15  kubernetes  10.152.183.122 

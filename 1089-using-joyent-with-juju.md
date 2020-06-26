@@ -1,3 +1,7 @@
+[note type=negative]
+Joyent has removed its public cloud offering. Juju is no longer able to create clouds provided by Joyent. This page is being retained to prevent dead links, but will not be updated. 
+[/note]
+
 <!--
 Todo:
 - Review required

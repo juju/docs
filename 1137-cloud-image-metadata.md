@@ -16,7 +16,7 @@ This "metadata" is stored in a JSON format called *Simplestreams*. It is built-i
 There are a few ways to do this based on the design of the OpenStack cloud and your level of permissions with Juju and the OpenStack deployment:
 
 -   If you are a general user start with [Create image metadata with Juju](#heading--create-image-metadata-with-juju).
--   If you have admin or operator permissions in the OpenStack deployment, start with [Create image metadata with Juju](#heading--create-image-metadata-with-juju) and continue with [Upload the Simplestreams Metadata to an object store](#upload-the-simplestreams-metadata-to-an-object-store).
+-   If you have sufficient permissions in the OpenStack deployment, start with [Create image metadata with Juju](#heading--create-image-metadata-with-juju) and continue with [Upload the Simplestreams Metadata to an object store](#upload-the-simplestreams-metadata-to-an-object-store).
 -   If the OpenStack deployment was done with Juju and you have permissions to deploy charms alongside the OpenStack charms then use the [glance-simplestreams-sync charm](#heading--using-the-glance-simplestreams-sync-charm-to-configure-image-streams).
 
 <h2 id="heading--create-image-metadata-with-juju">Create image metadata with Juju</h2>
@@ -115,7 +115,7 @@ Stop here and return to the [bootstrap instructions](/t/using-openstack-with-juj
 <h2 id="heading--upload-the-image-metadata-to-an-object-store">Upload the image metadata to an object store</h2>
 
 [note]
-Only those with admin privileges or who are operators in the OpenStack environment will be able to create a service and view endpoints used by the following instructions.
+Only those with sufficient privileges in the OpenStack environment will be able to create a service and view endpoints used by the following instructions.
 [/note]
 
 These instructions use Swift, however other object stores may be used as well.

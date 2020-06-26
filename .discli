@@ -2,7 +2,7 @@
   filename: 111-about-the-docs-category.md
   id: 338
   slug: about-the-docs-category
-  updated_at: '2018-08-03T17:25:56.443Z'
+  updated_at: '2020-02-19T19:56:20.210Z'
 112:
   filename: 112-logfile-var-log-juju-machine-lock-log.md
   id: 339
@@ -62,7 +62,7 @@
   filename: 1032-what-is-juju.md
   id: 2336
   slug: what-is-juju
-  updated_at: '2019-03-13T14:51:00.876Z'
+  updated_at: '2020-06-08T21:24:03.794Z'
 1033:
   filename: 1033-working-with-actions.md
   id: 2337
@@ -72,12 +72,12 @@
   filename: 1034-applications-and-charms.md
   id: 2338
   slug: applications-and-charms
-  updated_at: '2019-09-06T16:27:46.015Z'
+  updated_at: '2020-05-08T23:25:23.710Z'
 1051:
   filename: 1051-implementing-relations.md
   id: 2355
   slug: implementing-relations
-  updated_at: '2019-05-29T19:45:06.108Z'
+  updated_at: '2020-03-21T02:06:22.214Z'
 1057:
   filename: 1057-using-bundles-with-the-gui.md
   id: 2361
@@ -87,7 +87,7 @@
   filename: 1058-charm-bundles.md
   id: 2362
   slug: charm-bundles
-  updated_at: '2019-06-19T21:11:14.294Z'
+  updated_at: '2020-06-19T05:38:22.246Z'
 1059:
   filename: 1059-configuring-applications.md
   id: 2363
@@ -102,17 +102,17 @@
   filename: 1061-deploying-applications-advanced.md
   id: 2365
   slug: deploying-applications-advanced
-  updated_at: '2019-08-02T16:37:18.871Z'
+  updated_at: '2020-05-03T08:02:30.544Z'
 1062:
   filename: 1062-deploying-applications.md
   id: 2367
   slug: deploying-applications
-  updated_at: '2019-06-05T17:14:31.817Z'
+  updated_at: '2020-05-26T17:11:19.702Z'
 1063:
   filename: 1063-removing-things.md
   id: 2368
   slug: removing-things
-  updated_at: '2019-06-03T22:35:30.388Z'
+  updated_at: '2020-03-03T11:08:55.719Z'
 1064:
   filename: 1064-appendix-creating-an-aws-vpc.md
   id: 2369
@@ -132,7 +132,7 @@
   filename: 1067-application-metrics.md
   id: 2372
   slug: application-metrics
-  updated_at: '2019-03-13T14:52:14.231Z'
+  updated_at: '2020-03-03T12:40:58.363Z'
 1068:
   filename: 1068-configuring-juju-for-offline-usage.md
   id: 2373
@@ -162,12 +162,12 @@
   filename: 1073-managing-relations.md
   id: 2378
   slug: managing-relations
-  updated_at: '2019-07-30T18:27:17.989Z'
+  updated_at: '2020-05-12T20:37:46.501Z'
 1074:
   filename: 1074-juju-resources.md
   id: 2379
   slug: juju-resources
-  updated_at: '2019-05-30T18:41:27.707Z'
+  updated_at: '2020-05-03T08:06:45.176Z'
 1075:
   filename: 1075-scaling-applications.md
   id: 2380
@@ -202,12 +202,12 @@
   filename: 1083-client.md
   id: 2388
   slug: client
-  updated_at: '2019-03-13T14:52:38.847Z'
+  updated_at: '2020-03-03T11:11:10.651Z'
 1084:
   filename: 1084-using-amazon-aws-with-juju.md
   id: 2389
   slug: using-amazon-aws-with-juju
-  updated_at: '2019-05-30T18:49:06.168Z'
+  updated_at: '2020-05-22T01:55:32.001Z'
 1085:
   filename: 1085-using-microsoft-azure-with-juju-advanced.md
   id: 2390
@@ -217,12 +217,12 @@
   filename: 1086-using-microsoft-azure-with-juju.md
   id: 2391
   slug: using-microsoft-azure-with-juju
-  updated_at: '2019-05-30T18:49:24.691Z'
+  updated_at: '2020-03-12T15:36:02.493Z'
 1087:
   filename: 1087-juju-documentation.md
   id: 2392
   slug: juju-documentation
-  updated_at: '2019-10-02T23:50:14.265Z'
+  updated_at: '2020-06-17T22:26:26.248Z'
 1088:
   filename: 1088-using-google-gce-with-juju.md
   id: 2393
@@ -232,22 +232,22 @@
   filename: 1089-using-joyent-with-juju.md
   id: 2394
   slug: using-joyent-with-juju
-  updated_at: '2019-05-30T18:50:31.838Z'
+  updated_at: '2020-01-26T21:49:36.243Z'
 1090:
   filename: 1090-using-kubernetes-with-juju.md
   id: 2395
   slug: using-kubernetes-with-juju
-  updated_at: '2019-10-02T01:34:34.416Z'
+  updated_at: '2020-05-27T21:41:48.524Z'
 1091:
   filename: 1091-using-lxd-with-juju-advanced.md
   id: 2396
   slug: using-lxd-with-juju-advanced
-  updated_at: '2019-09-23T15:00:15.736Z'
+  updated_at: '2020-04-23T04:12:56.691Z'
 1092:
   filename: 1092-additional-lxd-resources.md
   id: 2397
   slug: additional-lxd-resources
-  updated_at: '2019-07-08T14:49:33.740Z'
+  updated_at: '2020-03-03T11:12:03.776Z'
 1093:
   filename: 1093-using-lxd-with-juju.md
   id: 2398
@@ -257,7 +257,7 @@
   filename: 1094-using-maas-with-juju.md
   id: 2399
   slug: using-maas-with-juju
-  updated_at: '2019-08-22T00:50:13.459Z'
+  updated_at: '2020-06-25T14:00:08.653Z'
 1095:
   filename: 1095-using-the-manual-cloud-with-juju.md
   id: 2400
@@ -272,7 +272,7 @@
   filename: 1097-using-openstack-with-juju.md
   id: 2402
   slug: using-openstack-with-juju
-  updated_at: '2019-10-03T03:02:42.881Z'
+  updated_at: '2019-12-02T09:10:40.215Z'
 1098:
   filename: 1098-using-rackspace-with-juju.md
   id: 2403
@@ -282,12 +282,12 @@
   filename: 1099-using-vmware-vsphere-with-juju.md
   id: 2404
   slug: using-vmware-vsphere-with-juju
-  updated_at: '2019-11-06T21:57:56.030Z'
+  updated_at: '2020-05-21T04:57:03.083Z'
 1100:
   filename: 1100-clouds.md
   id: 2405
   slug: clouds
-  updated_at: '2019-05-14T17:19:52.176Z'
+  updated_at: '2020-03-03T11:02:54.692Z'
 1101:
   filename: 1101-command-changes-from-1-25-to-2-0.md
   id: 2406
@@ -342,7 +342,7 @@
   filename: 1112-credentials.md
   id: 2418
   slug: credentials
-  updated_at: '2019-05-23T14:33:07.050Z'
+  updated_at: '2020-01-26T21:52:34.531Z'
 1123:
   filename: 1123-leadership-howtos.md
   id: 2429
@@ -357,12 +357,12 @@
   filename: 1126-charm-network-primitives.md
   id: 2432
   slug: charm-network-primitives
-  updated_at: '2019-03-13T14:49:04.623Z'
+  updated_at: '2020-01-31T12:19:22.339Z'
 1132:
   filename: 1132-managed-solutions.md
   id: 2438
   slug: managed-solutions
-  updated_at: '2019-03-13T14:53:59.741Z'
+  updated_at: '2020-03-03T11:00:21.287Z'
 1133:
   filename: 1133-creating-ssh-keypairs-on-windows.md
   id: 2439
@@ -372,7 +372,7 @@
   filename: 1137-cloud-image-metadata.md
   id: 2443
   slug: cloud-image-metadata
-  updated_at: '2019-04-16T06:54:48.170Z'
+  updated_at: '2020-03-03T11:13:39.921Z'
 1138:
   filename: 1138-collecting-juju-metrics.md
   id: 2444
@@ -432,12 +432,12 @@
   filename: 1150-cross-model-relations.md
   id: 2456
   slug: cross-model-relations
-  updated_at: '2019-07-30T18:36:36.447Z'
+  updated_at: '2020-05-29T09:01:22.810Z'
 1151:
   filename: 1151-configuring-models.md
   id: 2457
   slug: configuring-models
-  updated_at: '2019-05-26T21:16:16.910Z'
+  updated_at: '2020-02-14T21:49:30.711Z'
 1152:
   filename: 1152-migrating-models.md
   id: 2458
@@ -457,17 +457,17 @@
   filename: 1155-models.md
   id: 2461
   slug: models
-  updated_at: '2019-10-14T23:07:57.576Z'
+  updated_at: '2020-03-03T11:07:22.529Z'
 1156:
   filename: 1156-working-with-multiple-users.md
   id: 2462
   slug: working-with-multiple-users
-  updated_at: '2019-05-31T21:11:17.097Z'
+  updated_at: '2020-03-03T11:06:28.473Z'
 1157:
   filename: 1157-network-spaces.md
   id: 2463
   slug: network-spaces
-  updated_at: '2019-11-07T14:22:00.274Z'
+  updated_at: '2019-12-10T19:03:53.936Z'
 1158:
   filename: 1158-bundle-reference.md
   id: 2464
@@ -477,7 +477,7 @@
   filename: 1160-juju-constraints.md
   id: 2466
   slug: juju-constraints
-  updated_at: '2019-10-03T03:05:17.113Z'
+  updated_at: '2020-01-26T21:51:59.472Z'
 1161:
   filename: 1161-reference-documents.md
   id: 2467
@@ -492,12 +492,12 @@
   filename: 1164-installing-juju.md
   id: 2470
   slug: installing-juju
-  updated_at: '2019-10-30T14:00:53.817Z'
+  updated_at: '2020-06-04T00:56:52.147Z'
 1166:
   filename: 1166-release-notes-index.md
   id: 2472
   slug: release-notes-index
-  updated_at: '2019-10-30T13:57:27.401Z'
+  updated_at: '2020-06-04T00:50:59.067Z'
 1169:
   filename: 1169-2-4-0-release-notes.md
   id: 2475
@@ -572,7 +572,7 @@
   filename: 1185-troubleshooting-removals.md
   id: 2491
   slug: troubleshooting-removals
-  updated_at: '2019-05-31T14:34:17.957Z'
+  updated_at: '2020-06-11T02:17:17.304Z'
 1186:
   filename: 1186-troubleshooting-model-upgrades.md
   id: 2492
@@ -587,7 +587,7 @@
   filename: 1189-create-a-google-compute-engine-controller.md
   id: 2495
   slug: create-a-google-compute-engine-controller
-  updated_at: '2019-03-13T14:55:22.522Z'
+  updated_at: '2020-01-26T21:51:36.124Z'
 1190:
   filename: 1190-a-multi-user-cloud.md
   id: 2496
@@ -597,27 +597,27 @@
   filename: 1191-basic-client-usage-tutorial.md
   id: 2497
   slug: basic-client-usage-tutorial
-  updated_at: '2019-07-15T20:24:47.951Z'
+  updated_at: '2020-03-03T11:15:11.474Z'
 1192:
   filename: 1192-using-the-aws-integrator-charm-tutorial.md
   id: 2498
   slug: using-the-aws-integrator-charm-tutorial
-  updated_at: '2019-05-31T19:20:03.897Z'
+  updated_at: '2019-12-16T20:59:42.001Z'
 1193:
   filename: 1193-setting-up-static-kubernetes-storage-tutorial.md
   id: 2499
   slug: setting-up-static-kubernetes-storage-tutorial
   updated_at: '2019-05-31T19:18:57.885Z'
 1194:
-  filename: 1194-using-juju-with-microk8s-tutorial.md
+  filename: 1194-using-juju-with-microk8s.md
   id: 2500
-  slug: using-juju-with-microk8s-tutorial
-  updated_at: '2019-09-12T04:29:03.980Z'
+  slug: using-juju-with-microk8s
+  updated_at: '2020-06-25T04:12:45.184Z'
 1195:
   filename: 1195-multi-user-basic-setup-tutorial.md
   id: 2501
   slug: multi-user-basic-setup-tutorial
-  updated_at: '2019-03-13T14:55:36.441Z'
+  updated_at: '2020-03-03T10:52:47.251Z'
 1196:
   filename: 1196-multi-user-external-setup-tutorial.md
   id: 2502
@@ -629,10 +629,10 @@
   slug: tutorials
   updated_at: '2019-09-18T14:14:35.244Z'
 1198:
-  filename: 1198-upgrading-a-machine-series.md
+  filename: 1198-upgrading-a-machines-series.md
   id: 2504
-  slug: upgrading-a-machine-series
-  updated_at: '2019-03-13T14:55:40.195Z'
+  slug: upgrading-a-machines-series
+  updated_at: '2020-03-17T03:57:36.511Z'
 1199:
   filename: 1199-upgrading.md
   id: 2505
@@ -657,7 +657,7 @@
   filename: 1263-understanding-kubernetes-charms-tutorial.md
   id: 2697
   slug: understanding-kubernetes-charms-tutorial
-  updated_at: '2019-10-15T02:57:22.739Z'
+  updated_at: '2020-03-03T11:05:08.887Z'
 1270:
   filename: 1270-2-5-2-release-notes.md
   id: 2712
@@ -677,7 +677,7 @@
   filename: 1389-controller-logins.md
   id: 3079
   slug: controller-logins
-  updated_at: '2019-04-19T16:19:47.230Z'
+  updated_at: '2020-03-03T10:55:54.110Z'
 1448:
   filename: 1448-appendix-installing-a-gke-cluster.md
   id: 3233
@@ -702,12 +702,12 @@
   filename: 1554-installing-charmed-osm-with-microk8s.md
   id: 3618
   slug: installing-charmed-osm-with-microk8s
-  updated_at: '2019-09-12T07:40:41.723Z'
+  updated_at: '2020-02-12T10:07:19.849Z'
 1667:
   filename: 1667-commands.md
   id: 3941
   slug: commands
-  updated_at: '2019-07-22T11:20:13.102Z'
+  updated_at: '2020-05-20T22:25:20.746Z'
 1668:
   filename: 1668-command-actions.md
   id: 3942
@@ -1532,7 +1532,7 @@
   filename: 1836-command-status.md
   id: 4117
   slug: command-status
-  updated_at: '2019-07-22T14:14:23.532Z'
+  updated_at: '2020-06-24T02:03:06.352Z'
 1837:
   filename: 1837-command-storage.md
   id: 4118
@@ -1682,12 +1682,12 @@
   filename: 1949-glossary.md
   id: 4380
   slug: glossary
-  updated_at: '2019-08-23T04:54:02.146Z'
+  updated_at: '2020-03-03T10:33:29.068Z'
 1970:
   filename: 1970-getting-started-with-juju.md
   id: 4427
   slug: getting-started-with-juju
-  updated_at: '2019-10-09T19:24:21.629Z'
+  updated_at: '2020-03-03T11:03:50.289Z'
 2094:
   filename: 2094-openstack-novadocker-support.md
   id: 4830
@@ -1724,4 +1724,29 @@
   slug: tutorial-stack-of-stacks-deploying-workloads-on-kubernetes-thats-deployed-on-bare-metal
   updated_at: '2019-10-22T01:01:30.767Z'
 _meta:
-  updated_at: '2019-11-12T03:15:55+00:00'
+  updated_at: '2020-06-26T00:36:40+00:00'
+3092:
+  filename: 3092-command-debug-code.md
+  id: 7948
+  slug: command-debug-code
+  updated_at: '2020-05-20T22:03:27.248Z'
+2715:
+  filename: 2715-juju-on-wikipedia-infrastructure-as-code.md
+  id: 6778
+  slug: juju-on-wikipedia-infrastructure-as-code
+  updated_at: '2020-02-29T16:09:54.935Z'
+1245:
+  filename: 1245-how-to-write-docs-our-documentation-guidelines-for-contributors.md
+  id: 2636
+  slug: how-to-write-docs-our-documentation-guidelines-for-contributors
+  updated_at: '2019-12-05T20:17:44.152Z'
+2213:
+  filename: 2213-command-bind.md
+  id: 5200
+  slug: command-bind
+  updated_at: '2019-12-02T20:49:21.412Z'
+1134:
+  filename: 1134-getting-started-with-juju-on-jaas.md
+  id: 2440
+  slug: getting-started-with-juju-on-jaas
+  updated_at: '2020-05-22T01:06:55.246Z'

@@ -18,7 +18,6 @@ This rest of this page covers general cloud management and an overview of how cl
 - [Google GCE](/t/using-google-gce-with-juju/1088) *
 - [Oracle](/t/using-oracle-oci-with-juju/1096) *
 - [Rackspace](/t/using-rackspace-with-juju/1098) *
-- [Joyent](/t/using-joyent-with-juju/1089) *
 - [LXD](/t/using-lxd-with-juju/1093) (local) *
 - [LXD](/t/using-lxd-with-juju/1093) (remote)
 - [Kubernetes](/t/using-kubernetes-with-juju/1090)
@@ -48,7 +47,6 @@ azure                27  centralus        azure       Microsoft Azure
 azure-china           2  chinaeast        azure       Microsoft Azure China
 cloudsigma           12  dub              cloudsigma  CloudSigma Cloud
 google               18  us-east1         gce         Google Cloud Platform
-joyent                6  us-east-1        joyent      Joyent Cloud
 oracle                4  us-phoenix-1     oci         Oracle Cloud Infrastructure
 oracle-classic        5  uscom-central-1  oracle      Oracle Cloud Infrastructure Classic
 rackspace             6  dfw              rackspace   Rackspace Cloud
@@ -158,7 +156,7 @@ For new users, interactive mode is the recommended method for adding a cloud. Th
 
 <h3 id="heading--adding-clouds-manually">Adding clouds manually</h3>
 
-More experienced operators can add their clouds manually. This can assist with automation.
+More experienced Juju administrators can add their clouds manually. This can assist with automation.
 
 The manual method necessitates the use of a [YAML-formatted](http://www.yaml.org/spec/1.2/spec.html) configuration file. It has the following format:
 
@@ -180,7 +178,6 @@ The table below shows the authentication types available for each cloud type. It
 | `cloudsigma` | `userpass`                   |
 | `ec2`        | `access-key`                 |
 | `gce`        | `jsonfile,oauth2`            |
-| `joyent`     | `userpass`                   |
 | `lxd`        | n/a, `certificate` (`v.2.5`) |
 | `maas`       | `oauth1`                     |
 | `manual`     | n/a                          |

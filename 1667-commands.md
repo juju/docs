@@ -1,4 +1,3 @@
-# Command reference
 You can get a list of all Juju commands by invoking `juju help commands` in a terminal.
 
 To drill down into each command use `juju help <command name>`.
@@ -42,6 +41,7 @@ This same information is also provided below. Click on a command to view informa
 [create-storage-pool](https://discourse.jujucharms.com/t/command-create-storage-pool/1702)
 [create-wallet](https://discourse.jujucharms.com/t/command-create-wallet/1703)
 [credentials](https://discourse.jujucharms.com/t/command-credentials/1704)
+[debug-code](https://discourse.juju.is/t/-/3092)
 [debug-hooks](https://discourse.jujucharms.com/t/command-debug-hooks/1705)
 [debug-log](https://discourse.jujucharms.com/t/command-debug-log/1706)
 [deploy](https://discourse.jujucharms.com/t/command-deploy/1707)
@@ -193,9 +193,3 @@ This same information is also provided below. Click on a command to view informa
 [version](https://discourse.jujucharms.com/t/command-version/1856)
 [wallets](https://discourse.jujucharms.com/t/command-wallets/1857)
 [whoami](https://discourse.jujucharms.com/t/command-whoami/1858)
-
-***
-
-© 2018 Canonical Ltd. Ubuntu and Canonical are registered trademarks of Canonical Ltd.
-
-[Docs](https://docs.jujucharms.com/getting-started) | [Community](https://jujucharms.com/community) | [Blog](https://jujucharms.com/community/blog) | [Install Juju](https://jujucharms.com/docs)
