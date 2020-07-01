@@ -3,120 +3,160 @@ Todo:
 - Warning: Ubuntu release versions hardcoded
 -->
 
-Juju already has knowledge of the (local) LXD cloud, known to Juju as cloud 'localhost'. In addition, LXD does not require an account with a remote cloud service nor do credentials need to be added (this is done automatically via certificates). LXD is thus a backing cloud that is trivial to set up and has become an essential part of every Juju operator's toolbox.
+When your computer has LXD installed, Juju can operate the "`localhost`" cloud. The localhost cloud provides the experience of working with a public cloud without needing to incur any financial cost.
 
-Here is a list of advanced LXD features supported by Juju that are explained elsewhere:
+Reasons to use Juju on localhost:
 
--   [LXD clustering](/t/using-lxd-with-juju-advanced/1091#heading--lxd-clustering) (`v.2.4.0`)
--   [Adding a remote LXD cloud](/t/using-lxd-with-juju-advanced/1091#heading--adding-a-remote-lxd-cloud) (`v.2.5.0`)
--   [Charms and LXD profiles](/t/using-lxd-with-juju-advanced/1091#heading--charms-and-lxd-profiles) (`v.2.5.0`)
+- creating a repeatable deployment: Juju enables you to quickly iterate to construct the optimal deployment for your situation, then distribute that across your team
+- local development: Juju's localhost cloud can mirror the production ops environment (without incuring the costs involved with duplicating it)
+- learning Juju: LXD is a lightweight tool for exploring Juju and how it operates
+- rapid prototyping: LXD is great for when you're creating a new charm and want to be able to quickly provision capacity and tear it down  
 
-[note type="caution"]
-Most Ubuntu releases have LXD installed by default as a deb package. We'll be removing that package and replacing it with the snap. Either find another system if LXD is already in use or follow the included instructions to migrate existing containers.
+[note]
+If you would like to run Kubernetes workloads on your computer with Juju, we recommend [MicroK8s](https://microk8s.io/) with the [MicroK8s cloud](/t/using-juju-with-microk8s/1194).
 [/note]
 
-<h2 id="heading--installing-lxd">Installing LXD</h2>
+[note]
+If you are looking to connect to a LXD server, rather than accessing LXD installed locally, then read [Adding a remote LXD cloud](/t/using-lxd-with-juju-advanced/1091#heading--adding-a-remote-lxd-cloud).  
+[/note]
 
-On Ubuntu, LXD is normally installed by default as an APT (deb) package. We recommend the snap package instead:
 
-``` text
-sudo snap install lxd
-```
 
-If you're transitioning existing containers to the now-installed snap, migrate them now. Choose 'yes' when prompted (at the end) to remove the old deb packages:
+## About LXD
 
-``` text
-sudo lxd.migrate
-```
+LXD is an open source hypervisor that is secure, lightweight, and very easy to use. For Juju users, LXD makes it easy to create a cloud in your laptop.
+It provides secure system containers based on the LXC functionality within the Linux kernel and virtual machines via QEMU.
 
-Otherwise, remove the deb packages manually:
+[details="Need to install LXD?"]
+See LXD's [Getting Started](https://linuxcontainers.org/lxd/getting-started-cli/) page at linuxcontainers.org for installation instructions for Windows, macOS, and Linux.
+[/details]
 
-``` text
-sudo apt purge liblxc1 lxcfs lxd lxd-client
-```
+[details="Why not Docker, Vagrant or another option?"]
+Docker containers are a great solution for running a single application within a container.
+Its model has some weaknesses when used more widely.
+LXD focuses on system-level virtualization, offering an operating system-like like environment within a container.
+More importantly though, LXD offers greater security.
+LXD does not require privileged containers, unlike Docker.
 
-<h2 id="heading--configuring-lxd">Configuring LXD</h2>
+Vagrant requires resource-intensive virtual machines.
+This can make it difficult to simulate large models.
+[/details]
 
-To quickly configure LXD for general use:
+## Setting up the localhost cloud
 
-``` text
+The localhost cloud requires minimal setup. Neither registering LXD with Juju, nor security credentials are required.
+
+### Configure LXD
+
+If you have not already done so, you will need to run `lxd init` to carry out from post-installation tasks. For most environments, using the default parameters is usually preferred:
+
+```text
 lxd init --auto
 ```
 
-[note]
-If you get a permission denied error see [LXD and group membership](/t/additional-lxd-resources/1092#heading--lxd-and-group-membership).
-[/note]
+There are several options, however. See the [Getting Started with LXD](https://linuxcontainers.org/lxd/getting-started-cli/#initial-configuration) webpage and the output from `lxd init --help` for more details. 
 
-This will configure LXD to use the legacy 'dir' (filesystem) for storage. To use a different backend, such as ZFS, you can do:
+
+### Configure Networking
+
+Currently, Juju does not support IPv6. Therefore, you will need to request that LXD does not allocate IPv6 addresses for containers and virtual machine instances that it creates.
 
 ```text
-lxd init --auto --storage-backend zfs
-```
-
-Currently Juju does not support IPv6. You will therefore need to disable it at the LXD level. For the default bridge of `lxdbr0`:
-
-``` text
 lxc network set lxdbr0 ipv6.address none
 ```
 
-The interactive method should be used to obtain a more customised setup (e.g. clustering, storage, etc.):
+## Deploying workloads
 
-``` text
-lxd init
+Workloads live within a "model" that is managed by the "Juju controller". 
+
+### Creating a controller
+
+Use the `juju bootstrap` command to provision a machine within LXD and create a controller running within it.
+
+```text
+juju bootstrap localhost
 ```
 
-In the above, ensure that you at least choose to have networking auto-configured (answer 'auto'). You can also disable IPv6 using this method (answer 'none').
 
-<h2 id="heading--subnet-and-firewall">Subnet and firewall</h2>
+The bootstrap process is highly configurable, but changing the settings is rarely required while evaluating Juju. See the [Creating a controller](/t/creating-a-controller/1108) page for further details.
 
-The subnet can be derived from the bridge's address:
 
-``` text
-lxc network get lxdbr0 ipv4.address
+### Adding a model
+
+A model is a workspace for a set of inter-related applications. It houses machines and applications (often referred to as "workloads"), as well as associated resources such as firewall rules and storage volumes.
+
+```text
+juju add-model <model>
 ```
 
-Our example gives:
+Models are tied to Juju user accounts. This allows Juju administrators to create fine-grained access controls over the infrastructure used by their team. 
 
-``` text
-10.243.67.1/24
-```
+Adding a model does not create compute resources. They are provisioned on-demand with the `juju deploy` and `juju add-machine` commands. 
 
-So the subnet address is **10.243.67.0/24**.
 
-LXD adds iptables (firewall) rules to allow traffic to the subnet/bridge it created. If you subsequently add/change firewall settings, ensure that such changes have not interfered with Juju's ability to communicate with LXD. Juju needs access to the LXD subnet on TCP port 8443.
+### Deploying a workload
 
-<h2 id="heading--creating-a-controller">Creating a controller</h2>
+The `juju deploy` command deploys a charm as an application. To explore how this works, consider following through 1 or more of these tutorials:
 
-You are now ready to create a Juju controller for cloud 'localhost':
+- [A high-availability PostgreSQL cluster](https://juju.is/tutorials/deploy-postgres-on-ubuntu-server)
+- [A multi-node RabbitMQ cluster](https://juju.is/tutorials/deploy-rabbitmq-cluster-on-ubuntu-server)
+- [Nextcloud and Collabora both backed by HTTPS](https://juju.is/tutorials/deploy-nextcloud-and-collabora-on-ubuntu)
 
-``` text
-juju bootstrap localhost lxd-controller
-```
+## Next steps
 
-Above, the name given to the new controller is 'lxd-controller'. LXD will provision a container to run the controller on.
+### Learn Juju's core commands
 
-For a detailed explanation and examples of the `bootstrap` command see the [Creating a controller](/t/creating-a-controller/1108) page.
+Juju includes lots of functionality (see `juju help commands` for a full list). Here is a brief list of the most helpful commands to use when you are getting started:
 
-View the new controller machine like this:
+- `juju dashboard` provides a real-time web dashboard of all the models managed by the controller
+- `juju status` provides a view of a model, its applications, their units and other resources
+- `juju deploy` deploys a new charm (or bundle) as application(s) within a model 
+- `juju ssh` allows you to access a secure shell into any machine or unit within the model
+- `juju switch` allows you to switch between models and controllers 
+
+Use `juju help <command>` for detailed usage instructions on every command provided by Juju.
+
+
+### Learn Juju's concepts
+
+Becoming familiar with Juju involves learning some new terminology:
+
+- [Models](/t/models/1155) house applications
+- [Applications](/t/applications-and-charms/1034)  are "instances" of charms that are comprised of units. A unit occupies a machine. That machine may be also be used by other units.
+- [Relations](/t/managing-relations/1073) are a data exchange system between applications facilitated by the Juju controller
+
+## Common Questions
+
+### How do I find charms to deploy?
+
+Visit the [Charm Store](https://jaas.ai/store ). 
+
+### How do I access help?
+
+We recommend creating an account in the [Juju Discourse forum](https://discourse.juju.is/).
+
+### How do I inspect the model?
+
+Use the `juju dashboard` and/or the `juju status` command.
+
+## How do Juju machines correspond to LXC containers?
+
+There is a 1:1 correspondence between machine and container. From the command-line, we can request that Juju report the list of machines within the controller model:
 
 ``` text
 juju machines -m controller
 ```
-
-This example yields the following output:
 
 ``` text
 Machine  State    DNS            Inst id        Series  AZ  Message
 0        started  10.243.67.177  juju-c795fe-0  bionic      Running
 ```
 
-The controller's underlying container can be listed with the LXD client:
+The "Inst id" column corresponds to the "NAME" column from LXC's output:
 
 ``` text
 lxc list
 ```
-
-Output:
 
 ``` text
 +---------------+---------+----------------------+------+------------+-----------+
@@ -126,19 +166,31 @@ Output:
 +---------------+---------+----------------------+------+------------+-----------+
 ```
 
-<h2 id="heading--lxd-specific-features-and-additional-resources">LXD specific features and additional resources</h2>
+## Considerations with the localhost cloud
 
-Constraints can be used with LXD containers (`v.2.4.1`). However, these are not bound to the LXD cloud type (i.e. they can affect containers that are themselves backed by a Juju machine running on any cloud type). See [Constraints and LXD containers](/t/using-constraints/1060#heading--constraints-and-lxd-containers) for details.
+Juju aims to abstract away the differences between individual cloud providers. LXD offers the following differences:
 
-Advanced Juju usage with LXD is explained on page [Using LXD with Juju - advanced](/t/using-lxd-with-juju-advanced/1091).
+### Constraints
 
-For more LXD-specific information see [Additional LXD resources](/t/additional-lxd-resources/1092).
+Constraints are applied differently to containers. When deploying containers, constraints are interpreted as resource maximums as opposed to minimums. See [Constraints and LXD containers](/t/using-constraints/1060#heading--constraints-and-lxd-containers) for further details.
 
-<h2 id="heading--next-steps">Next steps</h2>
+## Advanced usage
 
-A controller is created with two models - the 'controller' model, which should be reserved for Juju's internal operations, and a model named 'default', which can be used for deploying user workloads.
+### LXD tips
 
-See these pages for ideas on what to do next:
+For more information relating to an optimal experience with LXD—especially in cases where there might be unique requirements—read the [Additional LXD resources](/t/additional-lxd-resources/1092) page. It covers:
 
-- [Juju models](/t/models/1155)
-- [Applications and charms](/t/applications-and-charms/1034)
+- Using LXD with custom container images
+- LXD and group membership
+- Adding non-admin user credentials
+- Useful LXD client commands
+- Using the LXD snap from Ubuntu Server older series
+- Accessing LXD log files directly
+
+### Juju-specific advice
+
+Juju can make use of several advanced features within LXD. They are explained on the [Using LXD with Juju - Advanced](/t/using-lxd-with-juju-advanced/1091) page. It includes:
+
+- Add resilience to your models through LXD clustering
+- Registering a remote LXD server as a LXD cloud
+- Charms and LXD profiles
