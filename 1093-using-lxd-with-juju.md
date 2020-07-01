@@ -34,7 +34,7 @@ See LXD's [Getting Started](https://linuxcontainers.org/lxd/getting-started-cli/
 [details="Why not Docker, Vagrant or another option?"]
 Docker containers are a great solution for running a single application within a container.
 Its model has some weaknesses when used more widely.
-LXD focuses on system-level virtualization, offering an operating system-like like environment within a container.
+LXD focuses on system-level virtualization, offering an operating system-like environment within a container.
 More importantly though, LXD offers greater security.
 LXD does not require privileged containers, unlike Docker.
 
