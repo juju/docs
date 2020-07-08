@@ -219,10 +219,10 @@
   slug: using-microsoft-azure-with-juju
   updated_at: '2020-03-12T15:36:02.493Z'
 1087:
-  filename: 1087-juju-documentation.md
+  filename: 1087-documentation-index.md
   id: 2392
-  slug: juju-documentation
-  updated_at: '2020-06-17T22:26:26.248Z'
+  slug: documentation-index
+  updated_at: '2020-07-08T01:34:52.902Z'
 1088:
   filename: 1088-using-google-gce-with-juju.md
   id: 2393
@@ -248,11 +248,6 @@
   id: 2397
   slug: additional-lxd-resources
   updated_at: '2020-03-03T11:12:03.776Z'
-1093:
-  filename: 1093-using-lxd-with-juju.md
-  id: 2398
-  slug: using-lxd-with-juju
-  updated_at: '2019-08-22T22:08:02.306Z'
 1094:
   filename: 1094-using-maas-with-juju.md
   id: 2399
@@ -322,7 +317,7 @@
   filename: 1108-creating-a-controller.md
   id: 2414
   slug: creating-a-controller
-  updated_at: '2019-10-02T11:43:55.870Z'
+  updated_at: '2020-06-26T03:43:31.474Z'
 1109:
   filename: 1109-juju-gui.md
   id: 2415
@@ -453,11 +448,6 @@
   id: 2460
   slug: upgrading-models
   updated_at: '2019-05-08T17:24:12.526Z'
-1155:
-  filename: 1155-models.md
-  id: 2461
-  slug: models
-  updated_at: '2020-03-03T11:07:22.529Z'
 1156:
   filename: 1156-working-with-multiple-users.md
   id: 2462
@@ -1750,3 +1740,13 @@ _meta:
   id: 2440
   slug: getting-started-with-juju-on-jaas
   updated_at: '2020-05-22T01:06:55.246Z'
+1093:
+  filename: 1093-using-lxd-with-juju.md
+  id: 2398
+  slug: using-lxd-with-juju
+  updated_at: '2020-07-01T22:03:57.368Z'
+1155:
+  filename: 1155-models.md
+  id: 2461
+  slug: models
+  updated_at: '2020-07-02T00:39:43.209Z'

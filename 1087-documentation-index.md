@@ -1,19 +1,48 @@
-Juju allows you to retain a high-level understanding of all the parts of your system without being bogged down needing to know every hostname, every machine, every subnet and every specification of every storage volume.
+Juju is simple, secure and stable devops tooling. Juju is free and open source software that brings the Operator Model to all infrastructure. Whether services are hosted within containers, virtual machines, on bare metal, or a combination, it keeps complexity low and productivity high. 
 
-Focus on your applications and their relations. Create a development environment on your laptop,  then recreate that environment on the public cloud, onto bare metal servers or into a Kubernetes cluster. 
+Juju is a good fit for
 
-Maximise your productivity by encapsulating specialist knowledge into Juju charms. They create repeatable, systematic and secure devops practices for all stages of your product's lifecycle. Juju simplifies deployment, maintenance, scaling up and winding down. 
+- SRE and operations teams
+- Software developers
+- Data engineers
+
+Juju's points of difference
+- an emphasis on software modelling to reduce cognitive load
+- an ability to create services that span hosting environments
+- an active-agent architecture that allows services to be immediately responsive to changes
+
+Juju excels at
+
+- Making your deployment understandable
+- Simplifying post-install operations, such as upgrades, updates and configuration management
+- Managing hybrid-cloud services, whether on Kubernetes, VMs, bare metal or any combination
+
+## Why Juju?
+
+Juju increases your productivity and decreases your costs.
+
+- **Increase confidence**  
+  If you have ever put off upgrading something in production because something might break, then consider Juju. Juju allows applications to automatically negotiate their configuration, creating optimal settings dynamically.
+
+- **Reduce complexity**  
+  Microservices have made applications simpler, but operations more complex. Regain your understanding of the whole stack.
+
+- **Strengthen operations knowledge**
+  Everyone has their in-house expert. Encapsulating their know-how in charms distributes that knowledge throughout the business.
+
+- **Simplify day two and beyond**
+  Upgrades, provisioning new capacity, applying configuration changes can be subtle and difficult. Juju takes responsibility for them, as well as deployment.
+
+- **Maintain portability and repeatability**
+  Retain control over your deployment and eliminate the need for vendor-specific offerings. Your devops tooling should be cloud-agnostic and Kubernetes-aware.
+
+<!--
 
 ## Getting started
 
-<!--
-TODO
-
-[Getting started with JAAS](/t/getting-started-with-jaas/1134)
--->
-
-* [Getting started](/t/getting-started-with-juju/1970)
-* [Install Juju](/t/installing-juju/1164)
+* [Getting started on traditional infrastructure](/t/getting-started-with-juju/1970)
+* [Getting started on Kubernetes](/t/getting-started-with-juju/1970)
+* [Installing Juju](/t/installing-juju/1164)
 * Learn the [concepts behind Juju](/t/concepts-and-terms/1144)
 
 ## Finding help and seeking support
@@ -32,6 +61,8 @@ TODO
 - Engage a Juju expert to deliver a [managed solution](/t/managed-solutions/1132)
 - Read our [blog posts](https://ubuntu.com/blog/tag/juju)
 
+-->
+
 ## Navigation
 
 ### Introduction
@@ -40,35 +71,34 @@ TODO
 - [Home](index.md)
 -->
 
-- [Getting started](/t/getting-started-with-juju/1970)
+- [Getting started on Kubernetes](/t/getting-started-with-juju/1970)
+- [Getting started on traditional infrastructure](/t/getting-started-with-juju/1970)
 - [Install Juju](/t/installing-juju/1164)
 - [Tutorials](/t/tutorials/1197)
 
 
-### Creating a Controller
+### Understanding Juju
+
+- [Overview of Juju's concepts and terms](/t/concepts-and-terms/1144)
+- Core Concepts
+-- [Application](/t/applications-and-charms/1034)
+-- [Model](/t/models/1155)
+-- [Relation](/t/managing-relations/1073)
+- Important Terms
+-- [Clouds](/t/clouds/1100)
+-- [Credentials](/t/credentials/1112)
+-- [Controllers](/t/controllers/1111)
+-- [Constraints](/t/using-constraints/1060)
+-- [Fan container networking](/t/fan-container-networking/1065)
+-- [High availability](/t/application-high-availability/1066)
+-- [Network spaces](/t/network-spaces/1157)
+
+
+### Setting up
 
   - [Add a cloud](/t/clouds/1100)
   - [Add credentials](/t/credentials/1112)
   - [Create a controller](/t/creating-a-controller/1108)
-
-### Supported Clouds 
-
-- Virtual Machines
-  - [Amazon AWS](/t/using-amazon-aws-with-juju/1084)
-  - [Microsoft Azure](/t/using-microsoft-azure-with-juju/1086)
-  - [Google GCE](/t/using-google-gce-with-juju/1088) 
-  - [Oracle](/t/using-oracle-oci-with-juju/1096)
-  - [Rackspace](/t/using-rackspace-with-juju/1098)
-  - [VMware vSphere](/t/using-vmware-vsphere-with-juju/1099)
-  - [OpenStack](/t/using-openstack-with-juju/1097)
-- Containers
-  - [Kubernetes](/t/using-kubernetes-with-juju/1090)
-  - [MicroK8s](/t/using-juju-with-microk8s-tutorial/1194)
-  - [LXD](/t/using-lxd-with-juju/1093)
-- Bare metal
-  - [MAAS](/t/using-maas-with-juju/1094)
-- Any SSH-accessible computer
-  - [Manual](/t/using-the-manual-cloud-with-juju/1095)
 
 ### Deployment
 
@@ -78,7 +108,26 @@ TODO
   - [Relating applications](/t/managing-relations/1073)
   - [Creating cross-model relations](/t/cross-model-relations/1150)
 
-### Operations
+### Cloud Guides 
+
+- Localhost
+  -  [LXD](/t/using-lxd-with-juju/1093)
+- Kubernetes
+  - [MicroK8s](/t/using-juju-with-microk8s-tutorial/1194)
+  - [Other clusters](/t/using-kubernetes-with-juju/1090)
+- Private Cloud
+  - [VMware vSphere](/t/using-vmware-vsphere-with-juju/1099)
+  - [OpenStack](/t/using-openstack-with-juju/1097)
+  - [MAAS](/t/using-maas-with-juju/1094)
+  - ["Manual" Cloud](/t/using-the-manual-cloud-with-juju/1095)
+- Public Cloud
+  - [Amazon AWS](/t/using-amazon-aws-with-juju/1084)
+  - [Microsoft Azure](/t/using-microsoft-azure-with-juju/1086)
+  - [Google GCE](/t/using-google-gce-with-juju/1088) 
+  - [Oracle](/t/using-oracle-oci-with-juju/1096)
+  - [Rackspace](/t/using-rackspace-with-juju/1098)
+
+### Operations Tasks
 
   - [Accessing individual machines with SSH](/t/machine-authentication/1146)
   - [Running actions](/t/working-with-actions/1033)
@@ -88,7 +137,7 @@ TODO
   - [Cleaning up](/t/removing-things/1063)
 
 
-### System Administration
+### System Administration Tasks
 
 - [Upgrading to a new release](/t/upgrading/1199)
 - [Backing up the controller](/t/controller-backups/1106)
@@ -105,23 +154,6 @@ TODO
 - [Working with resources](/t/juju-resources/1074)
 - [Charm writing guide](/t/charm-writing/1260)
 - [Software tools for charm writers](/t/tools/1181)
-
-### Juju Concepts
-
-- Concepts I
-  - [Application](/t/applications-and-charms/1034)
-  - [Model](/t/models/1155)
-  - [Relation](/t/managing-relations/1073)
-- Concepts II
-  - [Clouds](/t/clouds/1100)
-  - [Credentials](/t/credentials/1112)
-  - [Controllers](/t/controllers/1111)
-  - [Constraints](/t/using-constraints/1060)
-  - [Fan container networking](/t/fan-container-networking/1065)
-  - [High availability](/t/application-high-availability/1066)
-  - [Network spaces](/t/network-spaces/1157)
-  - [More terms](/t/concepts-and-terms/1144)
-
 
 ### Reference
 
