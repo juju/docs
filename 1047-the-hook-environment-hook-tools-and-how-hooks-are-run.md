@@ -6,7 +6,7 @@ This is to say that the software you install must, once it's running, be entirel
 
 So, every hook runs with easy access to the charm files. Every hook also runs as root, with a number of useful variables set, and has access to hook-specific tools that let you interrogate and affect the juju environment.
 
-No more than one hook will execute on a given system at a given time. A unit in a container is considered to be on a different system to any unit on the container's host machine.
+No more than one hook will execute on a given unit at a given time. A unit in a container is considered to be on a different system to any unit on the container's host machine.
 
 <h2 id="heading--environment-variables">Environment variables</h2>
 

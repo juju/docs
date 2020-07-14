@@ -1,0 +1,3 @@
+I just found a link to the [Faster LXD](https://github.com/juju/juju/wiki/Faster-LXD)  in [this post](https://discourse.jujucharms.com/t/setting-up-a-development-environment-and-contribution-workflow/490?u=zicklag) about getting setup for Juju contribution, but even if you are just writing charms these tips would be extremely useful. I know that they would help me as I develop charms on my local LXD installation.
+
+Should we just find a place in the docs to link to this page ( if we don't already have one, I may just not have found/followed the link ) or would it be good to actually have the contents of that page on the main docs site?

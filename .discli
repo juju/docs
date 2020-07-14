@@ -7,42 +7,42 @@
   filename: 112-logfile-var-log-juju-machine-lock-log.md
   id: 339
   slug: logfile-var-log-juju-machine-lock-log
-  updated_at: '2019-03-15T01:46:25.612Z'
+  updated_at: '2020-02-19T19:51:05.083Z'
 116:
   filename: 116-agent-introspection-juju-machine-lock.md
   id: 345
   slug: agent-introspection-juju-machine-lock
-  updated_at: '2019-03-15T01:46:57.283Z'
+  updated_at: '2020-02-19T19:48:27.278Z'
 117:
   filename: 117-agent-introspection.md
   id: 346
   slug: agent-introspection
-  updated_at: '2019-03-15T01:45:00.286Z'
+  updated_at: '2020-02-19T19:50:11.410Z'
 118:
   filename: 118-agent-introspection-juju-goroutines.md
   id: 347
   slug: agent-introspection-juju-goroutines
-  updated_at: '2019-03-15T01:46:42.513Z'
+  updated_at: '2020-02-19T19:48:43.240Z'
 135:
   filename: 135-about-juju-page.md
   id: 378
   slug: about-juju-page
-  updated_at: '2019-03-15T01:58:58.424Z'
+  updated_at: '2020-02-19T19:51:37.833Z'
 146:
   filename: 146-agent-introspection-juju-engine-report.md
   id: 398
   slug: agent-introspection-juju-engine-report
-  updated_at: '2019-03-15T01:45:41.702Z'
+  updated_at: '2020-02-19T19:50:34.353Z'
 423:
   filename: 423-welcome-text-to-juju.md
   id: 1278
   slug: welcome-text-to-juju
-  updated_at: '2019-03-15T01:43:02.078Z'
+  updated_at: '2020-02-19T19:45:14.882Z'
 426:
   filename: 426-controller-feature-flags.md
   id: 1299
   slug: controller-feature-flags
-  updated_at: '2019-03-15T01:52:44.953Z'
+  updated_at: '2020-02-19T19:46:34.279Z'
 500:
   filename: 500-about-the-docs-category.md
   id: 1528
@@ -52,12 +52,12 @@
   filename: 512-using-model-config-key-cloudinit-userdata.md
   id: 1563
   slug: using-model-config-key-cloudinit-userdata
-  updated_at: '2019-10-30T21:50:51.068Z'
+  updated_at: '2020-02-19T19:30:20.421Z'
 514:
   filename: 514-using-model-config-key-container-inherit-properties.md
   id: 1565
   slug: using-model-config-key-container-inherit-properties
-  updated_at: '2019-01-22T14:13:51.023Z'
+  updated_at: '2020-02-19T19:49:52.883Z'
 1032:
   filename: 1032-what-is-juju.md
   id: 2336
@@ -387,7 +387,7 @@
   filename: 1142-juju-support-for-centos7.md
   id: 2448
   slug: juju-support-for-centos7
-  updated_at: '2019-03-15T20:09:35.349Z'
+  updated_at: '2020-02-12T20:45:34.531Z'
 1143:
   filename: 1143-running-multiple-versions-of-juju.md
   id: 2449
@@ -482,12 +482,12 @@
   filename: 1164-installing-juju.md
   id: 2470
   slug: installing-juju
-  updated_at: '2020-06-04T00:56:52.147Z'
+  updated_at: '2020-07-13T04:29:19.909Z'
 1166:
   filename: 1166-release-notes-index.md
   id: 2472
   slug: release-notes-index
-  updated_at: '2020-06-04T00:50:59.067Z'
+  updated_at: '2020-07-13T04:24:28.470Z'
 1169:
   filename: 1169-2-4-0-release-notes.md
   id: 2475
@@ -1687,7 +1687,7 @@
   filename: 2155-draft-how-to-install-a-private-docker-registry-and-configure-it-for-ar-kubernetes-cluster.md
   id: 5014
   slug: draft-how-to-install-a-private-docker-registry-and-configure-it-for-ar-kubernetes-cluster
-  updated_at: '2019-10-22T21:38:42.357Z'
+  updated_at: '2020-02-19T19:54:17.590Z'
 2197:
   filename: 2197-concepts-guide.md
   id: 5138
@@ -1697,7 +1697,7 @@
   filename: 2234-create-a-processing-pipeline-that-bursts-out-to-the-public-cloud.md
   id: 5259
   slug: create-a-processing-pipeline-that-bursts-out-to-the-public-cloud
-  updated_at: '2019-10-17T01:33:20.960Z'
+  updated_at: '2020-02-19T19:45:42.950Z'
 2253:
   filename: 2253-charming-documentation-index.md
   id: 5325
@@ -1707,12 +1707,12 @@
   filename: 2259-deploy-databases-and-storage-middleware-to-metal-application-software-to-kubernetes.md
   id: 5345
   slug: deploy-databases-and-storage-middleware-to-metal-application-software-to-kubernetes
-  updated_at: '2019-10-29T19:52:49.992Z'
+  updated_at: '2020-02-19T19:33:34.310Z'
 2260:
   filename: 2260-tutorial-stack-of-stacks-deploying-workloads-on-kubernetes-thats-deployed-on-bare-metal.md
   id: 5346
   slug: tutorial-stack-of-stacks-deploying-workloads-on-kubernetes-thats-deployed-on-bare-metal
-  updated_at: '2019-10-22T01:01:30.767Z'
+  updated_at: '2020-02-19T19:50:48.647Z'
 _meta:
   updated_at: '2020-06-26T00:36:40+00:00'
 3092:
@@ -1750,3 +1750,513 @@ _meta:
   id: 2461
   slug: models
   updated_at: '2020-07-02T00:39:43.209Z'
+3301:
+  filename: 3301-juju-on-azure-aks.md
+  id: 8634
+  slug: juju-on-azure-aks
+  updated_at: '2020-07-14T02:08:28.082Z'
+3297:
+  filename: 3297-lxd-rewrite-draft.md
+  id: 8626
+  slug: lxd-rewrite-draft
+  updated_at: '2020-07-01T02:40:31.725Z'
+2767:
+  filename: 2767-inline-help-update-juju-deploy.md
+  id: 6882
+  slug: inline-help-update-juju-deploy
+  updated_at: '2020-03-05T15:31:26.484Z'
+3235:
+  filename: 3235-jujus-internals.md
+  id: 8382
+  slug: jujus-internals
+  updated_at: '2020-06-16T04:56:04.763Z'
+1040:
+  filename: 1040-charm-hooks.md
+  id: 2344
+  slug: charm-hooks
+  updated_at: '2020-03-21T08:35:03.168Z'
+1121:
+  filename: 1121-interface-layers.md
+  id: 2427
+  slug: interface-layers
+  updated_at: '2019-10-22T10:35:49.357Z'
+3102:
+  filename: 3102-draft-charm-interfaces.md
+  id: 7968
+  slug: draft-charm-interfaces
+  updated_at: '2020-05-22T20:09:15.395Z'
+3101:
+  filename: 3101-draft-operator-charm-writing-guide.md
+  id: 7967
+  slug: draft-operator-charm-writing-guide
+  updated_at: '2020-05-22T20:09:52.947Z'
+1118:
+  filename: 1118-getting-started-with-charm-development.md
+  id: 2424
+  slug: getting-started-with-charm-development
+  updated_at: '2019-10-22T10:35:00.399Z'
+2999:
+  filename: 2999-commands-available-within-juju-ssh-sessions-and-a-charm-context.md
+  id: 7685
+  slug: commands-available-within-juju-ssh-sessions-and-a-charm-context
+  updated_at: '2020-05-03T07:59:56.779Z'
+2914:
+  filename: 2914-live-debugging-at-python-level.md
+  id: 7346
+  slug: live-debugging-at-python-level
+  updated_at: '2020-04-13T19:34:42.056Z'
+1041:
+  filename: 1041-creating-icons-for-charms.md
+  id: 2345
+  slug: creating-icons-for-charms
+  updated_at: '2019-10-22T10:33:39.986Z'
+2969:
+  filename: 2969-developing-a-charm-outline.md
+  id: 7577
+  slug: developing-a-charm-outline
+  updated_at: '2020-04-23T00:55:03.973Z'
+1163:
+  filename: 1163-hook-tools.md
+  id: 2469
+  slug: hook-tools
+  updated_at: '2020-04-22T23:15:58.118Z'
+2919:
+  filename: 2919-draft-charm-hooks.md
+  id: 7392
+  slug: draft-charm-hooks
+  updated_at: '2020-05-20T04:01:42.128Z'
+2950:
+  filename: 2950-upcoming-working-with-actions.md
+  id: 7494
+  slug: upcoming-working-with-actions
+  updated_at: '2020-04-21T01:04:16.669Z'
+1128:
+  filename: 1128-writing-charms-that-use-storage.md
+  id: 2434
+  slug: writing-charms-that-use-storage
+  updated_at: '2019-10-22T10:39:44.447Z'
+2943:
+  filename: 2943-what-is-an-endpoint-what-is-an-endpoint-binding-collecting-info.md
+  id: 7450
+  slug: what-is-an-endpoint-what-is-an-endpoint-binding-collecting-info
+  updated_at: '2020-04-17T03:32:31.749Z'
+2920:
+  filename: 2920-draft-event-cycle.md
+  id: 7394
+  slug: draft-event-cycle
+  updated_at: '2020-04-20T03:31:00.813Z'
+2926:
+  filename: 2926-juju-debug-code-use-a-debugger-for-your-hooks.md
+  id: 7404
+  slug: juju-debug-code-use-a-debugger-for-your-hooks
+  updated_at: '2020-04-15T08:36:05.767Z'
+2918:
+  filename: 2918-draft-components-of-a-charm.md
+  id: 7390
+  slug: draft-components-of-a-charm
+  updated_at: '2020-05-20T01:58:08.031Z'
+2893:
+  filename: 2893-about-the-operator-framework-category.md
+  id: 7300
+  slug: about-the-operator-framework-category
+  updated_at: '2020-04-08T15:10:08.732Z'
+1122:
+  filename: 1122-layers-for-charm-authoring.md
+  id: 2428
+  slug: layers-for-charm-authoring
+  updated_at: '2020-03-21T08:36:05.491Z'
+2808:
+  filename: 2808-juju-user-personas.md
+  id: 7033
+  slug: juju-user-personas
+  updated_at: '2020-04-01T18:32:11.596Z'
+2811:
+  filename: 2811-state-diagrams.md
+  id: 7047
+  slug: state-diagrams
+  updated_at: '2020-03-19T04:03:36.630Z'
+1047:
+  filename: 1047-the-hook-environment-hook-tools-and-how-hooks-are-run.md
+  id: 2351
+  slug: the-hook-environment-hook-tools-and-how-hooks-are-run
+  updated_at: '2019-11-12T22:49:44.981Z'
+1589:
+  filename: 1589-juju-feature-and-compatibility-matrix.md
+  id: 3704
+  slug: juju-feature-and-compatibility-matrix
+  updated_at: '2020-03-11T04:00:26.804Z'
+2758:
+  filename: 2758-cli-command-help-text-template.md
+  id: 6841
+  slug: cli-command-help-text-template
+  updated_at: '2020-03-03T16:22:27.842Z'
+2688:
+  filename: 2688-interface-mysql.md
+  id: 6689
+  slug: interface-mysql
+  updated_at: '2020-02-24T23:26:30.829Z'
+2393:
+  filename: 2393-interface-pgsql.md
+  id: 5834
+  slug: interface-pgsql
+  updated_at: '2019-12-18T02:29:12.105Z'
+2614:
+  filename: 2614-it-seems-like-we-should-have-the-faster-lxd-docs-in-the-main-docs.md
+  id: 6453
+  slug: it-seems-like-we-should-have-the-faster-lxd-docs-in-the-main-docs
+  updated_at: '2020-02-08T18:58:51.220Z'
+2626:
+  filename: 2626-interface-elasticsearch.md
+  id: 6508
+  slug: interface-elasticsearch
+  updated_at: '2020-02-12T02:55:01.939Z'
+2618:
+  filename: 2618-getting-started-with-juju-on-microk8s.md
+  id: 6464
+  slug: getting-started-with-juju-on-microk8s
+  updated_at: '2020-02-10T20:54:24.193Z'
+1976:
+  filename: 1976-feedback-please-wecloming-new-users-to-juju.md
+  id: 4438
+  slug: feedback-please-wecloming-new-users-to-juju
+  updated_at: '2019-08-23T03:40:59.576Z'
+2569:
+  filename: 2569-interface-reql.md
+  id: 6324
+  slug: interface-reql
+  updated_at: '2020-02-19T18:52:15.918Z'
+370:
+  filename: 370-adding-tutorials.md
+  id: 1012
+  slug: adding-tutorials
+  updated_at: '2019-03-15T02:05:31.755Z'
+2395:
+  filename: 2395-interface-tls-certificates.md
+  id: 5836
+  slug: interface-tls-certificates
+  updated_at: '2019-12-03T04:21:52.454Z'
+2392:
+  filename: 2392-interface-http.md
+  id: 5833
+  slug: interface-http
+  updated_at: '2019-12-02T22:54:02.466Z'
+2390:
+  filename: 2390-about-the-interfaces-category.md
+  id: 5830
+  slug: about-the-interfaces-category
+  updated_at: '2019-12-02T21:44:20.579Z'
+326:
+  filename: 326-access-the-juju-cli-from-within-the-gui.md
+  id: 864
+  slug: access-the-juju-cli-from-within-the-gui
+  updated_at: '2019-03-15T02:06:37.440Z'
+2263:
+  filename: 2263-about-the-charming-docs-category.md
+  id: 5360
+  slug: about-the-charming-docs-category
+  updated_at: '2019-10-22T10:24:16.193Z'
+2215:
+  filename: 2215-networking-spaces.md
+  id: 5202
+  slug: networking-spaces
+  updated_at: '2019-10-14T19:46:28.243Z'
+2214:
+  filename: 2214-bundles-support-for-cross-model-relations.md
+  id: 5201
+  slug: bundles-support-for-cross-model-relations
+  updated_at: '2019-10-14T19:45:39.026Z'
+2212:
+  filename: 2212-application-databag-how-to-use.md
+  id: 5199
+  slug: application-databag-how-to-use
+  updated_at: '2019-10-14T19:40:51.613Z'
+2211:
+  filename: 2211-application-databag-introduction-and-intended-use-cases.md
+  id: 5198
+  slug: application-databag-introduction-and-intended-use-cases
+  updated_at: '2019-10-14T19:39:54.938Z'
+2196:
+  filename: 2196-getting-started-with-juju-on-kubernetes.md
+  id: 5137
+  slug: getting-started-with-juju-on-kubernetes
+  updated_at: '2019-10-09T19:11:29.717Z'
+2167:
+  filename: 2167-questions-and-answers.md
+  id: 5038
+  slug: questions-and-answers
+  updated_at: '2019-10-09T03:04:36.769Z'
+2152:
+  filename: 2152-documenting-kubernetes-getting-started-personal-background-notes.md
+  id: 5005
+  slug: documenting-kubernetes-getting-started-personal-background-notes
+  updated_at: '2019-10-09T18:52:59.211Z'
+2053:
+  filename: 2053-credential-faq.md
+  id: 4726
+  slug: credential-faq
+  updated_at: '2019-09-17T12:35:48.751Z'
+2021:
+  filename: 2021-command-show-action.md
+  id: 4562
+  slug: command-show-action
+  updated_at: '2019-09-03T08:46:39.735Z'
+1456:
+  filename: 1456-documentation-in-discourse-now-synchronised-to-web.md
+  id: 3253
+  slug: documentation-in-discourse-now-synchronised-to-web
+  updated_at: '2019-05-07T16:57:16.365Z'
+1113:
+  filename: 1113-actions-for-the-charm-author.md
+  id: 2419
+  slug: actions-for-the-charm-author
+  updated_at: '2019-10-22T10:24:38.557Z'
+1952:
+  filename: 1952-version-strings.md
+  id: 4394
+  slug: version-strings
+  updated_at: '2019-08-21T09:06:05.652Z'
+1330:
+  filename: 1330-manual-steps-to-restore-a-backup.md
+  id: 2885
+  slug: manual-steps-to-restore-a-backup
+  updated_at: '2020-03-06T10:14:37.505Z'
+1054:
+  filename: 1054-charm-promulgation.md
+  id: 2358
+  slug: charm-promulgation
+  updated_at: '2019-10-22T10:29:22.058Z'
+1595:
+  filename: 1595-configuring-model-settings.md
+  id: 3711
+  slug: configuring-model-settings
+  updated_at: '2019-06-21T19:00:23.471Z'
+1608:
+  filename: 1608-juju-docs-charms-development-juju-user-separation.md
+  id: 3736
+  slug: juju-docs-charms-development-juju-user-separation
+  updated_at: '2019-06-26T09:54:22.225Z'
+1484:
+  filename: 1484-tutorial-2-6-2-example-adding-a-k8s-cloud-and-model.md
+  id: 3368
+  slug: tutorial-2-6-2-example-adding-a-k8s-cloud-and-model
+  updated_at: '2019-05-20T15:20:45.540Z'
+1411:
+  filename: 1411-getting-started-juju-controller-configuration.md
+  id: 3124
+  slug: getting-started-juju-controller-configuration
+  updated_at: '2019-12-16T20:53:01.729Z'
+1401:
+  filename: 1401-new-2-6-feature-multi-cloud-controllers.md
+  id: 3108
+  slug: new-2-6-feature-multi-cloud-controllers
+  updated_at: '2019-05-14T17:03:46.575Z'
+1116:
+  filename: 1116-debugging-charm-hooks.md
+  id: 2422
+  slug: debugging-charm-hooks
+  updated_at: '2019-10-22T10:34:23.780Z'
+1274:
+  filename: 1274-documentation-migrated-to-discourse.md
+  id: 2737
+  slug: documentation-migrated-to-discourse
+  updated_at: '2019-03-19T02:54:48.583Z'
+1359:
+  filename: 1359-series-supported-by-juju.md
+  id: 2982
+  slug: series-supported-by-juju
+  updated_at: '2019-04-16T05:01:16.638Z'
+1333:
+  filename: 1333-model-branches.md
+  id: 2895
+  slug: model-branches
+  updated_at: '2020-02-19T03:01:25.193Z'
+1304:
+  filename: 1304-unit-lifecycle.md
+  id: 2805
+  slug: unit-lifecycle
+  updated_at: '2019-03-25T15:51:07.621Z'
+1276:
+  filename: 1276-about-the-docs-discuss-category.md
+  id: 2740
+  slug: about-the-docs-discuss-category
+  updated_at: '2019-03-15T21:18:10.334Z'
+1260:
+  filename: 1260-charm-writing.md
+  id: 2694
+  slug: charm-writing
+  updated_at: '2019-10-22T10:31:00.546Z'
+1022:
+  filename: 1022-doc-updates.md
+  id: 2325
+  slug: doc-updates
+  updated_at: '2019-04-12T19:27:32.355Z'
+1188:
+  filename: 1188-introduction-to-juju-charms.md
+  id: 2494
+  slug: introduction-to-juju-charms
+  updated_at: '2019-10-22T10:35:59.827Z'
+1181:
+  filename: 1181-tools.md
+  id: 2487
+  slug: tools
+  updated_at: '2019-10-22T10:37:30.472Z'
+1180:
+  filename: 1180-charm-tools.md
+  id: 2486
+  slug: charm-tools
+  updated_at: '2019-10-22T10:30:19.490Z'
+1168:
+  filename: 1168-charm-unit-status-and-their-meanings.md
+  id: 2474
+  slug: charm-unit-status-and-their-meanings
+  updated_at: '2019-10-22T10:30:32.313Z'
+1165:
+  filename: 1165-charm-layer-yaml-reference.md
+  id: 2471
+  slug: charm-layer-yaml-reference
+  updated_at: '2019-10-22T10:28:52.595Z'
+1139:
+  filename: 1139-charms-and-mysql-interfaces.md
+  id: 2445
+  slug: charms-and-mysql-interfaces
+  updated_at: '2020-02-24T23:05:20.168Z'
+1135:
+  filename: 1135-deploy-your-docker-container-to-any-cloud-with-charms.md
+  id: 2441
+  slug: deploy-your-docker-container-to-any-cloud-with-charms
+  updated_at: '2019-10-22T10:38:14.083Z'
+1131:
+  filename: 1131-upgrading-a-charm.md
+  id: 2437
+  slug: upgrading-a-charm
+  updated_at: '2019-10-22T10:38:03.020Z'
+1130:
+  filename: 1130-writing-charm-tests.md
+  id: 2436
+  slug: writing-charm-tests
+  updated_at: '2019-10-22T10:39:34.705Z'
+1129:
+  filename: 1129-writing-charms-that-use-terms.md
+  id: 2435
+  slug: writing-charms-that-use-terms
+  updated_at: '2019-10-22T10:39:59.318Z'
+1127:
+  filename: 1127-using-resources-developer-guide.md
+  id: 2433
+  slug: using-resources-developer-guide
+  updated_at: '2019-12-17T00:49:49.503Z'
+1125:
+  filename: 1125-metric-collecting-charms.md
+  id: 2431
+  slug: metric-collecting-charms
+  updated_at: '2019-10-22T10:36:14.643Z'
+1120:
+  filename: 1120-writing-a-layer-by-example.md
+  id: 2426
+  slug: writing-a-layer-by-example
+  updated_at: '2019-10-22T10:39:12.658Z'
+1117:
+  filename: 1117-event-cycle.md
+  id: 2423
+  slug: event-cycle
+  updated_at: '2019-10-22T10:34:50.649Z'
+1115:
+  filename: 1115-debugging-building-layers.md
+  id: 2421
+  slug: debugging-building-layers
+  updated_at: '2019-10-22T10:34:15.936Z'
+1114:
+  filename: 1114-dhx-a-customized-hook-debugging-environment-plugin.md
+  id: 2420
+  slug: dhx-a-customized-hook-debugging-environment-plugin
+  updated_at: '2019-10-22T10:34:32.558Z'
+1056:
+  filename: 1056-unmaintained-charms.md
+  id: 2360
+  slug: unmaintained-charms
+  updated_at: '2019-10-22T10:37:49.905Z'
+1055:
+  filename: 1055-charm-review-process.md
+  id: 2359
+  slug: charm-review-process
+  updated_at: '2019-10-22T10:29:35.557Z'
+1053:
+  filename: 1053-subordinate-applications.md
+  id: 2357
+  slug: subordinate-applications
+  updated_at: '2019-10-22T10:36:28.816Z'
+1052:
+  filename: 1052-application-configuration.md
+  id: 2356
+  slug: application-configuration
+  updated_at: '2020-06-11T01:08:56.384Z'
+1050:
+  filename: 1050-the-lifecycle-of-charm-relations.md
+  id: 2354
+  slug: the-lifecycle-of-charm-relations
+  updated_at: '2019-10-22T10:37:13.723Z'
+1049:
+  filename: 1049-how-to-become-a-juju-charm-author.md
+  id: 2353
+  slug: how-to-become-a-juju-charm-author
+  updated_at: '2019-10-22T10:35:18.224Z'
+1048:
+  filename: 1048-dealing-with-errors-encountered-by-charm-hooks.md
+  id: 2352
+  slug: dealing-with-errors-encountered-by-charm-hooks
+  updated_at: '2019-10-22T10:33:57.496Z'
+1046:
+  filename: 1046-writing-your-first-juju-charm.md
+  id: 2350
+  slug: writing-your-first-juju-charm
+  updated_at: '2019-11-15T00:46:09.070Z'
+1045:
+  filename: 1045-the-juju-charm-store.md
+  id: 2349
+  slug: the-juju-charm-store
+  updated_at: '2019-10-22T10:36:58.813Z'
+1044:
+  filename: 1044-charm-store-policy.md
+  id: 2348
+  slug: charm-store-policy
+  updated_at: '2019-10-22T10:29:51.341Z'
+1043:
+  filename: 1043-charm-metadata.md
+  id: 2347
+  slug: charm-metadata
+  updated_at: '2020-05-03T02:27:26.118Z'
+1039:
+  filename: 1039-creating-config-yaml-and-configuring-charms.md
+  id: 2343
+  slug: creating-config-yaml-and-configuring-charms
+  updated_at: '2019-10-22T10:33:22.741Z'
+1038:
+  filename: 1038-components-of-a-charm.md
+  id: 2342
+  slug: components-of-a-charm
+  updated_at: '2019-10-22T10:33:08.268Z'
+1037:
+  filename: 1037-best-practice-for-charm-authors.md
+  id: 2341
+  slug: best-practice-for-charm-authors
+  updated_at: '2019-10-22T10:27:22.447Z'
+1036:
+  filename: 1036-benchmarking-juju-applications.md
+  id: 2340
+  slug: benchmarking-juju-applications
+  updated_at: '2019-10-22T10:25:15.940Z'
+520:
+  filename: 520-about-the-docs-in-progress-category.md
+  id: 1583
+  slug: about-the-docs-in-progress-category
+  updated_at: '2019-08-22T19:58:54.073Z'
+393:
+  filename: 393-tailor-juju-help-for-new-inexperienced-users.md
+  id: 1157
+  slug: tailor-juju-help-for-new-inexperienced-users
+  updated_at: '2019-03-15T02:05:10.154Z'
+3341:
+  filename: 3341-draft-juju-with-google-kubernetes-engine-gke.md
+  id: 8711
+  slug: draft-juju-with-google-kubernetes-engine-gke
+  updated_at: '2020-07-14T02:49:14.852Z'

@@ -15,7 +15,10 @@ Each of these has a distinct role, and it’s important to understand how a char
 Base layers are layers that other charms can be built on. They contain things that are common to many different charms, and allow charms to reuse that commonality without having to reimplement it each time. Base layers typically are not sufficient on their own to be considered a charm; they likely can’t be built into a deployable charm, and if they can, they’re unlikely to do anything useful.
 
 The basic layer provides the minimum needed to use the [charms.reactive](https://charmsreactive.readthedocs.io/) framework. The [layer-basic](http://github.com/juju-solutions/layer-basic) provides:
-* Wheelhouse support for management of python dependencies. * Hook decorators so the code can react to Juju Hooks. * Logic decorators for bash and python code (@when, @when_not, @when_any, etc). * A python library named [charmhelpers](https://charm-helpers.readthedocs.io/) to make writing charm code easier
+* Wheelhouse support for management of python dependencies.
+* Hook decorators so the code can react to Juju hooks. 
+* Logic decorators for bash and python code (@when, @when_not, @when_any, etc). 
+* A python library named [charmhelpers](https://charm-helpers.readthedocs.io/) to make writing charm code easier
 
 The most useful base layers are actually a type of runtime layer. For example, [layer-apache-php](https://github.com/johnsca/apache-php) provides Apache2 and mod-php, as well as mechanisms for fetching and installing a PHP project within that runtime. Other layers can build off the runtime layers to avoid code duplication and separate concerns.
 

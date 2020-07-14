@@ -4,37 +4,35 @@ This page covers the various fields that can be included. Some are required and 
 
 <h2 id="heading--required-fields">Required fields</h2>
 
-Every charm should have these fields declared:
+Every charm should have these fields declared.
 
--   `name`: The charm name, which is used to form the charm URL.
-    -   The following criteria are applied:
-        -   Contains only characters `a-z`, `0-9`, and `-` (hyphen)
-        -   Must start with `a-z`
-        -   Must not end with a `-` (hyphen)
-    -   May only end with digits if the digits are *not* directly preceded by a space.
-    -   Simple examples: 'foo' and 'foo-bar-baz'.
--   `summary`: A one-line description of the charm.
--   `description`: A longer description of the charm and its features. It will appear in the Juju GUI.
-
-Here's a minimal, but valid, metadata file:
+Here's a minimal valid, metadata.yaml file:
 
 ``` yaml
-    name: mongodb
-    summary: An open-source document database, and the leading NoSQL database
-    description: |
-      MongoDB is a high-performance, open source, schema-free document- oriented
-      data store that's easy to deploy, manage and use. It's network accessible,
-      written in C++ and offers the following features:
-      - Collection oriented storage
-      - easy storage of object-style data
-      - Full index support, including on inner objects
-      - Query profiling
-      - Replication and fail-over support
-      - Efficient storage of binary data including large objects (e.g. videos)
-      - Auto-sharding for cloud-level scalability (Q209) High performance,
-      scalability, and reasonable depth of functionality are the goals for the
-      project.
+name: mongodb
+summary: A document database
+description: A database that stores JSON-like data. 
 ```
+
+
+###  `name`
+
+The charm's name, which is used when `juju deploy` is called.
+
+Charm names must:
+  -   Contain only letters (`a-z`),  numbers (`0-9`), and hyphens (`-`)
+  -   Start with `a-z`
+  -   End with a letter or a number
+
+Examples: 'foo' and 'foo-bar-baz'
+
+### `summary`
+
+A one-line description of the charm.
+
+###  `description`
+
+A longer description of the charm and its features. It will appear in the Juju GUI.
 
 <h2 id="heading--charm-store-fields">Charm Store fields</h2>
 
@@ -71,13 +69,52 @@ Charms destined for the [Charm Store](https://jujucharms.com/store) should set t
 
 <h2 id="heading--miscellaneous-fields">Miscellaneous fields</h2>
 
--   `series`: A list of series that the charm supports.
-    -   Supports Ubuntu code names (e.g. 'trusty', 'xenial') or CentOS release names (e.g. 'centos7').
-    -   The top-most entry acts as the default series.
--   `terms`: A list of the terms the user must agree to before using the charm.
--   `min-juju-version`: The minimum Juju version running on the controller (machine agent) that this charm is compatible with.
--   `provides`, `requires`, and `peers`: Define the charm's [relations](/t/implementing-relations-in-juju-charms/1051).
--   `subordinate`: Indicates a [subordinate](/t/subordinate-applications/1053) charm (set to 'true'). Such a charm must contain at least one `requires` relation with container scope.
+### `display-name`
+
+Displayed in the Charm Store and other user-facing areas.
+
+###  `series`
+
+A list of series that the charm supports. The first element of the list acts as the default series.
+
+| Operating system* | Supported series | 
+|---|---|
+| Kubernetes | `kubernetes` |
+| Ubuntu | `xenial`, `bionic`, `focal` (and other series code names) |
+| CentOS | `centos7` |
+| openSUSE | `opensuseleap` |
+| MS Windows | `win2012`,  `win2012r2`, `win2012hv`, `win2012hvr2`, `win2016`, `win2016hv`, `win2016nano `, `win2019` | 
+
+
+\* Not all clouds support all operating systems. For best support, use `kubernetes` or an Ubuntu series.
+
+### `terms`
+
+A list of the terms  the user must agree to before using the charm before a deployment will proceed.
+
+###  `min-juju-version`
+
+ The minimum Juju version running on the controller (machine agent) that this charm is compatible with.
+
+## Relation fields
+
+These fields define the charm's [relations](/t/implementing-relations-in-juju-charms/1051).
+
+###  `provides`
+
+Describes the relations that this charm provides for others.
+
+### `requires`
+
+Describes the relations that this charm consumes from other charms. Typically `requires` relations are essential for the correct functioning of the application.
+
+### peers
+
+Allows information to be exchanged between units of the same application. 
+
+### `subordinate`
+
+Indicates a [subordinate](/t/subordinate-applications/1053) charm (when set to 'true'). Subordinate applications must contain at least one `requires` relation with container scope.
 
 <h2 id="heading--storage-field">Storage field</h2>
 
@@ -103,9 +140,14 @@ The `resources` field allows one to add blobs that a charm can make use of.
 ``` yaml
 resources:
   example:
-    type: file # "file" is the only type supported currently
+    type: file
     filename: example.tar.gz
     description: example resource
+  gitlab_image:
+    type: oci-image
+    description: |
+      Image used for gitlab pod. Must use gitlab/gitlab-ce:12.0.12-ce.0 or older
+      to use the mysql interface.
 ```
 
 <h2 id="heading--payloads-field">Payloads field</h2>

@@ -18,8 +18,8 @@ Go to your home directory (or wherever is appropriate and make the appropriate f
 
 ``` text
 cd ~
-mkdir -p charms/precise
-cd charms/precise
+mkdir -p charms
+cd charms
 ```
 
 <h2 id="heading--create-a-bare-bones-charm-with-charm-tools">Create a bare bones charm with Charm Tools</h2>

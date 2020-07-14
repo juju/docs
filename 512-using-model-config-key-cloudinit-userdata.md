@@ -41,7 +41,7 @@ Create a file, `cloudinit-userdata.yaml`, which starts with the `cloudinit-userd
 Template `cloudinit-userdata.yaml`:
 
 ```plain
-cloudinit-userdata:
+cloudinit-userdata: |
     <key>: <value>
     <key>: <value>
 ```

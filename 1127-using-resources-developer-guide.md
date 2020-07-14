@@ -40,8 +40,8 @@ Sample output:
 
 ``` text
 [Service]
-RESOURCE SUPPLIED BY REVISION
-software admin@local 2016-25-05T18:37
+Resource  Supplied by  Revision
+software  admin@local  0
 ```
 
 Or
@@ -54,8 +54,8 @@ Sample output:
 
 ``` text
 [Unit]
-RESOURCE REVISION
-software 2016-25-05T18:37
+Resource  Revision
+software  0
 ```
 
 <h3 id="heading--charm-list-resources">charm list-resources</h3>
@@ -71,10 +71,9 @@ charm list-resources cs:~lazypower/etcd
 Sample output:
 
 ``` text
-[Service]
-RESOURCE REVISION
-etcd     0
-etcdctl  0
+Resource  Revision
+etcd      0
+etcdctl   0
 ```
 
 <h2 id="heading--adding-resources">Adding resources</h2>

@@ -31,3 +31,4 @@ cp -r local/tools <path/to/webserver>
 -   Containers are not yet supported
 -   There is a lack of mongo tools at the moment so any functionality depending on those is not available(for example backups)
 -   There is no way to currently specify a proxy or mirror for `yum` in the environment configuration. The values that you specify for `apt` packages will be used for `yum` packages as well. This limitation will be fixed as soon as possible.
+- Bootstrap must be an Ubuntu machine

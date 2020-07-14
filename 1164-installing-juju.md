@@ -117,10 +117,10 @@ Juju functionality can be extended through the use of plugins. See the [Juju plu
 <!-- LINKS TO CHANGE -->
 
 [Release notes]: https://discourse.juju.is/t/juju-2-8-0-release-notes/3180
-[centos-manual]: https://launchpad.net/juju/2.8/2.8.0/+download/juju-2.8.0-centos7.tar.gz
-[centos-manual-md5]: https://launchpad.net/juju/2.8/2.8.0/+download/juju-2.8.0-centos7.tar.gz/+md5
-[windows-installer]: https://launchpad.net/juju/2.7/2.7.6/+download/juju-setup-2.7.6-signed.exe
-[windows-installer-md5]: https://launchpad.net/juju/2.7/2.7.6/+download/juju-setup-2.7.6-signed.exe/+md5
-[windows-installer-sig]: https://launchpad.net/juju/2.7/2.7.6/+download/juju-setup-2.7.6-signed.exe.asc
+[centos-manual]: https://launchpad.net/juju/2.8/2.8.1/+download/juju-2.1.0-centos7.tar.gz
+[centos-manual-md5]: https://launchpad.net/juju/2.8/2.8.1/+download/juju-2.8.1-centos7.tar.gz/+md5
+[windows-installer]: https://launchpad.net/juju/2.8/2.8.0/+download/juju-setup-2.8.0-signed.exe
+[windows-installer-md5]: https://launchpad.net/juju/2.8/2.8.0/+download/juju-setup-2.8.0-signed.exe/+md5
+[windows-installer-sig]: https://launchpad.net/juju/2.8/2.8.0/+download/juju-setup-2.8.0-signed.exe.asc
 [lp-juju]: https://launchpad.net/juju/
 [lp-juju-downloads]: https://launchpad.net/juju/+download

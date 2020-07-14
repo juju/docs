@@ -12,9 +12,10 @@ A charm joining this relationship may also request that the created database set
 
 Implementation in `bash`:
 
-``` text
+```bash
 #!/bin/bash
 # db-relation-joined example
+
 relation-set encoding=latin1
 juju-log "db-relation-joined set encoding=latin1"
 ```
@@ -36,23 +37,29 @@ The corresponding `relation-joined` hook in any charm connecting to the mysql ch
 
 Implementation in `bash`:
 
-``` text
+```bash
 #!/bin/bash
 # db-relation-joined example
-set -ex # -x for verbose logging to juju debug-log
-juju-log "Joining database at $JUJU_REMOTE_UNIT"
-hostname=`unit-get public-address`
+
+set -e # abort on error
+set -x # trace execution
+
+hostname=$(unit-get public-address)
 juju-log "from host: $hostname"
+
 # Check to see if 'database' has been set, and loop until it is
-database=`relation-get database`
+database=$(relation-get database)
 if [ -z "$database" ] ; then
    exit 0
 fi
+juju-log "Joining database at $JUJU_REMOTE_UNIT"
+
 # retrieve the remaining values which have been set by the mysql charm
-user=`relation-get user`
-password=`relation-get password`
-host=`relation-get private-address`
-slave=`relation-get slave`
+user=$(relation-get user)
+password=$(relation-get password)
+host=$(relation-get private-address)
+slave=$(relation-get slave)
+
 # do something with these values
 juju-log "Database acquired"
 juju-log "database: $database username: $user host: $host"

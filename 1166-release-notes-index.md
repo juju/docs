@@ -1,6 +1,8 @@
 This page maintains the Release Notes for the 2.4, 2.5, 2.6 and 2.7 series of Juju.
 
+- [2.8.1](https://discourse.juju.is/t/juju-2-8-1-release-notes/3296)
 - [2.8.0](https://discourse.juju.is/t/juju-2-8-0-release-notes/3180)
+- [2.7.7](https://discourse.juju.is/t/juju-2-7-7-release-notes/3293)
 - [2.7.6](https://discourse.juju.is/t/juju-2-7-6-release-notes/2888)
 - [2.7.5](https://discourse.juju.is/t/juju-2-7-5-release-notes/2772)
 - [2.7.4](https://discourse.juju.is/t/juju-2-7-4-release-notes/2787)

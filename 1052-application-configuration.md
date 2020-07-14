@@ -2,13 +2,13 @@
 
 A [Charm](/t/charms/1082) often will require access to specific options or configuration. Charms allow for the manipulation of the various configuration options which the charm author has chosen to expose. juju provides tools to help manage these options and respond to changes in these options over the lifetime of the application deployment. These options apply to the entire application, as opposed to only a specific unit or relation. Configuration is modified by an administrator at deployment time or over the lifetime of the applications.
 
-As an example a wordpress application may expose a 'blog-title' option. This option would control the title of the blog being published. Changes to this option would be applied to all units implementing this application through the invocation of a hook on each of them.
+As an example, a wordpress charm may expose a 'blog-title' option. This option would control the title of the blog being published. Changes to this option would be applied to all units of the charm, as an application, through the invocation of a hook on each of them.
 
 <h2 id="heading--using-configuration-options">Using configuration options</h2>
 
-Configuration options are manipulated using a command line interface. juju provide a set command to aid the administrator in changing values.
+Configuration options are manipulated using a command line interface. Juju provides the `juju config`  command to update configuration settings:
 
-    juju set <application name> option=value [option=value]
+    juju config <application name> option=value [option=value]
 
 This command allows changing options at runtime and takes one or more name/value pairs which will be set into the application options. Configuration options which are set together are delivered to the applications for handling together. E.g. if you are changing a username and a password, changing them individually may yield bad results since the username will temporarily be set with an incorrect password.
 
