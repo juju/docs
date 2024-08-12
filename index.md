@@ -69,7 +69,6 @@ Juju is a member of the Ubuntu family. It’s an open source project that warmly
 :hidden:
 :maxdepth: 2
 
-self
 Tutorial </tutorial/get_started>
 How-to guides </how-to/index>
 Reference </reference/index>
