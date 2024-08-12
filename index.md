@@ -70,7 +70,3 @@ Juju is a member of the Ubuntu family. It’s an open source project that warmly
 :maxdepth: 2
 
 self
-Tutorial </tutorial/get_started>
-/how-to/index
-/reference/index
-/explanation/index
