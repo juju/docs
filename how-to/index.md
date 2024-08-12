@@ -1,2 +1,2 @@
 (howto)=
-# Juju How-to guides
+# How-to guides

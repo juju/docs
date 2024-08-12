@@ -1,2 +1,2 @@
 (tutorial)=
-# Juju Tutorial
+# Tutorial

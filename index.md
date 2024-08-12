@@ -71,6 +71,6 @@ Juju is a member of the Ubuntu family. It’s an open source project that warmly
 
 self
 Tutorial </tutorial/get_started>
-/how-to/index
-/reference/index
-/explanation/index
+How-to guides </how-to/index>
+Reference </reference/index>
+Explanation </explanation/index>
