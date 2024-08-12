@@ -181,6 +181,8 @@ extensions = [
 # Add files or directories that should be excluded from processing.
 exclude_patterns = [
     'doc-cheat-sheet*',
+    'pull_request_template.md',
+    'README.md'
     ]
 
 # Add custom CSS files (located in .sphinx/_static/)
