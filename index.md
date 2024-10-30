@@ -3,10 +3,7 @@
 
 Juju is an open-source ecosystem of tools designed to revolutionise the speed and quality of software operations on any cloud.
 
-The Juju ecosystem comprises a charm hub, a charm SDK, and Juju. 
-
-- A charm is a software operator that packages an application with operations code in a way understandable to Juju.
-- Juju is an orchestration engine that uses charms and the applications deployed from them to make operations as simple as `juju deploy foo`, `juju configure foo`, `juju integrate foo bar`, `juju scale foo`, `juju upgrade foo`, etc. – for any application on any type of cloud.
+When you do operations the Juju way, things are simple as  `juju deploy`, `juju configure`, `juju integrate...`, `juju scale...`, `juju upgrade`, etc. – for any charmed application (i.e., application equipped with operations code for use with Juju) on any type of supported cloud (Kubernetes or otherwise).
 
 > [Browse existing charms on Charmhub](https://charmhub.io/) <p> [Browse supported clouds](https://juju.is/docs/juju/juju-supported-clouds) 
 
@@ -15,6 +12,8 @@ At a time when operations code is still largely stuck with handcrafted code, YAM
 > [Did you know? Juju also has an integration with Terraform!](https://juju.is/docs/juju/terraform-juju-client)
 
 Whether you are a developer wondering how to make your application ready for the cloud, a cloud system administrator or an SRE tired of YAML, or a business owner, Juju can help.
+
+
 
 
 ---
