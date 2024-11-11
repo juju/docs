@@ -1,0 +1,11 @@
+(supported-features)=
+# Supported features
+
+> See also: [Juju SDK | File `metadata.yaml` > Key `assumes`](https://juju.is/docs/sdk/metadata-yaml#heading--assumes)
+
+A Juju model supports many different features. Some of these features may be explicitly targeted by a charm, as a way to check compatibility between the model and the charm at deployment or upgrade time. These features, along with their brief description and the earliest Juju version that introduces support for them, are given below.
+
+|Feature Name|Description|Available since|
+| --- | --- | --- |
+|juju|The version of Juju agent binaries used by the model|2.9.23|
+|k8s-api|The Kubernetes API lets charms query and manipulate the state of API objects in a Kubernetes cluster. Charms designed to work with Kubernetes will generally depend on this particular feature.|2.9.23|

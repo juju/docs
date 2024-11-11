@@ -1,9 +1,14 @@
-[note type=caution]
+(command-juju-list-storage-pools)=
+# Command 'juju list-storage-pools'
+
+```{caution}
+
 The information in this doc is based on Juju version 3.5.5,
 and may not accurately reflect other versions of Juju.
-[/note]
 
-> See also: [create-storage-pool](/t/10093), [remove-storage-pool](/t/10068)
+```
+
+> See also: {ref}`create-storage-pool <command-juju-create-storage-pool>`, {ref}`remove-storage-pool <command-juju-remove-storage-pool>`
 **Alias:** storage-pools
 
 ## Summary
@@ -46,9 +51,3 @@ If only types are specified, all pools of the specified types will be listed.
 
 Both pool types and names must be valid.
 Valid pool types are pool types that are registered for Juju model.
-
-
----
-
--------------------------
-

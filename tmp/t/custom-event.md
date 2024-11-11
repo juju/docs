@@ -1,0 +1,51 @@
+(custom-event)=
+# Custom event
+
+The Operator Framework lets any Object known to it create custom events. A custom event is, from a technical standpoint, an EventBase subclass that can be emitted at any point throughout the charm's lifecycle. These events are therefore totally unknown to Juju. They are essentially charm-internal, and can be useful to abstract certain conditional workflows and wrap the toplevel Juju event so it can be observed independently.
+
+They are typically useful in charm libraries, where they can be used instead of callbacks to provide a more ops-native-feeling API.
+
+A typical use case of custom events is a charm lib wrapping a relation endpoint. The wrapper might want to check that the remote end has sent valid data; and if that is the case, communicate it to the charm.
+
+For example, suppose that you have a `DatabaseRequirer` object, and the charm using it is interested in knowing when the database is ready. The DatabaseRequirer then will be:
+
+```python
+class DatabaseReadyEvent(ops.charm.EventBase):
+    """Event representing that the database is ready."""
+
+
+class DatabaseRequirerEvents(ops.framework.ObjectEvents):
+    """Container for Database Requirer events."""
+    ready = ops.charm.EventSource(DatabaseReadyEvent)
+
+class DatabaseRequirer(ops.framework.Object):
+    on = DatabaseRequirerEvents()
+
+    def __init__(self, charm, ...):
+        [...]
+        self.framework.observe(self.charm.on.database_relation_changed, self._on_db_changed)
+    
+    def _on_db_changed(self, e):
+        if [...]:  # check remote end has sent valid data
+            self.on.ready.emit()
+```
+
+The charm using `DatabaseRequirer`, then, instead of observing the `database_relation_ready` event, can observe the `ready` event emitted by the wrapper instead: a higher-level API better reflecting what the event means, rather how the knowledge is obtained.
+
+```python
+
+class MyCharm(CharmBase):
+    def __init__(...):
+        [...]
+        self.db_requirer = DatabaseRequirer(self)
+        self.framework.observe(self.db_requirer.on.ready, self._on_db_ready)
+```
+
+# Comparison with a callback model
+
+This behaviour is similar, but not quite equivalent, with a callback model where the charm does:
+`self.db_requirer = DatabaseRequirer(self, on_ready=self._on_db_ready)`, and where the DatabaseRequirer, instead of defining and emitting a custom event, simply calls the `on_ready` callback it received whenever the preconditions are met.
+
+There are two main differences with the custom event model:
+- the feel is less `ops`y and native
+- `ops` queues any custom events so that they are executed not immediately, but after the event currently being emitted is 'done', i.e. the handler for it returns. So keep in mind that a callback might be called 'earlier' than one would expect if you're used to events.
