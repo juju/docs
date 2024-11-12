@@ -1,0 +1,53 @@
+(sdk-reference)=
+# SDK Reference
+
+Technical information - specifications, APIs, architecture, etc., related to the Charm SDK
+
+- {ref}`Bundle <bundle>`                                           
+  - {ref}`File `<bundle>.yaml` <file-bundleyaml>`                             
+- {ref}`Charm <charm>`                                            
+  - {ref}`List of files in the charm project <list-of-files-in-a-charm-project>`               
+  - {ref}`The Juju execution flow for a charm <the-juju-execution-flow-for-a-charm>`             
+  - {ref}`Charm taxonomy <charm-taxonomy>`
+      - {ref}`12-Factor app charm <12-factor-app-charm>`                                   
+  - {ref}`Charm maturity <charm-maturity>`                                  
+  - {ref}`Charm development best practices <charm-development-best-practices>`                 
+- {ref}`Charmcraft <charmcraft-charmcraft>`                                       
+    - {ref}`List of Charmcraft CLI commands <list-of-charmcraft-commands>`
+    - {ref}`Charmcraft extension ‘flask-framework’ <charmcraft-extension-flask-framework>`
+    - {ref}`Charmcraft extension 'django-framework' <charmcraft-extension-django-framework>`                  
+    - {ref}`Charmcraft extension 'fastapi-framework' <charmcraft-extension-fastapi-framework>`
+    - {ref}`Charmcraft deprecation notices <charmcraft-deprecation-notices>`   
+    - {ref}`Charmcraft analyzers and linters <charmcraft-analyzers-and-linters>`                       
+- {ref}`Charmhub <charmhub>`                                         
+- {ref}``charm-relation-interfaces` <charm-relation-interfaces>`                     
+- {ref}`Event <event>`                                            
+  - {ref}`List of events <list-of-events>`                                   
+  - {ref}`Custom event <custom-event>`                                     
+  - {ref}`Charm lifecycle <charm-lifecycle>`
+- {ref}`Extension <extension>` 
+- {ref}``jhack` <jhack>`                                 
+- {ref}`Library <library>`                                          
+  - {ref}`Popular charm library index <popular-charm-library-index>`                      
+- {ref}`Ops <ops-ops>`                                                                           
+- {ref}`Pebble <pebble>`                                          
+- {ref}`Profile <profile>`                               
+- {ref}`Promotion <promotion>`                                      
+- {ref}`Publication <charm-publication>`                                     
+  - {ref}`Reasons to publish your charm on Charmhub <reasons-to-publish-your-charm-on-charmhub>`       
+- {ref}``pytest-operator` <library-pytest-operator>`                              
+- {ref}`Revision <revision>`                                       
+- {ref}`Rockcraft <rockcraft>`  
+    - {ref}`Rockcraft extension ‘flask-framework’ <rockcraft-extension-flask-framework>`
+    - {ref}`Rockcraft extension 'django-framework' <rockcraft-extension-django-framework>` 
+    - {ref}`Rockcraft extension 'fastapi-framework' <rockcraft-extension-fastapi-framework>`                                   
+- {ref}`Scenario <scenario>`                                        
+  - {ref}`Context <context-scenario>`                                         
+  - {ref}`Event <event-scenario>`                                           
+  - {ref}`State <state-scenario>`                                           
+- {ref}`Status <status>`                                          
+- {ref}`Storage <storage>`                                          
+- {ref}`StoredState: Uses, Limitations <storedstate-uses-limitations>`                   
+- {ref}`Testing <testing>`                                         
+  - {ref}`Interface tests <interface-tests>`                                 
+- {ref}`YAML anchors and aliases <yaml-anchors-and-aliases>`

@@ -1,0 +1,41 @@
+(command-juju-add-user)=
+# Command 'juju add-user'
+
+```{caution}
+
+The information in this doc is based on Juju version 3.5.5,
+and may not accurately reflect other versions of Juju.
+
+```
+
+> See also: {ref}`register <command-juju-register>`, {ref}`grant <command-juju-grant>`, {ref}`users <command-juju-users>`, {ref}`show-user <command-juju-show-user>`, {ref}`disable-user <command-juju-disable-user>`, {ref}`enable-user <command-juju-enable-user>`, {ref}`change-user-password <command-juju-change-user-password>`, {ref}`remove-user <command-juju-remove-user>`
+
+## Summary
+Adds a Juju user to a controller.
+
+## Usage
+```juju add-user [options] <user name> [<display name>]```
+
+### Options
+| Flag | Default | Usage |
+| --- | --- | --- |
+| `-B`, `--no-browser-login` | false | Do not use web browser for authentication |
+| `-c`, `--controller` |  | Controller to operate in |
+
+## Examples
+
+    juju add-user bob
+    juju add-user --controller mycontroller bob
+
+
+## Details
+
+The user's details are stored within the controller and will be removed when
+the controller is destroyed.
+
+A user unique registration string will be printed. This registration string 
+must be used by the newly added user as supplied to complete the registration
+process.
+
+Some machine providers will require the user to be in possession of certain
+credentials in order to create a model.

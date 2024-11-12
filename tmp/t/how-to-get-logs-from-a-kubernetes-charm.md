@@ -1,0 +1,120 @@
+(how-to-get-logs-from-a-kubernetes-charm)=
+# How to get logs from a Kubernetes charm
+
+> See also: [How to debug a charm](https://discourse.charmhub.io/t/how-to-debug-a-charm/4837)
+
+This document shows how to get logs from a Kubernetes charm.
+
+**Contents:**
+
+- [Use `juju debug-log`](#heading--use-juju-debug-log)
+- [Use `kubectl logs`](#heading--use-kubectl-logs)
+- [Use `pebble logs`](#heading--use-pebble-logs)
+- [Use `pebble changes` and `tasks`](#heading--use-pebble-changes-and-tasks)
+- [Use `juju ssh` and `cat`](#heading--use-juju-ssh-and-cat)
+- [Use an integrated solution](#heading--use-an-integrated-solution)
+
+ <a href="#heading--use-juju-debug-log"><h2 id="heading--use-juju-debug-log">Use `juju debug-log`</h2></a>
+
+ 
+Juju automatically logs all the agents on a per-model basic. It also picks up automatically logs from charm code that uses the python [logging facility](https://docs.python.org/3/library/logging.html):
+
+```python
+import logging
+logger = logging.getLogger(__name__)
+```
+
+One way to get logs from a Kubernetes charm is thus to use Juju's built-in logging tools, as follows:
+
+1. Set the model configuration such that logging for a unit is at the `DEBUG` level:
+
+```text
+juju model-config logging-config="<root>=WARNING; unit=DEBUG"
+```
+
+2. View the resulting logs:
+
+`juju debug-log`
+
+```{caution}
+
+The `debug-log` command shows logs from charm code (charm container), but not the workload container.
+
+```
+
+> See more: [Juju | How to manage Juju logs](https://juju.is/docs/olm/manage-logs#heading--configure-the-log-file-rotation)
+
+<a href="#heading--use-kubectl-logs"><h2 id="heading--use-kubectl-logs">Use `kubectl logs`</h2></a>
+
+With [`kubectl logs`](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#logs) we can see logs from the charm and the workload containers.
+
+For example:
+```shell
+# Get logs from the charm container
+kubectl -n model_name logs pods/prometheus-0 -c charm
+
+# Get logs from the workload container
+kubectl -n model_name logs pods/prometheus-0 -c prometheus
+```
+
+Logs that are printed to stdout/stderr are automatically picked up by kubectl (in machine charms: journalctl). Logging to stdout/stderr is an established convention and is generally preferable to only logging to a file.
+
+
+ <a href="#heading--use-pebble-logs"><h2 id="heading--use-pebble-logs">Use `pebble logs`</h2></a>
+
+With `pebble logs` we can get logs for a particular pebble service:
+
+```bash
+juju ssh --container prometheus prometheus/0 \
+  /charm/bin/pebble logs prometheus
+```
+
+ <a href="#heading--use-pebble-changes-and-tasks"><h2 id="heading--use-pebble-changes-and-tasks">Use `pebble changes` and `tasks`</h2></a>
+
+To see logs related to a service that failed to start, you first obtain the ID of the failed change from the list of changes with `pebble changes`,
+```shell
+$ juju ssh --container prometheus prometheus/0 /charm/bin/pebble changes
+ID   Status  Spawn                   Ready                   Summary
+30   Error   yesterday at 21:31 UTC  yesterday at 21:31 UTC  Replan service "prometheus"
+31   Done    yesterday at 21:38 UTC  yesterday at 21:38 UTC  Execute command "/usr/bin/promtool"
+32   Done    yesterday at 21:38 UTC  yesterday at 21:38 UTC  Replan service "prometheus"
+```
+
+and then query for the logs with `pebble tasks`,
+```shell
+$ juju ssh --container prometheus prometheus/0 /charm/bin/pebble tasks 30
+Status  Spawn                   Ready                   Summary
+Error   yesterday at 21:31 UTC  yesterday at 21:31 UTC  Start service "prometheus"
+
+......................................................................
+Start service "prometheus"
+
+2023-03-07T21:31:39Z INFO Most recent service output:
+    (...)
+    ts=2023-03-07T21:31:39.309Z caller=web.go:561 level=info component=web msg="Start listening for connections" address=0.0.0.0:9090
+    ts=2023-03-07T21:31:39.309Z caller=main.go:807 level=error msg="Unable to start web listener" err="listen tcp 0.0.0.0:9090: bind: address already in use"
+2023-03-07T21:31:39Z ERROR cannot start service: exited quickly with code 1
+```
+
+ <a href="#heading--use-juju-ssh-and-cat"><h2 id="heading--use-juju-ssh-and-cat">Use `juju ssh` and `cat`</h2></a>
+
+You could `cat`  log files directly with `juju ssh`:
+```
+juju ssh --container prometheus prometheus/0 \
+  cat /var/log/bootstrap.log
+```
+
+If your workload does not write logs to disk, you could modify the pebble service as follows:
+
+```python
+"services": {
+  "service-name": {
+    # trick to drop the logs to a file but also keep them available in the pod logs
+    # https://github.com/canonical/traefik-k8s-operator/blob/a287fa6a41077c8c3b7d3eb244f055c2a354bd2a/src/charm.py#L880
+    "command": '/bin/sh -c "{} | tee -a {}"'.format(BIN_PATH, LOG_PATH),
+  },
+},
+```
+ <a href="#heading--use-an-integrated-solution"><h2 id="heading--use-an-integrated-solution">Use an integrated solution</h2></a>
+
+For an integrated solution, consider the [`loki_push_api`](https://charmhub.io/loki-k8s/libraries/loki_push_api) interface.

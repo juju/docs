@@ -1,0 +1,61 @@
+(sdk-how-to-guides)=
+# SDK How-to guides
+
+Step-by-step guides covering key operations and common tasks related to the Charm SDK
+
+- {ref}`Build a 12-Factor app charm <how-to-build-a-12-factor-app-charm>`
+- {ref}`Build a charm or bundle <how-to-build-and-own-a-charm-or-a-bundle>`             
+- {ref}`Manage bundles <how-to-manage-charm-bundles>`                                 
+- Set things up                                             
+    - {ref}`Set up your development environment <set-up-your-development-environment>`            
+    - {ref}`Set up a charm project <how-to-set-up-a-charm-project>`                         
+    - {ref}`Manage extensions <manage-extensions>`                             
+    - {ref}`Install and manage Charmcraft <how-to-manage-charmcraft>`                              
+        - {ref}`Install Charmcraft <how-to-install-charmcraft>`                             
+        - {ref}`Configure Charmcraft <how-to-configure-charmcraft>`                           
+        - {ref}`Authenticate Charmcraft in remote environments <how-to-authenticate-charmcraft-in-remote-environments>` 
+        - {ref}`Change step behavior when creating a charm <how-to-change-step-behavior-when-creating-a-charm>`     
+    - {ref}`Include extra files in a charm <how-to-include-extra-files-in-a-charm>`                
+- Develop                                              
+    - {ref}`Configure logging in a charm <how-to-log-a-message-in-a-charm>`                        
+    - {ref}`Use charm resources <how-to-manage-charm-resources>`                                 
+    - {ref}`Run workloads with a charm - machines <how-to-run-workloads-with-a-charm---machines>`               
+    - {ref}`Run workloads with a charm - Kubernetes <how-to-run-workloads-with-a-charm---kubernetes>`   
+    - {ref}`Set the charm version <how-to-set-the-charm-version>`
+    - {ref}`Set the workload version <how-to-set-the-workload-version>`          
+    - {ref}`Add an action to a charm <how-to-add-an-action-to-a-charm>`                            
+    - {ref}`Add a config option to a charm <how-to-add-a-configuration-option-to-a-charm>`                      
+    - {ref}`Use storage in a charm <how-to-use-storage-in-your-charm>`                             
+    - {ref}`Use secrets in a charm <how-to-use-secrets-in-a-charm>`                              
+    - {ref}`Use charm libraries <how-to-manage-charm-libraries>`                                 
+        - {ref}`Find and use a charm library <how-to-find-and-use-a-charm-library>`                        
+        - {ref}`Create and publish a charm library <how-to-create-and-share-a-charm-library>`                  
+        - {ref}`Write a scenario test for a charm library <how-to-test-charm-libraries-with-scenario>`          
+        - {ref}`Document a charm library <how-to-document-your-charm-library>`                            
+    - {ref}`Handle leadership <how-to-handle-leadership>`                                  
+    - {ref}`Add an integration to a charm <how-to-add-an-integration-to-a-charm>`                                      
+    - {ref}`Observe your charm <5521md>`     
+    - Manage interfaces                                         
+        - {ref}`Register an interface <how-to-register-an-interface>`                         
+        - {ref}`Write interface tests <how-to-write-interface-tests>`                         
+- Test and debug                                            
+    - {ref}`Get started with charm testing <getting-started-with-charm-testing>`                 
+    - {ref}`Write a unit test for a charm <how-to-write-unit-tests-for-a-charm>`                  
+    - {ref}`Write a scenario test for a charm <how-to-write-scenario-tests-for-a-charm>`             
+    - {ref}`Write integration tests for a charm <how-to-write-integration-tests-for-a-charm>`           
+    - {ref}`Pack a charm <how-to-pack-a-charm>`                                   
+    - {ref}`Deploy a charm <how-to-deploy-a-charm>`                                 
+    - {ref}`Debug a charm <how-to-debug-a-charm>`                                  
+    - {ref}`Get logs from a Kubernetes charm <how-to-get-logs-from-a-kubernetes-charm>`               
+- Document                                                  
+    - {ref}`Add docs to a charm on Charmhub <how-to-add-docs-to-your-charm-or-charm-bundle-on-charmhub>`                
+    - {ref}`Document a charm: The README file <how-to-create-an-effective-readme-file-for-your-charm>`              
+- Market                                                    
+    - {ref}`Publish a charm <how-to-publish-your-charm-on-charmhub>`                                
+    - {ref}`Create a track for your charm <how-to-create-a-track-for-your-charm>`                 
+    - {ref}`Create an icon for a charm <how-to-create-an-icon-for-your-charm>`                     
+- Miscellaneous                                             
+    - Align an old charm with charmcraft and ops                
+        - {ref}`Turn a hooks-based charm into an ops charm <how-to-turn-a-hooks-based-charm-into-an-ops-charm>`     
+        - {ref}`Pack a reactive-based charm with Charmcraft <how-to-pack-your-reactive-based-charm-with-charmcraft>`    
+        - {ref}`Pack a hooks-based charm with Charmcraft <how-to-pack-your-hooks-based-charm-with-charmcraft>`

@@ -1,0 +1,44 @@
+(event-secret-remove)=
+# Event 'secret-remove'
+
+> <small> {ref}`Event <event>` > {ref}`List of events <list-of-events>` > {ref}`Secret events <secret-events>` > `secret-remove`</small>
+
+```{note}
+ This feature is scheduled for release in `ops` 2.0, and is only available when using Juju 3.0.2 or greater.
+```
+
+The `secret-remove` event is fired on the owner of a secret when either:
+
+- All observers tracking a now-outdated revision have updated to tracking a newer one, so the old revision can be removed.
+- No observer is tracking an intermediate revision, and a newer one has already been created. So there is a orphaned revision which no observer will ever be able to peek or update to, because there is already a newer one the observer would get instead.
+
+In short, the purpose of this event is to notify the owner of a secret that a specific revision of it is safe to remove: no charm is presently observing it or ever will be able to in the future.
+
+
+<a href="#heading--emission-sequence"><h2 id="heading--emission-sequence">Emission sequence</h2></a>
+
+Like all secret events, `secret-remove` is automatically triggered by Juju. It is up to the secret owner to create a new revision.
+
+|   Scenario   | Example Code                          | Resulting Events                     |
+| :---------------: | ---------------------------------------- | ----------------------------------------- |
+|  Observers update to a newer revision   | (on all observers) `secret.get_content(refresh=True)`  | (owner) `secret-remove` |
+
+<a href="#heading--observing-this-event-in-ops"><h2 id="heading--observing-this-event-in-ops">Observing this event in `ops`</h2></a>
+
+In the Python Operator Framework, you can observe the event like you would any other:
+
+```
+self.framework.observe(charm.on.secret_remove, self._on_secret_remove)
+```
+
+The [`SecretRemoveEvent`](https://ops.readthedocs.io/en/latest/#ops.SecretRemoveEvent) exposes the attributes it inherits from [`SecretEvent`](https://ops.readthedocs.io/en/latest/#ops.SecretEvent) as well as a [`revision`](https://ops.readthedocs.io/en/latest/#ops.SecretExpiredEvent.revision) attribute which specifies which revision this event refers to.
+
+A typical implementation of `_on_secret_remove` might look like this:
+
+```python
+def _on_secret_remove(self, event: SecretRemoveEvent):
+    secret = event.secret
+
+    # remove the unused revision
+    secret.remove_revision(event.revision)
+```
